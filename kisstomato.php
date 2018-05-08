@@ -21,41 +21,41 @@
 				}
 				
 				// determine si c'est un repertoire
-				if( is_dir( $sModel.DS.$sScanDir ) ){
+				if( is_dir( $sModel.DIRECTORY_SEPARATOR.$sScanDir ) ){
 					
 					// determine si le repertoire existe dans la destination
-					if( !file_exists( $sDest.DS.$sScanDir ) ){
-						$this->dirsCreate( $sDest.DS.$sScanDir );
+					if( !file_exists( $sDest.DIRECTORY_SEPARATOR.$sScanDir ) ){
+						$this->dirsCreate( $sDest.DIRECTORY_SEPARATOR.$sScanDir );
 					}
 					
 					// determine si celui-ci existe egalement dans la source
-					if( file_exists( $sSource.DS.$sScanDir ) ){
+					if( file_exists( $sSource.DIRECTORY_SEPARATOR.$sScanDir ) ){
 						
 						// merge le repertoire
-						$SubSource = $sSource.DS.$sScanDir;
-						$SubModel = $sModel.DS.$sScanDir;
-						$SubDest = $sDest.DS.$sScanDir;
+						$SubSource = $sSource.DIRECTORY_SEPARATOR.$sScanDir;
+						$SubModel = $sModel.DIRECTORY_SEPARATOR.$sScanDir;
+						$SubDest = $sDest.DIRECTORY_SEPARATOR.$sScanDir;
 						$this->mergeDirs( $SubSource, $SubModel, $SubDest, $oExtsTags );
 					}
 					continue;
 				}
 				
 				// determine si le source n'existe pas
-				if( !file_exists( $sSource.DS.$sScanDir ) ){
+				if( !file_exists( $sSource.DIRECTORY_SEPARATOR.$sScanDir ) ){
 					
 					// copie le fichier du modele
-					copy( $sModel.DS.$sScanDir, $sDest.DS.$sScanDir );
+					copy( $sModel.DIRECTORY_SEPARATOR.$sScanDir, $sDest.DIRECTORY_SEPARATOR.$sScanDir );
 				}else{
 
 					// recupere l'extension du modele
-					$oInfo = pathinfo( $sModel.DS.$sScanDir );
+					$oInfo = pathinfo( $sModel.DIRECTORY_SEPARATOR.$sScanDir );
 					if( isset( $oInfo[ 'extension' ] ) && array_key_exists( strtolower( $oInfo[ 'extension' ] ), $oExtsTags ) ){
 
 						// recupere les informations de fusion
 						$oMergeInfos = $oExtsTags[ $oInfo[ 'extension' ] ];
 
 						// determine si le fichier a une zone de saisie a la derniere ligne
-						$sContentModel = file_get_contents( $sModel.DS.$sScanDir );
+						$sContentModel = file_get_contents( $sModel.DIRECTORY_SEPARATOR.$sScanDir );
 						$oLines = explode( "\n", $sContentModel );
 						$sLastLine = trim( $oLines[ count( $oLines ) - 1 ] );
 						$bInsertLastRC = stripos( $sLastLine, $oMergeInfos[ 'stop' ] ) === 0;
@@ -80,7 +80,7 @@
 							$sValContent = substr( $sContentModel, $iPosBlock, $iPosTagStop - $iPosBlock );
 							
 							// determine si les tags sont presents dans le fichier source
-							$sContentSource = file_get_contents( $sSource.DS.$sScanDir );
+							$sContentSource = file_get_contents( $sSource.DIRECTORY_SEPARATOR.$sScanDir );
 							do{
 								$iSourcePosStart = stripos( $sContentSource, $sTagStart );
 								if( $iSourcePosStart === false ){
@@ -110,14 +110,14 @@
 						}
 						
 						// creation du nouveau fichier
-						file_put_contents( $sDest.DS.$sScanDir, $sContentModel );
+						file_put_contents( $sDest.DIRECTORY_SEPARATOR.$sScanDir, $sContentModel );
 						
 					// aucune information concernant le merge, copie du fichier du modele
 					}else{
-						copy( $sModel.DS.$sScanDir, $sDest.DS.$sScanDir );
+						copy( $sModel.DIRECTORY_SEPARATOR.$sScanDir, $sDest.DIRECTORY_SEPARATOR.$sScanDir );
 					}
 				}
-				@chmod( $sDest.DS.$sScanDir, 0777 );
+				@chmod( $sDest.DIRECTORY_SEPARATOR.$sScanDir, 0777 );
 			
 			// fin, foreach des fichiers / repertoires
 			}
@@ -138,7 +138,7 @@
 				$objects = scandir($dir);
 				foreach ($objects as $object) {
 					if ($object != "." && $object != "..") {
-						if (filetype($dir.DS.$object) == "dir") $this->fsRrmdir($dir.DS.$object); else unlink($dir.DS.$object);
+						if (filetype($dir.DIRECTORY_SEPARATOR.$object) == "dir") $this->fsRrmdir($dir.DIRECTORY_SEPARATOR.$object); else unlink($dir.DIRECTORY_SEPARATOR.$object);
 					}
 				}
 				reset($objects);
