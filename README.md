@@ -2,6 +2,10 @@
 
 A code generator engine in PHP for all.
 
+## Operating principle
+
+![](https://gluk00.github.io/ehidalgo.github.io/assets/images/kisstomato_principe.png)
+
 ## Example code :
 
 ```
