@@ -13,6 +13,31 @@
 
 		// merge 2 repertoires
 		public function mergeDirs( $sSource, $sModel, &$sDest, &$oExtsTags ){
+
+			// fonction anonyme de recuperation de structure d'un fichier
+			$fGetStruct = function( $sPathFile, $oMergeInfos ){
+				$oResults = array();
+
+				$sContent = file_get_contents( $sPathFile );
+				$iPosBlock = stripos( $sContent, $oMergeInfos[ 'start' ] );
+				while( $iPosBlock !== false ){
+					$iPosStop = stripos( $sContent, $oMergeInfos[ 'start_end' ], $iPosBlock );
+					if( $iPosStop === false ){
+						break;
+					}
+					$sSectionName = substr( $sContent, $iPosBlock, $iPosStop - $iPosBlock );
+					$sSectionName = substr( $sSectionName, strlen( $oMergeInfos[ 'start' ] ) );
+					$iPosStopBlock = stripos( $sContent, $oMergeInfos[ 'stop' ].$sSectionName, $iPosStop );
+					if( $iPosStopBlock === false ){
+						break;
+					}
+					$iPosStop += strlen( $oMergeInfos[ 'start_end' ] );
+					$oResults[ $sSectionName ] = substr( $sContent, $iPosStop, $iPosStopBlock - $iPosStop );
+					$iPosBlock = stripos( $sContent, $oMergeInfos[ 'start' ], $iPosStopBlock );
+				}
+
+				return $oResults;
+			};
 			
 			// pour tous les fichiers du modele
 			foreach( scandir( $sModel ) as $sScanDir ){
@@ -54,61 +79,34 @@
 						// recupere les informations de fusion
 						$oMergeInfos = $oExtsTags[ $oInfo[ 'extension' ] ];
 
-						// determine si le fichier a une zone de saisie a la derniere ligne
+						// recupere les informations des structures de la source et du modele
+						$oStructSource = $fGetStruct( $sSource.DIRECTORY_SEPARATOR.$sScanDir, $oMergeInfos );
+						$oStructModel = $fGetStruct( $sModel.DIRECTORY_SEPARATOR.$sScanDir, $oMergeInfos );
+
+						// alimentation du fichier de model
 						$sContentModel = file_get_contents( $sModel.DIRECTORY_SEPARATOR.$sScanDir );
-						$oLines = explode( "\n", $sContentModel );
-						$sLastLine = trim( $oLines[ count( $oLines ) - 1 ] );
-						$bInsertLastRC = stripos( $sLastLine, $oMergeInfos[ 'stop' ] ) === 0;
-						if( $bInsertLastRC ){
-							$sContentModel .= "\n";
-						}
-						
-						// merge le modele avec la source
-						$iPosBlock = stripos( $sContentModel, $oMergeInfos[ 'start' ] );
-						while( $iPosBlock !== false ){
+						foreach( $oStructModel as $sSectionName=>$sContent ){
+							if( !isset( $oStructSource[ $sSectionName ] ) ){
+								continue;
+							}
 
-							// recherche le nom de la section
-							$iPosNameStop = stripos( $sContentModel, $oMergeInfos[ 'start_end' ], $iPosBlock + strlen( $oMergeInfos[ 'start' ] ) );
-							$sSectionName = substr( $sContentModel, $iPosBlock + strlen( $oMergeInfos[ 'start' ] ), $iPosNameStop - ( $iPosBlock + strlen( $oMergeInfos[ 'start' ] ) ) );
-							
-							// determine le tag START et STOP
-							$sTagStart = $oMergeInfos[ 'start' ].$sSectionName.$oMergeInfos[ 'start_end' ];
-							$sTagStop = $oMergeInfos[ 'stop' ].$sSectionName.$oMergeInfos[ 'stop_end' ];
-							
-							// recupere la valeur par defaut du modele
-							$iPosTagStop = stripos( $sContentModel, $sTagStop, $iPosBlock ) + strlen( $sTagStop );
-							$sValContent = substr( $sContentModel, $iPosBlock, $iPosTagStop - $iPosBlock );
-							
-							// determine si les tags sont presents dans le fichier source
-							$sContentSource = file_get_contents( $sSource.DIRECTORY_SEPARATOR.$sScanDir );
-							do{
-								$iSourcePosStart = stripos( $sContentSource, $sTagStart );
-								if( $iSourcePosStart === false ){
-									break;
-								}
-								$iSourcePosStop = stripos( $sContentSource, $sTagStop, $iSourcePosStart + strlen( $sTagStart ) );
-								if( $iSourcePosStop === false ){
-									break;
-								}
-								$iSourcePosStop += strlen( $sTagStop );
-								
-								// recupere le nouveau contenu de la section
-								$sValContent = substr( $sContentSource, $iSourcePosStart, $iSourcePosStop - $iSourcePosStart );
+							// recherche de la section a alimenter
+							$iPosBlock = stripos( $sContentModel, $oMergeInfos[ 'start' ].$sSectionName.$oMergeInfos[ 'start_end' ] );
+							if( $iPosBlock === false ){
+								continue;
+							}
+							$iPosStopBlock = stripos( $sContentModel, $oMergeInfos[ 'stop' ].$sSectionName, $iPosBlock );
+							if( $iPosStopBlock === false ){
+								continue;
+							}
 
-							}while( false );						
-							
-							// mise a jour du contenu
-							$sContentModel = substr( $sContentModel, 0, $iPosBlock ).$sValContent.substr( $sContentModel, stripos( $sContentModel, $sTagStop, $iPosNameStop ) + strlen( $sTagStop ) );
-							
-							// recherche la prochaine position
-							$iPosBlock = stripos( $sContentModel, $oMergeInfos[ 'start' ], $iPosBlock + strlen( $oMergeInfos[ 'start' ] ) );
+							// remplacement de la section
+							$sContentModel = substr( $sContentModel, 0, $iPosBlock ).
+								$oMergeInfos[ 'start' ].$sSectionName.$oMergeInfos[ 'start_end' ].
+								$oStructSource[ $sSectionName ].
+								substr( $sContentModel, $iPosStopBlock );
 						}
 
-						// supprime le dernier charactere
-						if( $bInsertLastRC ){
-							$sContentModel = substr( $sContentModel, 0, strlen( $sContentModel ) - 1 );
-						}
-						
 						// creation du nouveau fichier
 						file_put_contents( $sDest.DIRECTORY_SEPARATOR.$sScanDir, $sContentModel );
 						
