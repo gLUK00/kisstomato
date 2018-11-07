@@ -26,7 +26,7 @@
 						break;
 					}
 					$sSectionName = substr( $sContent, $iPosBlock, $iPosStop - $iPosBlock );
-					$sSectionName = substr( $sSectionName, strlen( $oMergeInfos[ 'start' ] ) );
+					$sSectionName = trim( substr( $sSectionName, strlen( $oMergeInfos[ 'start' ] ) ) );
 					$iPosStopBlock = stripos( $sContent, $oMergeInfos[ 'stop' ].$sSectionName, $iPosStop );
 					if( $iPosStopBlock === false ){
 						break;
