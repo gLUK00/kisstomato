@@ -16,9 +16,9 @@ include_once( 'kisstomato.php' );
 
 // define your rules of merge
 $oRulesMerge = array(
-	'php'=>array( 'start'=>'// START-USER-', 'start_end'=>"\n", 'stop'=>'// STOP-USER-', 'stop_end'=>"\n" ),
-	'js'=>array( 'start'=>'// START-USER-', 'start_end'=>"\n", 'stop'=>'// STOP-USER-', 'stop_end'=>"\n" ),
-	'txt'=>array( 'start'=>'# START-USER-', 'start_end'=>"\n", 'stop'=>'# STOP-USER-', 'stop_end'=>"\n" )
+	'php'=>array( 'start'=>'// START-USER-', 'start_end'=>PHP_EOL, 'stop'=>'// STOP-USER-', 'stop_end'=>PHP_EOL ),
+	'js'=>array( 'start'=>'// START-USER-', 'start_end'=>PHP_EOL, 'stop'=>'// STOP-USER-', 'stop_end'=>PHP_EOL ),
+	'txt'=>array( 'start'=>'# START-USER-', 'start_end'=>PHP_EOL, 'stop'=>'# STOP-USER-', 'stop_end'=>PHP_EOL )
 );
 
 // create a data model
