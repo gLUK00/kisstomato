@@ -1,12 +1,12 @@
 # KISSTOMATO
 
-A code generator engine in PHP for all.
+A code generator engine in PHP/JAVA for all.
 
 ## Operating principle
 
 ![](https://gluk00.github.io/ehidalgo.github.io/assets/images/kisstomato_principe.png)
 
-## Example code :
+## Example code in PHP :
 
 ```
 <?php
@@ -35,3 +35,24 @@ $oKiss->mergeDirs( 'your path of reference, or path to output', 'your path temp 
 
 ```
 
+## Example code in JAVA :
+
+```
+HashMap<String, HashMap<String, String>> oExtsTags = new HashMap<String, HashMap<String,String>>();
+
+HashMap<String, String> oRulesJS = new HashMap<String, String>();
+oRulesJS.put("start", "// START-USER-");
+oRulesJS.put("start_end", "\r\n");
+oRulesJS.put("stop", "// STOP-USER-");
+oRulesJS.put("stop_end", "\r\n");
+oExtsTags.put("js", oRulesJS);
+
+HashMap<String, String> oRulesHTML = new HashMap<String, String>();
+oRulesHTML.put("start", "<!-- START-USER-");
+oRulesHTML.put("start_end", "-->\r\n");
+oRulesHTML.put("stop", "<!-- STOP-USER-");
+oRulesHTML.put("stop_end", "-->\r\n");
+oExtsTags.put("html", oRulesHTML);
+
+Kisstomato.getInstance().mergeDirs(dirCible, tempDir, dirCible, oExtsTags);
+```
