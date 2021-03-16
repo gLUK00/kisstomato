@@ -17,8 +17,14 @@
 			// fonction anonyme de recuperation de structure d'un fichier
 			$fGetStruct = function( $sPathFile, $oMergeInfos ){
 				$oResults = array();
-
 				$sContent = file_get_contents( $sPathFile );
+
+				// si une conversion est necessaire
+				if( isset( $oMergeInfos[ 'options' ] ) && isset( $oMergeInfos[ 'options' ][ 'convert' ] ) ){
+					while( stripos( $sContent, $oMergeInfos[ 'options' ][ 'convert' ][ 'find' ] ) > -1 ){
+						$sContent = str_replace( $oMergeInfos[ 'options' ][ 'convert' ][ 'find' ], $oMergeInfos[ 'options' ][ 'convert' ][ 'replace' ], $sContent );
+					}
+				}
 				$iPosBlock = stripos( $sContent, $oMergeInfos[ 'start' ] );
 				while( $iPosBlock !== false ){
 					$iPosStop = stripos( $sContent, $oMergeInfos[ 'start_end' ], $iPosBlock );
@@ -79,12 +85,25 @@
 						// recupere les informations de fusion
 						$oMergeInfos = $oExtsTags[ $oInfo[ 'extension' ] ];
 
+						// si il y a des options
+						if( isset( $oExtsTags[ '*' ] ) ){
+							$oMergeInfos[ 'options' ] = $oExtsTags[ '*' ];
+						}
+
 						// recupere les informations des structures de la source et du modele
 						$oStructSource = $fGetStruct( $sSource.DIRECTORY_SEPARATOR.$sScanDir, $oMergeInfos );
 						$oStructModel = $fGetStruct( $sModel.DIRECTORY_SEPARATOR.$sScanDir, $oMergeInfos );
 
 						// alimentation du fichier de model
 						$sContentModel = file_get_contents( $sModel.DIRECTORY_SEPARATOR.$sScanDir );
+
+						// si une conversion est necessaire
+						if( isset( $oMergeInfos[ 'options' ] ) && isset( $oMergeInfos[ 'options' ][ 'convert' ] ) ){
+							while( stripos( $sContentModel, $oMergeInfos[ 'options' ][ 'convert' ][ 'find' ] ) > -1 ){
+								$sContentModel = str_replace( $oMergeInfos[ 'options' ][ 'convert' ][ 'find' ], $oMergeInfos[ 'options' ][ 'convert' ][ 'replace' ], $sContentModel );
+							}
+						}
+
 						foreach( $oStructModel as $sSectionName=>$sContent ){
 							if( !isset( $oStructSource[ $sSectionName ] ) ){
 								continue;
@@ -109,7 +128,7 @@
 
 						// creation du nouveau fichier
 						file_put_contents( $sDest.DIRECTORY_SEPARATOR.$sScanDir, $sContentModel );
-						
+
 					// aucune information concernant le merge, copie du fichier du modele
 					}else{
 						copy( $sModel.DIRECTORY_SEPARATOR.$sScanDir, $sDest.DIRECTORY_SEPARATOR.$sScanDir );
