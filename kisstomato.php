@@ -141,10 +141,13 @@
 		}
 
 		// generation d'un fichier a partir d'un template
-		public function genFromTemplate( $oData, $sDestFile, $sSrcTemplate ){
+		public function genFromTemplate( $oData, $sDestFile = NULL, $sSrcTemplate ){
 			$PHP_TAG = '<?php';
 			ob_start();
 			include( $sSrcTemplate );
+			if( is_null( $sDestFile ) ){
+				return ob_get_clean();
+			}
 			$sContent = ob_get_clean();
 			file_put_contents( $sDestFile, $sContent );
 		}
