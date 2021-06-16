@@ -12,10 +12,6 @@
 					<b-button variant="danger" title="Supprimer le projet"><b-icon icon="trash2"></b-icon></b-button>
 				</template>
 			</b-table>
-
-  <b-modal id="modal-1" title="BootstrapVue">
-    <p class="my-4">Hello from modal!</p>
-  </b-modal>
 		</div>
 		<div style="border:1px solid red;">
 			<b-form>
@@ -42,6 +38,35 @@
 		          </template>
 			</b-table>
 		</div>
+		<b-modal id="modal-field" :title="'id : ' + item.id">
+			<b-form>
+				<b-form-group label="Nom de l'élément :">
+					<b-form-input
+						v-model="item.name"
+						placeholder="Nom de l'élément"
+						required/>
+				</b-form-group>
+				<b-form-group label="Description de l'élément :">
+					<b-form-input
+						v-model="item.description"
+						placeholder="Description de l'élément"
+						required/>
+				</b-form-group>
+			</b-form>
+			<b-form inline>
+    <label class="mr-sm-2" for="inline-form-custom-select-pref">Preference</label>
+    <b-form-select
+      id="inline-form-custom-select-pref"
+      class="mb-2 mr-sm-2 mb-sm-0"
+      :options="[{ text: 'Choose...', value: null }, 'One', 'Two', 'Three']"
+      :value="null"
+    ></b-form-select>
+
+    <b-form-checkbox class="mb-2 mr-sm-2 mb-sm-0">Remember my preference</b-form-checkbox>
+
+    <b-button variant="primary">Save</b-button>
+  </b-form>
+		</b-modal>
 	</div>
 </template>
 
@@ -60,12 +85,13 @@ export default {
 					{ id: 'nssfsfsd', name: 'sdfsdfsdf', description: 'dsf qsdfqs fsqdfqsd', type: 'variable', cible: 'kiss:base_vars:integer', actions: '' },
 					{ id: 'nssfsfsd', name: 'sdfsdfsdf', description: 'dsf qsdfqs fsqdfqsd', type: 'object', cible: 'kiss:js:vuejs:v2', actions: '' }
 				]
-			}
+			},
+			item: { id: 'nssfsfsd', name: 'sdfsdfsdf', description: 'dsf qsdfqs fsqdfqsd', type: 'variable', cible: 'kiss:base_vars:integer', actions: '' }
 		}
 	},
 	methods: {
 		updateItem() {
-			this.$bvModal.show('modal-1')
+			this.$bvModal.show('modal-field')
 		}
 	}
 }
