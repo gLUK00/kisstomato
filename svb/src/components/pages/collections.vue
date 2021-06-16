@@ -40,6 +40,7 @@
 		</div>
 		<b-modal id="modal-field" :title="'id : ' + item.id">
 			<b-form>
+				<b-form-checkbox><span class="chk">Utiliser ce champ comme nom du noeud</span></b-form-checkbox>
 				<b-form-group label="Nom de l'élément :">
 					<b-form-input
 						v-model="item.name"
@@ -52,20 +53,19 @@
 						placeholder="Description de l'élément"
 						required/>
 				</b-form-group>
+				<b-form-group label="Description de l'élément :">
+					<b-form-radio-group v-model="item.type" inline="true">
+						<b-form-radio value="variable">Variable</b-form-radio>
+						<b-form-radio value="object">Objet</b-form-radio>
+					</b-form-radio-group>
+				</b-form-group>
 			</b-form>
 			<b-form inline>
-    <label class="mr-sm-2" for="inline-form-custom-select-pref">Preference</label>
-    <b-form-select
-      id="inline-form-custom-select-pref"
-      class="mb-2 mr-sm-2 mb-sm-0"
-      :options="[{ text: 'Choose...', value: null }, 'One', 'Two', 'Three']"
-      :value="null"
-    ></b-form-select>
-
-    <b-form-checkbox class="mb-2 mr-sm-2 mb-sm-0">Remember my preference</b-form-checkbox>
-
-    <b-button variant="primary">Save</b-button>
-  </b-form>
+				<b-form-checkbox-group>
+					<b-form-checkbox><span class="chk">Variable</span></b-form-checkbox>
+					<b-form-checkbox><span class="chk">Objet</span></b-form-checkbox>
+				</b-form-checkbox-group>
+				</b-form>
 		</b-modal>
 	</div>
 </template>
@@ -96,3 +96,9 @@ export default {
 	}
 }
 </script>
+
+<style scoped>
+	.chk{
+		padding-left: 10px;
+	}
+</style>
