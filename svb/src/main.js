@@ -3,7 +3,9 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import VueLogger from 'vuejs-logger'
 import VueResource from 'vue-resource'
+
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
@@ -19,6 +21,20 @@ Vue.use(IconsPlugin)
 Vue.use(VueResource)
 
 Vue.config.productionTip = false
+
+const isProduction = process.env.NODE_ENV === 'production'
+ 
+const options = {
+    isEnabled: true,
+    logLevel : isProduction ? 'error' : 'debug',
+    stringifyArguments : false,
+    showLogLevel : true,
+    showMethodName : true,
+    separator: '|',
+    showConsoleColors: true
+}
+ 
+Vue.use(VueLogger, options)
 
 /* eslint-disable no-new */
 new Vue({
