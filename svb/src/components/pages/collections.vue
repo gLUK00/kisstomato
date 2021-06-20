@@ -10,7 +10,10 @@
 			<b-button variant="success" title="Supprimer le projet"><b-icon icon="arrow-counterclockwise"></b-icon> Valider</b-button>
 		</div>
 		<div style="border:1px solid red;">
-			<b-table striped hover :items="collections" caption-top :filter-ignored-fields="['guid']">>
+			<b-table striped hover :items="collections" caption-top :fields="show_fields">
+				<template #cell(guid)="data">
+					<span class="tagColor" :style="'background-color:#' + data.item.color">{{ data.item.guid }}</span>
+				</template>
 				<template #cell(actions)="data">
 					<b-button variant="success" title="Selectionner le projet"><b-icon icon="eye"></b-icon>{{ data.item.id }}</b-button>
 					<b-button variant="danger" title="Supprimer le projet"><b-icon icon="trash2"></b-icon></b-button>
@@ -36,18 +39,18 @@
 			<b-table striped hover :items="collection.items" caption-top>
 				<template #table-caption>Element de la collections</template>
 				<template #cell(actions)="data">
-		            <b-button variant="info"><b-icon icon="arrow-up"></b-icon></b-button>
-		            <b-button variant="info"><b-icon icon="arrow-down"></b-icon></b-button>
-		            <b-button variant="warning" title="Modifier l'élement" @click="updateItem"><b-icon icon="pencil-square"></b-icon></b-button>
-		            <b-button variant="danger" title="Supprimer le projet"><b-icon icon="trash2"></b-icon></b-button>
-		          </template>
-		          <template #cell(require)="data">
-		          	<span v-if="data.item.require">Oui</span>
-		          </template>
+					<b-button variant="info"><b-icon icon="arrow-up"></b-icon></b-button>
+					<b-button variant="info"><b-icon icon="arrow-down"></b-icon></b-button>
+					<b-button variant="warning" title="Modifier l'élement" @click="updateItem"><b-icon icon="pencil-square"></b-icon></b-button>
+					<b-button variant="danger" title="Supprimer le projet"><b-icon icon="trash2"></b-icon></b-button>
+				</template>
+				<template #cell(require)="data">
+					<span v-if="data.item.require">Oui</span>
+				</template>
 			</b-table>
 			<b-button variant="success" title="Ajouter un élément"><b-icon icon="plus-circle"></b-icon> Ajouter un élément</b-button>
 		</div>
-		<b-modal id="modal-field" :title="'id : ' + item.id">
+		<b-modal id="modal-field" :title="'guid : ' + item.guid">
 			<b-form>
 				<b-form-checkbox class="element"><span class="chk">Utiliser ce champ comme nom du noeud</span></b-form-checkbox>
 				<b-form-checkbox class="element"><span class="chk">Rendre sa saisie obligatoire</span></b-form-checkbox>
@@ -81,7 +84,7 @@
 				</div>
 			</b-form>
 		</b-modal>
-		<b-modal id="modal-select-one" :title="'id : ' + item.id">
+		<b-modal id="modal-select-one" :title="'guid : ' + item.guid">
 			<b-list-group>
 				<b-list-group-item button variant="danger">Button item</b-list-group-item>
 				<b-list-group-item button>I am a button</b-list-group-item>
@@ -101,19 +104,20 @@ export default {
 	},
 	data() {
 		return {
+			show_fields: ['root', 'guid', 'name', 'description', 'actions'],
 			collections: [
-				{ root: 'oui', guid: '4sd54fd56s4g', name: 'page', description: 'liste des pages', actions: '' },
-				{ root: '', guid: '6s5d4fg56sd4fg', name: 'component', description: 'liste des composants', actions: '' }
+				{ color: '3ff2e9', root: 'oui', guid: '4sd54fd56s4g', name: 'page', description: 'liste des pages', actions: '' },
+				{ color: 'e3e635', root: '', guid: '6s5d4fg56sd4fg', name: 'component', description: 'liste des composants', actions: '' }
 			],
 			collection: { root: '', guid: '6s5d4fg56sd4fg', name: 'component', description: 'liste des composants', actions: '', color: '3ff2e9',
 				items:[
-					{ id: 'nssfsfsd', require: true, name: 'sdfsdfsdf', description: 'dsf qsdfqs fsqdfqsd', type: 'variable', target: 'kiss:base_vars:integer', actions: '' },
-					{ id: 'nssfsfsd', require: false, name: 'sdfsdfsdf', description: 'dsf qsdfqs fsqdfqsd', type: 'variable', target: 'kiss:base_vars:integer', actions: '' },
-					{ id: 'nssfsfsd', require: false, name: 'sdfsdfsdf', description: 'dsf qsdfqs fsqdfqsd', type: 'variable', target: 'kiss:base_vars:integer', actions: '' },
-					{ id: 'nssfsfsd', require: true, name: 'sdfsdfsdf', description: 'dsf qsdfqs fsqdfqsd', type: 'object', target: 'kiss:js:vuejs:v2', actions: '' }
+					{ guid: 'nssfsfsd', require: true, name: 'sdfsdfsdf', description: 'dsf qsdfqs fsqdfqsd', type: 'variable', target: 'kiss:base_vars:integer', actions: '' },
+					{ guid: 'nssfsfsd', require: false, name: 'sdfsdfsdf', description: 'dsf qsdfqs fsqdfqsd', type: 'variable', target: 'kiss:base_vars:integer', actions: '' },
+					{ guid: 'nssfsfsd', require: false, name: 'sdfsdfsdf', description: 'dsf qsdfqs fsqdfqsd', type: 'variable', target: 'kiss:base_vars:integer', actions: '' },
+					{ guid: 'nssfsfsd', require: true, name: 'sdfsdfsdf', description: 'dsf qsdfqs fsqdfqsd', type: 'object', target: 'kiss:js:vuejs:v2', actions: '' }
 				]
 			},
-			item: { id: 'nssfsfsd', require: true, name: 'sdfsdfsdf', description: 'dsf qsdfqs fsqdfqsd', type: 'variable', target: 'kiss:base_vars:integer', actions: '' },
+			item: { guid: 'nssfsfsd', require: true, name: 'sdfsdfsdf', description: 'dsf qsdfqs fsqdfqsd', type: 'variable', target: 'kiss:base_vars:integer', actions: '' },
 			type_de_vars:[
 				{ value: null, text: 'Please select an option' },
 				{ value: 'kiss:base_vars:string', text: 'Chaine de characteres' },
@@ -141,5 +145,9 @@ export default {
 	}
 	.element{
 		margin-bottom: 20px;
+	}
+	.tagColor{
+		padding: 3px 5px;
+		border-radius: 7px;
 	}
 </style>
