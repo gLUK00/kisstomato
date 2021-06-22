@@ -78,29 +78,31 @@
 				<div v-if="item.type != 'variable'">
 					<span>Objet séléctionné :</span>
 					<div>
-						<span>Le nom de l'objet</span>
-						<b-button variant="info" @click="selectElement"><b-icon icon="arrow-up"></b-icon></b-button>
+						<!--<span>Le nom de l'objet</span>-->
+						<listSelector :items="collections" :target="item.target" title="Liste des objets" keyId="id" keyName="name" keyColor="color" @select-item="setTarget"/>
+						<!--<b-button variant="info" @click="selectElement"><b-icon icon="arrow-up"></b-icon></b-button>-->
 					</div>
 				</div>
 			</b-form>
 		</b-modal>
-		<b-modal id="modal-select-one" :title="'guid : ' + item.guid">
+		<!--<b-modal id="modal-select-one" :title="'guid : ' + item.guid">
 			<b-list-group>
 				<b-list-group-item button variant="danger">Button item</b-list-group-item>
 				<b-list-group-item button>I am a button</b-list-group-item>
 				<b-list-group-item button>Disabled button</b-list-group-item>
 				<b-list-group-item button>This is a button too</b-list-group-item>
 			</b-list-group>
-		</b-modal>
+		</b-modal>-->
 	</div>
 </template>
 
 <script>
 import colorPicker from '../helpers/colorPicker'
+import listSelector from '../helpers/listSelector'
 
 export default {
 	components: {
-		colorPicker
+		colorPicker, listSelector
 	},
 	data() {
 		return {
@@ -112,9 +114,9 @@ export default {
 			collection: { root: '', guid: '6s5d4fg56sd4fg', name: 'component', description: 'liste des composants', actions: '', color: '3ff2e9',
 				items:[
 					{ guid: 'nssfsfsd', require: true, name: 'sdfsdfsdf', description: 'dsf qsdfqs fsqdfqsd', type: 'variable', target: 'kiss:base_vars:integer', actions: '' },
-					{ guid: 'nssfsfsd', require: false, name: 'sdfsdfsdf', description: 'dsf qsdfqs fsqdfqsd', type: 'variable', target: 'kiss:base_vars:integer', actions: '' },
-					{ guid: 'nssfsfsd', require: false, name: 'sdfsdfsdf', description: 'dsf qsdfqs fsqdfqsd', type: 'variable', target: 'kiss:base_vars:integer', actions: '' },
-					{ guid: 'nssfsfsd', require: true, name: 'sdfsdfsdf', description: 'dsf qsdfqs fsqdfqsd', type: 'object', target: 'kiss:js:vuejs:v2', actions: '' }
+					{ guid: 'nssfsfsd', require: false, name: 'component aa', description: 'dsf qsdfqs fsqdfqsd', type: 'variable', target: 'kiss:base_vars:integer', actions: '' },
+					{ guid: 'nssfsfsd', require: false, name: 'component bb', description: 'dsf qsdfqs fsqdfqsd', type: 'variable', target: 'kiss:base_vars:integer', actions: '' },
+					{ guid: 'nssfsfsd', require: true, name: 'component cc', description: 'dsf qsdfqs fsqdfqsd', type: 'object', target: 'kiss:js:vuejs:v2', actions: '' }
 				]
 			},
 			item: { guid: 'nssfsfsd', require: true, name: 'sdfsdfsdf', description: 'dsf qsdfqs fsqdfqsd', type: 'variable', target: 'kiss:base_vars:integer', actions: '' },
@@ -129,11 +131,14 @@ export default {
 		updateItem() {
 			this.$bvModal.show('modal-field')
 		},
-		selectElement() {
+		/*selectElement() {
 			this.$bvModal.show('modal-select-one')
-		},
+		},*/
 		setColor( itemColor ) {
 			this.collection.color = itemColor
+		},
+		setTarget( selectItem ){
+			this.item.target = selectItem
 		}
 	}
 }
