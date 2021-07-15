@@ -3,7 +3,7 @@
 		<span class="message tagColor" v-if="keyInItems" :style="'background-color:#' + target[ keyColor ] + ';'">{{ target[ keyName ] }}</span>
 		<span class="message" v-else>Aucune selection</span>
 		<b-button variant="info" @click="showList"><b-icon icon="arrow-up"></b-icon></b-button>
-		<b-modal id="modal-select-one" :title="title">
+		<b-modal id="modal-select-one" :title="title" hide-header-close="true">
 			<b-list-group>
 				<b-list-group-item button v-for="item in items" :key="item[ keyId ]" :style="'background-color:#' + item[ keyColor ] + ';'" @click="selectElement(item)">{{ item[ keyName ] }}</b-list-group-item>
 			</b-list-group>
@@ -16,8 +16,6 @@ export default {
 	props: [ 'title', 'items', 'target', 'keyId', 'keyName', 'keyColor' ],
 	data() {
 		return {
-			//color: '3beb61',
-			//mutableColor: this.color,
 			colors: [ '4287f5', '3ff2e9', '3beb61', '55bd1e', 'e3e635', 'e39932', 'e35532', '5f31de', 'bd2fd6', 'd12ea0', 'c9284b' ]
 		}
 	},
@@ -41,7 +39,6 @@ export default {
 		selectElement( selectItem ) {
 			this.$emit('select-item', selectItem)
 			this.$bvModal.hide('modal-select-one')
-			//this.$bvModal.show('modal-select-one')
 		}
 	}
 

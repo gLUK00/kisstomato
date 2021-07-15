@@ -1,10 +1,6 @@
 <template>
-	<!--
-		couleur guid collection
-		icone cle champ nom du noeud
-	-->
 	<div>
-		<h1>Collections de l'application</h1>
+		<h1>Collections du projet</h1>
 		<div style="border:1px solid red;">
 			<b-button variant="secondary" title="Supprimer le projet"><b-icon icon="arrow-left"></b-icon> Annuler</b-button>
 			<b-button variant="success" title="Supprimer le projet"><b-icon icon="arrow-counterclockwise"></b-icon> Valider</b-button>
@@ -36,7 +32,8 @@
 				</b-form-group>
 			</b-form>
 			<colorPicker :color="collection.color" @update-color="setColor"/>
-			<b-table striped hover :items="collection.items" caption-top>
+			<!-- mise en place des limites -->
+			<b-table striped hover :items="collection.items" :fields="['guid','require','name','description','type','actions']" caption-top>
 				<template #table-caption>Element de la collections</template>
 				<template #cell(actions)="data">
 					<b-button variant="info"><b-icon icon="arrow-up"></b-icon></b-button>
@@ -47,10 +44,14 @@
 				<template #cell(require)="data">
 					<span v-if="data.item.require">Oui</span>
 				</template>
+				<template #cell(name)="data">
+					<span v-if="data.item.nodename" class="tagColor" style="border:1px solid #ccc">{{ data.item.name }}</span>
+					<span v-else>{{ data.item.name }}</span>
+				</template>
 			</b-table>
 			<b-button variant="success" title="Ajouter un élément"><b-icon icon="plus-circle"></b-icon> Ajouter un élément</b-button>
 		</div>
-		<b-modal id="modal-field" :title="'guid : ' + item.guid">
+		<b-modal id="modal-field" size="xl" :title="'guid : ' + item.guid" no-close-on-backdrop="true" hide-header-close="true">
 			<b-form>
 				<b-form-checkbox class="element"><span class="chk">Utiliser ce champ comme nom du noeud</span></b-form-checkbox>
 				<b-form-checkbox class="element"><span class="chk">Rendre sa saisie obligatoire</span></b-form-checkbox>
@@ -78,21 +79,11 @@
 				<div v-if="item.type != 'variable'">
 					<span>Objet séléctionné :</span>
 					<div>
-						<!--<span>Le nom de l'objet</span>-->
 						<listSelector :items="collections" :target="item.target" title="Liste des objets" keyId="id" keyName="name" keyColor="color" @select-item="setTarget"/>
-						<!--<b-button variant="info" @click="selectElement"><b-icon icon="arrow-up"></b-icon></b-button>-->
 					</div>
 				</div>
 			</b-form>
 		</b-modal>
-		<!--<b-modal id="modal-select-one" :title="'guid : ' + item.guid">
-			<b-list-group>
-				<b-list-group-item button variant="danger">Button item</b-list-group-item>
-				<b-list-group-item button>I am a button</b-list-group-item>
-				<b-list-group-item button>Disabled button</b-list-group-item>
-				<b-list-group-item button>This is a button too</b-list-group-item>
-			</b-list-group>
-		</b-modal>-->
 	</div>
 </template>
 
@@ -113,7 +104,7 @@ export default {
 			],
 			collection: { root: '', guid: '6s5d4fg56sd4fg', name: 'component', description: 'liste des composants', actions: '', color: '3ff2e9',
 				items:[
-					{ guid: 'nssfsfsd', require: true, name: 'sdfsdfsdf', description: 'dsf qsdfqs fsqdfqsd', type: 'variable', target: 'kiss:base_vars:integer', actions: '' },
+					{ guid: 'nssfsfsd', nodename: true, require: true, name: 'sdfsdfsdf', description: 'dsf qsdfqs fsqdfqsd', type: 'variable', target: 'kiss:base_vars:integer', actions: '' },
 					{ guid: 'nssfsfsd', require: false, name: 'component aa', description: 'dsf qsdfqs fsqdfqsd', type: 'variable', target: 'kiss:base_vars:integer', actions: '' },
 					{ guid: 'nssfsfsd', require: false, name: 'component bb', description: 'dsf qsdfqs fsqdfqsd', type: 'variable', target: 'kiss:base_vars:integer', actions: '' },
 					{ guid: 'nssfsfsd', require: true, name: 'component cc', description: 'dsf qsdfqs fsqdfqsd', type: 'object', target: 'kiss:js:vuejs:v2', actions: '' }
@@ -131,9 +122,6 @@ export default {
 		updateItem() {
 			this.$bvModal.show('modal-field')
 		},
-		/*selectElement() {
-			this.$bvModal.show('modal-select-one')
-		},*/
 		setColor( itemColor ) {
 			this.collection.color = itemColor
 		},
