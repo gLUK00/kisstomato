@@ -1,30 +1,32 @@
 <template>
 	<div>
-		<div class="node" v-for="node in data">
-			<span>{{ getName( node ) }}</span>
-		</div>
-
-
-		zzz
-		<div>
-nnn
-			<div>
-ddddddddd ddddddddddddddddddddddddddddddd
+		<div class="posNode" v-for="node in data">
+			<span class="tagNode" :style="'background-color:' + getColor( node )">{{ getName( node ) }}</span>
+			<div v-if="getChilds( node ).length > 0" style="margin-left:15px">
+				<treeNode :data="getChilds( node )" getChildsMethode="getChilds" getNameMethode="getName" getColorMethode="getColor"/>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+import treeNode from './treeNode'
+
 export default {
-	props: [ 'data', 'getNameMethode' ],
+	name: 'treeNode',
+	components: {
+		treeNode
+	},
+	props: [ 'data', 'getNameMethode', 'getChildsMethode', 'getColorMethode' ],
 	methods: {
 		getName( node ){
-
-			//console.log( this.$emit('getName', node) )
-			//console.log( this.getNameMethode )
-			//console.log( this.$parent[ this.getNameMethode ]( node ) )
 			return this.$parent[ this.getNameMethode ]( node )
+		},
+		getChilds( node ){
+			return this.$parent[ this.getChildsMethode ]( node )
+		},
+		getColor( node ){
+			return this.$parent[ this.getColorMethode ]( node )
 		}
 	}
 	//name: 'treeNode'
@@ -53,8 +55,14 @@ export default {
 </script>
 
 <style scoped>
-	.node{
-		border: 1px solid red;
-		width: 300px;
+	.posNode{
+		width: min-content;
+	}
+	.tagNode{
+		border: 1px solid green;
+		padding: 5px;
+		border-radius: 5px;
+		margin-bottom: 10px;
+		display:block;
 	}
 </style>

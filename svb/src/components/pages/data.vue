@@ -4,7 +4,7 @@
 		<b-row>
 			<b-col cols="6" md="4">
 				<!--<treeNode :data="treeData" keyId="guid" keyName="name" keyChilds="data" keyColor="color"/>-->
-				<treeNode :data="project.data" @getChilds="treeGetChilds" getNameMethode="treeGetName" @getBgColor="treeGetBgColor"/>
+				<treeNode :data="project.data" getChildsMethode="treeGetChilds" getNameMethode="treeGetName" getColorMethode="treeGetBgColor"/>
 				<!-- https://github.com/kamil-lip/bootstrap-vue-treeview -->
 			</b-col>
 			<b-col cols="12" md="8">
@@ -111,12 +111,19 @@ export default {
 	},
 	methods: {
 		treeGetChilds( oNode ){
+			if( oNode.childs ){
 
+
+console.log( 'yyyyyyyyyyyyyyyy' )
+
+				return oNode.childs
+			}
+			return []
 		},
 		treeGetName( oNode ){
 			var sName = ''
 
-			// recherche de la collection associe
+			// recherche de la collection associee
 			var oCol = this.getColByGuid( oNode.guidCol )
 
 			// recherche le "nodename"
@@ -134,6 +141,10 @@ export default {
 		},
 		treeGetBgColor( oNode ){
 
+			// recherche de la collection associee
+			var oCol = this.getColByGuid( oNode.guidCol )
+			console.log( '#' + oCol.color )
+			return '#' + oCol.color
 		},
 
 		// les collections
