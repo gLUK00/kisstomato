@@ -4,7 +4,7 @@
 		<b-row>
 			<b-col cols="6" md="4">
 				<!--<treeNode :data="treeData" keyId="guid" keyName="name" keyChilds="data" keyColor="color"/>-->
-				<treeNode :data="project.data" getChildsMethode="treeGetChilds" getNameMethode="treeGetName" getColorMethode="treeGetBgColor"/>
+				<treeNode :data="project.data" getIdMethode="treeGetId" getChildsMethode="treeGetChilds" getNameMethode="treeGetName" getColorMethode="treeGetBgColor"/>
 				<!-- https://github.com/kamil-lip/bootstrap-vue-treeview -->
 			</b-col>
 			<b-col cols="12" md="8">
@@ -119,6 +119,9 @@ console.log( 'yyyyyyyyyyyyyyyy' )
 				return oNode.childs
 			}
 			return []
+		},
+		treeGetId( oNode ){
+			return oNode.guid
 		},
 		treeGetName( oNode ){
 			var sName = ''
