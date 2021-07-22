@@ -70,6 +70,7 @@
 				<div class="element">
 					<span>Type d'élément :</span>
 					<label><input type="radio" v-model="item.type" value="variable"/> Variable</label>
+					<label><input type="radio" v-model="item.type" value="list"/> Liste</label>
 					<label><input type="radio" v-model="item.type" value="object"/> Objet</label>
 					<label><input type="radio" v-model="item.type" value="objects"/> Collection d'objets</label>
 				</div>

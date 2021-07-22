@@ -1,5 +1,10 @@
 <template>
 	<div>
+		<div class="node" v-for="node in data">
+			<span>{{ getName( node ) }}</span>
+		</div>
+
+
 		zzz
 		<div>
 nnn
@@ -12,6 +17,16 @@ ddddddddd ddddddddddddddddddddddddddddddd
 
 <script>
 export default {
+	props: [ 'data', 'getNameMethode' ],
+	methods: {
+		getName( node ){
+
+			//console.log( this.$emit('getName', node) )
+			//console.log( this.getNameMethode )
+			//console.log( this.$parent[ this.getNameMethode ]( node ) )
+			return this.$parent[ this.getNameMethode ]( node )
+		}
+	}
 	//name: 'treeNode'
 	/*props: [ 'keyId', 'keyName', 'keyChilds', 'keyColor' ],
 	data() {
@@ -31,9 +46,15 @@ export default {
 		}
 	}*/
 
+
+	//<treeNode :data="project.data" :getChilds="treeGetChilds" :getName="treeGetName" :getBgColor="treeGetBgColor"/>
+
 }
 </script>
 
 <style scoped>
-
+	.node{
+		border: 1px solid red;
+		width: 300px;
+	}
 </style>
