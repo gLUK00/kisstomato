@@ -1,11 +1,11 @@
 <template>
 	<div v-if="renderComponent">
-		<div class="posNode" v-for="node in data">
+		<div class="posNode" v-for="node in data" :key="getId(node)">
 			<b-icon v-if="getChilds( node ).length == 0" class="posIcon" icon="octagon"></b-icon>
-			<b-icon v-else-if="getChilds( node ).length > 0 && !asNodeOpen(node)" class="posIcon" icon="patch-plus" @dblclick="eDoubleClick( node )"></b-icon>
-			<b-icon v-else-if="getChilds( node ).length > 0 && asNodeOpen(node)" class="posIcon" icon="patch-minus" @dblclick="eDoubleClick( node )"></b-icon>
-			<span class="tagNode" :style="'background-color:' + getColor( node )" @dblclick="eDoubleClick( node )">{{ getName( node ) }}</span>
-			<div v-if="getChilds( node ).length > 0" style="margin-left:15px">
+			<b-icon v-else-if="!asNodeOpen(node)" class="posIcon" icon="patch-plus" @click="eOpenClick( node )"></b-icon>
+			<b-icon v-else-if="asNodeOpen(node)" class="posIcon" icon="patch-minus" @click="eOpenClick( node )"></b-icon>
+			<span class="tagNode" :style="'background-color:' + getColor( node )" @dblclick="eOpenClick( node )">{{ getName( node ) }}</span>
+			<div v-if="asNodeOpen(node)" style="margin-left:15px">
 				<treeNode :data="getChilds( node )" getIdMethode="getId" getChildsMethode="getChilds" getNameMethode="getName" getColorMethode="getColor"/>
 			</div>
 		</div>
@@ -21,6 +21,9 @@ export default {
 		treeNode
 	},
 	props: [ 'data', 'getIdMethode', 'getNameMethode', 'getChildsMethode', 'getColorMethode' ],
+	computed: {
+
+	},
 	methods: {
 		getId( node ){
 			return this.$parent[ this.getIdMethode ]( node )
@@ -34,13 +37,18 @@ export default {
 		getColor( node ){
 			return this.$parent[ this.getColorMethode ]( node )
 		},
-		eDoubleClick( node ){
+		eOpenClick( node ){
 			var sId = this.getId( node )
 			this.nodesOpen[ sId ] = !this.asNodeOpen( node )
+			this.forceRerender()
 //console.log( e )
 console.log( this.nodesOpen[ sId ] )
 		},
 		asNodeOpen( node ){
+			//this.forceRerender()
+			if( this.getChilds( node ).length == 0 ){
+				return false
+			}
 			var sId = this.getId( node )
 			return this.nodesOpen[ sId ] !== undefined && this.nodesOpen[ sId ]
 		},
