@@ -5,7 +5,7 @@
 			<b-col cols="6" md="4">
 				<!--<treeNode :data="treeData" keyId="guid" keyName="name" keyChilds="data" keyColor="color"/>-->
 				<!--<treeNode :data="project.data" getIdMethode="treeGetId" getChildsMethode="treeGetChilds" getNameMethode="treeGetName" getColorMethode="treeGetBgColor"/>-->
-				<treeNode :data="treeData" getIdMethode="treeGetId" getChildsMethode="treeGetChilds" getNameMethode="treeGetName" getColorMethode="treeGetBgColor"/>
+				<treeNode :data="treeData" getIdMethode="treeGetId" getChildsMethode="treeGetChilds" getNameMethode="treeGetName" getColorMethode="treeGetBgColor" rightClick="treeRightClick"/>
 				<!-- https://github.com/kamil-lip/bootstrap-vue-treeview -->
 			</b-col>
 			<b-col cols="12" md="8">
@@ -143,6 +143,11 @@ export default {
 			var oCol = this.getColByGuid( oNode.guidCol )
 			//console.log( '#' + oCol.color )
 			return '#' + oCol.color
+		},
+
+		// evenement de click droit sur un element du treeview
+		treeRightClick( node ){
+console.log( 'treeRightClick : ' + node.guid )
 		},
 
 		// les collections
