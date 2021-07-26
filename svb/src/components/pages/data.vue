@@ -4,7 +4,8 @@
 		<b-row>
 			<b-col cols="6" md="4">
 				<!--<treeNode :data="treeData" keyId="guid" keyName="name" keyChilds="data" keyColor="color"/>-->
-				<treeNode :data="project.data" getIdMethode="treeGetId" getChildsMethode="treeGetChilds" getNameMethode="treeGetName" getColorMethode="treeGetBgColor"/>
+				<!--<treeNode :data="project.data" getIdMethode="treeGetId" getChildsMethode="treeGetChilds" getNameMethode="treeGetName" getColorMethode="treeGetBgColor"/>-->
+				<treeNode :data="treeData" getIdMethode="treeGetId" getChildsMethode="treeGetChilds" getNameMethode="treeGetName" getColorMethode="treeGetBgColor"/>
 				<!-- https://github.com/kamil-lip/bootstrap-vue-treeview -->
 			</b-col>
 			<b-col cols="12" md="8">
@@ -16,33 +17,27 @@
 
 <script>
 import treeNode from '../helpers/treeNode'
-//import { bTreeView } from 'bootstrap-vue-treeview'
-
-
-//[ keyId="" keyName="" keyChilds="" keyColor=""]
 
 export default {
 	components: {
-		/*bTreeView, treeNode*/
 		treeNode
 	},
 	computed: {
-		/*treeData(){
+		treeData(){
 			
 			// pour les noeuds racines
 			var oNodes = []
 			for( var i=0; i<this.project.collections.length; i++ ){
 				if( this.project.collections[ i ].root ){
 					var oCol = Object.assign( {}, this.project.collections[ i ] )
+					oCol.__asRootCol = true
 
 					// positionne les donnees de premier niveau associees a cette collection
-					oCol.data = []
+					oCol.childs = []
 					for( var a=0; a<this.project.data.length; a++ ){
 						if( this.project.data[ a ].guidCol == oCol.guid ){
-
 							var oData = Object.assign( {}, this.project.data[ a ] )
-							oData = this.preprareNode( oData )
-							oCol.data.push( this.project.data[ a ] )
+							oCol.childs.push( this.project.data[ a ] )
 						}
 					}
 
@@ -50,14 +45,11 @@ export default {
 				}
 			}
 
-
-
-			return [{"id": 2, "name": "Venus" , "children": [{"id": 3, "name": "Neptune"}, {"id": 4, "name": "Stratus"} ] }, {"id": 5, "name": "Uranus"} ]
-		}*/
+			return oNodes
+		}
 	},
 	data() {
 		return {
-			//treeData: [{"id": 2, "name": "Venus" , "children": [{"id": 3, "name": "Neptune"}, {"id": 4, "name": "Stratus"} ] }, {"id": 5, "name": "Uranus"} ],
 			project:{
 				guid: '12s1fsd1fsdf',
 				name: 'Project One',
@@ -91,12 +83,12 @@ export default {
 						] }
 				],
 				data:[
-					{ guid: "s65fs6d5fsd", guidCol: '4sd54fd56s4g-page', data: [
+					{ guid: "auth-s65fs6d5fsd", guidCol: '4sd54fd56s4g-page', data: [
 						{ guid: 'anssfsfsd1', guidItem: 'nssfsfsd1', value: 'authentification' },
 						{ guid: 'anssfsfsd2', guidItem: 'nssfsfsd2', value: 'page d\'authentification' },
 						{ guid: 'anssfsfsd3', guidItem: 'nssfsfsd3', value: false }
 					], childs:[
-						{ guid: '1sf1sd2f1d1', guidCol: '6s5d4fg56sd4fg', data: [
+						{ guid: 'message-1sf1sd2f1d1', guidCol: '6s5d4fg56sd4fg', data: [
 							{ guid: 'g4hj56g4hj4', guidItem: 'nssfsfsd0', value: 'message' },
 							{ guid: 'g4hj56g4hj4e', guidItem: 'nssfsfsd1', value: 'bienvenu sur la page d\'authentification' }
 						] }
@@ -112,10 +104,6 @@ export default {
 	methods: {
 		treeGetChilds( oNode ){
 			if( oNode.childs ){
-
-
-console.log( 'yyyyyyyyyyyyyyyy' )
-
 				return oNode.childs
 			}
 			return []
@@ -124,6 +112,10 @@ console.log( 'yyyyyyyyyyyyyyyy' )
 			return oNode.guid
 		},
 		treeGetName( oNode ){
+			if( oNode.__asRootCol ){
+				return oNode.name
+			}
+
 			var sName = ''
 
 			// recherche de la collection associee
@@ -143,10 +135,13 @@ console.log( 'yyyyyyyyyyyyyyyy' )
 			return sName
 		},
 		treeGetBgColor( oNode ){
+			if( oNode.__asRootCol ){
+				return '#' + oNode.color
+			}
 
 			// recherche de la collection associee
 			var oCol = this.getColByGuid( oNode.guidCol )
-			console.log( '#' + oCol.color )
+			//console.log( '#' + oCol.color )
 			return '#' + oCol.color
 		},
 
@@ -174,20 +169,6 @@ console.log( 'yyyyyyyyyyyyyyyy' )
 			return null
 		}
 
-		/*,
-		preprareNode( oData ){
-
-			// recherche de la collection associees
-			for( var i=0; i<this.project.collections.length; i++ ){
-				if( this.project.collections[ i ].guid == oData.guidCol ){
-					oData.color = this.project.collections[ i ].color
-					break;
-				}
-			}
-			//var oData = Object.assign( {}, this.data[ a ] )
-
-			return oData
-		}*/
 	}
 }
 </script>

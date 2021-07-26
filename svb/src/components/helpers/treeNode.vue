@@ -1,10 +1,10 @@
 <template>
-	<div v-if="renderComponent">
+	<div :ref-id="renderComponent">
 		<div class="posNode" v-for="node in data" :key="getId(node)">
 			<b-icon v-if="getChilds( node ).length == 0" class="posIcon" icon="octagon"></b-icon>
 			<b-icon v-else-if="!asNodeOpen(node)" class="posIcon" icon="patch-plus" @click="eOpenClick( node )"></b-icon>
 			<b-icon v-else-if="asNodeOpen(node)" class="posIcon" icon="patch-minus" @click="eOpenClick( node )"></b-icon>
-			<span class="tagNode" :style="'background-color:' + getColor( node )" @dblclick="eOpenClick( node )">{{ getName( node ) }}</span>
+			<span class="tagNode noselect" :style="'background-color:' + getColor( node )" @dblclick="eOpenClick( node )">{{ getName( node ) }}</span>
 			<div v-if="asNodeOpen(node)" style="margin-left:15px">
 				<treeNode :data="getChilds( node )" getIdMethode="getId" getChildsMethode="getChilds" getNameMethode="getName" getColorMethode="getColor"/>
 			</div>
@@ -14,6 +14,8 @@
 
 <script>
 import treeNode from './treeNode'
+
+const staticNodesOpen = {}
 
 export default {
 	name: 'treeNode',
@@ -40,32 +42,34 @@ export default {
 		eOpenClick( node ){
 			var sId = this.getId( node )
 			this.nodesOpen[ sId ] = !this.asNodeOpen( node )
+//console.log( 'eOpenClick : ' + sId + ' : ' + this.nodesOpen[ sId ] )
 			this.forceRerender()
-//console.log( e )
-console.log( this.nodesOpen[ sId ] )
 		},
 		asNodeOpen( node ){
-			//this.forceRerender()
 			if( this.getChilds( node ).length == 0 ){
 				return false
 			}
 			var sId = this.getId( node )
-			return this.nodesOpen[ sId ] !== undefined && this.nodesOpen[ sId ]
+			if( this.nodesOpen[ sId ] === undefined ){
+				this.nodesOpen[ sId ] = false
+			}
+//console.log( 'asNodeOpen : ' + this.getName( node ) + ' : ' + sId + ' : ' + this.nodesOpen[ sId ] )
+			return this.nodesOpen[ sId ]
 		},
 		forceRerender() {
 			// Remove my-component from the DOM
-			this.renderComponent = false;
+			//this.renderComponent++
 
 			this.$nextTick(() => {
 				// Add the component back in
-				this.renderComponent = true;
+				this.renderComponent++
 			});
 		}
 	},
 	data(){
 		return {
-			nodesOpen: {},
-			renderComponent: true
+			nodesOpen: staticNodesOpen,
+			renderComponent: 0
 		}
 	}
 	//name: 'treeNode'
@@ -102,7 +106,7 @@ patch-plus : elements et ferme
 
 <style scoped>
 	.posNode{
-		
+		cursor: pointer;
 	}
 	.posIcon{
 		float:left;
@@ -116,5 +120,13 @@ patch-plus : elements et ferme
 		margin-bottom: 10px;
 		display:flex;
 		width: min-content;
+	}
+	.noselect {
+		-webkit-touch-callout: none; /* iOS Safari */
+		-webkit-user-select: none; /* Safari */
+		-khtml-user-select: none; /* Konqueror HTML */
+		-moz-user-select: none; /* Old versions of Firefox */
+		-ms-user-select: none; /* Internet Explorer/Edge */
+		user-select: none; /* Non-prefixed version, currently*/
 	}
 </style>
