@@ -46,6 +46,7 @@ export default {
 			this.forceRerender()
 		},
 		eRightClick( node ){
+			window.event.returnValue = false
 			if( this.$parent[ this.rightClick ] === undefined ){
 				return
 			}

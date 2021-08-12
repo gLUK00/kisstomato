@@ -6,6 +6,7 @@
 				<!--<treeNode :data="treeData" keyId="guid" keyName="name" keyChilds="data" keyColor="color"/>-->
 				<!--<treeNode :data="project.data" getIdMethode="treeGetId" getChildsMethode="treeGetChilds" getNameMethode="treeGetName" getColorMethode="treeGetBgColor"/>-->
 				<treeNode :data="treeData" getIdMethode="treeGetId" getChildsMethode="treeGetChilds" getNameMethode="treeGetName" getColorMethode="treeGetBgColor" rightClick="treeRightClick"/>
+				<contextMenu/>
 				<!-- https://github.com/kamil-lip/bootstrap-vue-treeview -->
 			</b-col>
 			<b-col cols="12" md="8">
@@ -17,10 +18,12 @@
 
 <script>
 import treeNode from '../helpers/treeNode'
+import contextMenu from '../helpers/contextMenu'
 
 export default {
 	components: {
-		treeNode
+		treeNode,
+		contextMenu
 	},
 	computed: {
 		treeData(){
@@ -148,6 +151,19 @@ export default {
 		// evenement de click droit sur un element du treeview
 		treeRightClick( node ){
 console.log( 'treeRightClick : ' + node.guid )
+
+			contextMenu.methods.show( [], this.selectContextItem )
+
+//contextMenu.show( [], this.xxxxxxxxxx )
+
+		},
+
+		// selection d'un element du menu contextuel
+		selectContextItem( item ){
+
+console.log( 'selectContextItem' )
+console.log( item )
+
 		},
 
 		// les collections
