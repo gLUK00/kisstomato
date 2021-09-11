@@ -1,12 +1,9 @@
 <template>
-	<div>
-		<div v-show="visible" class="ctxBackground">
-			<div class="ctxContent">
+	<div v-show="visible" class="ctxBackground">
+		<div class="ctxContent" :style="'left: ' + this.position.x + 'px; top: ' + this.position.y + 'px'">
 sdf4qsdf4 4qsd6f4qs6df4 qsd6f4qs56df4qs6df4qsd654f
 4qsdf5qsd4fq q56sdf4 6qsd4fqs6d54fqs56d4fq6sd
-			</div>
 		</div>
-		ddddddddddddddddddddd
 		
 	<!-- more task items here... -->
 	<!--</ul>
@@ -33,16 +30,16 @@ sdf4qsdf4 4qsd6f4qs6df4 qsd6f4qs56df4qs6df4qsd654f
 </template>
 
 <script>
+import Vue from 'vue'
 
 export default {
 	name: 'contextMenu',
 	props: [ 'color' ],
 	data() {
 		return {
-			//color: '3beb61',
-			//mutableColor: this.color,
-			colors: [ '4287f5', '3ff2e9', '3beb61', '55bd1e', 'e3e635', 'e39932', 'e35532', '5f31de', 'bd2fd6', 'd12ea0', 'c9284b' ],
-			visible: false
+			visible: false,
+			position: { x:0, y:0 }
+			//renderComponent: 0
 		}
 	},
 	computed: {
@@ -50,7 +47,9 @@ export default {
 	},
 	methods: {
 		show( oItems, eSelect, position ) {
-			this.visible = true;
+			this.visible = true
+			this.position.x = position.x
+			this.position.y = position.y
 
 			//this.$log.info('this.color', this.color)
 			console.log( 'ooooooooooooooooooooooooo' )
@@ -61,9 +60,7 @@ export default {
 			/*const { x, y } = useMousePosition();
 
 			console.log( x + ' * ' + y );*/
-			console.log( position.x + ' * ' + position.y );
-
-
+			console.log( position.x + ' * ' + position.y )
 		}
 	}
 
@@ -75,7 +72,8 @@ export default {
 
 }
 .ctxContent{
-
+	position: fixed;
+	border: 1px solid red;
 }
 /*
 .tasks {

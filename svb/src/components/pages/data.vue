@@ -12,7 +12,7 @@
 				cccccccccccc
 			</b-col>
 		</b-row>
-		<contextMenu/>
+		<contextMenu ref='componentContextMenu'/>
 	</div>
 </template>
 
@@ -159,7 +159,7 @@ export default {
 		treeRightClick( node ){
 console.log( 'treeRightClick : ' + node.guid )
 
-			contextMenu.methods.show( [], this.selectContextItem, this.position )
+			this.$refs.componentContextMenu.show( [], this.selectContextItem, this.position )
 
 //contextMenu.show( [], this.xxxxxxxxxx )
 
