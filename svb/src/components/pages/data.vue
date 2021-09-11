@@ -1,18 +1,18 @@
 <template>
-	<div>
+	<div v-on:mousemove="ctxMenuPosition">
 		<h1>Données du projet</h1>
 		<b-row>
 			<b-col cols="6" md="4">
 				<!--<treeNode :data="treeData" keyId="guid" keyName="name" keyChilds="data" keyColor="color"/>-->
 				<!--<treeNode :data="project.data" getIdMethode="treeGetId" getChildsMethode="treeGetChilds" getNameMethode="treeGetName" getColorMethode="treeGetBgColor"/>-->
 				<treeNode :data="treeData" getIdMethode="treeGetId" getChildsMethode="treeGetChilds" getNameMethode="treeGetName" getColorMethode="treeGetBgColor" rightClick="treeRightClick"/>
-				<contextMenu/>
 				<!-- https://github.com/kamil-lip/bootstrap-vue-treeview -->
 			</b-col>
 			<b-col cols="12" md="8">
 				cccccccccccc
 			</b-col>
 		</b-row>
+		<contextMenu/>
 	</div>
 </template>
 
@@ -101,7 +101,8 @@ export default {
 						{ guid: 'sdf445', guidItem: 'nssfsfsd5', value: [ 'color' ] }
 					] }
 				]
-			}
+			},
+			position: { x:0, y:0 }
 		}
 	},
 	methods: {
@@ -148,11 +149,17 @@ export default {
 			return '#' + oCol.color
 		},
 
+		// alimentate la position du menu contextuel
+		ctxMenuPosition( event ){
+			this.position.x = event.clientX;
+			this.position.y = event.clientY;
+		},
+
 		// evenement de click droit sur un element du treeview
 		treeRightClick( node ){
 console.log( 'treeRightClick : ' + node.guid )
 
-			contextMenu.methods.show( [], this.selectContextItem )
+			contextMenu.methods.show( [], this.selectContextItem, this.position )
 
 //contextMenu.show( [], this.xxxxxxxxxx )
 
