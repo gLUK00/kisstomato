@@ -4,9 +4,9 @@
 			<b-icon v-if="getChilds( node ).length == 0" class="posIcon" icon="octagon"></b-icon>
 			<b-icon v-else-if="!asNodeOpen(node)" class="posIcon" icon="patch-plus" @click="eOpenClick( node )"></b-icon>
 			<b-icon v-else-if="asNodeOpen(node)" class="posIcon" icon="patch-minus" @click="eOpenClick( node )"></b-icon>
-			<span class="tagNode noselect" :style="'background-color:' + getColor( node )" @dblclick="eOpenClick( node )" @contextmenu="eRightClick( node )">{{ getName( node ) }}</span>
+			<span class="tagNode noselect" :style="'background-color:' + getColor( node )" @dblclick="eDblClick( node )" @contextmenu="eRightClick( node )">{{ getName( node ) }}</span>
 			<div v-if="asNodeOpen(node)" style="margin-left:15px">
-				<treeNode :data="getChilds( node )" getIdMethode="getId" getChildsMethode="getChilds" getNameMethode="getName" getColorMethode="getColor" rightClick="eRightClick"/>
+				<treeNode :data="getChilds( node )" getIdMethode="getId" getChildsMethode="getChilds" getNameMethode="getName" getColorMethode="getColor" rightClick="eRightClick" dblclick="eDblClick"/>
 			</div>
 		</div>
 	</div>
@@ -22,7 +22,7 @@ export default {
 	components: {
 		treeNode
 	},
-	props: [ 'data', 'getIdMethode', 'getNameMethode', 'getChildsMethode', 'getColorMethode', 'rightClick' ],
+	props: [ 'data', 'getIdMethode', 'getNameMethode', 'getChildsMethode', 'getColorMethode', 'rightClick', 'dblclick' ],
 	computed: {
 
 	},
@@ -44,6 +44,16 @@ export default {
 			this.nodesOpen[ sId ] = !this.asNodeOpen( node )
 //console.log( 'eOpenClick : ' + sId + ' : ' + this.nodesOpen[ sId ] )
 			this.forceRerender()
+		},
+		eDblClick( node ){
+
+console.log( '>>>>>><< ' )
+console.log( node )
+
+			if( this.$parent[ this.dblclick ] === undefined ){
+				return
+			}
+			this.$parent[ this.dblclick ]( node )
 		},
 		eRightClick( node ){
 			window.event.returnValue = false

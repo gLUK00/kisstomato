@@ -1,31 +1,16 @@
 <template>
-	<div v-show="visible" class="ctxBackground">
+	<div v-show="visible" class="ctxBackground" @click="hide" @contextmenu="hide">
 		<div class="ctxContent" :style="'left: ' + this.position.x + 'px; top: ' + this.position.y + 'px'">
-sdf4qsdf4 4qsd6f4qs6df4 qsd6f4qs56df4qs6df4qsd654f
-4qsdf5qsd4fq q56sdf4 6qsd4fqs6d54fqs56d4fq6sd
+			<b-list-group>
+				<template v-for="(item, index) in items">
+					<b-list-group-item v-if="item.type && item.type=='separator'" @click.stop="select(item)">&nbsp;</b-list-group-item>
+					<b-list-group-item v-else button :style="'background-color:#' + item.color" @click.stop="select(item)">
+						<span v-if="item.disabled" style="color: rgba(255, 255, 255, 0.8)">{{ item.text }}</span>
+						<span v-else>{{ item.text }}</span>
+					</b-list-group-item>
+				</template>
+			</b-list-group>
 		</div>
-		
-	<!-- more task items here... -->
-	<!--</ul>
-		<nav class="context-menu">
-			<ul class="context-menu__items">
-				<li class="context-menu__item">
-					<a href="#" class="context-menu__link">
-						<i class="fa fa-eye"></i> View Task
-					</a>
-				</li>
-				<li class="context-menu__item">
-					<a href="#" class="context-menu__link">
-						<i class="fa fa-edit"></i> Edit Task
-					</a>
-				</li>
-				<li class="context-menu__item">
-					<a href="#" class="context-menu__link">
-						<i class="fa fa-times"></i> Delete Task
-					</a>
-				</li>
-			</ul>
-		</nav>-->
 	</div>
 </template>
 
@@ -34,11 +19,12 @@ import Vue from 'vue'
 
 export default {
 	name: 'contextMenu',
-	props: [ 'color' ],
+	props: [ 'selectItem' ],
 	data() {
 		return {
 			visible: false,
-			position: { x:0, y:0 }
+			position: { x:0, y:0 },
+			items: []
 			//renderComponent: 0
 		}
 	},
@@ -46,21 +32,30 @@ export default {
 
 	},
 	methods: {
+		hide( e ){
+			this.visible = false
+			e.preventDefault()
+		},
 		show( oItems, eSelect, position ) {
 			this.visible = true
 			this.position.x = position.x
 			this.position.y = position.y
+			this.items = oItems
+		},
+		select( item ){
+			if( ( item.type !== undefined && item.type == 'separator' ) ||
+				( item.disabled !== undefined && item.disabled == true ) ){
+				return
+			}
 
-			//this.$log.info('this.color', this.color)
-			console.log( 'ooooooooooooooooooooooooo' )
-			console.log( this.visible )
+			// masque l'affichage
+			this.visible = false
 
-
-			// determine la position de la sourie
-			/*const { x, y } = useMousePosition();
-
-			console.log( x + ' * ' + y );*/
-			console.log( position.x + ' * ' + position.y )
+			// propagation de l'evenement
+			if( this.$parent[ this.selectItem ] === undefined ){
+				return
+			}
+			this.$parent[ this.selectItem ]( item )
 		}
 	}
 
@@ -69,6 +64,19 @@ export default {
 
 <style scoped>
 .ctxBackground{
+	/*background-color: red;*/
+
+	min-height: 100%;
+	min-width: 1024px;
+
+	/* Set up proportionate scaling */
+	width: 100%;
+	height: auto;
+
+	/* Set up positioning */
+	position: fixed;
+	top: 0;
+	left: 0;
 
 }
 .ctxContent{

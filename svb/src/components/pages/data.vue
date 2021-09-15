@@ -5,14 +5,14 @@
 			<b-col cols="6" md="4">
 				<!--<treeNode :data="treeData" keyId="guid" keyName="name" keyChilds="data" keyColor="color"/>-->
 				<!--<treeNode :data="project.data" getIdMethode="treeGetId" getChildsMethode="treeGetChilds" getNameMethode="treeGetName" getColorMethode="treeGetBgColor"/>-->
-				<treeNode :data="treeData" getIdMethode="treeGetId" getChildsMethode="treeGetChilds" getNameMethode="treeGetName" getColorMethode="treeGetBgColor" rightClick="treeRightClick"/>
+				<treeNode :data="treeData" getIdMethode="treeGetId" getChildsMethode="treeGetChilds" getNameMethode="treeGetName" getColorMethode="treeGetBgColor" rightClick="treeRightClick" dblclick="treeDblclick"/>
 				<!-- https://github.com/kamil-lip/bootstrap-vue-treeview -->
 			</b-col>
 			<b-col cols="12" md="8">
 				cccccccccccc
 			</b-col>
 		</b-row>
-		<contextMenu ref='componentContextMenu'/>
+		<contextMenu ref="componentContextMenu" selectItem="selectContextItem"/>
 	</div>
 </template>
 
@@ -148,6 +148,12 @@ export default {
 			//console.log( '#' + oCol.color )
 			return '#' + oCol.color
 		},
+		treeDblclick( oNode ){
+
+console.log( 'ouverture' )
+console.log( oNode )
+
+		},
 
 		// alimentate la position du menu contextuel
 		ctxMenuPosition( event ){
@@ -159,7 +165,13 @@ export default {
 		treeRightClick( node ){
 console.log( 'treeRightClick : ' + node.guid )
 
-			this.$refs.componentContextMenu.show( [], this.selectContextItem, this.position )
+			this.$refs.componentContextMenu.show( [
+					{ text: 'Menu 1', id: 12, color:'3ff2e9' },
+					{ text: 'Menu 2', id: 13, color:'ccc' },
+					{ type: 'separator' },
+					{ text: 'Menu 3', id: 14, color:'3ff2e9', disabled: true },
+					{ text: 'Menu 4', id: 15, color:'e3e635' }
+				], this.selectContextItem, this.position )
 
 //contextMenu.show( [], this.xxxxxxxxxx )
 
@@ -168,8 +180,8 @@ console.log( 'treeRightClick : ' + node.guid )
 		// selection d'un element du menu contextuel
 		selectContextItem( item ){
 
-console.log( 'selectContextItem' )
-console.log( item )
+console.log( 'selectContextItem >>' )
+console.log( item.id )
 
 		},
 
