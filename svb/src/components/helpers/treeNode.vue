@@ -46,10 +46,6 @@ export default {
 			this.forceRerender()
 		},
 		eDblClick( node ){
-
-console.log( '>>>>>><< ' )
-console.log( node )
-
 			if( this.$parent[ this.dblclick ] === undefined ){
 				return
 			}

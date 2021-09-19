@@ -9,7 +9,7 @@
 				<!-- https://github.com/kamil-lip/bootstrap-vue-treeview -->
 			</b-col>
 			<b-col cols="12" md="8">
-				cccccccccccc
+				<listForm/>
 			</b-col>
 		</b-row>
 		<contextMenu ref="componentContextMenu" selectItem="selectContextItem"/>
@@ -19,11 +19,13 @@
 <script>
 import treeNode from '../helpers/treeNode'
 import contextMenu from '../helpers/contextMenu'
+import listForm from '../helpers/listForm'
 
 export default {
 	components: {
 		treeNode,
-		contextMenu
+		contextMenu,
+		listForm
 	},
 	computed: {
 		treeData(){
@@ -40,7 +42,8 @@ export default {
 					for( var a=0; a<this.project.data.length; a++ ){
 						if( this.project.data[ a ].guidCol == oCol.guid ){
 							var oData = Object.assign( {}, this.project.data[ a ] )
-							oCol.childs.push( this.project.data[ a ] )
+							oCol.childs.push( oData )
+							//oCol.childs.push( this.project.data[ a ] )
 						}
 					}
 
