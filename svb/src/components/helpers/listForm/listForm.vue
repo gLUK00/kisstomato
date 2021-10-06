@@ -14,18 +14,33 @@
 						<span v-if="form.state == 'edit'">&nbsp;*</span>
 					</template>
 				</b-tab>
-				<p class="p-3" @click="select(form)">Tab contents {{ form.id }}</p>
+				<!--<p class="p-3" @click="select(form)">Tab contents {{ form.id }}</p>
 				<div>
 					<template v-for="(field, iF) in form.fields">
-						<span>{{ field.name }}</span> : <span>{{ field.value }}</span>
+						<template v-if="field.type == 'text'">
+							<span>{{ field.name }}</span>
+
+						</template>
+						<span>{{ field.name }}</span> : <span>{{ field.type }}</span>
 					</template>
-				</div>
+				</div>-->
 			</template>
 		</b-tabs>
+		<div v-if="activeForm != null">
+			<template v-for="(field, iF) in activeForm.fields">
+				<template v-if="field.type == 'text'">
+					<span>{{ field.name }}</span>
+
+				</template>
+				<span>{{ field.name }}</span> : <span>{{ field.type }}</span>
+			</template>
+		</div>
 	</div>
 </template>
 
 <script>
+const oLstTypeFields = [ 'text', 'textarea', 'color', 'file', 'radio', 'checkbox', 'custom' ]
+
 export default {
 	//props: [ 'color' ],
 	data() {
@@ -58,11 +73,17 @@ export default {
 	},
 	computed: {
 		//this.forms = this.devGetRandomForms()
+		
+	},
+	ready: function () {
+		if( this.forms.length > 0 && this.activeForm == null ){
+			this.activeForm = this.forms[ 0 ]
+		}
 	},
 	methods: {
 		select( oForm ){
 			this.activeForm = oForm
-			console.log( this.activeForm.id )
+console.log( this.activeForm.id )
 		},
 		devGetRandomForms(){
 			var oForms = []
@@ -74,6 +95,34 @@ export default {
 				var iNbrFields = Math.floor(Math.random() * 10)
 				for( var iField = 0; iField < iNbrFields; iField++ ){
 
+					var sTypeField = oLstTypeFields[ Math.floor(Math.random() * oLstTypeFields.length) ]
+					while( sTypeField == 'custom' ){
+						sTypeField = oLstTypeFields[ Math.floor(Math.random() * oLstTypeFields.length) ]
+					}
+					var oField = { type: sTypeField, id: 'filed_' + ( Date.now() + ( Math.random() * 1000 ) ), label: 'filed ' + sTypeField + ' ' + iField }
+					if( sTypeField == 'text' ){
+						oField.value = (Math.random() + 1).toString(36).substring(7)
+					}else if( sTypeField == 'textarea' ){
+						oField.value = (Math.random() + 1).toString(36).substring(100)
+					}else if( sTypeField == 'color' ){
+						oField.value = Math.floor(Math.random()*16777215).toString(16)
+					}else if( sTypeField == 'radio' ){
+						oField.values = []
+						var iNbrRadios = Math.floor(Math.random() * 10)
+						for( var iRadio = 0; iRadio < iNbrRadios; iRadio++ ){
+							oField.values.push( { value: ( Date.now() + ( Math.random() * 1000 ) ), label: Math.floor(Math.random()*16777215).toString(16), selected: false } )
+						}
+
+						// determine si il y a une selection
+						if( Math.random() > 0.5 && oField.values.length > 0 ){
+							oField.values[ Math.floor(Math.random() * oField.values.length) ].selected = true
+						}
+
+						// determine la position de la selection
+						
+					}
+					
+					oForm.fields.push( oField )
 				}
 
 

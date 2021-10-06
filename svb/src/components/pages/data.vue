@@ -19,7 +19,7 @@
 <script>
 import treeNode from '../helpers/treeNode'
 import contextMenu from '../helpers/contextMenu'
-import listForm from '../helpers/listForm'
+import listForm from '../helpers/listForm/listForm'
 
 export default {
 	components: {
