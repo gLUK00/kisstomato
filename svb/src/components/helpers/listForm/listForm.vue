@@ -32,7 +32,16 @@
 					<span>{{ field.name }}</span>
 
 				</template>
+				<template v-if="field.type == 'radio'">
+					<span>{{ field.name }}</span>
+					<b-form-group :label="field.label" v-slot="{ ariaDescribedby }">
+
+						<b-form-radio v-for="(radio, indexRadio) in field.items" v-bind:key="field.id" :aria-describedby="ariaDescribedby" :name="field.id" :value="radio.value">{{ radio.label }}</b-form-radio>
+					</b-form-group>
+
+				</template>
 				<span>{{ field.name }}</span> : <span>{{ field.type }}</span>
+				<br/>
 			</template>
 		</div>
 	</div>
@@ -48,7 +57,7 @@ export default {
 			//color: '3beb61',
 			//mutableColor: this.color,
 			activeForm: null,
-			forms: this.devGetRandomForms()
+			forms: this.devGetRandomForms(),
 			/*forms: [
 				{ id: '12121', name: 'Conversion', state: 'view', fields: [
 					{ id: '5454', type:'text', name:"aaa", value: 'sdfsfsdf'},
@@ -75,11 +84,6 @@ export default {
 		//this.forms = this.devGetRandomForms()
 		
 	},
-	ready: function () {
-		if( this.forms.length > 0 && this.activeForm == null ){
-			this.activeForm = this.forms[ 0 ]
-		}
-	},
 	methods: {
 		select( oForm ){
 			this.activeForm = oForm
@@ -99,7 +103,7 @@ console.log( this.activeForm.id )
 					while( sTypeField == 'custom' ){
 						sTypeField = oLstTypeFields[ Math.floor(Math.random() * oLstTypeFields.length) ]
 					}
-					var oField = { type: sTypeField, id: 'filed_' + ( Date.now() + ( Math.random() * 1000 ) ), label: 'filed ' + sTypeField + ' ' + iField }
+					var oField = { type: sTypeField, id: 'field_' + ( Date.now() + ( Math.random() * 1000 ) ), label: 'field ' + sTypeField + ' ' + iField }
 					if( sTypeField == 'text' ){
 						oField.value = (Math.random() + 1).toString(36).substring(7)
 					}else if( sTypeField == 'textarea' ){
@@ -107,18 +111,21 @@ console.log( this.activeForm.id )
 					}else if( sTypeField == 'color' ){
 						oField.value = Math.floor(Math.random()*16777215).toString(16)
 					}else if( sTypeField == 'radio' ){
-						oField.values = []
+						oField.items = []
+						oField.value = null
 						var iNbrRadios = Math.floor(Math.random() * 10)
 						for( var iRadio = 0; iRadio < iNbrRadios; iRadio++ ){
-							oField.values.push( { value: ( Date.now() + ( Math.random() * 1000 ) ), label: Math.floor(Math.random()*16777215).toString(16), selected: false } )
+							oField.items.push( { value: ( Date.now() + ( Math.random() * 1000 ) ), label: 'radio ' + Math.floor(Math.random()*16777215).toString(16) } )
+							//oField.items.push( { value: ( Date.now() + ( Math.random() * 1000 ) ), label: Math.floor(Math.random()*16777215).toString(16), selected: false } )
 						}
 
 						// determine si il y a une selection
-						if( Math.random() > 0.5 && oField.values.length > 0 ){
-							oField.values[ Math.floor(Math.random() * oField.values.length) ].selected = true
-						}
+						if( Math.random() > 0.5 && oField.items.length > 0 ){
 
-						// determine la position de la selection
+							// selectionne un radio
+							//oField.items[ Math.floor(Math.random() * oField.items.length) ].selected = true
+							oField.value = oField.items[ Math.floor(Math.random() * oField.items.length) ].value
+						}
 						
 					}
 					
@@ -127,6 +134,13 @@ console.log( this.activeForm.id )
 
 
 				oForms.push( oForm )
+			}
+
+			// selection asynchrone du premier formulaire
+			if( oForms.length > 0 && this.activeForm == null ){
+				this.$nextTick(() => {
+					this.select( oForms[ 0 ] )
+				});
 			}
 
 			return oForms
