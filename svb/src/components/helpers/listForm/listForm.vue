@@ -28,20 +28,28 @@
 		</b-tabs>
 		<div v-if="activeForm != null">
 			<template v-for="(field, iF) in activeForm.fields">
-				<template v-if="field.type == 'text'">
-					<span>{{ field.name }}</span>
-
-				</template>
-				<template v-if="field.type == 'radio'">
-					<span>{{ field.name }}</span>
-					<b-form-group :label="field.label" v-slot="{ ariaDescribedby }">
-
-						<b-form-radio v-for="(radio, indexRadio) in field.items" v-bind:key="field.id" :aria-describedby="ariaDescribedby" :name="field.id" :value="radio.value">{{ radio.label }}</b-form-radio>
-					</b-form-group>
-
-				</template>
-				<span>{{ field.name }}</span> : <span>{{ field.type }}</span>
-				<br/>
+				<b-container fluid>
+					<b-row>
+						<b-col sm="2">
+							<label :for="field.id">{{ field.label }}</label>
+						</b-col>
+						<b-col sm="10">
+							<template v-if="field.type == 'text'">
+								<b-form-input :id="field.id" type="text" v-model="field.value"></b-form-input>
+							</template>
+							<template v-if="field.type == 'textarea'">
+								<b-form-textarea :id="field.id" v-model="field.value">{{ field.value }}</b-form-textarea>
+								<span>val : {{ field.value }}</span>
+							</template>
+							<template v-if="field.type == 'radio'">
+								<b-form-group :label="field.label" v-slot="{ ariaDescribedby }">
+									<b-form-radio v-for="(radio, indexRadio) in field.items" v-bind:key="field.id + indexRadio" v-model="field.value" :aria-describedby="ariaDescribedby" :name="field.id" :value="radio.value">&nbsp;{{ radio.label }}</b-form-radio>
+								</b-form-group>
+							</template>
+							<span>debug : {{ field.name }}</span> : <span>{{ field.type }}</span>
+						</b-col>
+					</b-row>
+				</b-container>
 			</template>
 		</div>
 	</div>
@@ -115,18 +123,15 @@ console.log( this.activeForm.id )
 						oField.value = null
 						var iNbrRadios = Math.floor(Math.random() * 10)
 						for( var iRadio = 0; iRadio < iNbrRadios; iRadio++ ){
-							oField.items.push( { value: ( Date.now() + ( Math.random() * 1000 ) ), label: 'radio ' + Math.floor(Math.random()*16777215).toString(16) } )
-							//oField.items.push( { value: ( Date.now() + ( Math.random() * 1000 ) ), label: Math.floor(Math.random()*16777215).toString(16), selected: false } )
+							oField.items.push( { value: ( Date.now() + ( Math.random() * 1000 ) ), label: 'label radio ' + Math.floor(Math.random()*16777215).toString(16) } )
 						}
 
 						// determine si il y a une selection
 						if( Math.random() > 0.5 && oField.items.length > 0 ){
 
 							// selectionne un radio
-							//oField.items[ Math.floor(Math.random() * oField.items.length) ].selected = true
 							oField.value = oField.items[ Math.floor(Math.random() * oField.items.length) ].value
 						}
-						
 					}
 					
 					oForm.fields.push( oField )
