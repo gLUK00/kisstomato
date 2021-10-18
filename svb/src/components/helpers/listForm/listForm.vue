@@ -37,8 +37,11 @@
 							<template v-if="field.type == 'text'">
 								<b-form-input :id="field.id" type="text" v-model="field.value"></b-form-input>
 							</template>
+							<template v-if="field.type == 'color'">
+								<b-form-input :id="field.id" type="color" v-model="field.value"></b-form-input>
+							</template>
 							<template v-if="field.type == 'textarea'">
-								<b-form-textarea :id="field.id" v-model="field.value">{{ field.value }}</b-form-textarea>
+								<b-form-textarea :id="field.id" v-model="field.value" rows="3" max-rows="15"></b-form-textarea>
 								<span>val : {{ field.value }}</span>
 							</template>
 							<template v-if="field.type == 'radio'">
@@ -46,7 +49,14 @@
 									<b-form-radio v-for="(radio, indexRadio) in field.items" v-bind:key="field.id + indexRadio" v-model="field.value" :aria-describedby="ariaDescribedby" :name="field.id" :value="radio.value">&nbsp;{{ radio.label }}</b-form-radio>
 								</b-form-group>
 							</template>
-							<span>debug : {{ field.name }}</span> : <span>{{ field.type }}</span>
+							<template v-if="field.type == 'checkbox'">
+								<b-form-group :label="field.label" v-slot="{ ariaDescribedby }">
+									<b-form-checkbox-group v-for="(checkbox, indexCheckbox) in field.items" v-bind:key="field.id + indexCheckbox" v-model="field.values" :aria-describedby="ariaDescribedby" :name="field.id">
+										<b-form-checkbox :value="checkbox.value">&nbsp;{{ checkbox.label }}</b-form-checkbox>
+									</b-form-checkbox-group>
+								</b-form-group>
+							</template>
+							<span>debug : {{ field.name }}</span> : <span>{{ field.type }}</span> : <span>{{ field.values }}</span> : <span>{{ field.value }}</span>
 						</b-col>
 					</b-row>
 				</b-container>
@@ -56,7 +66,7 @@
 </template>
 
 <script>
-const oLstTypeFields = [ 'text', 'textarea', 'color', 'file', 'radio', 'checkbox', 'custom' ]
+const oLstTypeFields = [ 'text', 'textarea', 'color', 'radio', 'checkbox', 'custom' ]
 
 export default {
 	//props: [ 'color' ],
@@ -115,13 +125,13 @@ console.log( this.activeForm.id )
 					if( sTypeField == 'text' ){
 						oField.value = (Math.random() + 1).toString(36).substring(7)
 					}else if( sTypeField == 'textarea' ){
-						oField.value = (Math.random() + 1).toString(36).substring(100)
+						oField.value = (Math.random() + 1).toString(36)
 					}else if( sTypeField == 'color' ){
 						oField.value = Math.floor(Math.random()*16777215).toString(16)
 					}else if( sTypeField == 'radio' ){
 						oField.items = []
 						oField.value = null
-						var iNbrRadios = Math.floor(Math.random() * 10)
+						var iNbrRadios = Math.floor(Math.random() * 10) + 1
 						for( var iRadio = 0; iRadio < iNbrRadios; iRadio++ ){
 							oField.items.push( { value: ( Date.now() + ( Math.random() * 1000 ) ), label: 'label radio ' + Math.floor(Math.random()*16777215).toString(16) } )
 						}
@@ -131,6 +141,20 @@ console.log( this.activeForm.id )
 
 							// selectionne un radio
 							oField.value = oField.items[ Math.floor(Math.random() * oField.items.length) ].value
+						}
+					}else if( sTypeField == 'checkbox' ){
+						oField.items = []
+						oField.values = []
+						var iNbrCheckbox = Math.floor(Math.random() * 10) + 1
+						for( var icheck = 0; icheck < iNbrCheckbox; icheck++ ){
+							oField.items.push( { value: ( Date.now() + ( Math.random() * 1000 ) ), label: 'label checkbox ' + Math.floor(Math.random()*16777215).toString(16) } )
+
+							// determine si il y a selection
+							if( Math.random() > 0.5 && oField.items.length > 0 ){
+
+								// selectionne un radio
+								oField.values.push( oField.items[ oField.items.length - 1 ].value )
+							}
 						}
 					}
 					
