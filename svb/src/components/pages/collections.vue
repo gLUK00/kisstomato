@@ -98,12 +98,12 @@ export default {
 	},
 	data() {
 		return {
-			show_fields: ['root', 'guid', 'name', 'description', 'actions'],
+			show_fields: ['racine', 'guid', 'name', 'description', 'actions'],
 			collections: [
-				{ color: '3ff2e9', root: 'oui', guid: '4sd54fd56s4g', name: 'page', description: 'liste des pages', actions: '' },
-				{ color: 'e3e635', root: '', guid: '6s5d4fg56sd4fg', name: 'component', description: 'liste des composants', actions: '' }
+				{ color: '3ff2e9', racine: '(root)', guid: '4sd54fd56s4g', name: 'page', description: 'liste des pages', actions: '' },
+				{ color: 'e3e635', racine: 'page', guid: '6s5d4fg56sd4fg', name: 'component', description: 'liste des composants', actions: '' }
 			],
-			collection: { root: '', guid: '6s5d4fg56sd4fg', name: 'component', description: 'liste des composants', actions: '', color: '3ff2e9',
+			collection: { racine: '', guid: '6s5d4fg56sd4fg', name: 'component', description: 'liste des composants', actions: '', color: '3ff2e9',
 				items:[
 					{ guid: 'nssfsfsd', nodename: true, require: true, name: 'sdfsdfsdf', description: 'dsf qsdfqs fsqdfqsd', type: 'variable', target: 'kiss:base_vars:integer', actions: '' },
 					{ guid: 'nssfsfsd', require: false, name: 'component aa', description: 'dsf qsdfqs fsqdfqsd', type: 'variable', target: 'kiss:base_vars:integer', actions: '' },

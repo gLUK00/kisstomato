@@ -29,7 +29,7 @@
 		<div v-if="activeForm != null">
 			<template v-for="(field, iF) in activeForm.fields">
 				<b-container fluid>
-					<b-row>
+					<b-row class="row_form">
 						<b-col sm="2">
 							<label :for="field.id">{{ field.label }}</label>
 						</b-col>
@@ -42,7 +42,6 @@
 							</template>
 							<template v-if="field.type == 'textarea'">
 								<b-form-textarea :id="field.id" v-model="field.value" rows="3" max-rows="15"></b-form-textarea>
-								<span>val : {{ field.value }}</span>
 							</template>
 							<template v-if="field.type == 'radio'">
 								<b-form-group :label="field.label" v-slot="{ ariaDescribedby }">
@@ -56,7 +55,15 @@
 									</b-form-checkbox-group>
 								</b-form-group>
 							</template>
-							<span>debug : {{ field.name }}</span> : <span>{{ field.type }}</span> : <span>{{ field.values }}</span> : <span>{{ field.value }}</span>
+							<template v-if="field.type == 'list'">
+								<span>Custom value : {{ field.value }}</span>
+							</template>
+							<!--<span>debug : {{ field.name }}</span> : <span>{{ field.type }}</span> : <span>{{ field.values }}</span> : <span>{{ field.value }}</span>-->
+<!--
+<label><input type="radio" v-model="item.type" value="list"/> Liste</label>
+<label><input type="radio" v-model="item.type" value="object"/> Objet</label>
+<label><input type="radio" v-model="item.type" value="objects"/> Collection d'objets</label>
+-->
 						</b-col>
 					</b-row>
 				</b-container>
@@ -66,10 +73,15 @@
 </template>
 
 <script>
-const oLstTypeFields = [ 'text', 'textarea', 'color', 'radio', 'checkbox', 'custom' ]
+import listSelector from '../listSelector'
+
+const oLstTypeFields = [ 'text', 'textarea', 'color', 'radio', 'checkbox', 'list', 'object', 'objects' ]
 
 export default {
 	//props: [ 'color' ],
+	components: {
+		listSelector
+	},
 	data() {
 		return {
 			//color: '3beb61',
@@ -118,11 +130,11 @@ console.log( this.activeForm.id )
 				for( var iField = 0; iField < iNbrFields; iField++ ){
 
 					var sTypeField = oLstTypeFields[ Math.floor(Math.random() * oLstTypeFields.length) ]
-					while( sTypeField == 'custom' ){
+					/*while( sTypeField == 'custom' ){
 						sTypeField = oLstTypeFields[ Math.floor(Math.random() * oLstTypeFields.length) ]
-					}
+					}*/
 					var oField = { type: sTypeField, id: 'field_' + ( Date.now() + ( Math.random() * 1000 ) ), label: 'field ' + sTypeField + ' ' + iField }
-					if( sTypeField == 'text' ){
+					if( sTypeField == 'text' || sTypeField == 'custom' ){
 						oField.value = (Math.random() + 1).toString(36).substring(7)
 					}else if( sTypeField == 'textarea' ){
 						oField.value = (Math.random() + 1).toString(36)
@@ -156,6 +168,8 @@ console.log( this.activeForm.id )
 								oField.values.push( oField.items[ oField.items.length - 1 ].value )
 							}
 						}
+					}else if( sTypeField == 'list' || sTypeField == 'object' || sTypeField == 'objects' ){
+
 					}
 					
 					oForm.fields.push( oField )
@@ -180,5 +194,7 @@ console.log( this.activeForm.id )
 </script>
 
 <style scoped>
-	
+	.row_form{
+		margin-bottom: 5px;
+	}
 </style>
