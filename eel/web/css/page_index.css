@@ -1,0 +1,17 @@
+html {
+	height: 100%;
+}
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+#lstProjets{
+	margin-top: 50px;
+}
+
+#lstProjets div{
+	margin-top: 10px;
+	border: 1px solid red;
+	text-align: left;
+}

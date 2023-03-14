@@ -32,8 +32,13 @@ export default {
   margin-top: 60px;*/
 }
 .pos_container{
+<<<<<<< HEAD
   margin-left: 5px;
   margin-right: 5px;
+=======
+  /*margin-left: 5px;
+  margin-right: 5px;*/
+>>>>>>> ffb9697e69e3fe2d16935fc8a8535647447fb395
   margin-top: 5px;
   max-width: initial;
 }
