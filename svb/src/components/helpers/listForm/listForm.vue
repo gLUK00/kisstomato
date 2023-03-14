@@ -58,12 +58,13 @@
 							<template v-if="field.type == 'list'">
 								<span>Custom value : {{ field.value }}</span>
 							</template>
+							<template v-if="field.type == 'object'">
+								<span>Objet séléctionné :</span>
+								<div>
+									<listSelector :items="collections" :target="item.target" title="Liste des objets" keyId="id" keyName="name" keyColor="color" @select-item="setTarget"/>
+								</div>
+							</template>
 							<!--<span>debug : {{ field.name }}</span> : <span>{{ field.type }}</span> : <span>{{ field.values }}</span> : <span>{{ field.value }}</span>-->
-<!--
-<label><input type="radio" v-model="item.type" value="list"/> Liste</label>
-<label><input type="radio" v-model="item.type" value="object"/> Objet</label>
-<label><input type="radio" v-model="item.type" value="objects"/> Collection d'objets</label>
--->
 						</b-col>
 					</b-row>
 				</b-container>
@@ -88,6 +89,11 @@ export default {
 			//mutableColor: this.color,
 			activeForm: null,
 			forms: this.devGetRandomForms(),
+			collections: [
+				{ color: '3ff2e9', racine: '(root)', guid: '4sd54fd56s4g', name: 'page', description: 'liste des pages', actions: '' },
+				{ color: 'e3e635', racine: 'page', guid: '6s5d4fg56sd4fg', name: 'component', description: 'liste des composants', actions: '' }
+			],
+			item: { guid: 'nssfsfsd', require: true, name: 'sdfsdfsdf', description: 'dsf qsdfqs fsqdfqsd', type: 'variable', target: 'kiss:base_vars:integer', actions: '' },
 			/*forms: [
 				{ id: '12121', name: 'Conversion', state: 'view', fields: [
 					{ id: '5454', type:'text', name:"aaa", value: 'sdfsfsdf'},
