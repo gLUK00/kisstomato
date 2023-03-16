@@ -2,7 +2,24 @@ $( document ).ready( function(){
 	refreshProjects();
 } );
 
+// referencement d'un projet
 $( document ).on( "click", "#btn-ref-projet", function() {
+
+	modalShowForm( "Référencer un projet existant", "Valider",
+		function( oData ){
+
+			
+
+			return true;
+		}, "Annuler", null,
+		[
+			{ 'name': 'file', 'title': 'Fichier du projet', 'type': 'file' }
+		]
+	);
+} );
+
+// creation d'un projet
+$( document ).on( "click", "#btn-new-projet", function() {
 
 	// recupere tous des types de modeles des plugins
 	/*oModels = [
@@ -78,7 +95,6 @@ $( document ).on( "click", ".del-project", function() {
 		],
 		{ 'class-btn-ok': 'danger' }
 	);
-	console.log( fileProject );
 } );
 
 // actualise les projets

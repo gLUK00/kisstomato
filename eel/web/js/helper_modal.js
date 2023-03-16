@@ -212,6 +212,13 @@ function modalShowForm( sTitle, sTitleYes, fYes, sTitleNo, fNo, oForm, oOptions 
 					'<label for="modalShowForm_' + oEle[ 'name' ] + '" class="form-check-label">' + oEle[ 'title' ] + '</label>' +
 				'</div>' +
 			'</div>';
+		}else if( oEle[ 'type' ] == 'file' ){
+			sForm += '<div class="mb-3">' +
+				'<div class="form-check">' +
+					'<label for="modalShowForm_' + oEle[ 'name' ] + '" class="form-control">' + oEle[ 'title' ] + '</label>' +
+					'<input type="file" class="form-control" id="modalShowForm_' + oEle[ 'name' ] + '">' +
+				'</div>' +
+			'</div>';
 		}else if( oEle[ 'type' ] == 'list' ){
 			var sList = '';
 			for( var a=0; a<oEle[ 'value' ].length; a++ ){
@@ -276,7 +283,7 @@ function modalShowForm( sTitle, sTitleYes, fYes, sTitleNo, fNo, oForm, oOptions 
 			$( '#modalShowFormError' ).html( resultValidation ).show();
 		}
 	};
-	fModalFormNo = fNo !== undefined ? fNo : function(){};
+	fModalFormNo = fNo !== null ? fNo : function(){};
 	
 	oModalForm.show();
 }
