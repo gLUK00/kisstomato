@@ -1,10 +1,11 @@
+import eel, base64, json, os
+
 # importation du CORE
 from core import config, plugin
 
-import base64, json, os
-
 # creation du fichier d'un projet
-def createFileProject( data ):
+@eel.expose
+def get_create_file_project( data ):
     try:
 
         # recuperation du json du modele selectionne
@@ -35,8 +36,18 @@ def createFileProject( data ):
 
     return True
 
+# ajout du fichier d'un projet
+@eel.expose
+def set_file_project( filename ):
+
+    # referencement du projet
+    config.addProject( filename )
+
+    return True
+
 # recupere tous les projets
-def getAll():
+@eel.expose
+def get_all_projects():
     oProjects = []
 
     for pathProject in config.configuration[ 'projects' ]:
@@ -51,7 +62,8 @@ def getAll():
     return oProjects
 
 # supprime un projet
-def delProject( filename, deletefile ):
+@eel.expose
+def del_project( filename, deletefile ):
 
     oProjects = []
     for pathProject in config.configuration[ 'projects' ]:

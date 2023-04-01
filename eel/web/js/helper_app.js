@@ -18,6 +18,19 @@ $( document ).on( "click", ".app-btn-save-as", function(){
 
 } );
 
+// evenement de prise en charge des boutons de type "set-file"
+$( document ).on( "click", ".app-btn-set-file", function(){
+
+	var idTarget = $( this ).attr( 'idtarget' );
+	var fileTitle = $( this ).attr( 'filetitle' );
+	var fileExt = $( this ).attr( 'fileext' );
+
+	eel.app_set_file( fileTitle, fileExt )( function( path ){
+		$( '#' + idTarget ).val( path );
+	} );
+
+} );
+
 function makeid(length) {
 	let result = '';
 	const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

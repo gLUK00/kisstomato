@@ -212,11 +212,12 @@ function modalShowForm( sTitle, sTitleYes, fYes, sTitleNo, fNo, oForm, oOptions 
 					'<label for="modalShowForm_' + oEle[ 'name' ] + '" class="form-check-label">' + oEle[ 'title' ] + '</label>' +
 				'</div>' +
 			'</div>';
-		}else if( oEle[ 'type' ] == 'file' ){
+		}else if( oEle[ 'type' ] == 'set-file' ){
 			sForm += '<div class="mb-3">' +
 				'<div class="form-check">' +
-					'<label for="modalShowForm_' + oEle[ 'name' ] + '" class="form-control">' + oEle[ 'title' ] + '</label>' +
-					'<input type="file" class="form-control" id="modalShowForm_' + oEle[ 'name' ] + '">' +
+					'<label for="modalShowForm_' + oEle[ 'name' ] + '" class="form-label">' + oEle[ 'title' ] + '</label>' +
+					'<button type="button" fileext="' + oEle[ 'ext' ] + '" filetitle="' + oEle[ 'ext-title' ] + '" idtarget="modalShowForm_' + oEle[ 'name' ] + '" class="app-btn-set-file btn btn-primary btn-sm" style="float:right;"><i class="fa-solid fa-file-lines"></i></button>' +
+					'<input type="text" class="form-control" id="modalShowForm_' + oEle[ 'name' ] + '">' +
 				'</div>' +
 			'</div>';
 		}else if( oEle[ 'type' ] == 'list' ){

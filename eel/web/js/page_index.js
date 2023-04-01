@@ -8,12 +8,30 @@ $( document ).on( "click", "#btn-ref-projet", function() {
 	modalShowForm( "Référencer un projet existant", "Valider",
 		function( oData ){
 
-			
+			// controle du formulaire
+			sError = '';
+			if( oData[ 'file' ].trim() == '' ){
+				sError += '<li>Le nom du fichier ne peut être vide</li>';
+			}
+			if( sError != '' ){
+				return '<ul>' + sError + '</ul>';
+			}
 
+			// enregistrement du nouveau projet
+			eel.set_file_project( oData[ 'file' ].trim() )( function( result ){
+
+				console.log( 'js set_file_project' );
+				console.log( result );
+
+				if( result === true ){
+					refreshProjects();
+				}
+			} );
+			
 			return true;
 		}, "Annuler", null,
 		[
-			{ 'name': 'file', 'title': 'Fichier du projet', 'type': 'file' }
+			{ 'name': 'file', 'title': 'Fichier du projet', 'type': 'set-file', 'ext': 'json', 'ext-title': 'Fichier Json'}
 		]
 	);
 } );
@@ -103,11 +121,15 @@ $( document ).on( "click", ".refresh-project", function() {
 } );
 
 // ouvre un projet
-$( document ).on( "click", ".open-project", function() {
+$( document ).on( "mouseup", ".open-project", function(e) {
 	var fileProject = $( this ).parent().attr( 'file' );
 
-
-
+	// determine le type de clic
+	if( e.which == 1 ){ // clic gauche
+		window.location.href = 'project.html';
+	}else if( e.which == 2 ){ // clic molette
+		eel.app_new_window( 'project.html' )
+	}
 } );
 
 // chargement des projets
