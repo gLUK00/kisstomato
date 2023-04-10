@@ -13,3 +13,10 @@ def getAll():
         oModels.append( {"name":name_model} | json.load(f) )
 
     return oModels
+
+# recupere les informations d'un modele
+def getOne( modele ):
+
+    sPathConfModel = glob.glob( config.configuration[ "path_base" ] + os.sep + 'plugins' + os.sep + 'models' + os.sep + modele + os.sep + 'configuration.json' )[ 0 ]
+    f = open( sPathConfModel )
+    return json.load(f)

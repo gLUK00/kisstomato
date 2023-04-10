@@ -1,7 +1,7 @@
-import eel, base64, json, os
+import eel, base64, json, os, glob
 
 # importation du CORE
-from core import config, plugin
+from core import config, model, plugin
 
 # creation du fichier d'un projet
 @eel.expose
@@ -77,3 +77,20 @@ def del_project( filename, deletefile ):
     config.saveConf()
 
     return True
+
+# ouverture d'un projet
+@eel.expose
+def open_project( filename ):
+
+    # ouverture du projet
+    f = open( filename )
+    oProject = json.load(f)
+    oData = oProject[ 'data' ]
+    oProject.pop( 'data' )
+
+    # determine si le modele a des fichiers javascript
+    oJs = []
+    for sJsFile in glob.glob( config.configuration[ "path_base" ] + os.sep + 'plugins' + os.sep + 'models' + os.sep + oProject[ 'model' ] + os.sep + 'js' + os.sep + '*.js' ):
+        oJs.append( sJsFile.split( os.sep )[ -1 ] )
+
+    return { 'file': filename, 'info': oProject, 'model': model.getOne( oProject[ 'model' ] ), 'data': oData, 'js': oJs }

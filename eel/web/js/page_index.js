@@ -126,9 +126,9 @@ $( document ).on( "mouseup", ".open-project", function(e) {
 
 	// determine le type de clic
 	if( e.which == 1 ){ // clic gauche
-		window.location.href = 'project.html';
+		window.location.href = 'project.html?project=' + fileProject;
 	}else if( e.which == 2 ){ // clic molette
-		eel.app_new_window( 'project.html' )
+		eel.app_new_window( 'project.html?project=' + fileProject )
 	}
 } );
 

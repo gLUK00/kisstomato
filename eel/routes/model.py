@@ -8,3 +8,10 @@ from core import model
 def get_all_models():
 
     return model.getAll()
+
+# telechargement d'un fichier javascript d'un modele
+@eel.expose
+def get_javascript( model, file ):
+    
+
+    return 'console.log( "toto" );'
