@@ -1,3 +1,5 @@
+virtualenv venv
+
 rem python -m venv C:\Users\S31155\Documents\share_vm\si_macif\kisstomato\eel\venv
 
 call ".\venv\Scripts\activate.bat"

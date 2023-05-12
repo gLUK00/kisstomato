@@ -1,5 +1,249 @@
-(function($) {
-	$.fn.modTab = function(parametre){
-		// Ici vos scripts
-	};
-})(jQuery);
+
+
+// selection unique d'un bouton radio
+$( document ).on( "click", ".select-radio-item", function() {
+	$( this ).closest( '.mb-3' ).find( '.select-radio-item' ).prop( "checked", false );
+	$( this ).prop( "checked", true );
+} );
+
+// report d'affichage de la valeur d'un range
+$( document ).on( "click", "input.form-range", function() {
+	
+	$( this ).closest( '.mb-3' ).find( '.select-range-show' ).html( $( this ).val() );
+	
+} );
+
+
+
+
+/*
+
+oTabs.push( { id: 's6d4fsd65f', text: 'Nouveau', state: 'new', form: [], focus: true } );
+oTabs.push( { id: 's6d4fsd65f', text: 'Edition', state: 'edit', form: [] } );
+oTabs.push( { id: 's6d4fsd65fcccd', text: 'un autre', state: 'view', form: [] } );
+
+*/
+
+jQuery.extend(jQuery.fn, {
+	modTab: function(options){
+		var defauts={
+			'action': 'show',
+			'tabs': []
+		};
+		var params=$.extend(defauts, options);
+
+		// determine l'index du tab affiche au premier plan
+		var iViewIndex = params.tabs.length - 1;
+		for( var i=0; i<params.tabs.length; i++ ){
+			var oTab = params.tabs[ i ];
+			if( oTab.focus != undefined && oTab.focus ){
+				iViewIndex = i;
+				break;
+			}
+		}
+
+		return this.each(function(){
+
+			var sTabs = '';
+			var sForms = '';
+			for( var i=0; i<params.tabs.length; i++ ){
+				var oTab = params.tabs[ i ];
+
+				// determine l'etat de la barre d'edition
+				var sStateBar = '<button type="button" class="btn btn-info btn-sm">Modifier</button>';
+				if( oTab.state != 'view' ){
+					sStateBar = '<button type="button" class="btn btn-warning btn-sm" style="margin-right:50px">Annuler</button>' +
+						'<button type="button" class="btn btn-success btn-sm">Enregistrer</button>';
+				}
+
+				// construction du formulaire
+				var sForm = '';
+				if( oTab.form != undefined && oTab.form.length > 0 ){
+					for( var a=0; a<oTab.form.length; a++ ){
+						var oField = oTab.form[ a ];
+						var sIdField = 'tab-field-' + oTab.id + '-' + oField.id;
+						if( oField.type == 'string' ){
+							sForm += '<div class="mb-3">' +
+								'<label for="' + sIdField + '" class="form-label">' + oField.text + '</label>' +
+								'<input type="text" class="form-control" id="' + sIdField + '">' +
+							'</div>';
+						}else if( oField.type == 'text' ){
+							sForm += '<div class="mb-3">' +
+								'<label for="' + sIdField + '" class="form-label">' + oField.text + '</label>' +
+								'<textarea class="form-control" id="' + sIdField + '" rows="3"></textarea>' +
+							'</div>';
+						}else if( oField.type == 'list' ){
+							sForm +=  '<div class="mb-3">' +
+								'<label for="' + sIdField + '" class="form-label">' + oField.text + '</label>' +
+								'<select id="' + sIdField + '" class="form-select" aria-label="Default select example">';
+							for( var b=0; b<oField.items.length; b++ ){
+								var oItem = oField.items[ b ];
+								sForm += '<option value="' + oItem.value + '">' + oItem.text + '</option>';
+							}
+							sForm += '</select>' +
+								'</div>';
+						}else if( oField.type == 'checkbox' ){
+							sForm +=  '<div class="mb-3">' +
+								'<label class="form-label">' + oField.text + '</label>';
+							for( var b=0; b<oField.items.length; b++ ){
+								var oItem = oField.items[ b ];
+								sForm += '<div class="form-check">' +
+									'<input class="form-check-input" type="checkbox" value="' + oItem.value + '" id="' + sIdField + '-' + b + '">' +
+									'<label class="form-check-label" for="' + sIdField + '-' + b + '">' + oItem.text + '</label>' +
+								'</div>';
+							}
+							sForm += '</div>';
+						}else if( oField.type == 'radio' ){
+							sForm +=  '<div class="mb-3">' +
+								'<label class="form-label">' + oField.text + '</label>';
+							for( var b=0; b<oField.items.length; b++ ){
+								var oItem = oField.items[ b ];
+								sForm += '<div class="form-check">' +
+									'<input class="select-radio-item form-check-input" type="radio" value="' + oItem.value + '" id="' + sIdField + '-' + b + '">' +
+									'<label class="form-check-label" for="' + sIdField + '-' + b + '">' + oItem.text + '</label>' +
+								'</div>';
+							}
+							sForm += '</div>';
+						}else if( oField.type == 'color' ){
+							sForm +=  '<div class="mb-3">' +
+								'<label for="' + sIdField + '" class="form-label">' + oField.text + '</label>' +
+								'<input type="color" class="form-control form-control-color" id="' + sIdField + '" title="Choisir la couleur">' +
+							'</div>';
+						}else if( oField.type == 'switch' ){
+							sForm +=  '<div class="form-check form-switch">' +
+								'<input class="form-check-input" type="checkbox" role="switch" id="' + sIdField + '">' +
+								'<label class="form-check-label" for="' + sIdField + '">' + oField.text + '</label>' +
+							'</div>';
+						}else if( oField.type == 'range' ){
+							sForm +=  '<div class="mb-3">' +
+								'<label for="' + sIdField + '" class="form-label">' + oField.text + '</label>' +
+								'<span class="select-range-show" style="float:right">' + ( oField.value != undefined ? oField.value : '' ) + '</span>' +
+								'<input type="range" class="form-range" id="' + sIdField + '" min="' + oField.min + '" max="' + oField.max + '">' +
+							'</div>';
+						}
+
+
+
+						
+					}
+				}
+
+
+				sTabs += '<button class="nav-link' + ( i == iViewIndex ? ' active' : '' ) + '" id="' + oTab.id + '-tab" data-bs-toggle="tab" data-bs-target="#' + oTab.id + '" type="button" role="tab" aria-controls="' + oTab.id + '" aria-selected="' + ( i == iViewIndex ? 'true' : 'false' ) + '">' + oTab.text + ( oTab.state != 'view' ? ' *': '' ) + '</button>';
+				sForms += '<div class="tab-pane fade' + ( i == iViewIndex ? ' show active' : '' ) + '" id="' + oTab.id + '" role="tabpanel" aria-labelledby="' + oTab.id + 'e-tab" tabindex="0">' +
+					'<div style="height:40px;">' +
+							( oTab.state == 'view' ? '<div style="float:left;">' +
+								'<button type="button" class="btn btn-secondary btn-sm">Fermer</button>' +
+							'</div>' : '' ) +
+						'<div style="float:right;">' + sStateBar + '</div>' +
+					'</div>' +
+					'<div>' + sForm + '</div>' +
+				'</div>';
+			}
+
+			$(this).html( '<nav><div class="nav nav-tabs" id="nav-tab" role="tablist">' + sTabs +
+				'</div></nav><div class="tab-content" id="nav-tabContent" style="border-left: 1px solid #dee2e6;padding: 10px;">' + sForms + '</div>' );
+
+			// attribution des valeurs
+			for( var i=0; i<params.tabs.length; i++ ){
+				var oTab = params.tabs[ i ];
+
+				// pour le formulaire
+				if( oTab.form != undefined && oTab.form.length > 0 ){
+
+					// pour tous les champs
+					for( var a=0; a<oTab.form.length; a++ ){
+						var oField = oTab.form[ a ];
+						var sIdField = 'tab-field-' + oTab.id + '-' + oField.id;
+
+						// attribution des valeurs
+						if( oField.value != undefined && $.inArray( oField.type, [ 'string', 'text', 'int', 'list', 'color', 'range' ] ) != -1 ){
+							$( '#' + sIdField ).val( oField.value );
+							//console.log( '#tab-field-' + oTab.id + '-' + oField.id );
+							//console.log( oField.value );
+						}else if( oField.values != undefined && $.inArray( oField.type, [ 'checkbox' ] ) != -1 ){
+							for( var b=0; b<oField.items.length; b++ ){
+								var oItem = oField.items[ b ];
+								if( $.inArray( oItem.value, oField.values ) != -1 ){
+									$( '#' + sIdField + '-' + b ).prop( "checked", true );
+								}
+							}
+						}else if( oField.value != undefined && $.inArray( oField.type, [ 'radio' ] ) != -1 ){
+							for( var b=0; b<oField.items.length; b++ ){
+								var oItem = oField.items[ b ];
+								if( oItem.value == oField.value ){
+									$( '#' + sIdField + '-' + b ).prop( "checked", true );
+								}
+							}
+						}else if( oField.value != undefined && oField.value && $.inArray( oField.type, [ 'switch' ] ) != -1 ){
+							$( '#' + sIdField ).prop( "checked", true );
+						}
+
+						// gestion de l'etat
+						if( oTab.state == 'view' ){
+							if( $.inArray( oField.type, [ 'string', 'text', 'int', 'list', 'color', 'switch', 'range' ] ) != -1 ){
+								$( '#' + sIdField ).prop( "disabled", true );
+							}else if( $.inArray( oField.type, [ 'checkbox', 'radio' ] ) != -1 ){
+								for( var b=0; b<oField.items.length; b++ ){
+									var oItem = oField.items[ b ];
+									$( '#' + sIdField + '-' + b ).prop( "disabled", true );
+								}
+							}
+						}
+					}
+				}
+
+				
+			}
+
+/*
+{ id: 's6d4fsd65f', text: 'Nouveau', state: 'new', form: [
+{ id: '4sf5sd4': type: 'string', text: 'Nom', value: 'un truc' },	
+{ id: '4sfsss5sd4': type: 'string', text: 'Nom 2' },
+{ id: '4sfsss5sdss4': type: 'int', text: 'Un nombre' },
+{ id: '4sfsss5sd4ddd': type: 'text', text: 'Un texte' },
+{ id: 'utut': type: 'list', text: 'Une liste', value:'b', items:[
+		{ text: 'valeur a', value: 'a' },
+		{ text: 'valeur b', value: 'b' },
+		{ text: 'valeur c', value: 'c' }
+	]
+},
+{ id: 'ututss': type: 'checkbox', text: 'Une liste de CAC', values:['a', 'c' ], items:[
+		{ text: 'valeur a', value: 'a' },
+		{ text: 'valeur b', value: 'b' },
+		{ text: 'valeur c', value: 'c' }
+	]
+}
+*/
+			
+
+			console.log( '-------------------------' );
+			console.log( $(this) );
+
+			//$(this).css( 'border', '1px solid red');
+
+
+			/*<nav>
+						<div class="nav nav-tabs" id="nav-tab" role="tablist">
+							<button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</button>
+							<button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile *</button>
+							<button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
+							<button class="nav-link" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled" type="button" role="tab" aria-controls="nav-disabled" aria-selected="false" disabled>Disabled</button>
+						</div>
+					</nav>
+					<div class="tab-content" id="nav-tabContent" style="border-left: 1px solid #dee2e6;padding: 10px;">
+						<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+							<div style="text-align: right;">
+								<button type="button" class="btn btn-info btn-sm">Modifier</button>
+								<button type="button" class="btn btn-warning btn-sm" style="margin-right:50px">Annuler</button>
+								<button type="button" class="btn btn-success btn-sm">Enregistrer</button>
+							</div>
+							fghjfg fgh jfh jfg jgfhj gfhj
+						</div>
+						<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">.ghhhhhhhh h h dh dgfhgfh.</div>
+						<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">fffffffffffffff fg fg sdf gsdfg sdfg sdfg</div>
+						<div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">.ffffffffffffffffffffff sfd sdf sdf d fdf</div>
+					</div>*/
+		} );
+	}
+});

@@ -1,0 +1,28 @@
+{
+    "name": "html",
+    "desc": "ghjghjghj",
+    "model": "html_maker",
+    "data": [
+        {
+            "id": "pages",
+            "text": "Pages",
+            "icon": "fa-solid fa-tree",
+            "li_attr": {
+                "readonly": true,
+                "children-type": [
+                    "page"
+                ]
+            }
+        },
+        {
+            "id": "contents",
+            "text": "Contenus",
+            "li_attr": {
+                "readonly": true,
+                "children-type": [
+                    "content"
+                ]
+            }
+        }
+    ]
+}
