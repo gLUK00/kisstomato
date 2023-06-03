@@ -9,8 +9,8 @@ def load():
     path_base = os.path.dirname( os.path.dirname( os.path.realpath( __file__ ) ) )
 
     # chargement du fichier de configuration
-    f = open( path_base + os.sep + 'configuration.json' )
-    configuration = json.load(f)
+    with open( path_base + os.sep + 'configuration.json', 'r' ) as j:
+        configuration = json.loads(j.read())
     configuration[ "path_base" ] = path_base
 
 # ajout d'un projet dans la configuration

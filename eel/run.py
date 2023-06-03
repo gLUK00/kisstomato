@@ -16,7 +16,7 @@ class MyHandler(FileSystemEventHandler):
         global eel
         if event.src_path.endswith(".py") or event.src_path.endswith(".json"):
             
-            print("Fichier modifié, redémarrage de l'application...")
+            print("Fichier modifie, redemarrage de l'application...")
             
             # fermeture est reouverture de l'application
             eel.close_all()

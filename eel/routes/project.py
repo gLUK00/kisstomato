@@ -14,6 +14,10 @@ def get_create_file_project( data ):
     except Exception as e:
         return str( e )
 
+    # si il n'y a pas de donnees
+    if "data" not in data:
+        data[ "data" ] = []
+
     # supprime les cles non necessaires
     filename = data[ 'file' ]
     data.pop( 'file', None )
@@ -52,10 +56,10 @@ def get_all_projects():
 
     for pathProject in config.configuration[ 'projects' ]:
         try:
-            f = open( pathProject )
-            oProject = json.load(f)
-            oProject[ 'file' ] = pathProject
-            oProjects.append( oProject )
+            with open( pathProject, 'r' ) as j:
+                oProject = json.loads(j.read())
+                oProject[ 'file' ] = pathProject
+                oProjects.append( oProject )
         except Exception as e:
             oProjects.append( { 'file': pathProject, 'error':str( e ) } )
 
@@ -83,8 +87,9 @@ def del_project( filename, deletefile ):
 def open_project( filename ):
 
     # ouverture du projet
-    f = open( filename )
-    oProject = json.load(f)
+    oProject = {}
+    with open( filename, 'r' ) as j:
+        oProject = json.loads(j.read())
     oData = oProject[ 'data' ]
     oProject.pop( 'data' )
 

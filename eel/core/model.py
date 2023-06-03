@@ -8,9 +8,12 @@ def getAll():
 
     oPathConfModels = glob.glob( config.configuration[ "path_base" ] + os.sep + 'plugins' + os.sep + 'models' + os.sep + '*' + os.sep + 'configuration.json' )
     for conf_model in oPathConfModels:
+        #print( 'debug : getAll : ' + conf_model )
         name_model = conf_model.split( os.sep )[ -2 ]
-        f = open( conf_model )
-        oModels.append( {"name":name_model} | json.load(f) )
+        oElement = {"name":name_model}
+        with open(conf_model, 'r') as j:
+            oElement.update( json.loads(j.read()) )
+        oModels.append( oElement )
 
     return oModels
 
