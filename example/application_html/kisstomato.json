@@ -1,6 +1,6 @@
 {
-    "name": "My Html App",
-    "desc": "First HTML application",
+    "name": "html",
+    "desc": "hjklhjkl",
     "model": "html_maker",
     "data": [
         {
@@ -10,8 +10,55 @@
             "li_attr": {
                 "readonly": true,
                 "children-type": [
+                    "directory",
                     "page"
                 ]
+            },
+            "children": [
+                {
+                    "id": "556a7c56-7e39-4d5b-a5f8-a0651e83e885",
+                    "text": "lm\u00f9lm\u00f9lm\u00f9",
+                    "li_attr": {
+                        "type": "page",
+                        "items": [
+                            {
+                                "id": "page_desc",
+                                "value": "lm\u00f9lm\u00f9lm\u00f9"
+                            },
+                            {
+                                "id": "aa_string",
+                                "value": ""
+                            },
+                            {
+                                "id": "aa_list",
+                                "value": "a"
+                            },
+                            {
+                                "id": "aaa_checkbox",
+                                "value": []
+                            },
+                            {
+                                "id": "aaa_radio",
+                                "value": null
+                            },
+                            {
+                                "id": "aaa_color",
+                                "value": "#000000"
+                            },
+                            {
+                                "id": "aaa_switch",
+                                "value": "on"
+                            },
+                            {
+                                "id": "aaa_range",
+                                "value": "8"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "state": {
+                "opened": true
             }
         },
         {

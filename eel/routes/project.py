@@ -23,16 +23,8 @@ def get_create_file_project( data ):
     data.pop( 'file', None )
 
     # enregistrement du fichier
-    def dumper(obj):
-        try:
-            return obj.toJSON()
-        except:
-            if isinstance( obj, bytes ):
-                return base64.b64encode( obj ).decode( 'utf-8' )
-            return obj.__dict__
-
     oFile = open( filename, "w", encoding="utf-8" )
-    oFile.write( json.dumps( data, default=dumper, indent=4 ) )
+    oFile.write( json.dumps( data, default=config.dumperJson, indent=4 ) )
     oFile.close()
 
     # referencement du projet
@@ -99,3 +91,19 @@ def open_project( filename ):
         oJs.append( sJsFile.split( os.sep )[ -1 ] )
 
     return { 'file': filename, 'info': oProject, 'model': model.getOne( oProject[ 'model' ] ), 'data': oData, 'js': oJs }
+
+# mise a jour des donnees d'un projet
+@eel.expose
+def update_project( filename, data ):
+
+    oProject = {}
+    with open( filename, 'r' ) as j:
+        oProject = json.loads(j.read())
+    oProject[ 'data' ] = data
+
+    # enregistrement du fichier
+    oFile = open( filename, "w", encoding="utf-8" )
+    oFile.write( json.dumps( oProject, default=config.dumperJson, indent=4 ) )
+    oFile.close()
+
+    return True

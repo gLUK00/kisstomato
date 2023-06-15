@@ -4,32 +4,9 @@ https://fontawesome.com/search?o=r&m=free
 https://www.jstree.com/docs/json/
 */
 
-// modeles de donnees
-var oModel = [];
-
-// reference vers les noeuds
-var oNodes = [];
-
-// reference des onglets
-var oTabs = [];
-
-// recherche un noeud en fonction de son id
-function getNode( id, _nodes ){
-	if( _nodes == undefined ){
-		_nodes = oNodes;
-	}
-	for( var i=0; i<oNodes.length; i++ ){
-		if( oNodes[ i ].id == id ){
-			return oNodes[ i ];
-		}else if( oNodes[ i ].children > 0 ){
-			var oNode = getNode( id, oNodes[ i ].children );
-			if( oNode != null ){
-				return oNode;
-			}
-		}
-	}
-	return null;
-}
+$( document ).ready( function(){
+	fullScreen();
+} );
 
 // chargement da la navbar
 eel.open_project( getUrlParameter( 'project' ) )( function( data ){
@@ -75,9 +52,7 @@ eel.open_project( getUrlParameter( 'project' ) )( function( data ){
 
 
 
-function refreshTabs(){
-	$( '#col_right' ).modTab( { tabs: oTabs } );
-}
+
 
 /*
 
@@ -141,11 +116,76 @@ oTabs.push( { id: 's6d4fsd65fcccd', text: 'un autre', state: 'view', form: [
 ] } );
 refreshTabs();
 
+// mise a jour d'un onglet
+function updateTab( tab ){
+
+	console.log( 'updateTab' );
+	console.log( tab );
+
+}
+
+// fonction d'ajout sur le menu contextuel
+function contextMenuAdd( oMenu ){
+	console.log( 'contextMenuAdd iiiiiiiiiiiiiiiiiiiiiiiii' );
+	console.log( oMenu );
+
+	// saisie du nom
+	modalShowInput( 'Nouvel élément : ' + oMenu[ 'item' ][ 'text' ], 'Oui', function( sResult ){
+
+		// si pas de contenu
+		if( oMenu[ 'item' ][ 'items' ] == undefined ){
+
+			// ajout de l'element
+			nodeAddNode( oMenu[ 'parent' ][ 'id' ], sResult, oMenu[ 'item' ], null );
+
+			// enregistrement du projet
+			modelSaveProjectModel( getUrlParameter( 'project' ), oNodes );
+
+			return;
+		}
+
+		// saisie du contenu de l'element
+		var oTab = { id: generate_uuidv4(), text: sResult, state: 'new', form: oMenu[ 'item' ][ 'items' ], options: { parent: oMenu[ 'parent' ] }, eOnSave: function( tab ){
+
+			var oData = [];
+			for( var i=0; i<tab.form.length; i++ ){
+				oData.push( { id: tab.form[ i ].id, value: tab.form[ i ].value } )
+			}
+
+			// ajout de l'element
+			nodeAddNode( oMenu[ 'parent' ][ 'id' ], sResult, oMenu[ 'item' ], oData );
+
+			// enregistrement du projet
+			modelSaveProjectModel( getUrlParameter( 'project' ), oNodes );
+
+			// remplace l'evenement eOnSave de l'onglet pour celui de la mise a jour
+			tab.eOnSave = updateTab;
+			
+		}, eOnCancel: function( tab ){
+
+		} };
+
+		tabAddTab( oTab );
+
+
+		console.log( oMenu );
+		console.log( sResult );
+	}, 'Non' );
+}
+
+function contextMenuDel( oItem ){
+	console.log( 'contextMenuDel iiiiiiiiiiiiiiiiiiiiiiiii' );
+	console.log( oItem );
+}
+
 $.contextMenu({
 	selector: '.jstree-node', 
 	callback: function(key, options) {
 		var m = "clicked: " + key;
-		window.console && console.log(m) || alert(m); 
+		console.log( '---------------------------------' );
+		console.log( key );
+		console.log( options );
+		window.console && console.log(m) || alert(m);
 	},
 	//items: {
 	//	"edit": {name: "Edit", icon: "edit"}
@@ -174,40 +214,80 @@ $.contextMenu({
 
 		// recupere le noeud concerne
 		var id = $( $triggerElement ).attr( 'id' );
-		var oNode = getNode( id );
+		var oNode = nodeGetNode( id );
+
+		// determine les types d'enfants du noeud
+		var oChildsType = [];
+		if( oNode.li_attr[ 'type' ] != undefined ){
+
+			// recupere l'element du modele correspondant
+			var oModelItem = modelGetElementById( oNode.li_attr[ 'type' ] );
+			if( oModelItem[ 'children-type' ] != undefined && oModelItem[ 'children-type' ].length > 0 ){
+				oChildsType = oModelItem[ 'children-type' ];
+			}
+
+
+		}
+		else if( oNode.li_attr[ 'children-type' ] != undefined && oNode.li_attr[ 'children-type' ].length > 0 ){
+			oChildsType = oNode.li_attr[ 'children-type' ];
+		}
+
+
 
 		// si il y a possibilite de creer des enfants
-		if( oNode.li_attr[ 'children-type' ] != undefined && oNode.li_attr[ 'children-type' ].length > 0 ){
+		if( oChildsType.length > 0 ){
+
 			var oSubItems = {};
 
-			for( var i=0; i<oNode.li_attr[ 'children-type' ].length; i++ ){
+			for( var i=0; i<oChildsType.length; i++ ){
 
-				var sIdChildModel = oNode.li_attr[ 'children-type' ][ i ];
-				for( var a=0; a<oModel.length; a++ ){
-					if( oModel[ a ][ 'id' ] == sIdChildModel ){
-						oSubItems[ oModel[ a ][ 'id' ] ] = { name: oModel[ a ][ 'text' ], li_attr: { action: 'add-element', 'element': oModel[ a ][ 'id' ] } }
-					}
-				}
+				var sIdChildModel = oChildsType[ i ];
+				var oModelItem = modelGetElementById( sIdChildModel );
 
-				//var sKeyAdd = oNode.li_attr[ 'childre-type' ]
+				var oResultAdd = {}
+				oResultAdd[ 'parent' ] = Object.assign( {}, oNode );
+
+				// mise en place du click-droit "ajouter" avec le parent et l'element cible a creer
+				oSubItems[ oModelItem[ 'id' ] ] = { name: oModelItem[ 'text' ], callback: function( key, options ){
+
+					oResultAdd[ 'item' ] = modelGetElementById( key );
+					contextMenuAdd( oResultAdd ) }
+				};
+
 			}
 			oItems[ 'add-element ' ] =  {name: "Ajouter", icon: "paste", items: oSubItems, state: { disabled: oSubItems.length == 0 } };
 		}
 
 		// si l'element peut etre supprime
 		if( oNode.li_attr[ 'readonly' ] == undefined || !oNode.li_attr[ 'readonly' ] ){
-			oItems[ 'del-element ' ] =  {name: "Supprimer", icon: "paste", li_attr: { action: 'del-element' } };
+			oItems[ 'del-element ' ] =  {name: "Supprimer", callback: function(){ contextMenuDel( oNode ) }, icon: "paste" };
 		}
 
 		console.log( oNode );
 		console.log( oItems );
 
-        return {
-            callback: function(){},
-            items: oItems
-        };
-    }
+		return {
+			callback: function(){},
+			items: oItems
+		};
+	}
 });
+
+$( document ).on( "dblclick", ".jstree-node", function( e ) {
+	var sIdNode = $( this ).attr( 'id' );
+	
+	console.log('uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu');
+	console.log('dblclick', sIdNode);
+	console.log(e);
+
+	// ne pas propager l'evenement vers le parent
+	e.stopPropagation();
+} );
+
+/*$( document ).on( "click", ".jstree-node", function() {
+	console.log('uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu');
+	console.log('click', this);
+} );*/
 
 
 $(document).on("contextmenu", ".jstree-node", function(e) {
@@ -215,23 +295,31 @@ $(document).on("contextmenu", ".jstree-node", function(e) {
   
   // Mise à jour du contenu du menu
   $.contextMenu("update", {
-    "copier": {name: "Copier", icon: "fa-copy"},
-    "coller": {name: "Coller", icon: "fa-paste"},
-    "sep1": "---------",
-    "sousmenu": {
-      name: "Sous-menu",
-      icon: "fa-cut",
-      items: {
-        "sousmenu1": {name: "Sous-menu 1 modifié", icon: "fa-file"},
-        "sousmenu2": {name: "Sous-menu 2 modifié", icon: "fa-folder"}
-      }
-    },
-    "nouveau": {name: "Nouveau", icon: "fa-plus"}
+	"copier": {name: "Copier", icon: "fa-copy"},
+	"coller": {name: "Coller", icon: "fa-paste"},
+	"sep1": "---------",
+	"sousmenu": {
+	  name: "Sous-menu",
+	  icon: "fa-cut",
+	  items: {
+		"sousmenu1": {name: "Sous-menu 1 modifié", icon: "fa-file"},
+		"sousmenu2": {name: "Sous-menu 2 modifié", icon: "fa-folder"}
+	  }
+	},
+	"nouveau": {name: "Nouveau", icon: "fa-plus"}
   });
 
   // Affichage du menu contextuel
   $(this).trigger("mousedown");
-})
+});
+
+// fermeture du projet
+$('#close_project').on('click', function(e){
+	modalShowQuery( 'Fermeture du projet', 'Voulez vous fermer ce projet ?', 'Oui', function(){
+		window.location.href = 'index.html';
+	}, 'Non' );
+});
+
 
 
 /*

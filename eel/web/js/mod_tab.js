@@ -1,4 +1,6 @@
 
+// reference des onglets
+var oTabs = [];
 
 // selection unique d'un bouton radio
 $( document ).on( "click", ".select-radio-item", function() {
@@ -13,7 +15,91 @@ $( document ).on( "click", "input.form-range", function() {
 	
 } );
 
+// click sur le bouton "modifier"
+$( document ).on( "click", ".tabUpdate", function() {
+	var sId = $( this ).attr( 'idTab' );
+	var oTab = tabGetTab( sId );
 
+	// change l'etat de l'onglet
+	oTab.state = 'edit';
+	refreshTabs();
+} );
+
+// click sur le bouton "fermer"
+$( document ).on( "click", ".tabClose", function() {
+	
+	console.log( 'tabClose' );
+} );
+
+// click sur le bouton "enregistrer"
+$( document ).on( "click", ".tabSave", function() {
+	var sId = $( this ).attr( 'idTab' );
+	var oTab = tabGetTab( sId );
+
+	// recupere les donnees du formulaire
+	for( var a=0; a<oTab.form.length; a++ ){
+		var oField = oTab.form[ a ];
+		var sIdField = 'tab-field-' + oTab.id + '-' + oField.id;
+
+		if( [ 'string', 'text', 'color', 'switch', 'range', 'list' ].includes( oField.type ) ){
+			oField.value = $( '#' + sIdField ).val();
+		}else if( oField.type == 'checkbox' ){
+			oField.value = [];
+			for( var b=0; b<oField.items.length; b++ ){
+				if( $( '#' + sIdField + '-' + b ).is( ':checked' ) ){
+					oField.value.push( $( '#' + sIdField + '-' + b ).val() );
+				}
+			}
+		}else if( oField.type == 'radio' ){
+			for( var b=0; b<oField.items.length; b++ ){
+				if( $( '#' + sIdField + '-' + b ).is( ':checked' ) ){
+					oField.value = $( '#' + sIdField + '-' + b ).val();
+				}
+			}
+		}
+	}
+
+	// change l'etat de l'onglet
+	oTab.state = 'view';
+	refreshTabs();
+
+	// si il y a une fonction de callback
+	if( oTab.eOnSave != undefined ){
+		oTab.eOnSave( oTab );
+	}
+} );
+
+// click sur le bouton "annuler"
+$( document ).on( "click", ".tabCancel", function() {
+	
+	console.log( 'tabCancel' );
+} );
+
+// ajout d'un onglet
+function tabAddTab( oTab ){
+	for( var i=0; i<oTabs.length; i++ ){
+		if( oTabs[ i ].focus ){
+			oTabs[ i ].focus = false;
+		}
+	}
+	oTab.focus = true;
+	oTabs.push( oTab );
+	refreshTabs();
+}
+
+function refreshTabs(){
+	$( '#col_right' ).modTab( { tabs: oTabs } );
+}
+
+//recherche un tab en fonction de son id
+function tabGetTab( sId ){
+	for( var i=0; i<oTabs.length; i++ ){
+		if( oTabs[ i ].id == sId ){
+			return oTabs[ i ];
+		}
+	}
+	return null;
+}
 
 
 /*
@@ -50,10 +136,10 @@ jQuery.extend(jQuery.fn, {
 				var oTab = params.tabs[ i ];
 
 				// determine l'etat de la barre d'edition
-				var sStateBar = '<button type="button" class="btn btn-info btn-sm">Modifier</button>';
+				var sStateBar = '<button idTab="' + oTab.id + '" type="button" class="btn btn-info btn-sm tabUpdate">Modifier</button>';
 				if( oTab.state != 'view' ){
-					sStateBar = '<button type="button" class="btn btn-warning btn-sm" style="margin-right:50px">Annuler</button>' +
-						'<button type="button" class="btn btn-success btn-sm">Enregistrer</button>';
+					sStateBar = '<button idTab="' + oTab.id + '" type="button" class="btn btn-warning btn-sm tabCancel" style="margin-right:50px">Annuler</button>' +
+						'<button idTab="' + oTab.id + '" type="button" class="btn btn-success btn-sm tabSave">Enregistrer</button>';
 				}
 
 				// construction du formulaire
@@ -133,7 +219,7 @@ jQuery.extend(jQuery.fn, {
 				sForms += '<div class="tab-pane fade' + ( i == iViewIndex ? ' show active' : '' ) + '" id="' + oTab.id + '" role="tabpanel" aria-labelledby="' + oTab.id + 'e-tab" tabindex="0">' +
 					'<div style="height:40px;">' +
 							( oTab.state == 'view' ? '<div style="float:left;">' +
-								'<button type="button" class="btn btn-secondary btn-sm">Fermer</button>' +
+								'<button idTab="' + oTab.id + '" type="button" class="btn btn-secondary btn-sm tabClose">Fermer</button>' +
 							'</div>' : '' ) +
 						'<div style="float:right;">' + sStateBar + '</div>' +
 					'</div>' +

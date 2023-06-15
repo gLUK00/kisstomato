@@ -29,16 +29,16 @@ def saveConf():
     global configuration
 
     # enregistrement du fichier
-    def dumper(obj):
-        try:
-            return obj.toJSON()
-        except:
-            if isinstance( obj, bytes ):
-                return base64.b64encode( obj ).decode( 'utf-8' )
-            return obj.__dict__
-
     path_base = configuration[ "path_base" ]
     oFile = open( configuration[ "path_base" ] + os.sep + 'configuration.json', "w", encoding="utf-8" )
-    oFile.write( json.dumps( configuration, default=dumper, indent=4 ) )
+    oFile.write( json.dumps( configuration, default=dumperJson, indent=4 ) )
     oFile.close()
     configuration[ "path_base" ] = path_base
+
+def dumperJson(obj):
+    try:
+        return obj.toJSON()
+    except:
+        if isinstance( obj, bytes ):
+            return base64.b64encode( obj ).decode( 'utf-8' )
+        return obj.__dict__

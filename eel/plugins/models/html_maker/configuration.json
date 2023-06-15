@@ -1,7 +1,30 @@
 {
 	"title": "Application HTML Maker",
 	"elements": [
-		{ "id": "page", "text": "Page", "children-type": [ "page" ] },
+		{ "id": "page", "text": "Page", "children-type": [ "page" ],
+			"items":[
+				{ "id": "page_desc", "text": "description", "type": "text" },
+				{ "id": "aa_string", "text": "aa_string", "type": "string" },
+				{ "id": "aa_list", "text": "aa_list", "type": "list", "items": [
+					{ "text": "valeur a", "value": "a" },
+					{ "text": "valeur b", "value": "b" },
+					{ "text": "valeur c", "value": "c" }
+				] },
+				{ "id": "aaa_checkbox", "text": "aaa_checkbox", "type": "checkbox", "items": [
+					{ "text": "valeur a", "value": "a" },
+					{ "text": "valeur b", "value": "b" },
+					{ "text": "valeur c", "value": "c" }
+				] },
+				{ "id": "aaa_radio", "text": "aaa_radio", "type": "radio", "items": [
+					{ "text": "valeur a", "value": "a" },
+					{ "text": "valeur b", "value": "b" },
+					{ "text": "valeur c", "value": "c" }
+				] },
+				{ "id": "aaa_color", "text": "aaa_color", "type": "color" },
+				{ "id": "aaa_switch", "text": "aaa_switch", "type": "switch" },
+				{ "id": "aaa_range", "text": "aaa_range", "type": "range", "min":0, "max":15 }
+			] },
+		{ "id": "directory", "text": "Repertoire", "children-type": [ "directory", "page" ] },
 		{ "id": "content", "text": "Contenu", "children-type": [ "content" ] }
 	]
 }
