@@ -1,8 +1,9 @@
 {
 	"title": "Application HTML Maker",
 	"elements": [
-		{ "id": "page", "text": "Page", "children-type": [ "page" ],
+		{ "id": "page", "text": "Page", "icon": "fa-solid fa-table-cells-large", "children-type": [ "page" ],
 			"items":[
+				{ "id": "page_icon", "text": "icone", "type": "icon" },
 				{ "id": "page_desc", "text": "description", "type": "text" },
 				{ "id": "aa_string", "text": "aa_string", "type": "string" },
 				{ "id": "aa_list", "text": "aa_list", "type": "list", "items": [
@@ -24,7 +25,7 @@
 				{ "id": "aaa_switch", "text": "aaa_switch", "type": "switch" },
 				{ "id": "aaa_range", "text": "aaa_range", "type": "range", "min":0, "max":15 }
 			] },
-		{ "id": "directory", "text": "Repertoire", "children-type": [ "directory", "page" ] },
-		{ "id": "content", "text": "Contenu", "children-type": [ "content" ] }
+		{ "id": "directory", "text": "Repertoire", "icon": "fa-solid fa-folder", "children-type": [ "directory", "page" ] },
+		{ "id": "content", "text": "Contenu", "icon": "fa-solid fa-file-lines", "children-type": [ "content" ] }
 	]
 }

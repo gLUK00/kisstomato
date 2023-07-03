@@ -2,7 +2,8 @@
     "port": 27000,
     "projects": [
         "/home/hidalgo/Documents/projects/asset-np6-tools/kisstomato.json",
-        "/home/hidalgo/Documents/projects/kisstomato/example/application_html/kisstomato.json"
+        "/home/hidalgo/Documents/projects/kisstomato/example/application_html/kisstomato.json",
+        "/home/hidalgo/Documents/projects/kisstomato/example/kisstomato.json"
     ],
     "path_base": "/home/hidalgo/Documents/projects/kisstomato/eel"
 }

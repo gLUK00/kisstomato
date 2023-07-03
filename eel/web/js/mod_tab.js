@@ -56,6 +56,9 @@ $( document ).on( "click", ".tabSave", function() {
 					oField.value = $( '#' + sIdField + '-' + b ).val();
 				}
 			}
+		}else if( oField.type == 'icon' ){
+			oField.icon = $( '#icon_value_' + sIdField ).val();
+			oField.color = $( '#icon_color_' + sIdField ).val();
 		}
 	}
 
@@ -109,6 +112,13 @@ oTabs.push( { id: 's6d4fsd65f', text: 'Edition', state: 'edit', form: [] } );
 oTabs.push( { id: 's6d4fsd65fcccd', text: 'un autre', state: 'view', form: [] } );
 
 */
+
+// changement de la couleur de l'icon
+$( document ).on( "change", ".icon-color", function() {
+	let sField = $( this ).attr( 'field' );
+	$( '#icon_' + sField + ' > i' ).css( "color", $( this ).val() );
+} );
+
 
 jQuery.extend(jQuery.fn, {
 	modTab: function(options){
@@ -206,6 +216,36 @@ jQuery.extend(jQuery.fn, {
 								'<span class="select-range-show" style="float:right">' + ( oField.value != undefined ? oField.value : '' ) + '</span>' +
 								'<input type="range" class="form-range" id="' + sIdField + '" min="' + oField.min + '" max="' + oField.max + '">' +
 							'</div>';
+						}else if( oField.type == 'icon' ){
+
+							var sCpIdField = sIdField;
+							sForm +=  '<div class="mb-3">' +
+								'<label for="' + sIdField + '" class="form-label">' + oField.text + '</label>' +
+								'<table width="200px">' +
+									'<tr>' +
+										'<td style="width:200px">' +
+											'<div class="icon_selected" id="icon_' + sIdField + '"></div>' +
+											'<input type="hidden" id="icon_value_' + sIdField + '" value="' + ( oField.icon != undefined ? oField.icon : '' ) + '">' +
+										'</td>' +
+										'<td style="width:200px">' +
+											'<input type="color" class="form-control form-control-color icon-color" field="' + sIdField + '" id="icon_color_' + sIdField + '" value="' + ( oField.color != undefined ? oField.color : '' ) + '" title="Choisir la couleur">' +
+										'</td>' +
+									'</tr>' +
+								'</table>' +
+								'<span class="select-range-show" style="float:right">' + ( oField.value != undefined ? oField.value : '' ) + '</span>' +
+								iconsGetHtmlPicker( function( icon ){
+
+									// recupere l'icone
+									let oIcon = iconsGetOne( icon );
+									$( '#icon_' + sCpIdField ).html( '<i class="fa-' + oIcon[ 'styles' ][ '0' ] + ' fa-' + icon + ' fa-2xl"></i>' );
+
+									// si il y a une couleur
+									let sColor = $( '#icon_color_' + sCpIdField ).val();
+									if( sColor != '' ){
+										$( '#icon_' + sCpIdField + ' > i' ).css( 'color', sColor );
+									}
+								} ) +
+							'</div>';
 						}
 
 
@@ -263,6 +303,13 @@ jQuery.extend(jQuery.fn, {
 							}
 						}else if( oField.value != undefined && oField.value && $.inArray( oField.type, [ 'switch' ] ) != -1 ){
 							$( '#' + sIdField ).prop( "checked", true );
+						}else if( oField.type == 'icon' && oField.icon != undefined && oField.icon != '' ){
+							let oIcon = iconsGetOne( oField.icon );
+							$( '#icon_' + sIdField ).html( '<i class="fa-' + oIcon[ 'styles' ][ '0' ] + ' fa-' + oField.icon + ' fa-2xl"></i>' );
+						}
+
+						if( oField.type == 'icon' && oField.color != undefined && oField.color != '' ){
+							$( '#icon_' + sIdField + ' > i' ).css( "color", oField.color );
 						}
 
 						// gestion de l'etat

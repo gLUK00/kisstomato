@@ -39,6 +39,11 @@ function nodeAddNode( idParent, sText, oModelItem, oData ){
 			//"children-type": oModelItem[ 'children-type' ]
 		} };
 
+	// si il y a un icon sur le modele
+	if( oModelItem[ 'icon' ] != undefined ){
+		oNewNode[ 'icon' ] = oModelItem[ 'icon' ];
+	}
+
 	// si il y a des donnees
 	if( oData != null ){
 		oNewNode[ 'li_attr' ][ 'items' ] = oData;
@@ -53,6 +58,7 @@ function nodeAddNode( idParent, sText, oModelItem, oData ){
 	console.log( 'yyyyyyyyyyyyyyyyyyyyyy' );
 	console.log( oNewNode );
 	console.log( oNodeParent );
+	console.log( oModelItem );
 
 	nodeRefreshTreeview();
 }

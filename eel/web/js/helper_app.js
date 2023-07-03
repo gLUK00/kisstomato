@@ -37,6 +37,9 @@ function fullScreen(){
 }
 
 function makeid(length) {
+	if( length == undefined ){
+		length = 16;
+	}
 	let result = '';
 	const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 	const charactersLength = characters.length;

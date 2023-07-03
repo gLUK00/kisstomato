@@ -57,64 +57,68 @@ eel.open_project( getUrlParameter( 'project' ) )( function( data ){
 /*
 
 
-
+chargement factice
 
 
 */
+window.setTimeout( function(){
+	oTabs.push( { id: 's6d4fsd65f', text: 'Nouveau', state: 'new', form: [
+		{ id: '4sf5sdff4', type: 'icon', text: 'Une Icone', icon: 'android', color: '#11ccc0' },
+		{ id: '4sf5sd4', type: 'string', text: 'Nom', value: 'un truc' },
+		{ id: '4sfsss5sd4switch', type: 'switch', text: 'Un switch', value: true },
+		{ id: '4sfsss5sd4', type: 'string', text: 'Nom 2' },
+		{ id: '4sfsss5sdaa4', type: 'range', text: 'Un range', min:0, max:15, value:3 },
+		{ id: '4sfsss5sdss4', type: 'int', text: 'Un nombre' },
+		{ id: '4sfsss5sd4ddd', type: 'text', text: 'Un texte' },
+		{ id: 'utut', type: 'list', text: 'Une liste', value:'b', items:[
+				{ text: 'valeur a', value: 'a' },
+				{ text: 'valeur b', value: 'b' },
+				{ text: 'valeur c', value: 'c' }
+			]
+		},
+		{ id: 'ututss', type: 'checkbox', text: 'Une liste de CAC', values:[ 'a', 'c' ], items:[
+				{ text: 'valeur a', value: 'a' },
+				{ text: 'valeur b', value: 'b' },
+				{ text: 'valeur c', value: 'c' }
+			]
+		},
+		{ id: 'yytyt', type: 'radio', text: 'Une liste radio', value:'c', items:[
+				{ text: 'valeur a', value: 'a' },
+				{ text: 'valeur b', value: 'b' },
+				{ text: 'valeur c', value: 'c' }
+			]
+		},
+		{ id: 'uuu465fd4g', type: 'color', text: 'Une couleur', value:'#cccccc' },
+		], focus: true } );
+	oTabs.push( { id: 's6d4fsd65fd', text: 'Edition', state: 'edit', form: [] } );
+	oTabs.push( { id: 's6d4fsd65fcccd', text: 'un autre', state: 'view', form: [
+		{ id: '4sf5sd422', type: 'string', text: 'Nom', value: 'un truc' },
+		{ id: '4sfsss5sssd4switch', type: 'switch', text: 'Un switch' },
+		{ id: 'sdsdsrrrrr', type: 'range', text: 'Un range', min:0, max:15 },
+		{ id: 'uaatut', type: 'list', text: 'Une liste', value:'b', items:[
+				{ text: 'valeur a', value: 'a' },
+				{ text: 'valeur b', value: 'b' },
+				{ text: 'valeur c', value: 'c' }
+			]
+		},
+		{ id: 'uaatutss', type: 'checkbox', text: 'Une liste de CAC', values:[ 'a', 'c' ], items:[
+				{ text: 'valeur a', value: 'a' },
+				{ text: 'valeur b', value: 'b' },
+				{ text: 'valeur c', value: 'c' }
+			]
+		},
+		{ id: 'yytytaa', type: 'radio', text: 'Une liste radio', items:[
+				{ text: 'valeur a', value: 'a' },
+				{ text: 'valeur b', value: 'b' },
+				{ text: 'valeur c', value: 'c' }
+			]
+		},
+		{ id: 'auuu465fd4g', type: 'color', text: 'Une couleur' },
+	] } );
+	refreshTabs();
+}, 500 );
 
-oTabs.push( { id: 's6d4fsd65f', text: 'Nouveau', state: 'new', form: [
-	{ id: '4sf5sd4', type: 'string', text: 'Nom', value: 'un truc' },	
-	{ id: '4sfsss5sd4switch', type: 'switch', text: 'Un switch', value: true },
-	{ id: '4sfsss5sd4', type: 'string', text: 'Nom 2' },
-	{ id: '4sfsss5sdaa4', type: 'range', text: 'Un range', min:0, max:15, value:3 },
-	{ id: '4sfsss5sdss4', type: 'int', text: 'Un nombre' },
-	{ id: '4sfsss5sd4ddd', type: 'text', text: 'Un texte' },
-	{ id: 'utut', type: 'list', text: 'Une liste', value:'b', items:[
-			{ text: 'valeur a', value: 'a' },
-			{ text: 'valeur b', value: 'b' },
-			{ text: 'valeur c', value: 'c' }
-		]
-	},
-	{ id: 'ututss', type: 'checkbox', text: 'Une liste de CAC', values:[ 'a', 'c' ], items:[
-			{ text: 'valeur a', value: 'a' },
-			{ text: 'valeur b', value: 'b' },
-			{ text: 'valeur c', value: 'c' }
-		]
-	},
-	{ id: 'yytyt', type: 'radio', text: 'Une liste radio', value:'c', items:[
-			{ text: 'valeur a', value: 'a' },
-			{ text: 'valeur b', value: 'b' },
-			{ text: 'valeur c', value: 'c' }
-		]
-	},
-	{ id: 'uuu465fd4g', type: 'color', text: 'Une couleur', value:'#cccccc' },
-	], focus: true } );
-oTabs.push( { id: 's6d4fsd65fd', text: 'Edition', state: 'edit', form: [] } );
-oTabs.push( { id: 's6d4fsd65fcccd', text: 'un autre', state: 'view', form: [
-	{ id: '4sf5sd422', type: 'string', text: 'Nom', value: 'un truc' },
-	{ id: '4sfsss5sssd4switch', type: 'switch', text: 'Un switch' },
-	{ id: 'sdsdsrrrrr', type: 'range', text: 'Un range', min:0, max:15 },
-	{ id: 'uaatut', type: 'list', text: 'Une liste', value:'b', items:[
-			{ text: 'valeur a', value: 'a' },
-			{ text: 'valeur b', value: 'b' },
-			{ text: 'valeur c', value: 'c' }
-		]
-	},
-	{ id: 'uaatutss', type: 'checkbox', text: 'Une liste de CAC', values:[ 'a', 'c' ], items:[
-			{ text: 'valeur a', value: 'a' },
-			{ text: 'valeur b', value: 'b' },
-			{ text: 'valeur c', value: 'c' }
-		]
-	},
-	{ id: 'yytytaa', type: 'radio', text: 'Une liste radio', items:[
-			{ text: 'valeur a', value: 'a' },
-			{ text: 'valeur b', value: 'b' },
-			{ text: 'valeur c', value: 'c' }
-		]
-	},
-	{ id: 'auuu465fd4g', type: 'color', text: 'Une couleur' },
-] } );
-refreshTabs();
+
 
 // mise a jour d'un onglet
 function updateTab( tab ){
