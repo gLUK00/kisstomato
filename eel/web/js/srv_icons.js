@@ -73,7 +73,7 @@ function iconsGetOne( key ){
 }
 
 // recupere le code html de selection d'un icon
-function iconsGetHtmlPicker( fSelectIconAndColor ){
+function iconsGetHtmlPicker( sIdDiv, fSelectIconAndColor ){
 	var sHtmlIcons = '';
 
 	var oAllIcons = iconsGetAll();
@@ -86,7 +86,7 @@ function iconsGetHtmlPicker( fSelectIconAndColor ){
 		sHtmlIcons += '<div class="icon_select" icon="' + key + '"><i class="fa-' + oIcon[ 'styles' ][ '0' ] + ' fa-' + key + ' fa-2xl"></i></div>';
 	}
 	let sId = makeid();
-	sHtmlIcons = '<div class="srv_icons" icon_selector="' + sId + '">\
+	sHtmlIcons = '<div id="' + sIdDiv + '" class="srv_icons" icon_selector="' + sId + '">\
 			Filtrer sur <input class="icon_filter" type="text" icon_selector="' + sId + '"/>\
 			<div class="icon_selector" id="icon_selector_' + sId + '">' + sHtmlIcons + '</div>\
 		</div>';
@@ -95,4 +95,10 @@ function iconsGetHtmlPicker( fSelectIconAndColor ){
 	iconsSelectEvents[ sId ] = fSelectIconAndColor;
 
 	return sHtmlIcons;
+}
+
+// recupere le code html d'un icon
+function iconsGetHtml( sIcon, sColor ){
+	var oIcon = iconsGetOne( sIcon );
+	return '<i class="fa-' + oIcon[ 'styles' ][ '0' ] + ' fa-' + sIcon + ' fa-2xl"' + ( sColor != undefined && sColor != '' ? ' style="color:' + sColor + '"' : '' ) + '></i>';
 }

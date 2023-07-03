@@ -72,3 +72,44 @@ function nodeRefreshTreeview(){
 	console.log( 'nodeRefreshTreeview' );
 	console.log( oNodes );
 }
+
+// recupere un formulaire a partir d'un noeud et son type
+function nodeNode2Form( oNode ){
+	var oForm = [];
+
+	// recherche de l'element dans le modele
+	var oElement = null;
+	for( var i=0; i<oModel.length; i++ ){
+		if( oNode[ 'li_attr' ][ 'type' ] == oModel[ i ].id ){
+			oElement = Object.assign( {}, oModel[ i ] );
+			break;
+		}
+	}
+
+	for( var i=0; i<oElement.items.length; i++ ){
+
+		// recupere l'element du noeud
+		var oItem = null;
+		for( var a=0; a<oNode[ 'li_attr' ][ 'items' ].length; a++ ){
+			if( oNode[ 'li_attr' ][ 'items' ][ a ].id == oElement.items[ i ].id ){
+				oItem = oNode[ 'li_attr' ][ 'items' ][ a ];
+				break;
+			}
+		}
+//console.log( oNode );
+//continue;
+		oElement.items[ i ].value = oItem.value;
+		oForm.push( oElement.items[ i ] );
+	}
+
+	/*console.log( 'nodeNode2Form' );
+	console.log( oElement );
+	console.log( oNode );
+	console.log( oForm );*/
+
+	console.log( 'oForm' );
+	console.log( oForm );
+
+
+	return oForm;
+}

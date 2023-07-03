@@ -57,8 +57,7 @@ $( document ).on( "click", ".tabSave", function() {
 				}
 			}
 		}else if( oField.type == 'icon' ){
-			oField.icon = $( '#icon_value_' + sIdField ).val();
-			oField.color = $( '#icon_color_' + sIdField ).val();
+			oField.value = { icon: $( '#icon_value_' + sIdField ).val(), color: $( '#icon_color_' + sIdField ).val() };
 		}
 	}
 
@@ -74,6 +73,14 @@ $( document ).on( "click", ".tabSave", function() {
 
 // click sur le bouton "annuler"
 $( document ).on( "click", ".tabCancel", function() {
+	var sId = $( this ).attr( 'idTab' );
+	var oTab = tabGetTab( sId );
+
+	
+
+	/*oTab.state = 'view';
+	refreshTabs();*/
+
 	
 	console.log( 'tabCancel' );
 } );
@@ -224,20 +231,21 @@ jQuery.extend(jQuery.fn, {
 								'<table width="200px">' +
 									'<tr>' +
 										'<td style="width:200px">' +
-											'<div class="icon_selected" id="icon_' + sIdField + '"></div>' +
-											'<input type="hidden" id="icon_value_' + sIdField + '" value="' + ( oField.icon != undefined ? oField.icon : '' ) + '">' +
+											'<div class="icon_selected" id="icon_' + sIdField + '">' +
+												( oField.value != undefined && oField.value.icon != '' ? iconsGetHtml( oField.value.icon, oField.value.color ) : '' ) +
+											'</div>' +
+											'<input type="hidden" id="icon_value_' + sIdField + '" value="' + ( oField.value != undefined ? oField.value.icon : '' ) + '">' +
 										'</td>' +
 										'<td style="width:200px">' +
-											'<input type="color" class="form-control form-control-color icon-color" field="' + sIdField + '" id="icon_color_' + sIdField + '" value="' + ( oField.color != undefined ? oField.color : '' ) + '" title="Choisir la couleur">' +
+											'<input type="color" class="form-control form-control-color icon-color" field="' + sIdField + '" id="icon_color_' + sIdField + '" value="' + ( oField.value != undefined ? oField.value.color : '' ) + '" title="Choisir la couleur">' +
 										'</td>' +
 									'</tr>' +
 								'</table>' +
-								'<span class="select-range-show" style="float:right">' + ( oField.value != undefined ? oField.value : '' ) + '</span>' +
-								iconsGetHtmlPicker( function( icon ){
+								iconsGetHtmlPicker( 'div_select_icon_' + sCpIdField, function( icon ){
 
 									// recupere l'icone
-									let oIcon = iconsGetOne( icon );
-									$( '#icon_' + sCpIdField ).html( '<i class="fa-' + oIcon[ 'styles' ][ '0' ] + ' fa-' + icon + ' fa-2xl"></i>' );
+									$( '#icon_' + sCpIdField ).html( iconsGetHtml( icon ) );
+									$( '#icon_value_' + sCpIdField ).val( icon );
 
 									// si il y a une couleur
 									let sColor = $( '#icon_color_' + sCpIdField ).val();
@@ -321,6 +329,9 @@ jQuery.extend(jQuery.fn, {
 									var oItem = oField.items[ b ];
 									$( '#' + sIdField + '-' + b ).prop( "disabled", true );
 								}
+							}else if( oField.type == 'icon' ){
+								$( '#div_select_icon_' + sIdField ).hide();
+								$( '#icon_color_' + sIdField ).prop( "disabled", true );
 							}
 						}
 					}
