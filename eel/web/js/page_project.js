@@ -90,8 +90,8 @@ window.setTimeout( function(){
 		},
 		{ id: 'uuu465fd4g', type: 'color', text: 'Une couleur', value:'#cccccc' },
 		], focus: true } );
-	oTabs.push( { id: 's6d4fsd65fd', text: 'Edition', state: 'edit', form: [] } );
-	oTabs.push( { id: 's6d4fsd65fcccd', text: 'un autre', state: 'view', form: [
+	oTabs.push( { id: '7aed063d-8fa5-47c7-b824-fd5b7ab49055', text: 'Edition', state: 'edit', form: [] } );
+	oTabs.push( { id: '7aed063d-8fa5-47c7-b824-fd5b7ab49888', text: 'un autre', state: 'view', form: [
 		{ id: '4sf5sd422', type: 'string', text: 'Nom', value: 'un truc' },
 		{ id: '4sfsss5sssd4switch', type: 'switch', text: 'Un switch' },
 		{ id: 'sdsdsrrrrr', type: 'range', text: 'Un range', min:0, max:15 },

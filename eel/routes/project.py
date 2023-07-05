@@ -106,4 +106,4 @@ def update_project( filename, data ):
     oFile.write( json.dumps( oProject, default=config.dumperJson, indent=4 ) )
     oFile.close()
 
-    return True
+    return open_project( filename )
