@@ -283,49 +283,35 @@ $( document ).on( "dblclick", ".jstree-node", function( e ) {
 	var oNode = nodeGetNode( sIdNode );
 
 	// determine si l'element a des proprietes
-
-		// si non, sortir
+	if( oNode[ 'li_attr' ][ 'items' ] == undefined || oNode[ 'li_attr' ][ 'items' ].length == 0 ){
+		return;
+	}
 
 	// determine si un tab existe deja
-
-		// si oui, afficher
+	if( tabFocusIfExist( sIdNode ) ){
+		return;
+	}
 
 	// determine le formulaire
 	var oForm = nodeNode2Form( oNode );
 
 	// nouvelle onglet en mode "view"
-	tabAddTab( { id: sIdNode, text: oNode.text, state: 'view', form: oForm, focus: true } );
-	//refreshTabs();
-	/*oTabs.push( { id: 's6d4fsd65fcccd', text: 'un autre', state: 'view', form: [
-		{ id: '4sf5sd422', type: 'string', text: 'Nom', value: 'un truc' },
-		{ id: '4sfsss5sssd4switch', type: 'switch', text: 'Un switch' },
-		{ id: 'sdsdsrrrrr', type: 'range', text: 'Un range', min:0, max:15 },
-		{ id: 'uaatut', type: 'list', text: 'Une liste', value:'b', items:[
-				{ text: 'valeur a', value: 'a' },
-				{ text: 'valeur b', value: 'b' },
-				{ text: 'valeur c', value: 'c' }
-			]
-		},
-		{ id: 'uaatutss', type: 'checkbox', text: 'Une liste de CAC', values:[ 'a', 'c' ], items:[
-				{ text: 'valeur a', value: 'a' },
-				{ text: 'valeur b', value: 'b' },
-				{ text: 'valeur c', value: 'c' }
-			]
-		},
-		{ id: 'yytytaa', type: 'radio', text: 'Une liste radio', items:[
-				{ text: 'valeur a', value: 'a' },
-				{ text: 'valeur b', value: 'b' },
-				{ text: 'valeur c', value: 'c' }
-			]
-		},
-		{ id: 'auuu465fd4g', type: 'color', text: 'Une couleur' },
-	] } );
-	refreshTabs();*/
-	
-	console.log('uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu');
-	console.log('dblclick', sIdNode);
-	console.log(e);
-	console.log( oNode );
+	tabAddTab( { id: sIdNode, text: oNode.text, state: 'view', form: oForm, focus: true, eOnSave: function( tab ){
+
+		var oData = [];
+		for( var i=0; i<tab.form.length; i++ ){
+			oData.push( { id: tab.form[ i ].id, value: tab.form[ i ].value } )
+		}
+
+		// mise a jour des informations du noeud
+		oNode[ 'li_attr' ][ 'items' ] = oData;
+
+		// enregistrement du projet
+		modelSaveProjectModel( getUrlParameter( 'project' ), oNodes );
+		
+	}, eOnCancel: function( tab ){
+
+	} } );
 
 	// ne pas propager l'evenement vers le parent
 	e.stopPropagation();

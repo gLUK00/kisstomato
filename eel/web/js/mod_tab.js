@@ -126,6 +126,27 @@ $( document ).on( "click", ".tabCancel", function() {
 	tabCancel( sId );
 } );
 
+// focus sur un onglet si il existe
+function tabFocusIfExist( sId ){
+	var bExist = false;
+
+	// recherche si l'onglet existe
+	for( var i=0; i<oTabs.length; i++ ){
+		if( oTabs[ i ].id == sId ){
+			bExist = true;
+			break;
+		}
+	}
+	if( bExist ){
+		for( var i=0; i<oTabs.length; i++ ){
+			oTabs[ i ].focus = ( oTabs[ i ].id == sId );
+		}
+		refreshTabs();
+	}
+
+	return bExist;
+}
+
 // ajout d'un onglet
 function tabAddTab( oTab ){
 	for( var i=0; i<oTabs.length; i++ ){
