@@ -177,7 +177,22 @@ function contextMenuAdd( oMenu ){
 	}, 'Non' );
 }
 
+// suppression d'un noeud
 function contextMenuDel( oItem ){
+
+	console.log( 'contextMenuDel iiiiiiiiiiiiiiiiiiiiiiiii' );
+	console.log( oItem );
+
+	modalShowQuery( 'Supprimer un élément', 'Voulez vous vraiment supprimer l\' élément <b>' + oItem[ 'text' ] + '</b> ainsi que ses enfants ?', 'Oui', function(){
+		
+		// supprime le noeud
+		nodeDeleteNode( oItem[ 'id' ] );
+
+		// enregistrement du projet
+		modelSaveProjectModel( getUrlParameter( 'project' ), oNodes );
+
+	}, 'Non' );
+
 	console.log( 'contextMenuDel iiiiiiiiiiiiiiiiiiiiiiiii' );
 	console.log( oItem );
 }

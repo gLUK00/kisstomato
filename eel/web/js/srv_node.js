@@ -20,6 +20,36 @@ function nodeGetNode( id, _nodes ){
 	return null;
 }
 
+// supprime un noeud en fonction de son id
+function nodeDeleteNode( id, _nodes ){
+	let bFirstCall = false;
+	if( _nodes == undefined ){
+		_nodes = oNodes;
+		bFirstCall = true;
+	}
+	var oNewNodes = [];
+	for( var i=0; i<_nodes.length; i++ ){
+
+		if( _nodes[ i ].id == id ){
+			continue;
+		}
+
+		oNewNodes.push( Object.assign( {}, _nodes[ i ] ) );
+
+		// si il y a des enfants
+		if( oNewNodes[ oNewNodes.length - 1 ].children != undefined && oNewNodes[ oNewNodes.length - 1 ].children.length > 0 ){
+			oNewNodes[ oNewNodes.length - 1 ].children = nodeDeleteNode( id, oNewNodes[ oNewNodes.length - 1 ].children );
+		}
+	}
+
+	if( bFirstCall ){
+		oNodes = oNewNodes;
+		nodeRefreshTreeview();
+	}else{
+		return oNewNodes;
+	}
+}
+
 // mise a jour d'un noeud
 function nodeUpdateNode(){
 	
@@ -55,22 +85,13 @@ function nodeAddNode( idParent, sText, oModelItem, oData ){
 	// ouvre le parent
 	oNodeParent[ 'state' ] = { "opened": true };
 
-	console.log( 'yyyyyyyyyyyyyyyyyyyyyy' );
-	console.log( oNewNode );
-	console.log( oNodeParent );
-	console.log( oModelItem );
-
 	nodeRefreshTreeview();
 }
 
 // affichage du treeview
 function nodeRefreshTreeview(){
-	
 	$('#tree').jstree(true).settings.core.data = oNodes;
 	$('#tree').jstree(true).refresh();
-
-	console.log( 'nodeRefreshTreeview' );
-	console.log( oNodes );
 }
 
 // recupere un formulaire a partir d'un noeud et son type
@@ -96,20 +117,10 @@ function nodeNode2Form( oNode ){
 				break;
 			}
 		}
-//console.log( oNode );
-//continue;
+
 		oElement.items[ i ].value = oItem.value;
 		oForm.push( oElement.items[ i ] );
 	}
-
-	/*console.log( 'nodeNode2Form' );
-	console.log( oElement );
-	console.log( oNode );
-	console.log( oForm );*/
-
-	console.log( 'oForm' );
-	console.log( oForm );
-
 
 	return oForm;
 }
