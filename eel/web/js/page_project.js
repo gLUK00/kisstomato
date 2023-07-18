@@ -177,11 +177,16 @@ function contextMenuAdd( oMenu ){
 	}, 'Non' );
 }
 
+// renommer un element
+function contextMenuRename( oItem ){
+
+	console.log( 'contextMenuRename iiiiiiiiiiiiiiiiiiiiiiiii' );
+	console.log( oItem );
+
+}
+
 // suppression d'un noeud
 function contextMenuDel( oItem ){
-
-	console.log( 'contextMenuDel iiiiiiiiiiiiiiiiiiiiiiiii' );
-	console.log( oItem );
 
 	modalShowQuery( 'Supprimer un élément', 'Voulez vous vraiment supprimer l\' élément <b>' + oItem[ 'text' ] + '</b> ainsi que ses enfants ?', 'Oui', function(){
 		
@@ -273,13 +278,19 @@ $.contextMenu({
 					contextMenuAdd( oResultAdd ) }
 				};
 
+				// si il y a une icone
+				if( oModelItem[ 'icon' ] != undefined ){
+					oSubItems[ oModelItem[ 'id' ] ][ 'icon' ] = 'fas ' + oModelItem[ 'icon' ];
+				}
+
 			}
-			oItems[ 'add-element ' ] =  {name: "Ajouter", icon: "paste", items: oSubItems, state: { disabled: oSubItems.length == 0 } };
+			oItems[ 'add-element ' ] =  {name: "Ajouter", icon: "fas fa-solid fa-plus-circle", items: oSubItems, state: { disabled: oSubItems.length == 0 } };
 		}
 
 		// si l'element peut etre supprime
 		if( oNode.li_attr[ 'readonly' ] == undefined || !oNode.li_attr[ 'readonly' ] ){
-			oItems[ 'del-element ' ] =  {name: "Supprimer", callback: function(){ contextMenuDel( oNode ) }, icon: "paste" };
+			oItems[ 'rename-element ' ] =  {name: "Renommer", callback: function(){ contextMenuRename( oNode ) }, icon: "fas a-solid fa-pen" };
+			oItems[ 'del-element ' ] =  {name: "Supprimer", callback: function(){ contextMenuDel( oNode ) }, icon: "fas fa-solid fa-eraser" };
 		}
 
 		console.log( oNode );

@@ -26,7 +26,7 @@
 				{ "id": "aaa_range", "text": "aaa_range", "type": "range", "min":0, "max":15 }
 			] },
 		{ "id": "directory", "text": "Repertoire", "icon": "fa-solid fa-folder", "children-type": [ "directory", "page" ] },
-		{ "id": "content", "text": "Contenu", "icon": "fa-solid fa-file-lines", "children-type": [ "content" ],
+		{ "id": "content", "text": "Contenu", "icon": "fa-solid fa-file-lines", "children-type": [],
 			"items":[
 				{ "id": "contenu", "text": "contenu", "type": "text" }
 			] }
