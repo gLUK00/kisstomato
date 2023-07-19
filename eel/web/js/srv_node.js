@@ -51,8 +51,22 @@ function nodeDeleteNode( id, _nodes ){
 }
 
 // mise a jour d'un noeud
-function nodeUpdateNode(){
-	
+function nodeUpdateNode( oNode, _nodes ){
+	if( _nodes == undefined ){
+		_nodes = oNodes;
+	}
+	for( var i=0; i<_nodes.length; i++ ){
+		if( _nodes[ i ].id == oNode.id ){
+			_nodes[ i ] = oNode;
+			nodeRefreshTreeview();
+			return true;
+		}else if( _nodes[ i ].children != undefined && _nodes[ i ].children.length > 0 ){
+			if( nodeUpdateNode( oNode, _nodes[ i ].children ) ){
+				return true;
+			}
+		}
+	}
+	return false;
 }
 
 // ajout d'un noeud

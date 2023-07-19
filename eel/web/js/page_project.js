@@ -180,14 +180,24 @@ function contextMenuAdd( oMenu ){
 // renommer un element
 function contextMenuRename( oItem ){
 
-	console.log( 'contextMenuRename iiiiiiiiiiiiiiiiiiiiiiiii' );
-	console.log( oItem );
+	// saisie du nouveau nom
+	modalShowInput( 'Nouveau nom', 'Renommer', function( sResult ){
 
+		if( sResult.trim() == '' ){
+			return;
+		}
+		let oNode = nodeGetNode( oItem[ 'id' ] );
+		oNode.text = sResult.trim();
+		nodeUpdateNode( oNode );
+
+		// enregistrement du projet
+		modelSaveProjectModel( getUrlParameter( 'project' ), oNodes );
+
+	}, 'Annuler', undefined , oItem[ 'text' ] );
 }
 
 // suppression d'un noeud
 function contextMenuDel( oItem ){
-
 	modalShowQuery( 'Supprimer un élément', 'Voulez vous vraiment supprimer l\' élément <b>' + oItem[ 'text' ] + '</b> ainsi que ses enfants ?', 'Oui', function(){
 		
 		// supprime le noeud
@@ -197,9 +207,6 @@ function contextMenuDel( oItem ){
 		modelSaveProjectModel( getUrlParameter( 'project' ), oNodes );
 
 	}, 'Non' );
-
-	console.log( 'contextMenuDel iiiiiiiiiiiiiiiiiiiiiiiii' );
-	console.log( oItem );
 }
 
 $.contextMenu({
@@ -256,8 +263,6 @@ $.contextMenu({
 			oChildsType = oNode.li_attr[ 'children-type' ];
 		}
 
-
-
 		// si il y a possibilite de creer des enfants
 		if( oChildsType.length > 0 ){
 
@@ -293,8 +298,8 @@ $.contextMenu({
 			oItems[ 'del-element ' ] =  {name: "Supprimer", callback: function(){ contextMenuDel( oNode ) }, icon: "fas fa-solid fa-eraser" };
 		}
 
-		console.log( oNode );
-		console.log( oItems );
+		/*console.log( oNode );
+		console.log( oItems );*/
 
 		return {
 			callback: function(){},
