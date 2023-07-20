@@ -2,6 +2,16 @@
 // reference des onglets
 var oTabs = [];
 
+$( document ).ready( function(){
+	
+	document.styleSheets[0].insertRule('.object_select_path{\
+			border:1px solid #ccc;\
+			border-radius: 5px;\
+			padding: 5px;\
+			margin-right: 5px;\
+		}', 0);
+} );
+
 // selection unique d'un bouton radio
 $( document ).on( "click", ".select-radio-item", function() {
 	$( this ).closest( '.mb-3' ).find( '.select-radio-item' ).prop( "checked", false );
@@ -15,6 +25,37 @@ $( document ).on( "click", "input.form-range", function() {
 	
 } );
 
+// click sur la selection d'un objet
+$( document ).on( "click", ".object_selector", function() {
+	let sField = $( this ).attr( 'field' );
+
+	// recherche de l'onglet et du champ
+	var oTab = null;
+	var oField = null;
+	rechercheElements: {
+		for( var i=0; i<oTabs.length; i++ ){
+			var oTab = oTabs[ i ];
+			for( var a=0; a<oTab.form.length; a++ ){
+				oField = oTab.form[ a ];
+				var sIdField = 'tab-field-' + oTab.id + '-' + oField.id;
+				if( sField == 'tab-field-' + oTab.id + '-' + oField.id ){
+					break rechercheElements;
+				}
+			}
+		}
+	}
+
+	var { oItems, sKey } = _tabSelectObject == null ? { oItems: [], sKey: '' } : _tabSelectObject( oField );
+	modalShowList( 'Selection d\'un objet', oItems, sKey, function( oItem ){
+
+
+		$( '#object_value_' + sIdField ).val( oItem[ 'id' ] );
+		$( '#object_select_' + sIdField ).html( nodeGetHtmlName( oItem ) );
+
+	} );
+
+} );
+
 // click sur le bouton "modifier"
 $( document ).on( "click", ".tabUpdate", function() {
 	var sId = $( this ).attr( 'idTab' );
@@ -24,6 +65,12 @@ $( document ).on( "click", ".tabUpdate", function() {
 	oTab.state = 'edit';
 	refreshTabs();
 } );
+
+// enregistrement d'un evenement d'affichage sur le selecteur d'un objet
+var _tabSelectObject = null;
+function tabSetShowSelectObject( fSelector ){
+	_tabSelectObject = fSelector;
+}
 
 // click sur le bouton "fermer"
 function tabClose( sId ){
@@ -253,7 +300,7 @@ function refreshTabs(){
 
 					var sCpIdField = sIdField;
 					sForm +=  '<div class="mb-3">' +
-						'<label for="' + sIdField + '" class="form-label">' + oField.text + '</label>' +
+						'<label class="form-label">' + oField.text + '</label>' +
 						'<table width="200px">' +
 							'<tr>' +
 								'<td style="width:200px">' +
@@ -279,6 +326,27 @@ function refreshTabs(){
 								$( '#icon_' + sCpIdField + ' > i' ).css( 'color', sColor );
 							}
 						} ) +
+					'</div>';
+				}else if( oField.type == 'object' ){
+					sForm +=  '<div class="mb-3">' +
+						'<label class="form-label">' + oField.text + '</label>' +
+						'<table width="100%">' +
+							'<tr>' +
+								'<td>' +
+									( oTab.state != 'view' ?
+										'<div class="object_select_path" id="object_select_' + sIdField + '">ppppppppppppp</div>' +
+										'<input type="hidden" id="object_value_' + sIdField + '" value="' + oField.value + '">' :
+										'<div class="object_select_path" id="object_select_' + sIdField + '" style="background-color:#e9ecef;">ppppppppppppp</div>'
+									) +
+								'</td>' +
+								'<td width="130px" align="right">' +
+									( oTab.state != 'view' ?
+										'<button type="button" field="' + sIdField + '" class="btn btn-primary btn-sm object_selector">Sélectionner</button>' :
+										'<button type="button" class="btn btn-secondary btn-sm">Sélectionner</button>'
+									) +
+								'</td>' +
+							'</tr>' +
+						'</table>' +
 					'</div>';
 				}
 				

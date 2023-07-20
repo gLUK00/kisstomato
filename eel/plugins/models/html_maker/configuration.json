@@ -3,6 +3,7 @@
 	"elements": [
 		{ "id": "page", "text": "Page", "icon": "fa-solid fa-table-cells-large", "children-type": [ "page" ],
 			"items":[
+				{ "id": "page_object", "text": "un_objet", "type": "object", "filter-type": "page" },
 				{ "id": "page_icon", "text": "icone", "type": "icon" },
 				{ "id": "page_desc", "text": "description", "type": "text" },
 				{ "id": "aa_string", "text": "aa_string", "type": "string" },

@@ -6,6 +6,9 @@ https://www.jstree.com/docs/json/
 
 $( document ).ready( function(){
 	fullScreen();
+
+	// liaison de l'evenement d'affichage du selecteur d'un objet
+	tabSetShowSelectObject( nodeGetListIdHtml );
 } );
 
 // chargement da la navbar
@@ -63,6 +66,7 @@ chargement factice
 */
 window.setTimeout( function(){
 	oTabs.push( { id: 's6d4fsd65f', text: 'Nouveau', state: 'new', form: [
+		{ id: "4sf5sdff4_page_object", text: "un_objet", type: "object", "filter-type": "page" },
 		{ id: '4sf5sdff4', type: 'icon', text: 'Une Icone', icon: 'android', color: '#11ccc0' },
 		{ id: '4sf5sd4', type: 'string', text: 'Nom', value: 'un truc' },
 		{ id: '4sfsss5sd4switch', type: 'switch', text: 'Un switch', value: true },
@@ -93,6 +97,7 @@ window.setTimeout( function(){
 	oTabs.push( { id: '7aed063d-8fa5-47c7-b824-fd5b7ab49055', text: 'Edition', state: 'edit', form: [] } );
 	oTabs.push( { id: '7aed063d-8fa5-47c7-b824-fd5b7ab49888', text: 'un autre', state: 'view', form: [
 		{ id: '4sf5sd422', type: 'string', text: 'Nom', value: 'un truc' },
+		{ id: "4sf5sdff4_page_objectssss", text: "un_objet", type: "object" },
 		{ id: '4sfsss5sssd4switch', type: 'switch', text: 'Un switch' },
 		{ id: 'sdsdsrrrrr', type: 'range', text: 'Un range', min:0, max:15 },
 		{ id: 'uaatut', type: 'list', text: 'Une liste', value:'b', items:[

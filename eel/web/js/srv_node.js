@@ -2,16 +2,110 @@
 // reference vers les noeuds
 var oNodes = [];
 
+// recupere la liste des noeuds sous la forme d'un tableau id/html
+function nodeGetListIdHtml( oField ){
+
+	// recupere l'ensemble des noeuds
+	var oAllNodes = nodeFetAllNodes();
+
+	// filtre les elements
+	var oResults = [];
+	for( var i=0; i<oAllNodes.length; i++ ){
+
+		// ejection pour les lectures seule et les elements sans proprietes
+		if( oAllNodes[ i ][ 'li_attr' ] == undefined ||
+			( oAllNodes[ i ][ 'li_attr' ][ 'readonly' ] != undefined && oAllNodes[ i ][ 'li_attr' ][ 'readonly' ] ) ){
+			continue;
+		}
+
+		// si il y a un filtre sur le type
+		if( oField[ 'filter-type' ] != undefined && oAllNodes[ i ][ 'li_attr' ][ 'type' ] != oField[ 'filter-type' ] ){
+			continue;
+		}
+
+		// recupere le nom au format HTML
+		oAllNodes[ i ][ 'html' ] = nodeGetHtmlName( oAllNodes[ i ] );
+
+		// recupere l'element
+		oResults.push( oAllNodes[ i ] );
+	}
+
+
+	/*var oItems = [ { id: '12sd1f', html: '<b>sdfsfsdf</b> aaaa <b>dsfsdfds</b>' },
+		{ id: '12sdd1f', html: '<b>sdfsfsdf</b> df <b>dsfsdfds</b>' },
+		{ id: '12sdf1f', html: '<b>sdfsfsdf</b> aadfaa <b>dsfsdfds</b>' },
+		{ id: '1h2sd1f', html: '<b>sdfsfsdf</b> aaaddfa <b>dsfsdfds</b>' },
+		{ id: '12jsd1f', html: '<b>sdfsfsdf</b> aaaasdf <b>dsfsdfds</b>' },
+		{ id: '12skd1f', html: '<b>sdfsfsdf</b> aaaa <b>dsfsdfds</b>' },
+		{ id: '12sdl1f', html: '<b>sdfsfsdf</b> aaaasss <b>dsfsdfds</b>' },
+		{ id: '12sd1mf', html: '<b>sdfsfsdf</b> aaaa <b>dsfsdfds</b>' },
+		{ id: '12sd1fo', html: '<b>sdfsfsdf</b> aaaa <b>dsfsdfds</b>' },
+		{ id: 'q12sd1f', html: '<b>sdfsfsdf</b> aaaa <b>dsfsdfds</b>' },
+		{ id: '1s2sd1f', html: '<b>sdfsfsdf</b> aaaa <b>dsfsdfds</b>' },
+		{ id: '12dsd1f', html: '<b>sdfsfsdf</b> aaaa <b>dsfsdfds</b>' },
+		{ id: '12sfd1f', html: '<b>sdfsfsdf</b> aaaa <b>dsfsdfds</b>' },
+		{ id: 'q12sdd1f', html: '<b>sdfsfsdf</b> df <b>dsfsdfds</b>' },
+		{ id: '1q2sdf1f', html: '<b>sdfsfsdf</b> aadfaa <b>dsfsdfds</b>' },
+		{ id: '1hq2sd1f', html: '<b>sdfsfsdf</b> aaaddfa <b>dsfsdfds</b>' },
+		{ id: '12jqsd1f', html: '<b>sdfsfsdf</b> aaaasdf <b>dsfsdfds</b>' },
+		{ id: '12skqd1f', html: '<b>sdfsfsdf</b> aaaa <b>dsfsdfds</b>' },
+		{ id: '12sdlq1f', html: '<b>sdfsfsdf</b> aaaasss <b>dsfsdfds</b>' },
+		{ id: '12sd1mqf', html: '<b>sdfsfsdf</b> aaaa <b>dsfsdfds</b>' },
+		{ id: '12sd1foq', html: '<b>sdfsfsdf</b> aaaa <b>dsfsdfds</b>' },
+		{ id: 'wq12sd1f', html: '<b>sdfsfsdf</b> aaaa <b>dsfsdfds</b>' },
+		{ id: '1ws2sd1f', html: '<b>sdfsfsdf</b> aaaa <b>dsfsdfds</b>' },
+		{ id: '12wdsd1f', html: '<b>sdfsfsdf</b> aaaa <b>dsfsdfds</b>' },
+		{ id: '12swfd1f', html: '<b>sdfsfsdf</b> aaaa <b>dsfsdfds</b>' },
+		{ id: '12sdwgh1f', html: '<b>sdfsfsdf</b> aaaa <b>dsfsdfds</b>' }
+	];*/
+
+	return { oItems: oResults, sKey: 'html' };
+}
+
+// retourne le nom d'un noeud au format HTML
+function nodeGetHtmlName( oNode ){
+	let sHtml = oNode[ 'text' ];
+	if( oNode[ 'icon' ] != undefined ){
+		sHtml = '<i class="' + oNode[ 'icon' ] + '"></i>&nbsp' + sHtml;
+	}
+	if( oNode[ 'parent' ] != undefined ){
+		sHtml = nodeGetHtmlName( oNode[ 'parent' ] ) + '&nbsp;/&nbsp;' + sHtml;
+	}
+	return sHtml;
+}
+
+// retourne la liste de tous les noeuds
+function nodeFetAllNodes(){
+	var fGetAll = function( oNodesFind, oParent ){
+		let oAll = [];
+		for( var i=0; i<oNodesFind.length; i++ ){
+			if( oParent != undefined ){
+				oNodesFind[ i ][ 'parent' ] = oParent;
+			}
+			oAll.push( oNodesFind[ i ] );
+			if( oNodesFind[ i ].children != undefined && oNodesFind[ i ].children.length > 0 ){
+				oAll = oAll.concat( fGetAll( oNodesFind[ i ].children, oNodesFind[ i ] ) );
+			}
+		}
+		return oAll;
+	};
+
+	return fGetAll( oNodes );
+}
+
 // recherche un noeud en fonction de son id
-function nodeGetNode( id, _nodes ){
+function nodeGetNode( id, _nodes, oParent ){
 	if( _nodes == undefined ){
 		_nodes = oNodes;
 	}
 	for( var i=0; i<_nodes.length; i++ ){
+		if( oParent != undefined ){
+			_nodes[ i ][ 'parent' ] = oParent;
+		}
 		if( _nodes[ i ].id == id ){
 			return _nodes[ i ];
 		}else if( _nodes[ i ].children != undefined && _nodes[ i ].children.length > 0 ){
-			var oNode = nodeGetNode( id, _nodes[ i ].children );
+			var oNode = nodeGetNode( id, _nodes[ i ].children, _nodes[ i ] );
 			if( oNode != null ){
 				return oNode;
 			}
