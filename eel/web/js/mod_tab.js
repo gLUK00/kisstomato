@@ -9,6 +9,7 @@ $( document ).ready( function(){
 			border-radius: 5px;\
 			padding: 5px;\
 			margin-right: 5px;\
+			min-height: 35px;\
 		}', 0);
 } );
 
@@ -47,11 +48,8 @@ $( document ).on( "click", ".object_selector", function() {
 
 	var { oItems, sKey } = _tabSelectObject == null ? { oItems: [], sKey: '' } : _tabSelectObject( oField );
 	modalShowList( 'Selection d\'un objet', oItems, sKey, function( oItem ){
-
-
-		$( '#object_value_' + sIdField ).val( oItem[ 'id' ] );
+		$( '#' + sIdField ).val( oItem[ 'id' ] );
 		$( '#object_select_' + sIdField ).html( nodeGetHtmlName( oItem ) );
-
 	} );
 
 } );
@@ -124,7 +122,7 @@ $( document ).on( "click", ".tabSave", function() {
 		var oField = oTab.form[ a ];
 		var sIdField = 'tab-field-' + oTab.id + '-' + oField.id;
 
-		if( [ 'string', 'text', 'color', 'switch', 'range', 'list' ].includes( oField.type ) ){
+		if( [ 'string', 'text', 'color', 'switch', 'range', 'list', 'object' ].includes( oField.type ) ){
 			oField.value = $( '#' + sIdField ).val();
 		}else if( oField.type == 'checkbox' ){
 			oField.value = [];
@@ -333,10 +331,10 @@ function refreshTabs(){
 						'<table width="100%">' +
 							'<tr>' +
 								'<td>' +
+									'<input type="hidden" id="' + sIdField + '" value="' + oField.value + '">' +
 									( oTab.state != 'view' ?
-										'<div class="object_select_path" id="object_select_' + sIdField + '">ppppppppppppp</div>' +
-										'<input type="hidden" id="object_value_' + sIdField + '" value="' + oField.value + '">' :
-										'<div class="object_select_path" id="object_select_' + sIdField + '" style="background-color:#e9ecef;">ppppppppppppp</div>'
+										'<div class="object_select_path" id="object_select_' + sIdField + '">' + nodeGetHtmlName( nodeGetNode( oField.value ) ) + '</div>' :
+										'<div class="object_select_path" id="object_select_' + sIdField + '" style="background-color:#e9ecef;" disabled>' + nodeGetHtmlName( nodeGetNode( oField.value ) ) + '</div>'
 									) +
 								'</td>' +
 								'<td width="130px" align="right">' +
@@ -392,7 +390,7 @@ function refreshTabs(){
 				var sIdField = 'tab-field-' + oTab.id + '-' + oField.id;
 
 				// attribution des valeurs
-				if( oField.value != undefined && $.inArray( oField.type, [ 'string', 'text', 'int', 'list', 'color', 'range' ] ) != -1 ){
+				if( oField.value != undefined && $.inArray( oField.type, [ 'string', 'text', 'int', 'list', 'color', 'range', 'object' ] ) != -1 ){
 					$( '#' + sIdField ).val( oField.value );
 					//console.log( '#tab-field-' + oTab.id + '-' + oField.id );
 					//console.log( oField.value );

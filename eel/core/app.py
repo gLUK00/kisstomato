@@ -32,6 +32,17 @@ def saveAs( text, ext, initialfile ):
 
     return filename
 
+# affichage de la fenetre de selection d'un repertoire
+def setDir( text ):
+    global root
+
+    dirName = filedialog.askdirectory(initialdir=text)
+
+    root.destroy()
+    _initRootTk()
+
+    return dirName
+
 # affichage de la fenetre de selection d'un fichier
 def setFile( text, ext ):
     global root

@@ -2,11 +2,14 @@
 // reference vers les noeuds
 var oNodes = [];
 
+// reference des parents
+var _oParents = {};
+
 // recupere la liste des noeuds sous la forme d'un tableau id/html
 function nodeGetListIdHtml( oField ){
 
 	// recupere l'ensemble des noeuds
-	var oAllNodes = nodeFetAllNodes();
+	var oAllNodes = nodeGetAllNodes();
 
 	// filtre les elements
 	var oResults = [];
@@ -24,10 +27,11 @@ function nodeGetListIdHtml( oField ){
 		}
 
 		// recupere le nom au format HTML
-		oAllNodes[ i ][ 'html' ] = nodeGetHtmlName( oAllNodes[ i ] );
+		let oNode = Object.assign( {}, oAllNodes[ i ] );
+		oNode[ 'html' ] = nodeGetHtmlName( oNode );
 
 		// recupere l'element
-		oResults.push( oAllNodes[ i ] );
+		oResults.push( oNode );
 	}
 
 
@@ -64,23 +68,27 @@ function nodeGetListIdHtml( oField ){
 
 // retourne le nom d'un noeud au format HTML
 function nodeGetHtmlName( oNode ){
+	if( oNode == null ){
+		return '';
+	}
 	let sHtml = oNode[ 'text' ];
 	if( oNode[ 'icon' ] != undefined ){
 		sHtml = '<i class="' + oNode[ 'icon' ] + '"></i>&nbsp' + sHtml;
 	}
-	if( oNode[ 'parent' ] != undefined ){
-		sHtml = nodeGetHtmlName( oNode[ 'parent' ] ) + '&nbsp;/&nbsp;' + sHtml;
+	if( _oParents[ oNode[ 'id' ] ] != undefined ){
+		sHtml = nodeGetHtmlName( _oParents[ oNode[ 'id' ] ] ) + '&nbsp;/&nbsp;' + sHtml;
 	}
 	return sHtml;
 }
 
 // retourne la liste de tous les noeuds
-function nodeFetAllNodes(){
+function nodeGetAllNodes(){
 	var fGetAll = function( oNodesFind, oParent ){
 		let oAll = [];
 		for( var i=0; i<oNodesFind.length; i++ ){
 			if( oParent != undefined ){
-				oNodesFind[ i ][ 'parent' ] = oParent;
+				//oNodesFind[ i ][ 'parent' ] = oParent;
+				_oParents[ oNodesFind[ i ][ 'id' ] ] = oParent;
 			}
 			oAll.push( oNodesFind[ i ] );
 			if( oNodesFind[ i ].children != undefined && oNodesFind[ i ].children.length > 0 ){
@@ -100,7 +108,8 @@ function nodeGetNode( id, _nodes, oParent ){
 	}
 	for( var i=0; i<_nodes.length; i++ ){
 		if( oParent != undefined ){
-			_nodes[ i ][ 'parent' ] = oParent;
+			//_nodes[ i ][ 'parent' ] = oParent;
+			_oParents[ _nodes[ i ][ 'id' ] ] = oParent;
 		}
 		if( _nodes[ i ].id == id ){
 			return _nodes[ i ];

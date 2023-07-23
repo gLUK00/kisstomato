@@ -1,0 +1,12 @@
+
+
+en cours :
+- generation du code HTML
+
+
+a faire :
+- a la fermeture du projet, proposer de sauvegarder les onglets ouverts, sous la forme d'un interupteur a off
+
+fait :
+
+

@@ -220,6 +220,14 @@ function modalShowForm( sTitle, sTitleYes, fYes, sTitleNo, fNo, oForm, oOptions 
 					'<input type="text" class="form-control" id="modalShowForm_' + oEle[ 'name' ] + '">' +
 				'</div>' +
 			'</div>';
+		}else if( oEle[ 'type' ] == 'set-dir' ){
+			sForm += '<div class="mb-3">' +
+				'<div class="form-check">' +
+					'<label for="modalShowForm_' + oEle[ 'name' ] + '" class="form-label">' + oEle[ 'title' ] + '</label>' +
+					'<button type="button" filetitle="' + oEle[ 'ext-title' ] + '" idtarget="modalShowForm_' + oEle[ 'name' ] + '" class="app-btn-set-dir btn btn-primary btn-sm" style="float:right;"><i class="fa-solid fa-file-lines"></i></button>' +
+					'<input type="text" class="form-control" id="modalShowForm_' + oEle[ 'name' ] + '">' +
+				'</div>' +
+			'</div>';
 		}else if( oEle[ 'type' ] == 'list' ){
 			var sList = '';
 			for( var a=0; a<oEle[ 'value' ].length; a++ ){

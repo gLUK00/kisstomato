@@ -3,6 +3,11 @@ import eel
 # importation du CORE
 from core import app
 
+# fenetre de selection d'un repertoire
+@eel.expose
+def app_set_dir( text ):
+    return app.setDir( text )
+
 # fenetre de selection des fichiers de type "save-as"
 @eel.expose
 def app_set_file( text, ext ):

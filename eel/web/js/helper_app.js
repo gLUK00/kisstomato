@@ -31,6 +31,18 @@ $( document ).on( "click", ".app-btn-set-file", function(){
 
 } );
 
+// evenement de prise en charge des boutons de type "set-dir"
+$( document ).on( "click", ".app-btn-set-dir", function(){
+
+	var idTarget = $( this ).attr( 'idtarget' );
+	var fileTitle = $( this ).attr( 'filetitle' );
+
+	eel.app_set_dir( fileTitle )( function( path ){
+		$( '#' + idTarget ).val( path );
+	} );
+
+} );
+
 // redimension de la fenetre en plein ecran
 function fullScreen(){
 	window.resizeTo( screen.width, screen.height );
