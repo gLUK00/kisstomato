@@ -12,9 +12,11 @@ $( document ).ready( function(){
 } );
 
 // chargement da la navbar
+var oInfoProject = {};
 eel.open_project( getUrlParameter( 'project' ) )( function( data ){
 
 	// alimente le type
+	oInfoProject = data[ 'info' ];
 	$( '#project_title' ).html( data[ 'model' ][ 'title' ] );
 
 	// recupere le modeles de donnees

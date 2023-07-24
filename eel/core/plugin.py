@@ -7,7 +7,7 @@ from core import config
 def exeMethodModel( model, module, method, data ):
 
     # determine le nom du module
-    modulename = config.configuration[ "path_base" ] + os.sep + 'plugins' + os.sep + 'models' + os.sep + model + os.sep + module
+    modulename = config.configuration[ "path_base" ] + os.sep + 'plugins' + os.sep + 'models' + os.sep + str( model ) + os.sep + str( module )
 
     try:
 
@@ -29,6 +29,6 @@ def exeMethodModel( model, module, method, data ):
     except Exception as e:
         print( 'error on exeMethodModel' )
         print( e )
-        return data
+        return 'error on exeMethodModel' + str( e )
 
     return data

@@ -5,12 +5,13 @@ $( document ).on( "click", "#gen-code", function() {
 	modalShowForm( 'Génération de code', 'Générer', function( oData ){
 		console.log( '--> generation' );
 
+		eel.plugin_exec_method_model( oInfoProject[ 'model' ], 'generation', 'generateHtmlCode', oData )( function( result ){
 
-
-
-		// affichage du rapport de generation, asynchrone
-
-
+			// affichage du rapport de generation, asynchrone
+			console.log( 'js generateHtmlCode aaaa' );
+			console.log( oData );
+			console.log( result );
+		} );
 
 		return true;
 	}, 'Annuler', undefined, [

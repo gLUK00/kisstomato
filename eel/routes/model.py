@@ -17,7 +17,7 @@ def get_javascript( model, file ):
     sFile = path_base + os.sep + 'plugins' + os.sep + 'models' + os.sep + model + os.sep + 'js' + os.sep + file
 
     sContent = ''
-    with open( sFile, "r" ) as oFile:
+    with open( sFile, "r", encoding="utf-8" ) as oFile:
         sContent = oFile.read()
 
     return str( sContent )
