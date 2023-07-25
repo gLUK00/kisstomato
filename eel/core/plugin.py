@@ -7,7 +7,7 @@ from core import config
 def exeMethodModel( model, module, method, data ):
 
     # determine le nom du module
-    modulename = config.configuration[ "path_base" ] + os.sep + 'plugins' + os.sep + 'models' + os.sep + str( model ) + os.sep + str( module )
+    modulename = config.getPathBase() + os.sep + 'plugins' + os.sep + 'models' + os.sep + str( model ) + os.sep + str( module )
 
     try:
 

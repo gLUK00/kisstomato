@@ -18,7 +18,7 @@ $( document ).on( "click", "#btn-ref-projet", function() {
 			}
 
 			// enregistrement du nouveau projet
-			eel.set_file_project( oData[ 'file' ].trim() )( function( result ){
+			eel.set_file_project( oData[ 'file' ].trim(), oData[ 'relatif-path' ] )( function( result ){
 
 				console.log( 'js set_file_project' );
 				console.log( result );
@@ -31,7 +31,8 @@ $( document ).on( "click", "#btn-ref-projet", function() {
 			return true;
 		}, "Annuler", null,
 		[
-			{ 'name': 'file', 'title': 'Fichier du projet', 'type': 'set-file', 'ext': 'json', 'ext-title': 'Fichier Json'}
+			{ 'name': 'file', 'title': 'Fichier du projet', 'type': 'set-file', 'ext': 'json', 'ext-title': 'Fichier Json'},
+			{ 'name': 'relatif-path', 'type': 'checkbox', 'title': 'Activer la prise en charge du chemin relatif à KissTomato', 'value': true }
 		]
 	);
 } );
@@ -84,7 +85,8 @@ $( document ).on( "click", "#btn-new-projet", function() {
 				{ 'name': 'name', 'title': 'Nom', 'type': 'string' },
 				{ 'name': 'desc', 'title': 'Description', 'type': 'text' },
 				{ 'name': 'model', 'title': 'Type d\'application', 'type': 'list', 'k-key': 'name', 'k-value': 'title', 'value': oModels },
-				{ 'name': 'file', 'title': 'Enregistrer sous', 'type': 'save-as', 'ext': 'json', 'ext-title': 'Fichier Json', 'initial-file': 'kisstomato.json' }
+				{ 'name': 'file', 'title': 'Enregistrer sous', 'type': 'save-as', 'ext': 'json', 'ext-title': 'Fichier Json', 'initial-file': 'kisstomato.json' },
+				{ 'name': 'relatif-path', 'type': 'checkbox', 'title': 'Activer la prise en charge du chemin relatif à KissTomato', 'value': true }
 			]
 		);
 	} );

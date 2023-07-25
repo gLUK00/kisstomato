@@ -208,7 +208,7 @@ function modalShowForm( sTitle, sTitleYes, fYes, sTitleNo, fNo, oForm, oOptions 
 		}else if( oEle[ 'type' ] == 'checkbox' ){
 			sForm += '<div class="mb-3">' +
 				'<div class="form-check">' +
-					'<input type="checkbox" class="form-check-input" id="modalShowForm_' + oEle[ 'name' ] + '">' +
+					'<input type="checkbox" class="form-check-input" id="modalShowForm_' + oEle[ 'name' ] + '"' + ( oEle[ 'value' ] != undefined && oEle[ 'value' ] ? ' checked="checked"' : '' ) + '>' +
 					'<label for="modalShowForm_' + oEle[ 'name' ] + '" class="form-check-label">' + oEle[ 'title' ] + '</label>' +
 				'</div>' +
 			'</div>';

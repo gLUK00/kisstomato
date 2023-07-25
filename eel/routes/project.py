@@ -28,16 +28,16 @@ def get_create_file_project( data ):
     oFile.close()
 
     # referencement du projet
-    config.addProject( filename )
+    config.addProject( filename, relatif_path = ( data[ 'relatif-path' ] != None and data[ 'relatif-path' ] ) )
 
     return True
 
 # ajout du fichier d'un projet
 @eel.expose
-def set_file_project( filename ):
+def set_file_project( filename, relatif_path ):
 
     # referencement du projet
-    config.addProject( filename )
+    config.addProject( filename, relatif_path )
 
     return True
 
@@ -48,9 +48,10 @@ def get_all_projects():
 
     for pathProject in config.configuration[ 'projects' ]:
         try:
-            with open( pathProject, 'r' ) as j:
+            sPathProject = pathProject.replace( "{path_base}", config.getPathBase() )
+            with open( sPathProject, 'r' ) as j:
                 oProject = json.loads(j.read())
-                oProject[ 'file' ] = pathProject
+                oProject[ 'file' ] = sPathProject
                 oProjects.append( oProject )
         except Exception as e:
             oProjects.append( { 'file': pathProject, 'error':str( e ) } )
@@ -63,7 +64,8 @@ def del_project( filename, deletefile ):
 
     oProjects = []
     for pathProject in config.configuration[ 'projects' ]:
-        if pathProject == filename:
+        sPathProject = pathProject.replace( "{path_base}", config.getPathBase() )
+        if sPathProject == filename:
             if deletefile and  os.path.isfile( filename ):
                 os.remove( filename )
             continue
@@ -87,7 +89,7 @@ def open_project( filename ):
 
     # determine si le modele a des fichiers javascript
     oJs = []
-    for sJsFile in glob.glob( config.configuration[ "path_base" ] + os.sep + 'plugins' + os.sep + 'models' + os.sep + oProject[ 'model' ] + os.sep + 'js' + os.sep + '*.js' ):
+    for sJsFile in glob.glob( config.getPathBase() + os.sep + 'plugins' + os.sep + 'models' + os.sep + oProject[ 'model' ] + os.sep + 'js' + os.sep + '*.js' ):
         oJs.append( sJsFile.split( os.sep )[ -1 ] )
 
     return { 'file': filename, 'info': oProject, 'model': model.getOne( oProject[ 'model' ] ), 'data': oData, 'js': oJs }

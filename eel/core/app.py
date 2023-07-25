@@ -21,7 +21,7 @@ _initRootTk()
 def saveAs( text, ext, initialfile ):
     global root
 
-    filename = filedialog.asksaveasfilename(initialdir=config.configuration[ "path_base" ],
+    filename = filedialog.asksaveasfilename(initialdir=config.getPathBase(),
         defaultextension='.' + ext,
         initialfile=initialfile,
         filetypes=[ (text,"." + ext) ]
@@ -47,7 +47,7 @@ def setDir( text ):
 def setFile( text, ext ):
     global root
 
-    filename = filedialog.askopenfilename(initialdir=config.configuration[ "path_base" ],
+    filename = filedialog.askopenfilename(initialdir=config.getPathBase(),
         defaultextension='.' + ext,
         filetypes=[ (text,"." + ext) ]
     )

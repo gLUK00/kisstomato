@@ -6,7 +6,7 @@ from core import config
 def getAll():
     oModels = []
 
-    oPathConfModels = glob.glob( config.configuration[ "path_base" ] + os.sep + 'plugins' + os.sep + 'models' + os.sep + '*' + os.sep + 'configuration.json' )
+    oPathConfModels = glob.glob( config.getPathBase() + os.sep + 'plugins' + os.sep + 'models' + os.sep + '*' + os.sep + 'configuration.json' )
     for conf_model in oPathConfModels:
         #print( 'debug : getAll : ' + conf_model )
         name_model = conf_model.split( os.sep )[ -2 ]
@@ -20,6 +20,6 @@ def getAll():
 # recupere les informations d'un modele
 def getOne( modele ):
 
-    sPathConfModel = glob.glob( config.configuration[ "path_base" ] + os.sep + 'plugins' + os.sep + 'models' + os.sep + modele + os.sep + 'configuration.json' )[ 0 ]
+    sPathConfModel = glob.glob( config.getPathBase() + os.sep + 'plugins' + os.sep + 'models' + os.sep + modele + os.sep + 'configuration.json' )[ 0 ]
     f = open( sPathConfModel )
     return json.load(f)
