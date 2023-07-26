@@ -203,7 +203,7 @@ function modalShowForm( sTitle, sTitleYes, fYes, sTitleNo, fNo, oForm, oOptions 
 		}else if( oEle[ 'type' ] == 'text' ){
 			sForm += '<div class="mb-3">' +
 				'<label for="modalShowForm_' + oEle[ 'name' ] + '" class="form-label">' + oEle[ 'title' ] + '</label>' +
-				'<textarea class="form-control" id="modalShowForm_' + oEle[ 'name' ] + '" rows="3"></textarea>' +
+				'<textarea class="form-control" id="modalShowForm_' + oEle[ 'name' ] + '" rows="3">' + ( oEle[ 'value' ] != undefined ? oEle[ 'value' ] : '' ) + '</textarea>' +
 			'</div>';
 		}else if( oEle[ 'type' ] == 'checkbox' ){
 			sForm += '<div class="mb-3">' +
@@ -217,7 +217,7 @@ function modalShowForm( sTitle, sTitleYes, fYes, sTitleNo, fNo, oForm, oOptions 
 				'<div class="form-check">' +
 					'<label for="modalShowForm_' + oEle[ 'name' ] + '" class="form-label">' + oEle[ 'title' ] + '</label>' +
 					'<button type="button" fileext="' + oEle[ 'ext' ] + '" filetitle="' + oEle[ 'ext-title' ] + '" idtarget="modalShowForm_' + oEle[ 'name' ] + '" class="app-btn-set-file btn btn-primary btn-sm" style="float:right;"><i class="fa-solid fa-file-lines"></i></button>' +
-					'<input type="text" class="form-control" id="modalShowForm_' + oEle[ 'name' ] + '">' +
+					'<input type="text" class="form-control" id="modalShowForm_' + oEle[ 'name' ] + '"' + ( oEle[ 'value' ] != undefined ? ' value="' + oEle[ 'value' ] + '"' : '' ) + '>' +
 				'</div>' +
 			'</div>';
 		}else if( oEle[ 'type' ] == 'set-dir' ){
@@ -225,7 +225,7 @@ function modalShowForm( sTitle, sTitleYes, fYes, sTitleNo, fNo, oForm, oOptions 
 				'<div class="form-check">' +
 					'<label for="modalShowForm_' + oEle[ 'name' ] + '" class="form-label">' + oEle[ 'title' ] + '</label>' +
 					'<button type="button" filetitle="' + oEle[ 'ext-title' ] + '" idtarget="modalShowForm_' + oEle[ 'name' ] + '" class="app-btn-set-dir btn btn-primary btn-sm" style="float:right;"><i class="fa-solid fa-file-lines"></i></button>' +
-					'<input type="text" class="form-control" id="modalShowForm_' + oEle[ 'name' ] + '">' +
+					'<input type="text" class="form-control" id="modalShowForm_' + oEle[ 'name' ] + '"' + ( oEle[ 'value' ] != undefined ? ' value="' + oEle[ 'value' ] + '"' : '' ) + '>' +
 				'</div>' +
 			'</div>';
 		}else if( oEle[ 'type' ] == 'list' ){
