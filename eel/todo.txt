@@ -2,6 +2,10 @@
 
 en cours :
 - generation du code HTML
+-- coder : deplacement des assets
+-- mettre des fichiers dans le repertoire : /home/hidalgo/Documents/projects/kisstomato/eel/plugins/models/html_maker
+-- continuer a coder dans le mergeDirs en fonction de la conf
+-- si pas de conf copier/ecraser la cible
 
 
 a faire :

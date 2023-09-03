@@ -1,0 +1,441 @@
+{
+    "name": "dsfdsf",
+    "desc": "dddd",
+    "model": "html_maker",
+    "data": [
+        {
+            "id": "pages",
+            "text": "Pages",
+            "icon": "fa-solid fa-tree",
+            "li_attr": {
+                "readonly": true,
+                "children-type": [
+                    "directory",
+                    "page"
+                ]
+            },
+            "children": [
+                {
+                    "id": "4f0a599f-42f3-422d-96b6-2cb3bfdfeb03",
+                    "text": "iiiiiiii",
+                    "li_attr": {
+                        "type": "page",
+                        "items": [
+                            {
+                                "id": "page_icon",
+                                "value": null
+                            },
+                            {
+                                "id": "page_desc",
+                                "value": ""
+                            },
+                            {
+                                "id": "aa_string",
+                                "value": ""
+                            },
+                            {
+                                "id": "aa_list",
+                                "value": "a"
+                            },
+                            {
+                                "id": "aaa_checkbox",
+                                "value": []
+                            },
+                            {
+                                "id": "aaa_radio",
+                                "value": null
+                            },
+                            {
+                                "id": "aaa_color",
+                                "value": "#000000"
+                            },
+                            {
+                                "id": "aaa_switch",
+                                "value": "on"
+                            },
+                            {
+                                "id": "aaa_range",
+                                "value": "8"
+                            }
+                        ]
+                    },
+                    "icon": "fa-solid fa-table-cells-large",
+                    "children": [
+                        {
+                            "id": "ee37ce95-e421-41eb-87c7-33a4cf867fbd",
+                            "text": "uuuuuuuuuu",
+                            "li_attr": {
+                                "type": "page",
+                                "items": [
+                                    {
+                                        "id": "page_object",
+                                        "value": null
+                                    },
+                                    {
+                                        "id": "page_icon",
+                                        "value": {
+                                            "icon": "",
+                                            "color": "#000000"
+                                        }
+                                    },
+                                    {
+                                        "id": "page_desc",
+                                        "value": ""
+                                    },
+                                    {
+                                        "id": "aa_string",
+                                        "value": ""
+                                    },
+                                    {
+                                        "id": "aa_list",
+                                        "value": "a"
+                                    },
+                                    {
+                                        "id": "aaa_checkbox",
+                                        "value": []
+                                    },
+                                    {
+                                        "id": "aaa_radio",
+                                        "value": null
+                                    },
+                                    {
+                                        "id": "aaa_color",
+                                        "value": "#000000"
+                                    },
+                                    {
+                                        "id": "aaa_switch",
+                                        "value": "on"
+                                    },
+                                    {
+                                        "id": "aaa_range",
+                                        "value": "8"
+                                    }
+                                ]
+                            },
+                            "icon": "fa-solid fa-table-cells-large",
+                            "children": [
+                                {
+                                    "id": "80ecb52b-1441-47bb-b48d-a9faced821e0",
+                                    "text": "ttttt",
+                                    "li_attr": {
+                                        "type": "page",
+                                        "items": [
+                                            {
+                                                "id": "page_object",
+                                                "value": "41b46460-f299-4bc1-b8d3-83aa66f3eb8e"
+                                            },
+                                            {
+                                                "id": "page_icon",
+                                                "value": {
+                                                    "icon": "",
+                                                    "color": "#000000"
+                                                }
+                                            },
+                                            {
+                                                "id": "page_desc",
+                                                "value": ""
+                                            },
+                                            {
+                                                "id": "aa_string",
+                                                "value": ""
+                                            },
+                                            {
+                                                "id": "aa_list",
+                                                "value": "a"
+                                            },
+                                            {
+                                                "id": "aaa_checkbox",
+                                                "value": []
+                                            },
+                                            {
+                                                "id": "aaa_radio",
+                                                "value": null
+                                            },
+                                            {
+                                                "id": "aaa_color",
+                                                "value": "#000000"
+                                            },
+                                            {
+                                                "id": "aaa_switch",
+                                                "value": "on"
+                                            },
+                                            {
+                                                "id": "aaa_range",
+                                                "value": "8"
+                                            }
+                                        ]
+                                    },
+                                    "icon": "fa-solid fa-table-cells-large"
+                                }
+                            ],
+                            "state": {
+                                "opened": true
+                            }
+                        }
+                    ],
+                    "state": {
+                        "opened": true
+                    }
+                },
+                {
+                    "id": "1eb2ad5e-4f08-48cf-8d61-fa86a404b2d0",
+                    "text": "dddddddddddddd",
+                    "li_attr": {
+                        "type": "page",
+                        "items": [
+                            {
+                                "id": "page_icon",
+                                "value": null
+                            },
+                            {
+                                "id": "page_desc",
+                                "value": ""
+                            },
+                            {
+                                "id": "aa_string",
+                                "value": ""
+                            },
+                            {
+                                "id": "aa_list",
+                                "value": "a"
+                            },
+                            {
+                                "id": "aaa_checkbox",
+                                "value": []
+                            },
+                            {
+                                "id": "aaa_radio",
+                                "value": null
+                            },
+                            {
+                                "id": "aaa_color",
+                                "value": "#000000"
+                            },
+                            {
+                                "id": "aaa_switch",
+                                "value": "on"
+                            },
+                            {
+                                "id": "aaa_range",
+                                "value": "8"
+                            }
+                        ]
+                    },
+                    "icon": "fa-solid fa-table-cells-large"
+                },
+                {
+                    "id": "41b46460-f299-4bc1-b8d3-83aa66f3eb8e",
+                    "text": "sdfsdf",
+                    "li_attr": {
+                        "type": "page",
+                        "items": [
+                            {
+                                "id": "page_icon",
+                                "value": {
+                                    "icon": "",
+                                    "color": "#40d44a"
+                                }
+                            },
+                            {
+                                "id": "page_desc",
+                                "value": ""
+                            },
+                            {
+                                "id": "aa_string",
+                                "value": ""
+                            },
+                            {
+                                "id": "aa_list",
+                                "value": "a"
+                            },
+                            {
+                                "id": "aaa_checkbox",
+                                "value": []
+                            },
+                            {
+                                "id": "aaa_radio",
+                                "value": null
+                            },
+                            {
+                                "id": "aaa_color",
+                                "value": "#000000"
+                            },
+                            {
+                                "id": "aaa_switch",
+                                "value": "on"
+                            },
+                            {
+                                "id": "aaa_range",
+                                "value": "8"
+                            }
+                        ]
+                    },
+                    "icon": "fa-solid fa-table-cells-large"
+                },
+                {
+                    "id": "7aed063d-8fa5-47c7-b824-fd5b7ab49060",
+                    "text": "ppppppp",
+                    "li_attr": {
+                        "type": "page",
+                        "items": [
+                            {
+                                "id": "page_icon",
+                                "value": {
+                                    "icon": "american-sign-language-interpreting",
+                                    "color": "#8f7019"
+                                }
+                            },
+                            {
+                                "id": "page_desc",
+                                "value": ""
+                            },
+                            {
+                                "id": "aa_string",
+                                "value": ""
+                            },
+                            {
+                                "id": "aa_list",
+                                "value": "a"
+                            },
+                            {
+                                "id": "aaa_checkbox",
+                                "value": []
+                            },
+                            {
+                                "id": "aaa_radio",
+                                "value": null
+                            },
+                            {
+                                "id": "aaa_color",
+                                "value": "#000000"
+                            },
+                            {
+                                "id": "aaa_switch",
+                                "value": "on"
+                            },
+                            {
+                                "id": "aaa_range",
+                                "value": "8"
+                            }
+                        ]
+                    },
+                    "icon": "fa-solid fa-table-cells-large"
+                },
+                {
+                    "id": "6d2f9a86-2221-4f90-9386-960c0648bc27",
+                    "text": "rep1",
+                    "li_attr": {
+                        "type": "directory"
+                    },
+                    "icon": "fa-solid fa-folder"
+                },
+                {
+                    "id": "bcdeb66f-03be-4630-8b59-3144d47f28d1",
+                    "text": "ffffff",
+                    "li_attr": {
+                        "type": "directory"
+                    },
+                    "icon": "fa-solid fa-folder",
+                    "children": [
+                        {
+                            "id": "6610e246-6e43-4a66-a370-f54e868f153a",
+                            "text": "ttttt",
+                            "li_attr": {
+                                "type": "page",
+                                "items": [
+                                    {
+                                        "id": "page_object",
+                                        "value": "undefined"
+                                    },
+                                    {
+                                        "id": "page_icon",
+                                        "value": {
+                                            "icon": "",
+                                            "color": "#000000"
+                                        }
+                                    },
+                                    {
+                                        "id": "page_desc",
+                                        "value": ""
+                                    },
+                                    {
+                                        "id": "aa_string",
+                                        "value": ""
+                                    },
+                                    {
+                                        "id": "aa_list",
+                                        "value": "a"
+                                    },
+                                    {
+                                        "id": "aaa_checkbox",
+                                        "value": []
+                                    },
+                                    {
+                                        "id": "aaa_radio",
+                                        "value": null
+                                    },
+                                    {
+                                        "id": "aaa_color",
+                                        "value": "#000000"
+                                    },
+                                    {
+                                        "id": "aaa_switch",
+                                        "value": "on"
+                                    },
+                                    {
+                                        "id": "aaa_range",
+                                        "value": "8"
+                                    }
+                                ]
+                            },
+                            "icon": "fa-solid fa-table-cells-large"
+                        },
+                        {
+                            "id": "a5233b78-b4df-4d9c-a3dc-82072f41a5b2",
+                            "text": "aaaa",
+                            "li_attr": {
+                                "type": "directory"
+                            },
+                            "icon": "fa-solid fa-folder"
+                        }
+                    ],
+                    "state": {
+                        "opened": true
+                    }
+                }
+            ],
+            "state": {
+                "opened": true
+            }
+        },
+        {
+            "id": "contents",
+            "text": "Contenus",
+            "li_attr": {
+                "readonly": true,
+                "children-type": [
+                    "content"
+                ]
+            },
+            "children": [
+                {
+                    "id": "02e66018-4b8f-4128-ad2d-6bae0e0a2721",
+                    "text": "fghjghjfgjh",
+                    "li_attr": {
+                        "type": "content",
+                        "items": [
+                            {
+                                "id": "contenu",
+                                "value": "hgjtfyjfyjfgj gfhj gfhj fghj"
+                            }
+                        ]
+                    },
+                    "icon": "fa-solid fa-file-lines"
+                }
+            ],
+            "state": {
+                "opened": true
+            }
+        }
+    ]
+}

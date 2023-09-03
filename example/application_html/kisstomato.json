@@ -1,6 +1,6 @@
 {
     "name": "html",
-    "desc": "hjklhjkl",
+    "desc": "sdfdsf",
     "model": "html_maker",
     "data": [
         {
@@ -16,44 +16,58 @@
             },
             "children": [
                 {
-                    "id": "556a7c56-7e39-4d5b-a5f8-a0651e83e885",
-                    "text": "lm\u00f9lm\u00f9lm\u00f9",
+                    "id": "71f22834-c4e2-4dbc-9032-bfee02ef1d96",
+                    "text": "rrr",
                     "li_attr": {
-                        "type": "page",
-                        "items": [
-                            {
-                                "id": "page_desc",
-                                "value": "lm\u00f9lm\u00f9lm\u00f9"
+                        "type": "directory"
+                    },
+                    "icon": "fa-solid fa-folder",
+                    "children": [
+                        {
+                            "id": "08cef250-a506-452d-87d0-7f08f29cbce4",
+                            "text": "ooo",
+                            "li_attr": {
+                                "type": "page",
+                                "items": [
+                                    {
+                                        "id": "page_desc",
+                                        "value": "hjhjk"
+                                    },
+                                    {
+                                        "id": "aa_string",
+                                        "value": ""
+                                    },
+                                    {
+                                        "id": "aa_list",
+                                        "value": "a"
+                                    },
+                                    {
+                                        "id": "aaa_checkbox",
+                                        "value": []
+                                    },
+                                    {
+                                        "id": "aaa_radio",
+                                        "value": null
+                                    },
+                                    {
+                                        "id": "aaa_color",
+                                        "value": "#000000"
+                                    },
+                                    {
+                                        "id": "aaa_switch",
+                                        "value": "on"
+                                    },
+                                    {
+                                        "id": "aaa_range",
+                                        "value": "8"
+                                    }
+                                ]
                             },
-                            {
-                                "id": "aa_string",
-                                "value": ""
-                            },
-                            {
-                                "id": "aa_list",
-                                "value": "a"
-                            },
-                            {
-                                "id": "aaa_checkbox",
-                                "value": []
-                            },
-                            {
-                                "id": "aaa_radio",
-                                "value": null
-                            },
-                            {
-                                "id": "aaa_color",
-                                "value": "#000000"
-                            },
-                            {
-                                "id": "aaa_switch",
-                                "value": "on"
-                            },
-                            {
-                                "id": "aaa_range",
-                                "value": "8"
-                            }
-                        ]
+                            "icon": "fa-solid fa-table-cells-large"
+                        }
+                    ],
+                    "state": {
+                        "opened": true
                     }
                 }
             ],
@@ -69,6 +83,19 @@
                 "children-type": [
                     "content"
                 ]
+            },
+            "children": [
+                {
+                    "id": "5ead2c12-61fc-4884-8392-7879f87af887",
+                    "text": "iiiiiii",
+                    "li_attr": {
+                        "type": "content"
+                    },
+                    "icon": "fa-solid fa-file-lines"
+                }
+            ],
+            "state": {
+                "opened": true
             }
         }
     ]
