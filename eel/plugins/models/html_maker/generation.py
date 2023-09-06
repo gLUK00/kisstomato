@@ -103,7 +103,7 @@ def generateHtmlCode( oData ):
         sRapport += 'Copie des assets :\n' + generator.mergeDirs( sPathPlugin + os.sep + 'assets', sDirTemp )
 
         # merge avec le repertoire cible
-        sRapport += 'Fusion avec l\'existant :\n' + generator.mergeDirs( sDirTemp, oData[ 'dir-out' ], { 'html': { 'start': '<!--', 'stop': '-->' } } )
+        sRapport += 'Fusion avec l\'existant :\n' + generator.mergeDirs( sDirTemp, oData[ 'dir-out' ], { 'html': { 'start': '<!-- kisstomato-', 'stop': ' -->' } } )
 
 
         #print( oProject )

@@ -1,4 +1,4 @@
-import os, glob, shutil
+import os, glob, shutil, sys
 
 from pathlib import Path
 
@@ -24,57 +24,107 @@ def getNodeById( sId, oNode ):
 # merge de repertoire
 def mergeDirs( sDirSource, sDirTarget, oConfig=None ):
     sRapport = ''
+    try:
 
-    # recupere l'ensemble des fichiers et repertoires source et cible
-    oAllSrc = glob.glob( sDirSource + os.sep + '**', recursive=True )
-    oAllTar = glob.glob( sDirTarget + os.sep + '**', recursive=True )
+        # recupere l'ensemble des fichiers et repertoires source et cible
+        oAllSrc = glob.glob( sDirSource + os.sep + '**', recursive=True )
+        oAllTar = glob.glob( sDirTarget + os.sep + '**', recursive=True )
 
-    # pour tous les elements sources
-    for sElement in oAllSrc:
+        # pour tous les elements sources
+        for sElement in oAllSrc:
 
-        # deduction du nom cible
-        sElementTarget = sDirTarget + sElement[ len( sDirSource ) : ]
+            # deduction du nom cible
+            sElementTarget = sDirTarget + sElement[ len( sDirSource ) : ]
 
-        # si c'est un repertoire et qu'il n'est pas present en cible
-        if os.path.isdir( sElement ):
+            # si c'est un repertoire et qu'il n'est pas present en cible
+            if os.path.isdir( sElement ):
 
-            # le repertoire existe deja en cible
-            if sElementTarget in oAllTar:
+                # le repertoire existe deja en cible
+                if sElementTarget in oAllTar:
+                    continue
+
+                sRapport += 'Creation du repertoire : ' + sElementTarget + '\n'
+                os.makedirs( sElementTarget, mode = 0o777 )
                 continue
 
-            sRapport += 'Creation du repertoire : ' + sElementTarget + '\n'
-            os.makedirs( sElementTarget, mode = 0o777 )
-            continue
+            # determine l'extension du fichier
+            sExt = ''
+            iPosPoint = sElement.rfind( '.' )
+            if iPosPoint != -1:
+                sExt = sElement[ iPosPoint + 1 : ].lower()
 
-        # determine l'extension du fichier
-        sExt = ''
-        iPosPoint = sElement.rfind( '.' )
-        if iPosPoint != -1:
-            sExt = sElement[ iPosPoint + 1 : ].lower()
+            # si le fichier n'existe pas en cible ou n'est pas a prendre en compte dans la configuration
+            if not sElementTarget in oAllTar or oConfig == None or not sExt in oConfig.keys():
 
-        # si le fichier n'existe pas en cible ou n'est pas a prendre en compte dans la configuration
-        if not sElementTarget in oAllTar or oConfig == None or not sExt in oConfig.keys():
+                # copie du fichier
+                sRapport += 'Copie du fichier : ' + sElementTarget + '\n'
+                shutil.copyfile( sElement, sElementTarget )
+                continue
 
-            # copie du fichier
-            sRapport += 'Copie du fichier : ' + sElementTarget + '\n'
-            shutil.copyfile( sElement, sElementTarget )
-            continue
-        
-        # recuperation du contenu source et cible
-        sContentSrc = Path( sElement ).read_text()
-        sContentTar = Path( sElementTarget ).read_text()
+            sRapport += 'Merge des fichiers : ' + sElement + ' et ' + sElementTarget +  '\n'
+            
+            # recuperation du contenu source et cible
+            sContentSrc = Path( sElement ).read_text()
+            sContentTar = Path( sElementTarget ).read_text()
 
-        print( 'ext' )
-        print( sExt )
-        print( sContentSrc )
-        print( sContentTar )
+            # determine les sections de la source
+            oSectionSrc = {}
+            sTagStart = oConfig[ sExt ][ 'start' ]
+            sTagStop = oConfig[ sExt ][ 'stop' ]
+            iPosStart = sContentSrc.find( sTagStart )
+            while iPosStart != -1:
+                iPosStop = sContentSrc.find( sTagStop, iPosStart )
 
+                # determine le nom de la section
+                sSection = sContentSrc[ iPosStart + len( sTagStart ) : iPosStop ].replace( '-start-user-code', '' ).strip()
 
+                # determine les positions de la portion
+                sTagSectionEnd = sTagStart + sSection + '-stop-user-code' + sTagStop
+                iPosPortionStart = iPosStop + len( sTagStop )
+                iPosPortionStop = sContentSrc.find( sTagSectionEnd, iPosPortionStart )
 
-    print( sDirSource )
-    print( sDirTarget )
-    print( oConfig )
-    #print( oAllSrc )
-    #print( oAllTar )
+                # recupere la section
+                oSectionSrc[ sSection ] = { 'start': iPosPortionStart, 'stop': iPosPortionStop }
+
+                # determine si il y a une autre occurence
+                iPosStart = sContentSrc.find( sTagStart, iPosPortionStop + len( sTagSectionEnd ) )
+
+            # determine les sections et le contenu de la cible
+            oContentTarget = {}
+            iPosStart = sContentTar.find( sTagStart )
+            while iPosStart != -1:
+                iPosStop = sContentTar.find( sTagStop, iPosStart )
+
+                # determine le nom de la section
+                sSection = sContentTar[ iPosStart + len( sTagStart ) : iPosStop ].replace( '-start-user-code', '' ).strip()
+
+                # determine les positions de la portion
+                sTagSectionEnd = sTagStart + sSection + '-stop-user-code' + sTagStop
+                iPosPortionStart = iPosStop + len( sTagStop )
+                iPosPortionStop = sContentTar.find( sTagSectionEnd, iPosPortionStart )
+
+                # recupere la section
+                oContentTarget[ sSection ] = { 'content': sContentTar[ iPosPortionStart : iPosPortionStop ] }
+
+                # determine si il y a une autre occurence
+                iPosStart = sContentTar.find( sTagStart, iPosPortionStop + len( sTagSectionEnd ) )
+
+            # pour toutes les sources
+            for sSection in oSectionSrc:
+                if not sSection in oContentTarget:
+                    continue
+
+                # insertion du code
+                sContentSrc = sContentSrc[ : oSectionSrc[ sSection ][ 'start' ] ] + oContentTarget[ sSection ][ 'content' ] + sContentSrc[ oSectionSrc[ sSection ][ 'stop' ] : ]
+
+            # reecriture de la cible
+            Path( sElementTarget ).write_text( sContentSrc )
+
+    except Exception as e:
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        print("------ ERROR mergeDirs ------")
+        print(str( e ))
+        print((exc_type, fname, exc_tb.tb_lineno))
 
     return sRapport
