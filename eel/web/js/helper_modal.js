@@ -1,3 +1,12 @@
+$( document ).ready( function(){
+
+	document.styleSheets[0].insertRule('.ModalmessageErreur{\
+			background-color: #f8d7da !important;\
+			color: #842029 !important;\
+			border-color: #f5c2c7 !important;\
+		}', 0);
+} );
+
 var fModalQueryYes = function(){};
 var fModalQueryNo = function(){};
 $( document ).on( "click", "#btnModalQueryNo", function(){ fModalQueryNo(); } );
@@ -145,7 +154,7 @@ function modalShowMessage( sMessage, sStyle ){
 	}
 
 	var sHtml = '<div class="modal-dialog">' +
-		'<div class="modal-content ' + ( sStyle == 'error' ? 'messageErreur' : '' ) + '">' +
+		'<div class="modal-content ' + ( sStyle == 'error' ? 'ModalmessageErreur' : '' ) + '">' +
 			'<div class="modal-body">' +
 				sMessage +
 			'</div>' +
