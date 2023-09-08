@@ -207,12 +207,17 @@ function modalShowForm( sTitle, sTitleYes, fYes, sTitleNo, fNo, oForm, oOptions 
 		if( oEle[ 'type' ] == 'string' ){
 			sForm += '<div class="mb-3">' +
 				'<label for="modalShowForm_' + oEle[ 'name' ] + '" class="form-label">' + oEle[ 'title' ] + '</label>' +
-				'<input type="text" class="form-control" id="modalShowForm_' + oEle[ 'name' ] + '">' +
+				'<input type="text" class="form-control" id="modalShowForm_' + oEle[ 'name' ] + '"' + ( oEle[ 'value' ] != undefined ? ' value="' + oEle[ 'value' ] + '"' : '' ) + '>' +
 			'</div>';
 		}else if( oEle[ 'type' ] == 'text' ){
 			sForm += '<div class="mb-3">' +
 				'<label for="modalShowForm_' + oEle[ 'name' ] + '" class="form-label">' + oEle[ 'title' ] + '</label>' +
 				'<textarea class="form-control" id="modalShowForm_' + oEle[ 'name' ] + '" rows="3">' + ( oEle[ 'value' ] != undefined ? oEle[ 'value' ] : '' ) + '</textarea>' +
+			'</div>';
+		}else if( oEle[ 'type' ] == 'password' ){
+			sForm += '<div class="mb-3">' +
+				'<label for="modalShowForm_' + oEle[ 'name' ] + '" class="form-label">' + oEle[ 'title' ] + '</label>' +
+				'<input type="password" class="form-control" id="modalShowForm_' + oEle[ 'name' ] + '">' +
 			'</div>';
 		}else if( oEle[ 'type' ] == 'checkbox' ){
 			sForm += '<div class="mb-3">' +
