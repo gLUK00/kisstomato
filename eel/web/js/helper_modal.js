@@ -204,7 +204,9 @@ function modalShowForm( sTitle, sTitleYes, fYes, sTitleNo, fNo, oForm, oOptions 
 	var sForm = '';
 	for( var i=0; i<oForm.length; i++ ){
 		var oEle = oForm[ i ];
-		if( oEle[ 'type' ] == 'string' ){
+		if( oEle[ 'type' ] == 'hidden' ){
+			sForm += '<input type="hidden" id="modalShowForm_' + oEle[ 'name' ] + '"' + ( oEle[ 'value' ] != undefined ? ' value="' + oEle[ 'value' ] + '"' : '' ) + '>';
+		}else if( oEle[ 'type' ] == 'string' ){
 			sForm += '<div class="mb-3">' +
 				'<label for="modalShowForm_' + oEle[ 'name' ] + '" class="form-label">' + oEle[ 'title' ] + '</label>' +
 				'<input type="text" class="form-control" id="modalShowForm_' + oEle[ 'name' ] + '"' + ( oEle[ 'value' ] != undefined ? ' value="' + oEle[ 'value' ] + '"' : '' ) + '>' +
