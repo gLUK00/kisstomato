@@ -146,14 +146,14 @@ function modalShowInput( sTitle, sTitleYes, fYes, sTitleNo, fNo, sValue ){
 }
 
 // affichage d'un message
-function modalShowMessage( sMessage, sStyle ){
+function modalShowMessage( sMessage, sStyle, sWidth ){
 
 	// determine si la modale existe dans le DOM
 	if( $( '#modalMessage' ).length == 0 ){
 		$( 'body' ).append( '<div id="modalMessage" class="modal" tabindex="-1"></div>' );
 	}
 
-	var sHtml = '<div class="modal-dialog">' +
+	var sHtml = '<div class="modal-dialog' + ( sWidth != undefined ? ' ' + sWidth : '' ) + '">' +
 		'<div class="modal-content ' + ( sStyle == 'error' ? 'ModalmessageErreur' : '' ) + '">' +
 			'<div class="modal-body">' +
 				sMessage +
