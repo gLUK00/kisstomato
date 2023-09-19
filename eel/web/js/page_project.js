@@ -66,7 +66,7 @@ chargement factice
 
 
 */
-window.setTimeout( function(){
+/*window.setTimeout( function(){
 	oTabs.push( { id: 's6d4fsd65f', text: 'Nouveau', state: 'new', form: [
 		{ id: "4sf5sdff4_page_object", text: "un_objet", type: "object", "filter-type": "page" },
 		{ id: '4sf5sdff4', type: 'icon', text: 'Une Icone', icon: 'android', color: '#11ccc0' },
@@ -123,7 +123,7 @@ window.setTimeout( function(){
 		{ id: 'auuu465fd4g', type: 'color', text: 'Une couleur' },
 	] } );
 	refreshTabs();
-}, 500 );
+}, 500 );*/
 
 
 

@@ -144,7 +144,7 @@ function modalShowMessage( sMessage, sStyle ){
 		$( 'body' ).append( '<div id="modalMessage" class="modal" tabindex="-1"></div>' );
 	}
 
-	var sHtml = '<div class="modal-dialog">' +
+	var sHtml = '<div class="modal-dialog modal-dialog-scrollable modal-xl">' +
 		'<div class="modal-content ' + ( sStyle == 'error' ? 'messageErreur' : '' ) + '">' +
 			'<div class="modal-body">' +
 				sMessage +

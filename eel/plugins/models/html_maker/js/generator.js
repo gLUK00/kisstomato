@@ -42,7 +42,9 @@ $( document ).on( "click", "#gen-code", function() {
 			console.log( oData );
 			console.log( result );
 
-			alert( result );
+			//alert( result );
+
+			modalShowMessage( result );
 		} );
 
 		return true;

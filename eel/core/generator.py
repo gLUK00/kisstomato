@@ -1,4 +1,4 @@
-import os, glob, shutil, sys
+import os, glob, shutil, sys, operator
 
 from pathlib import Path
 
@@ -57,7 +57,7 @@ def mergeDirs( sDirSource, sDirTarget, oConfig=None ):
             if not sElementTarget in oAllTar or oConfig == None or not sExt in oConfig.keys():
 
                 # copie du fichier
-                sRapport += 'Copie du fichier : ' + sElementTarget + '\n'
+                #sRapport += 'Copie du fichier : ' + sElementTarget + '\n'
                 shutil.copyfile( sElement, sElementTarget )
                 continue
 
@@ -82,6 +82,9 @@ def mergeDirs( sDirSource, sDirTarget, oConfig=None ):
                 sTagSectionEnd = sTagStart + sSection + '-stop-user-code' + sTagStop
                 iPosPortionStart = iPosStop + len( sTagStop )
                 iPosPortionStop = sContentSrc.find( sTagSectionEnd, iPosPortionStart )
+                if iPosPortionStop == -1:
+                    sRapport += 'Erreur de merge sur recherche de position de fin dans source : [' + sTagSectionEnd + '] à partir de ' + str( iPosPortionStart ) +  '\n'
+                    return sRapport
 
                 # recupere la section
                 oSectionSrc[ sSection ] = { 'start': iPosPortionStart, 'stop': iPosPortionStop }
@@ -102,12 +105,33 @@ def mergeDirs( sDirSource, sDirTarget, oConfig=None ):
                 sTagSectionEnd = sTagStart + sSection + '-stop-user-code' + sTagStop
                 iPosPortionStart = iPosStop + len( sTagStop )
                 iPosPortionStop = sContentTar.find( sTagSectionEnd, iPosPortionStart )
+                if iPosPortionStop == -1:
+                    sRapport += 'Erreur de merge sur recherche de position de fin dans cible : [' + sTagSectionEnd + '] à partir de ' + str( iPosPortionStart ) +  '\n'
+                    return sRapport
 
                 # recupere la section
                 oContentTarget[ sSection ] = { 'content': sContentTar[ iPosPortionStart : iPosPortionStop ] }
 
                 # determine si il y a une autre occurence
                 iPosStart = sContentTar.find( sTagStart, iPosPortionStop + len( sTagSectionEnd ) )
+
+            # tri les sections de la source pour mettre la plus lointaine au debut du traitement
+            oNewSectionSrc = {}
+            iPosMax = -1
+            while len( oNewSectionSrc ) != len( oSectionSrc ):
+                sSectionImport = ''
+                for sKey in oSectionSrc.keys():
+                    if sKey in oNewSectionSrc:
+                        continue
+                    if oSectionSrc[ sKey ][ 'start' ] > iPosMax:
+                        iPosMax = oSectionSrc[ sKey ][ 'start' ]
+                        sSectionImport = sKey
+
+                # recupere la section la plus lointaine
+                oNewSectionSrc[ sSectionImport ] = oSectionSrc[ sSectionImport ]
+                iPosMax = -1
+
+            oSectionSrc = oNewSectionSrc
 
             # pour toutes les sources
             for sSection in oSectionSrc:
