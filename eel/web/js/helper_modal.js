@@ -1,3 +1,12 @@
+$( document ).ready( function(){
+
+	document.styleSheets[0].insertRule('.ModalmessageErreur{\
+			background-color: #f8d7da !important;\
+			color: #842029 !important;\
+			border-color: #f5c2c7 !important;\
+		}', 0);
+} );
+
 var fModalQueryYes = function(){};
 var fModalQueryNo = function(){};
 $( document ).on( "click", "#btnModalQueryNo", function(){ fModalQueryNo(); } );
@@ -137,15 +146,15 @@ function modalShowInput( sTitle, sTitleYes, fYes, sTitleNo, fNo, sValue ){
 }
 
 // affichage d'un message
-function modalShowMessage( sMessage, sStyle ){
+function modalShowMessage( sMessage, sStyle, sWidth ){
 
 	// determine si la modale existe dans le DOM
 	if( $( '#modalMessage' ).length == 0 ){
 		$( 'body' ).append( '<div id="modalMessage" class="modal" tabindex="-1"></div>' );
 	}
 
-	var sHtml = '<div class="modal-dialog modal-dialog-scrollable modal-xl">' +
-		'<div class="modal-content ' + ( sStyle == 'error' ? 'messageErreur' : '' ) + '">' +
+	var sHtml = '<div class="modal-dialog' + ( sWidth != undefined ? ' ' + sWidth : '' ) + '">' +
+		'<div class="modal-content ' + ( sStyle == 'error' ? 'ModalmessageErreur' : '' ) + '">' +
 			'<div class="modal-body">' +
 				sMessage +
 			'</div>' +
@@ -195,15 +204,22 @@ function modalShowForm( sTitle, sTitleYes, fYes, sTitleNo, fNo, oForm, oOptions 
 	var sForm = '';
 	for( var i=0; i<oForm.length; i++ ){
 		var oEle = oForm[ i ];
-		if( oEle[ 'type' ] == 'string' ){
+		if( oEle[ 'type' ] == 'hidden' ){
+			sForm += '<input type="hidden" id="modalShowForm_' + oEle[ 'name' ] + '"' + ( oEle[ 'value' ] != undefined ? ' value="' + oEle[ 'value' ] + '"' : '' ) + '>';
+		}else if( oEle[ 'type' ] == 'string' ){
 			sForm += '<div class="mb-3">' +
 				'<label for="modalShowForm_' + oEle[ 'name' ] + '" class="form-label">' + oEle[ 'title' ] + '</label>' +
-				'<input type="text" class="form-control" id="modalShowForm_' + oEle[ 'name' ] + '">' +
+				'<input type="text" class="form-control" id="modalShowForm_' + oEle[ 'name' ] + '"' + ( oEle[ 'value' ] != undefined ? ' value="' + oEle[ 'value' ] + '"' : '' ) + '>' +
 			'</div>';
 		}else if( oEle[ 'type' ] == 'text' ){
 			sForm += '<div class="mb-3">' +
 				'<label for="modalShowForm_' + oEle[ 'name' ] + '" class="form-label">' + oEle[ 'title' ] + '</label>' +
 				'<textarea class="form-control" id="modalShowForm_' + oEle[ 'name' ] + '" rows="3">' + ( oEle[ 'value' ] != undefined ? oEle[ 'value' ] : '' ) + '</textarea>' +
+			'</div>';
+		}else if( oEle[ 'type' ] == 'password' ){
+			sForm += '<div class="mb-3">' +
+				'<label for="modalShowForm_' + oEle[ 'name' ] + '" class="form-label">' + oEle[ 'title' ] + '</label>' +
+				'<input type="password" class="form-control" id="modalShowForm_' + oEle[ 'name' ] + '">' +
 			'</div>';
 		}else if( oEle[ 'type' ] == 'checkbox' ){
 			sForm += '<div class="mb-3">' +
