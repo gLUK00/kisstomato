@@ -1,1 +1,5 @@
-alert( 'ttttttttttttttt' );
+
+$( document ).ready( function(){
+
+	
+} );

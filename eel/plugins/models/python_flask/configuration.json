@@ -34,6 +34,7 @@
 			] }
 	],
 	"properties": [
-		{ "id": "token-validatro", "text": "Validation par token", "type": "switch" }
+		{ "id": "token-validator", "text": "Validation par token", "type": "switch" },
+		{ "id": "secure-decorator", "text": "Décorateur de sécurité", "type": "object", "filter-type": "decorator" }
 	]
 }

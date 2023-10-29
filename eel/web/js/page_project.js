@@ -17,7 +17,8 @@ eel.open_project( getUrlParameter( 'project' ) )( function( data ){
 
 	// alimente le type
 	oInfoProject = data[ 'info' ];
-	$( '#project_title' ).html( data[ 'model' ][ 'title' ] );
+	$( 'title' ).html( data[ 'model' ][ 'title' ] + ' : ' + oInfoProject[ 'name' ] );
+	$( '#project_title' ).html( data[ 'model' ][ 'title' ] + ' : ' + oInfoProject[ 'name' ] );
 
 	// recupere le modeles de donnees
 	oModel = data[ 'model' ][ 'elements' ];
@@ -124,6 +125,12 @@ chargement factice
 	] } );
 	refreshTabs();
 }, 500 );*/
+
+// affichage des proprietes d'un projet
+$( document ).on( "click", "#properties_project", function( e ) {
+
+	console.log( 'ccccc' );
+} );
 
 
 

@@ -12,6 +12,64 @@
                 "children-type": [
                     "page"
                 ]
+            },
+            "children": [
+                {
+                    "id": "a110b7ff-1728-4702-8d14-ed536faa9d34",
+                    "text": "rrrrr",
+                    "li_attr": {
+                        "type": "page",
+                        "items": [
+                            {
+                                "id": "page_object",
+                                "value": "undefined"
+                            },
+                            {
+                                "id": "page_icon",
+                                "value": {
+                                    "icon": "",
+                                    "color": "#000000"
+                                }
+                            },
+                            {
+                                "id": "page_desc",
+                                "value": ""
+                            },
+                            {
+                                "id": "aa_string",
+                                "value": ""
+                            },
+                            {
+                                "id": "aa_list",
+                                "value": "a"
+                            },
+                            {
+                                "id": "aaa_checkbox",
+                                "value": []
+                            },
+                            {
+                                "id": "aaa_radio",
+                                "value": null
+                            },
+                            {
+                                "id": "aaa_color",
+                                "value": "#000000"
+                            },
+                            {
+                                "id": "aaa_switch",
+                                "value": "on"
+                            },
+                            {
+                                "id": "aaa_range",
+                                "value": "8"
+                            }
+                        ]
+                    },
+                    "icon": "fa-solid fa-table-cells-large"
+                }
+            ],
+            "state": {
+                "opened": true
             }
         },
         {
