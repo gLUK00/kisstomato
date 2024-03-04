@@ -28,9 +28,10 @@ def close_callback(route, websockets):
         exit()
 
 if __name__ == '__main__':
-    observer = Observer()
+    """observer = Observer()
     observer.schedule(MyHandler(), '.', recursive=True)
     observer.start()
+    """
     
     eel.init('web')
     eel.start( 'index.html', size=(600, 1200), port=config.configuration[ "port" ] )

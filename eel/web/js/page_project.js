@@ -13,6 +13,8 @@ $( document ).ready( function(){
 
 // chargement da la navbar
 var oInfoProject = {};
+var oModel = {};
+var oPropertiesProject = {};
 eel.open_project( getUrlParameter( 'project' ) )( function( data ){
 
 	// alimente le type
@@ -20,8 +22,14 @@ eel.open_project( getUrlParameter( 'project' ) )( function( data ){
 	$( 'title' ).html( data[ 'model' ][ 'title' ] + ' : ' + oInfoProject[ 'name' ] );
 	$( '#project_title' ).html( data[ 'model' ][ 'title' ] + ' : ' + oInfoProject[ 'name' ] );
 
-	// recupere le modeles de donnees
-	oModel = data[ 'model' ][ 'elements' ];
+	// si le projet a des proprietes
+	if( data[ 'properties' ] !== undefined ){
+		oPropertiesProject = data[ 'properties' ];
+	}
+
+	// recupere le modele
+	//oModel = data[ 'model' ][ 'elements' ];
+	oModel = data[ 'model' ];
 
 	// importation des fichiers javascript
 	for( var i=0; i<data[ 'js' ].length; i++ ){
@@ -44,10 +52,6 @@ eel.open_project( getUrlParameter( 'project' ) )( function( data ){
 			'data' : oNodes
 		}
 	});
-
-	
-
-
 
 	console.log( 'open_project' );
 	console.log( data );
@@ -129,7 +133,40 @@ chargement factice
 // affichage des proprietes d'un projet
 $( document ).on( "click", "#properties_project", function( e ) {
 
-	console.log( 'ccccc' );
+	// creation du formulaire
+	let oData = [ { 'name': 'name', 'title': 'Titre', 'value': oInfoProject[ 'name' ], 'type': 'string' },
+		{ 'name': 'desc', 'title': 'Description', 'value': oInfoProject[ 'desc' ], 'type': 'text' }
+	];
+
+	// pour les proprietes du modele
+	for( var i=0; i<oModel[ "properties" ].length; i++ ){
+		let oProperty = oModel[ "properties" ][ i ];
+		oProperty[ 'name' ] = 'prop-' + oProperty[ 'id' ];
+		oProperty[ 'title' ] = oProperty[ 'text' ];
+
+		// determine si il y a une valeur enregistree sur ce modele
+		if( oPropertiesProject[ oProperty[ 'id' ] ] !== undefined ){
+			oProperty[ 'value' ] = oPropertiesProject[ oProperty[ 'id' ] ];
+		}
+
+		oData.push( oProperty );
+	}
+
+	modalShowForm( 'Propriétés du projet', 'Valider les modifications', function( oResults ){
+
+		// recuperation de proprietes
+		oInfoProject[ 'name' ] = oResults[ 'name' ];
+		oInfoProject[ 'desc' ] = oResults[ 'desc' ];
+		for( var i=0; i<oModel[ "properties" ].length; i++ ){
+			let oProperty = oModel[ "properties" ][ i ];
+			oPropertiesProject[ oProperty[ 'id' ] ] = oResults[ 'prop-' + oProperty[ 'id' ] ];
+		}
+
+		modelSaveProjectModel( getUrlParameter( 'project' ), { 'name': oInfoProject[ 'name' ], 'desc': oInfoProject[ 'desc' ], 'properties': oPropertiesProject }, oNodes );
+		return true;
+
+
+	}, 'Annuler', null, oData );
 } );
 
 
@@ -157,7 +194,7 @@ function contextMenuAdd( oMenu ){
 			nodeAddNode( oMenu[ 'parent' ][ 'id' ], sResult, oMenu[ 'item' ], null );
 
 			// enregistrement du projet
-			modelSaveProjectModel( getUrlParameter( 'project' ), oNodes );
+			modelSaveProjectModel( getUrlParameter( 'project' ), { 'name': oInfoProject[ 'name' ], 'desc': oInfoProject[ 'desc' ], 'properties': oPropertiesProject }, oNodes );
 
 			return;
 		}
@@ -174,7 +211,7 @@ function contextMenuAdd( oMenu ){
 			nodeAddNode( oMenu[ 'parent' ][ 'id' ], sResult, oMenu[ 'item' ], oData );
 
 			// enregistrement du projet
-			modelSaveProjectModel( getUrlParameter( 'project' ), oNodes );
+			modelSaveProjectModel( getUrlParameter( 'project' ), { 'name': oInfoProject[ 'name' ], 'desc': oInfoProject[ 'desc' ], 'properties': oPropertiesProject }, oNodes );
 
 			// remplace l'evenement eOnSave de l'onglet pour celui de la mise a jour
 			tab.eOnSave = updateTab;
@@ -205,7 +242,7 @@ function contextMenuRename( oItem ){
 		nodeUpdateNode( oNode );
 
 		// enregistrement du projet
-		modelSaveProjectModel( getUrlParameter( 'project' ), oNodes );
+		modelSaveProjectModel( getUrlParameter( 'project' ), { 'name': oInfoProject[ 'name' ], 'desc': oInfoProject[ 'desc' ], 'properties': oPropertiesProject }, oNodes );
 
 	}, 'Annuler', undefined , oItem[ 'text' ] );
 }
@@ -218,7 +255,7 @@ function contextMenuDel( oItem ){
 		nodeDeleteNode( oItem[ 'id' ] );
 
 		// enregistrement du projet
-		modelSaveProjectModel( getUrlParameter( 'project' ), oNodes );
+		modelSaveProjectModel( getUrlParameter( 'project' ), { 'name': oInfoProject[ 'name' ], 'desc': oInfoProject[ 'desc' ], 'properties': oPropertiesProject }, oNodes );
 
 	}, 'Non' );
 }
@@ -286,6 +323,11 @@ $.contextMenu({
 
 				var sIdChildModel = oChildsType[ i ];
 				var oModelItem = modelGetElementById( sIdChildModel );
+				if( oModelItem == null ){
+					console.error( 'Erreur sur le chargement d\'un element du modele' );
+					console.error( sIdChildModel );
+					return;
+				}
 
 				var oResultAdd = {}
 				oResultAdd[ 'parent' ] = Object.assign( {}, oNode );

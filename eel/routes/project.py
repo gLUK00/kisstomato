@@ -18,6 +18,10 @@ def get_create_file_project( data ):
     if "data" not in data:
         data[ "data" ] = []
 
+    # si il n'y a pas de proprietes
+    if "properties" not in data:
+        data[ "properties" ] = {}
+
     # supprime les cles non necessaires
     filename = data[ 'file' ]
     data.pop( 'file', None )
@@ -49,7 +53,7 @@ def get_all_projects():
     for pathProject in config.configuration[ 'projects' ]:
         try:
             sPathProject = pathProject.replace( "{path_base}", config.getPathBase() )
-            with open( sPathProject, 'r' ) as j:
+            with open( sPathProject, 'r', encoding="utf-8" ) as j:
                 oProject = json.loads(j.read())
                 oProject[ 'file' ] = sPathProject
                 oProjects.append( oProject )
@@ -82,25 +86,36 @@ def open_project( filename ):
 
     # ouverture du projet
     oProject = {}
-    with open( filename, 'r' ) as j:
+    with open( filename, 'r', encoding="utf-8" ) as j:
         oProject = json.loads(j.read())
     oData = oProject[ 'data' ]
     oProject.pop( 'data' )
+
+    # si il y a des proprietes
+    oProperties = {}
+    if "properties" in oProject:
+        oProperties = oProject[ "properties" ]
+
+    # recupere le modele
+    oModel = model.getOne( oProject[ 'model' ] )
 
     # determine si le modele a des fichiers javascript
     oJs = []
     for sJsFile in glob.glob( config.getPathBase() + os.sep + 'plugins' + os.sep + 'models' + os.sep + oProject[ 'model' ] + os.sep + 'js' + os.sep + '*.js' ):
         oJs.append( sJsFile.split( os.sep )[ -1 ] )
 
-    return { 'file': filename, 'info': oProject, 'model': model.getOne( oProject[ 'model' ] ), 'data': oData, 'js': oJs }
+    return { 'file': filename, 'info': oProject, 'model': oModel, 'data': oData, 'properties': oProperties, 'js': oJs }
 
 # mise a jour des donnees d'un projet
 @eel.expose
-def update_project( filename, data ):
+def update_project( filename, properties, data ):
 
     oProject = {}
-    with open( filename, 'r' ) as j:
+    with open( filename, 'r', encoding="utf-8" ) as j:
         oProject = json.loads(j.read())
+    oProject[ 'name' ] = properties[ 'name' ]
+    oProject[ 'desc' ] = properties[ 'desc' ]
+    oProject[ 'properties' ] = properties[ 'properties' ]
     oProject[ 'data' ] = data
 
     # enregistrement du fichier
