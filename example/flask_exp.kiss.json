@@ -1,0 +1,103 @@
+{
+    "name": "flask rr",
+    "desc": "mon app rrr",
+    "model": "python_flask",
+    "relatif-path": true,
+    "data": [
+        {
+            "id": "templates",
+            "text": "Templates",
+            "icon": "fa-solid fa-tree",
+            "li_attr": {
+                "readonly": true,
+                "children-type": [
+                    "template",
+                    "directory"
+                ]
+            },
+            "children": [
+                {
+                    "id": "c9b95e91-510f-4181-86c0-05bef5245b29",
+                    "text": "ghgf",
+                    "li_attr": {
+                        "type": "template",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "ghghghg"
+                            }
+                        ]
+                    },
+                    "icon": "fa-solid fa-table-cells-large"
+                }
+            ],
+            "state": {
+                "opened": true
+            }
+        },
+        {
+            "id": "routes",
+            "text": "Routes",
+            "li_attr": {
+                "readonly": true,
+                "children-type": [
+                    "route"
+                ]
+            }
+        },
+        {
+            "id": "parameters",
+            "text": "Param\u00e8tres",
+            "li_attr": {
+                "readonly": true
+            },
+            "children": [
+                {
+                    "id": "helpers",
+                    "text": "Helpers",
+                    "icon": "fa-solid fa-tree",
+                    "li_attr": {
+                        "readonly": true,
+                        "children-type": [
+                            "helper"
+                        ]
+                    }
+                },
+                {
+                    "id": "decorators",
+                    "text": "D\u00e9corateurs",
+                    "icon": "fa-solid fa-tree",
+                    "li_attr": {
+                        "readonly": true,
+                        "children-type": [
+                            "decorator"
+                        ]
+                    },
+                    "children": [
+                        {
+                            "id": "4a08b762-caa1-4f5c-bd32-95767160307f",
+                            "text": "sdfsdf",
+                            "li_attr": {
+                                "type": "decorator",
+                                "items": [
+                                    {
+                                        "id": "desc",
+                                        "value": "sdfsfsdfsf"
+                                    }
+                                ]
+                            },
+                            "icon": "fa-solid fa-table-cells-large"
+                        }
+                    ],
+                    "state": {
+                        "opened": true
+                    }
+                }
+            ]
+        }
+    ],
+    "properties": {
+        "token-validator": true,
+        "secure-decorator": "4a08b762-caa1-4f5c-bd32-95767160307f"
+    }
+}

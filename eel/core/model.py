@@ -21,5 +21,5 @@ def getAll():
 def getOne( modele ):
 
     sPathConfModel = glob.glob( config.getPathBase() + os.sep + 'plugins' + os.sep + 'models' + os.sep + modele + os.sep + 'configuration.json' )[ 0 ]
-    f = open( sPathConfModel )
+    f = open( sPathConfModel, 'r', encoding="utf-8" )
     return json.load(f)

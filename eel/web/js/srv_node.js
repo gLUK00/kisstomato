@@ -217,9 +217,9 @@ function nodeNode2Form( oNode ){
 
 	// recherche de l'element dans le modele
 	var oElement = null;
-	for( var i=0; i<oModel.length; i++ ){
-		if( oNode[ 'li_attr' ][ 'type' ] == oModel[ i ].id ){
-			oElement = Object.assign( {}, oModel[ i ] );
+	for( var i=0; i<oModel[ 'elements' ].length; i++ ){
+		if( oNode[ 'li_attr' ][ 'type' ] == oModel[ 'elements' ][ i ].id ){
+			oElement = Object.assign( {}, oModel[ 'elements' ][ i ] );
 			break;
 		}
 	}

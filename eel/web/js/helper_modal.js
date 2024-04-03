@@ -33,6 +33,45 @@ var fModalFormNo = function(){};
 $( document ).on( "click", "#btnModalFormNo", function(){ fModalFormNo(); } );
 $( document ).on( "click", "#btnModalFormYes", function(){ fModalFormYes(); } );
 
+// evenement de fermeture des modales
+var oStaskModals = [];
+var bNoClose = false;
+$( document ).on( "hide.bs.modal", "#modalQuery,#modalList,#modalMessage,#notifyMessage,#modalShowForm", function(){
+
+	// supprime le dernier enregistrement
+	if( !bNoClose ){
+		oStaskModals.pop();
+	}
+	bNoClose = false;
+
+	// si il reste au moins une modale
+	if( oStaskModals.length > 0 ){
+		let oSaveModal = oStaskModals[ oStaskModals.length - 1 ];
+		$( '#' + oSaveModal.id ).html( oSaveModal.html );
+		$( '#' + oSaveModal.id ).modal('show');
+	}
+} );
+
+// evenement d'ouverture des modales
+$( document ).on( "show.bs.modal", "#modalQuery,#modalList,#modalMessage,#notifyMessage,#modalShowForm", function(){
+
+	// si il y a une modale d'ouverte
+	if( oStaskModals.length > 0 ){
+		let oSaveModal = oStaskModals[ oStaskModals.length - 1 ];
+		oSaveModal.html = $( '#' + oSaveModal.id ).html();
+		bNoClose = true;
+		$( '#' + oSaveModal.id ).modal('hide');
+	}
+
+	// enregistrement de la nouvelle modale
+	oStaskModals.push( { 'id': $( this ).attr( 'id' ), 'html': $( this ).html() } );
+
+	console.log( 'show' );
+	console.log( $( this ) );
+	console.log( $( this ).attr( 'id' ) );
+
+} );
+
 // affichage d'une question yes/no
 function modalShowQuery( sTitle, sQuery, sTitleYes, fYes, sTitleNo, fNo ){
 
@@ -204,6 +243,7 @@ function modalShowForm( sTitle, sTitleYes, fYes, sTitleNo, fNo, oForm, oOptions 
 	var sForm = '';
 	for( var i=0; i<oForm.length; i++ ){
 		var oEle = oForm[ i ];
+		var sIdField = i + '-' + oEle[ 'name' ] + '-' + Math.round( Math.random() * 1000 );
 		if( oEle[ 'type' ] == 'hidden' ){
 			sForm += '<input type="hidden" id="modalShowForm_' + oEle[ 'name' ] + '"' + ( oEle[ 'value' ] != undefined ? ' value="' + oEle[ 'value' ] + '"' : '' ) + '>';
 		}else if( oEle[ 'type' ] == 'string' ){
@@ -226,6 +266,30 @@ function modalShowForm( sTitle, sTitleYes, fYes, sTitleNo, fNo, oForm, oOptions 
 				'<div class="form-check">' +
 					'<input type="checkbox" class="form-check-input" id="modalShowForm_' + oEle[ 'name' ] + '"' + ( oEle[ 'value' ] != undefined && oEle[ 'value' ] ? ' checked="checked"' : '' ) + '>' +
 					'<label for="modalShowForm_' + oEle[ 'name' ] + '" class="form-check-label">' + oEle[ 'title' ] + '</label>' +
+				'</div>' +
+			'</div>';
+		}else if( oEle[ 'type' ] == 'switch' ){
+			sForm += '<div class="mb-3">' +
+				'<div class="form-check form-switch">' +
+					'<input type="checkbox" class="form-check-input" id="modalShowForm_' + oEle[ 'name' ] + '"' + ( oEle[ 'value' ] != undefined && oEle[ 'value' ] ? ' checked="checked"' : '' ) + '>' +
+					'<label for="modalShowForm_' + oEle[ 'name' ] + '" class="form-check-label">' + oEle[ 'title' ] + '</label>' +
+				'</div>' +
+			'</div>';
+		}else if( oEle[ 'type' ] == 'object' ){
+			sForm += '<div class="mb-3">' +
+				'<label for="modalShowForm_' + oEle[ 'name' ] + '" class="form-label">' + oEle[ 'title' ] + '</label>' +
+				'<input type="hidden" id="modalShowForm_' + oEle[ 'name' ] + '" value="' + oEle[ 'value' ] + '">' +
+				'<div style="display:flex">' +
+					'<div style="width:-webkit-fill-available">' +
+						'<div class="object_select_path" id="object_select_modal_' + oEle[ 'name' ] + '">' +
+							( oEle[ 'value' ] == '' ?
+								'' :
+								nodeGetHtmlName( nodeGetNode( oEle[ 'value' ] ) )
+							) +
+						'</div>' +
+					'</div>' +
+					'<div style="width: 50px"><button type="button" refId="' + oEle[ 'name' ] + '" class="btn btn-danger btn-sm object_erase_modal"><i class="fa-solid fa-eraser"></i></button></div>' +
+					'<div><button type="button" refId="' + oEle[ 'name' ] + '" typeObject="' + oEle[ 'filter-type' ] + '" class="btn btn-primary btn-sm object_selector_modal"><i class="fa-solid fa-square-plus"></i></button></div>' +
 				'</div>' +
 			'</div>';
 		}else if( oEle[ 'type' ] == 'set-file' ){
@@ -294,7 +358,8 @@ function modalShowForm( sTitle, sTitleYes, fYes, sTitleNo, fNo, oForm, oOptions 
 		// recuperation des valeurs du formulaire
 		var oData = {};
 		for( var i=0; i<oForm.length; i++ ){
-			if( oForm[ i ][ 'type' ] == 'checkbox' ){
+			//if( oForm[ i ][ 'type' ] == 'checkbox' ){
+			if( [ 'checkbox', 'switch' ].includes( oForm[ i ][ 'type' ] ) ){
 				oData[ oForm[ i ][ 'name' ] ] = $( '#modalShowForm_' + oForm[ i ][ 'name' ] ).is( ':checked' );
 			}else{
 				oData[ oForm[ i ][ 'name' ] ] = $( '#modalShowForm_' + oForm[ i ][ 'name' ] ).val();
@@ -312,3 +377,23 @@ function modalShowForm( sTitle, sTitleYes, fYes, sTitleNo, fNo, oForm, oOptions 
 	
 	oModalForm.show();
 }
+
+// click sur la selection d'un objet
+$( document ).on( "click", ".object_selector_modal", function() {
+	let sRefId = $( this ).attr( 'refId' );
+	let sField = $( this ).attr( 'typeObject' );
+	var { oItems, sKey } = nodeGetListIdHtml( { 'filter-type': sField } );
+	modalShowList( 'Selection d\'un objet', oItems, sKey, function( oItem ){
+		$( '#modalShowForm_' + sRefId ).val( oItem[ 'id' ] );
+		$( '#object_select_modal_' + sRefId ).html( nodeGetHtmlName( nodeGetNode( oItem[ 'id' ] ) ) );
+	} );
+
+} );
+
+// click sur l'effacement de la selection d'un objet
+$( document ).on( "click", ".object_erase_modal", function() {
+	let sRefId = $( this ).attr( 'refId' );
+	$( '#modalShowForm_' + sRefId ).val( '' );
+	$( '#object_select_modal_' + sRefId ).html( '' );
+
+} );
