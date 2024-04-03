@@ -129,7 +129,9 @@ chargement factice
 // affichage des proprietes d'un projet
 $( document ).on( "click", "#properties_project", function( e ) {
 
-	console.log( 'ccccc' );
+	modalShowForm( 'Paramètres du projet', 'Modifier', fYes, 'Annuler', null, [] );
+	
+	console.log( 'ccccc sdfqsdf54qsdf' );
 } );
 
 
