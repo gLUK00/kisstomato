@@ -393,7 +393,14 @@ $( document ).on( "click", ".object_selector_modal", function() {
 // click sur l'effacement de la selection d'un objet
 $( document ).on( "click", ".object_erase_modal", function() {
 	let sRefId = $( this ).attr( 'refId' );
-	$( '#modalShowForm_' + sRefId ).val( '' );
-	$( '#object_select_modal_' + sRefId ).html( '' );
-
+	if( $( '#' + sRefId ).length == 0 ){
+		sRefId = 'modalShowForm_' + sRefId
+	}
+	$( '#' + sRefId ).val( '' );
+	
+	let sHtmlId = '#object_select_modal_' + sRefId;
+	if( $( this ).attr( 'htmlId' ) != undefined ){
+		sHtmlId = $( this ).attr( 'htmlId' );
+	}
+	$( '#' + sHtmlId ).html( '' );
 } );

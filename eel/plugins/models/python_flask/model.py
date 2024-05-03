@@ -3,7 +3,7 @@ def getJsonCreateNewProject( data ):
 
 	data[ 'data' ] = [
 		{ 'id': 'templates', 'text': 'Templates', 'icon': 'fa-solid fa-tree', 'li_attr': { 'readonly': True, 'children-type': [ 'template', 'directory' ] } },
-		{ 'id': 'routes', 'text': 'Routes', 'li_attr': { 'readonly': True, 'children-type': [ 'route' ] } },
+		{ 'id': 'routes', 'text': 'Routes', 'li_attr': { 'readonly': True, 'children-type': [ 'route', 'route-directory' ] } },
 		{ 'id': 'parameters', 'text': 'Paramètres', 'li_attr': { 'readonly': True },
 			"children": [
 				{ 'id': 'helpers', 'text': 'Helpers', 'icon': 'fa-solid fa-tree', 'li_attr': { 'readonly': True, 'children-type': [ 'helper' ] } },

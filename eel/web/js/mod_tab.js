@@ -337,9 +337,11 @@ function refreshTabs(){
 										'<div class="object_select_path" id="object_select_' + sIdField + '" style="background-color:#e9ecef;" disabled>' + nodeGetHtmlName( nodeGetNode( oField.value ) ) + '</div>'
 									) +
 								'</td>' +
-								'<td width="130px" align="right">' +
+								'<td width="130px" align="right" style="display: contents;">' +
 									( oTab.state != 'view' ?
-										'<button type="button" field="' + sIdField + '" class="btn btn-primary btn-sm object_selector">Sélectionner</button>' :
+										'<button type="button" refId="' + sIdField + '" htmlId="object_select_' + sIdField + '" class="btn btn-danger btn-sm object_erase_modal"><i class="fa-solid fa-eraser"></i></button>&nbsp;' +
+										'<button type="button" field="' + sIdField + '" class="btn btn-primary btn-sm object_selector">Sélectionner</button>'
+										:
 										'<button type="button" class="btn btn-secondary btn-sm">Sélectionner</button>'
 									) +
 								'</td>' +
@@ -394,14 +396,14 @@ function refreshTabs(){
 					$( '#' + sIdField ).val( oField.value );
 					//console.log( '#tab-field-' + oTab.id + '-' + oField.id );
 					//console.log( oField.value );
-				}else if( oField.values != undefined && $.inArray( oField.type, [ 'checkbox' ] ) != -1 ){
+				}else if( oField.value != undefined && $.inArray( oField.type, [ 'checkbox' ] ) != -1 ){
 					for( var b=0; b<oField.items.length; b++ ){
 						var oItem = oField.items[ b ];
-						if( $.inArray( oItem.value, oField.values ) != -1 ){
+						if( $.inArray( oItem.value, oField.value ) != -1 ){
 							$( '#' + sIdField + '-' + b ).prop( "checked", true );
 						}
 					}
-				}else if( oField.value != undefined && $.inArray( oField.type, [ 'radio' ] ) != -1 ){
+				}else if( oField.value != undefined && $.inArray( oField.type, [ 'checkbox', 'radio' ] ) != -1 ){
 					for( var b=0; b<oField.items.length; b++ ){
 						var oItem = oField.items[ b ];
 						if( oItem.value == oField.value ){
@@ -463,6 +465,9 @@ $( document ).on( "change", ".icon-color", function() {
 	let sField = $( this ).attr( 'field' );
 	$( '#icon_' + sField + ' > i' ).css( "color", $( this ).val() );
 } );
+
+// efface la selection d'un objet
+
 
 /*
 jQuery.extend(jQuery.fn, {
