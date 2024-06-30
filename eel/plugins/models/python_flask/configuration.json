@@ -1,8 +1,8 @@
 {
 	"title": "Application Python Flask",
 	"elements": [
-		{ "id": "route-directory", "text": "Repertoire", "icon": "fa-solid fa-folder", "children-type": [ "route", "route-directory" ] },
-		{ "id": "route", "text": "Route", "icon": "fa-solid fa-table-cells-large", "children-type": [],
+		{ "id": "route-directory", "text": "Répertoire", "icon": "fa-solid fa-folder", "children-type": [ "route", "route-directory" ] },
+		{ "id": "route", "text": "Route", "icon": "fa-solid fa-code-compare", "children-type": [],
 			"items":[
 				{ "id": "desc", "text": "Description", "type": "text" },
 				{ "id": "uri", "text": "URI", "type": "string" },
@@ -12,6 +12,51 @@
 					{ "text": "HEAD", "value": "head" }
 				] },
 				{ "id": "secure-decorator", "text": "Décorateur de sécurité", "type": "object", "filter-type": "decorator" }
+			]
+		},
+		{ "id": "directory", "text": "Répertoire", "icon": "fa-solid fa-folder", "children-type": [ "directory", "page" ] },
+		{ "id": "content", "text": "Contenu", "icon": "fa-solid fa-file-lines", "children-type": [],
+			"items":[
+				{ "id": "contenu", "text": "contenu", "type": "text" }
+			]
+		},
+		{ "id": "template", "text": "Template", "icon": "fa-brands fa-html5", "children-type": [],
+			"items":[
+				{ "id": "desc", "text": "description", "type": "text" }
+			]
+		},
+		{ "id": "module-package", "text": "Package / répertoire", "icon": "fa-solid fa-box", "children-type": [ "module" ],
+			"items":[
+				{ "id": "desc", "text": "description", "type": "text" }
+			]
+		},
+		{ "id": "module", "text": "Module", "icon": "fa-solid fa-toolbox", "children-type": [],
+			"items":[
+				{ "id": "desc", "text": "description", "type": "text" }
+			],
+			"on-create": {
+				"add": [
+					{ "id": "module_fonction", "text": "Fonctions aa", "readonly": true,
+						"data": [
+							{ "id": "desc", "value": "une description insérée automatiquement" }
+						]
+					}
+				]
+			}
+		},
+		{ "id": "module_fonction", "text": "Fonctions", "icon": "fa-brands fa-stack-overflow", "children-type": [ "fonction" ],
+			"items":[
+				{ "id": "desc", "text": "description", "type": "text" }
+			]
+		},
+		{ "id": "fonction", "text": "Fonction", "icon": "fa-solid fa-trowel-bricks", "children-type": [],
+			"items":[
+				{ "id": "desc", "text": "description", "type": "text" }
+			]
+		},
+		{ "id": "decorator", "text": "Décorateur", "icon": "fa-solid fa-trowel-bricks", "children-type": [],
+			"items":[
+				{ "id": "desc", "text": "description", "type": "text" }
 			]
 		},
 		{ "id": "xxx_route", "text": "XXX Route", "icon": "fa-solid fa-table-cells-large", "children-type": [],
@@ -39,27 +84,6 @@
 				{ "id": "aaa_color", "text": "aaa_color", "type": "color" },
 				{ "id": "aaa_switch", "text": "aaa_switch", "type": "switch" },
 				{ "id": "aaa_range", "text": "aaa_range", "type": "range", "min":0, "max":15 }
-			]
-		},
-		{ "id": "directory", "text": "Repertoire", "icon": "fa-solid fa-folder", "children-type": [ "directory", "page" ] },
-		{ "id": "content", "text": "Contenu", "icon": "fa-solid fa-file-lines", "children-type": [],
-			"items":[
-				{ "id": "contenu", "text": "contenu", "type": "text" }
-			]
-		},
-		{ "id": "template", "text": "Template", "icon": "fa-solid fa-table-cells-large", "children-type": [],
-			"items":[
-				{ "id": "desc", "text": "description", "type": "text" }
-			]
-		},
-		{ "id": "helper", "text": "Helper", "icon": "fa-solid fa-table-cells-large", "children-type": [],
-			"items":[
-				{ "id": "desc", "text": "description", "type": "text" }
-			]
-		},
-		{ "id": "decorator", "text": "Décorateur", "icon": "fa-solid fa-table-cells-large", "children-type": [],
-			"items":[
-				{ "id": "desc", "text": "description", "type": "text" }
 			]
 		}
 	],

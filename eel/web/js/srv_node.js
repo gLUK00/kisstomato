@@ -180,15 +180,30 @@ function nodeAddNode( idParent, sText, oModelItem, oData ){
 		oNodeParent[ 'children' ] = [];
 	}
 
-	var oNewNode = { 'id': generate_uuidv4(), 'text': sText,
+	var sId = generate_uuidv4();
+	var oNewNode = { 'id': sId, 'text': sText,
 		"li_attr": {
 			"type": oModelItem[ 'id' ]
 			//"children-type": oModelItem[ 'children-type' ]
 		} };
 
+	// si il y a des attributs sur le modele, fusion
+	if( oModelItem[ "li_attr" ] != undefined ){
+		for( var sKey in oModelItem[ "li_attr" ] ){
+			oNewNode[ "li_attr" ][ sKey ] = oModelItem[ "li_attr" ][ sKey ];
+		}
+	}
+
 	// si il y a un icon sur le modele
 	if( oModelItem[ 'icon' ] != undefined ){
 		oNewNode[ 'icon' ] = oModelItem[ 'icon' ];
+	}else{
+
+		// recherche l'icone sur le modele
+		var oFindModelItem = modelGetElementById( oModelItem[ 'id' ] );
+		if( oFindModelItem[ 'icon' ] != undefined ){
+			oNewNode[ 'icon' ] = oFindModelItem[ 'icon' ];
+		}
 	}
 
 	// si il y a des donnees
@@ -201,6 +216,33 @@ function nodeAddNode( idParent, sText, oModelItem, oData ){
 
 	// ouvre le parent
 	oNodeParent[ 'state' ] = { "opened": true };
+
+	// si il y a des actions a effectuer sur la creation du nouvelle element
+	if( oModelItem[ 'on-create' ] != undefined ){
+
+		// si il y a des ajouts automatiques
+		if( oModelItem[ 'on-create' ][ 'add' ] != undefined ){
+
+			// pour tous les elements a ajouter
+			for( var i=0; i<oModelItem[ 'on-create' ][ 'add' ].length; i++ ){
+				let oAddItem = oModelItem[ 'on-create' ][ 'add' ][ i ];
+				let oNewNode = { "id": oAddItem[ 'id' ], "li_attr": {} }
+
+				// si c'est un mode en lecture seul
+				if( oAddItem[ 'readonly' ] != undefined ){
+					oNewNode[ 'li_attr' ][ 'readonly' ] = oAddItem[ 'readonly' ];
+				}
+
+				// si il y a des donnees
+				var oNewData = null;
+				if( oAddItem[ 'data' ] != undefined ){
+					oNewData = oAddItem[ 'data' ];
+				}
+
+				nodeAddNode( sId, oAddItem[ 'text' ], oNewNode, oNewData );
+			}
+		}
+	}
 
 	nodeRefreshTreeview();
 }

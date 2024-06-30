@@ -300,19 +300,22 @@ $.contextMenu({
 
 		// determine les types d'enfants du noeud
 		var oChildsType = [];
-		if( oNode.li_attr[ 'type' ] != undefined ){
+		do{
+			if( oNode.li_attr[ 'type' ] != undefined ){
 
-			// recupere l'element du modele correspondant
-			var oModelItem = modelGetElementById( oNode.li_attr[ 'type' ] );
-			if( oModelItem[ 'children-type' ] != undefined && oModelItem[ 'children-type' ].length > 0 ){
-				oChildsType = oModelItem[ 'children-type' ];
+				// recupere l'element du modele correspondant
+				var oModelItem = modelGetElementById( oNode.li_attr[ 'type' ] );
+				if( oModelItem != null && oModelItem[ 'children-type' ] != undefined && oModelItem[ 'children-type' ].length > 0 ){
+					oChildsType = oModelItem[ 'children-type' ];
+					break;
+				}
 			}
 
+			if( oNode.li_attr[ 'children-type' ] != undefined && oNode.li_attr[ 'children-type' ].length > 0 ){
+				oChildsType = oNode.li_attr[ 'children-type' ];
+			}
 
-		}
-		else if( oNode.li_attr[ 'children-type' ] != undefined && oNode.li_attr[ 'children-type' ].length > 0 ){
-			oChildsType = oNode.li_attr[ 'children-type' ];
-		}
+		}while( false );
 
 		// si il y a possibilite de creer des enfants
 		if( oChildsType.length > 0 ){
@@ -369,6 +372,9 @@ $( document ).on( "dblclick", ".jstree-node", function( e ) {
 	var sIdNode = $( this ).attr( 'id' );
 	var oNode = nodeGetNode( sIdNode );
 
+	// ne pas propager l'evenement vers le parent
+	e.stopPropagation();
+
 	// determine si l'element a des proprietes
 	if( oNode[ 'li_attr' ][ 'items' ] == undefined || oNode[ 'li_attr' ][ 'items' ].length == 0 ){
 		return;
@@ -400,15 +406,7 @@ $( document ).on( "dblclick", ".jstree-node", function( e ) {
 
 	} } );
 
-	// ne pas propager l'evenement vers le parent
-	e.stopPropagation();
 } );
-
-/*$( document ).on( "click", ".jstree-node", function() {
-	console.log('uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu');
-	console.log('click', this);
-} );*/
-
 
 $(document).on("contextmenu", ".jstree-node", function(e) {
 	e.preventDefault();
@@ -439,27 +437,3 @@ $('#close_project').on('click', function(e){
 		window.location.href = 'index.html';
 	}, 'Non' );
 });
-
-
-
-/*
-$('#tree').jstree({
-	"core" : {
-		'data' : [
-	   'Simple root node',
-	   {
-		 'text' : 'Root node 2',
-		 'icon': 'fa-solid fa-tree',
-		 'state' : {
-		   'opened' : true,
-		   'selected' : true
-		 },
-		 'children' : [
-		   { 'text' : 'Child 1' },
-		   'Child 2',
-		   { 'text' : 'Child gsdfg dsfg sdfg' },
-		 ]
-	  }
-	]
-	}
-});*/
