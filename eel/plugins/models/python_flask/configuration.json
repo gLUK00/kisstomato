@@ -12,6 +12,25 @@
 					{ "text": "HEAD", "value": "head" }
 				] },
 				{ "id": "secure-decorator", "text": "Décorateur de sécurité", "type": "object", "filter-type": "decorator" }
+			],
+			"on-create": {
+				"add": [
+					{ "id": "routes_parameters", "text": "Paramètres", "readonly": true }
+				]
+			}
+		},
+		{ "id": "routes_parameters", "text": "Paramètres", "icon": "fa-brands fa-galactic-republic", "children-type": [ "parameter" ] },
+		{ "id": "parameter", "text": "Paramètre", "icon": "fa-solid fa-star-half-stroke", "children-type": [],
+			"items":[
+				{ "id": "desc", "text": "Description", "type": "text" },
+				{ "id": "require", "text": "Obligatoire", "type": "switch", "value": true },
+				{ "id": "type", "text": "Type de retour", "type": "list", "items": [
+					{ "text": "Non spécifié / inconnu", "value": "none" },
+					{ "text": "Booléen", "value": "boolean" },
+					{ "text": "Numérique", "value": "number" },
+					{ "text": "Chaîne de caractères", "value": "string" },
+					{ "text": "Json", "value": "json" }
+				] }
 			]
 		},
 		{ "id": "directory", "text": "Répertoire", "icon": "fa-solid fa-folder", "children-type": [ "directory", "page" ] },
@@ -25,18 +44,18 @@
 				{ "id": "desc", "text": "description", "type": "text" }
 			]
 		},
-		{ "id": "module-package", "text": "Package / répertoire", "icon": "fa-solid fa-box", "children-type": [ "module" ],
+		{ "id": "module-package", "text": "Package / répertoire", "icon": "fa-solid fa-toolbox", "children-type": [ "module" ],
 			"items":[
 				{ "id": "desc", "text": "description", "type": "text" }
 			]
 		},
-		{ "id": "module", "text": "Module", "icon": "fa-solid fa-toolbox", "children-type": [],
+		{ "id": "module", "text": "Module", "icon": "fa-solid fa-box", "children-type": [],
 			"items":[
 				{ "id": "desc", "text": "description", "type": "text" }
 			],
 			"on-create": {
 				"add": [
-					{ "id": "module_fonction", "text": "Fonctions aa", "readonly": true,
+					{ "id": "module_fonction", "text": "Fonctions", "readonly": true,
 						"data": [
 							{ "id": "desc", "value": "une description insérée automatiquement" }
 						]
@@ -51,7 +70,38 @@
 		},
 		{ "id": "fonction", "text": "Fonction", "icon": "fa-solid fa-trowel-bricks", "children-type": [],
 			"items":[
-				{ "id": "desc", "text": "description", "type": "text" }
+				{ "id": "desc", "text": "description", "type": "text" },
+				{ "id": "exception", "text": "Peut générer une exception", "type": "switch", "value": false },
+				{ "id": "return", "text": "Type de retour", "type": "list", "items": [
+					{ "text": "Aucun retour", "value": "none" },
+					{ "text": "Booléen", "value": "boolean" },
+					{ "text": "Numérique", "value": "number" },
+					{ "text": "Chaîne de caractères", "value": "string" },
+					{ "text": "Tableau", "value": "array" },
+					{ "text": "Objet", "value": "object" },
+					{ "text": "Fonction", "value": "function" }
+				] }
+			],
+			"on-create": {
+				"add": [
+					{ "id": "fonction_arguments", "text": "Arguments", "readonly": true }
+				]
+			}
+		},
+		{ "id": "fonction_arguments", "text": "Arguments", "icon": "fa-brands fa-galactic-republic", "children-type": [ "argument" ] },
+		{ "id": "argument", "text": "Argument", "icon": "fa-solid fa-star-half-stroke", "children-type": [],
+			"items":[
+				{ "id": "desc", "text": "Description", "type": "text" },
+				{ "id": "require", "text": "Obligatoire", "type": "switch", "value": true },
+				{ "id": "type", "text": "Type de retour", "type": "list", "items": [
+					{ "text": "Non spécifié / inconnu", "value": "none" },
+					{ "text": "Booléen", "value": "boolean" },
+					{ "text": "Numérique", "value": "number" },
+					{ "text": "Chaîne de caractères", "value": "string" },
+					{ "text": "Tableau", "value": "array" },
+					{ "text": "Objet", "value": "object" },
+					{ "text": "Fonction", "value": "function" }
+				] }
 			]
 		},
 		{ "id": "decorator", "text": "Décorateur", "icon": "fa-solid fa-trowel-bricks", "children-type": [],

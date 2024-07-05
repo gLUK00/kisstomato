@@ -400,7 +400,7 @@ $( document ).on( "dblclick", ".jstree-node", function( e ) {
 		oNode[ 'li_attr' ][ 'items' ] = oData;
 
 		// enregistrement du projet
-		modelSaveProjectModel( getUrlParameter( 'project' ), oNodes );
+		modelSaveProjectModel( getUrlParameter( 'project' ), { 'name': oInfoProject[ 'name' ], 'desc': oInfoProject[ 'desc' ], 'properties': oPropertiesProject }, oNodes );
 		
 	}, eOnCancel: function( tab ){
 

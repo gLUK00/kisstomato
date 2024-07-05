@@ -2,3 +2,4 @@
 simple_front/node_modules/**
 eel/venv/**
 *.pyc
+example/**

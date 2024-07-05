@@ -37,8 +37,10 @@ $( document ).on( "click", ".app-btn-set-dir", function(){
 	var idTarget = $( this ).attr( 'idtarget' );
 	var fileTitle = $( this ).attr( 'filetitle' );
 
+	spinnerShow();
 	eel.app_set_dir( fileTitle )( function( path ){
 		$( '#' + idTarget ).val( path );
+		spinnerHide();
 	} );
 
 } );
@@ -82,10 +84,31 @@ function getUrlParameter(sParam) {
 function generate_uuidv4() {
 	var dt = new Date().getTime();
 	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,
-	function( c ) {
-		var rnd = Math.random() * 16;//random number in range 0 to 16
-		rnd = (dt + rnd)%16 | 0;
-		dt = Math.floor(dt/16);
-		return (c === 'x' ? rnd : (rnd & 0x3 | 0x8)).toString(16);
-	});
+		function( c ) {
+			var rnd = Math.random() * 16;//random number in range 0 to 16
+			rnd = (dt + rnd)%16 | 0;
+			dt = Math.floor(dt/16);
+			return (c === 'x' ? rnd : (rnd & 0x3 | 0x8)).toString(16);
+		});
+}
+
+// gestion du spinner de chargement
+$( 'body' ).append( '<div id="spinner" style="display:none !important" class="d-flex justify-content-center"><div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div></div>')
+function spinnerShow(){
+	$( 'body > div' ).each( function(){
+		if( $( this ).attr( 'id' ) == 'spinner' ){
+			$( this ).show();
+		}else{
+			$( this ).hide();
+		}
+	} );
+}
+function spinnerHide(){
+	$( 'body > div' ).each( function(){
+		if( $( this ).attr( 'id' ) == 'spinner' ){
+			$( this ).hide().attr("style", "display: none !important");
+		}else{
+			$( this ).show();
+		}
+	} );
 }

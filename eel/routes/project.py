@@ -113,6 +113,9 @@ def update_project( filename, properties, data ):
     oProject = {}
     with open( filename, 'r', encoding="utf-8" ) as j:
         oProject = json.loads(j.read())
+
+    #print( properties )
+    #print( data )
     oProject[ 'name' ] = properties[ 'name' ]
     oProject[ 'desc' ] = properties[ 'desc' ]
     oProject[ 'properties' ] = properties[ 'properties' ]

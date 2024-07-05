@@ -20,6 +20,37 @@ class GenHTML:
         return self.values[ 'title' ]
 
 # generation du code Flask
+def generateFlaskCode2( oData ):
+    sRapport = 'Le rapport de génération\n\n'
+    try:
+
+        # supprime et creer le repertoire temporaire
+        sDirTemp = oData[ 'dir-temp' ]
+        if os.path.isdir( sDirTemp ):
+            shutil.rmtree( sDirTemp )
+        os.makedirs( sDirTemp, mode = 0o777 )
+
+        # creation du repertoire de sortie, si inexistant
+
+        # todo : copie des fichiers de bases
+        # les assets de kisstomato : bootstrap, fontawesome, jquery
+
+
+        # merge le repertoire temporaire avec la sortie
+        # pour requirements.txt faire une fusion
+
+        sRapport += ''
+
+    except Exception as e:
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        print("------ ERROR ------")
+        print(str( e ))
+        print((exc_type, fname, exc_tb.tb_lineno))
+
+    return sRapport
+
+# generation du code Flask
 def generateFlaskCode( oData ):
     sRapport = 'Le rapport de génération\n\n'
     try:
@@ -84,7 +115,7 @@ def generateFlaskCode( oData ):
                 sResult += 'creation rep : ' + sDirCreate + '\n'
                 os.makedirs( sDirCreate, mode = 0o777 )
 
-                # si il y a des sous repertoire
+                # si il y a des sous elements
                 if 'children' in oNode and len( oNode[ 'children' ] ) > 0:
                     sResult += fCreate( oNode, sDirCreate )
 

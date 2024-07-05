@@ -122,8 +122,10 @@ $( document ).on( "click", ".tabSave", function() {
 		var oField = oTab.form[ a ];
 		var sIdField = 'tab-field-' + oTab.id + '-' + oField.id;
 
-		if( [ 'string', 'text', 'color', 'switch', 'range', 'list', 'object' ].includes( oField.type ) ){
+		if( [ 'string', 'text', 'color', 'range', 'list', 'object' ].includes( oField.type ) ){
 			oField.value = $( '#' + sIdField ).val();
+		}else if( oField.type == 'switch' ){
+			oField.value = $( '#' + sIdField ).is( ':checked' );
 		}else if( oField.type == 'checkbox' ){
 			oField.value = [];
 			for( var b=0; b<oField.items.length; b++ ){

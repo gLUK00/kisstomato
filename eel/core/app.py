@@ -11,15 +11,11 @@ else:
 
 from core import config
 
-def _initRootTk():
-    global root
-    root = tk.Tk()
-    root.wm_withdraw()
-_initRootTk()
-
 # affichage de la fenetre d'enregistrement sous
 def saveAs( text, ext, initialfile ):
-    global root
+    root = Tk()
+    root.withdraw()
+    root.wm_attributes('-topmost', 1)
 
     filename = filedialog.asksaveasfilename(initialdir=config.getPathBase(),
         defaultextension='.' + ext,
@@ -27,33 +23,36 @@ def saveAs( text, ext, initialfile ):
         filetypes=[ (text,"." + ext) ]
     )
 
-    root.destroy()
-    _initRootTk()
+    root.update()
 
     return filename
 
 # affichage de la fenetre de selection d'un repertoire
 def setDir( text ):
-    global root
+
+    root = Tk()
+    root.withdraw()
+    root.wm_attributes('-topmost', 1)
 
     dirName = filedialog.askdirectory(initialdir=text)
 
-    root.destroy()
-    _initRootTk()
+    root.update()
 
     return dirName
 
 # affichage de la fenetre de selection d'un fichier
 def setFile( text, ext ):
-    global root
+    
+    root = Tk()
+    root.withdraw()
+    root.wm_attributes('-topmost', 1)
 
     filename = filedialog.askopenfilename(initialdir=config.getPathBase(),
         defaultextension='.' + ext,
         filetypes=[ (text,"." + ext) ]
     )
 
-    root.destroy()
-    _initRootTk()
+    root.update()
 
     return filename
 
