@@ -109,6 +109,11 @@
 				{ "id": "desc", "text": "description", "type": "text" }
 			]
 		},
+		{ "id": "script", "text": "Script", "icon": "fa-solid fa-scroll", "children-type": [],
+			"items":[
+				{ "id": "desc", "text": "description", "type": "text" }
+			]
+		},
 		{ "id": "xxx_route", "text": "XXX Route", "icon": "fa-solid fa-table-cells-large", "children-type": [],
 			"items":[
 				{ "id": "desc", "text": "titre", "type": "text" },

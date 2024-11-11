@@ -1,0 +1,7 @@
+flasgger==0.9.7.1
+Flask==3.0.3
+Flask-APScheduler==1.13.3
+Flask-Cors==4.0.1
+# kisstomato-addons-start-user-code-kisstomato
+hjkghjkghjk
+# kisstomato-addons-stop-user-code-kisstomato

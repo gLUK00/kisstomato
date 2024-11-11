@@ -38,7 +38,7 @@ $( document ).on( "click", "#gen-code", function() {
 		eel.plugin_exec_method_model( oInfoProject[ 'model' ], 'generation', 'generateFlaskCode', oData )( function( result ){
 
 			// affichage du rapport de generation, asynchrone
-			console.log( 'js generateFlaskCode aaaa' );
+			console.log( 'plugin_exec_method_model js generateFlaskCode aaaa' );
 			console.log( oData );
 			console.log( result );
 

@@ -1,0 +1,85 @@
+{
+    "name": "fl",
+    "desc": "jkhjkh",
+    "model": "python_flask",
+    "relatif-path": true,
+    "data": [
+        {
+            "id": "templates",
+            "text": "Templates",
+            "icon": "fa-solid fa-book",
+            "li_attr": {
+                "readonly": true,
+                "children-type": [
+                    "template",
+                    "directory"
+                ]
+            }
+        },
+        {
+            "id": "routes",
+            "text": "Routes",
+            "icon": "fa-brands fa-hubspot",
+            "li_attr": {
+                "readonly": true,
+                "children-type": [
+                    "route",
+                    "route-directory"
+                ]
+            }
+        },
+        {
+            "id": "modules",
+            "text": "Modules",
+            "icon": "fa-solid fa-cubes",
+            "li_attr": {
+                "readonly": true,
+                "children-type": [
+                    "module-package"
+                ]
+            }
+        },
+        {
+            "id": "decorators",
+            "text": "D\u00e9corateurs",
+            "icon": "fa-brands fa-stack-overflow",
+            "li_attr": {
+                "readonly": true,
+                "children-type": [
+                    "decorator"
+                ]
+            }
+        },
+        {
+            "id": "scripts",
+            "text": "Scripts",
+            "icon": "fa-solid fa-scroll",
+            "li_attr": {
+                "readonly": true,
+                "children-type": [
+                    "script"
+                ]
+            },
+            "children": [
+                {
+                    "id": "866d2ae6-425c-405c-bc61-a95455c87947",
+                    "text": "importation",
+                    "li_attr": {
+                        "type": "script",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "Batch d'importation de l'historique des transactions"
+                            }
+                        ]
+                    },
+                    "icon": "fa-solid fa-scroll"
+                }
+            ],
+            "state": {
+                "opened": true
+            }
+        }
+    ],
+    "properties": {}
+}

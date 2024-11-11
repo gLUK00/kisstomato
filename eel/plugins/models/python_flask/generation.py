@@ -21,7 +21,7 @@ class GenHTML:
 
 # generation du code Flask
 def generateFlaskCode2( oData ):
-    sRapport = 'Le rapport de génération\n\n'
+    sRapport = 'Le rapport de génération 2\n\n'
     try:
 
         # supprime et creer le repertoire temporaire
@@ -52,8 +52,14 @@ def generateFlaskCode2( oData ):
 
 # generation du code Flask
 def generateFlaskCode( oData ):
+    sPathPlugin = os.path.dirname( os.path.abspath(__file__) )
     sRapport = 'Le rapport de génération\n\n'
     try:
+
+        # si les parametres doivent etre sauvegardes
+        if "save-params" in oData and oData[ "save-params" ]:
+
+            print( 'enregistrement des parametres' )
 
         # supprime et creer le repertoire temporaire
         sDirTemp = oData[ 'dir-temp' ]
@@ -61,12 +67,21 @@ def generateFlaskCode( oData ):
             shutil.rmtree( sDirTemp )
         os.makedirs( sDirTemp, mode = 0o777 )
 
-        # todo : copie des fichiers de bases
+        # si le repertoire de sortie n'existe pas
+        sDirOut = oData[ 'dir-out' ]
+        if not os.path.isdir( sDirOut ):
+            os.makedirs( sDirOut, mode = 0o777 )
+
+        # copie des fichiers de bases
         # les assets de kisstomato : bootstrap, fontawesome, jquery
+        generator.mergeDirs( sPathPlugin + os.sep + 'templates' + os.sep + 'base', sDirTemp )
+        #shutil.copytree( sPathPlugin + os.sep + 'templates' + os.sep + 'base', sDirTemp )
+
+        sRapport += 'enerator.mergeDirs( ' + sPathPlugin + os.sep + 'templates' + os.sep + 'base' + ', ' + sDirTemp + ' )\n'
 
         #env = Environment(loader=BaseLoader)
-        sPathPlugin = os.path.dirname( os.path.abspath(__file__) )
-        env = Environment( loader=FileSystemLoader( sPathPlugin + os.sep + 'templates' ) )
+        
+        env = Environment( loader=FileSystemLoader( sPathPlugin + os.sep + 'templates' + os.sep + 'html' ) )
 
         #print( sDirTemp )
         #print( env )
@@ -78,7 +93,7 @@ def generateFlaskCode( oData ):
 
         def fCreate( oNodes, sPath ):
             sResult = ''
-            if 'children' in oNodes and len( oNodes[ 'children' ] ) == 0:
+            if not 'children' in oNodes or len( oNodes[ 'children' ] ) == 0:
                 return
             for oNode in oNodes[ 'children' ]:
                 if oNode[ 'li_attr' ][ 'type' ] == 'page':
@@ -107,6 +122,10 @@ def generateFlaskCode( oData ):
 
                     continue
 
+                if oNode[ 'li_attr' ][ 'type' ] == 'script':
+
+                    continue
+
                 if oNode[ 'li_attr' ][ 'type' ] != 'directory':
                     continue
 
@@ -126,19 +145,24 @@ def generateFlaskCode( oData ):
 
         # recupere le noeud "Pages"
         oPages = generator.getNodeById( 'pages', oProject[ 'data' ] )
+        if oPages:
 
-        # creation des pages
-        sRapport += 'Creation temporaire :\n' + fCreate( oPages, sDirTemp ) + '\n\n'
+            # creation des pages
+            sRapport += 'Creation temporaire :\n' + fCreate( oPages, sDirTemp ) + '\n\n'
 
-        # deplacement des assets
-        sRapport += 'Copie des assets :\n' + generator.mergeDirs( sPathPlugin + os.sep + 'assets', sDirTemp )
+        
 
         # merge avec le repertoire cible
-        sRapport += 'Fusion avec l\'existant :\n' + generator.mergeDirs( sDirTemp, oData[ 'dir-out' ], { 'html': { 'start': '<!-- kisstomato-', 'stop': ' -->' } } )
+        sRapport += 'Fusion avec l\'existant :\n' + generator.mergeDirs( sDirTemp, sDirOut,
+            {
+                'html': { 'start': '<!-- kisstomato-', 'stop': ' -->' },
+                './requirements.txt': { 'start': '# kisstomato-', 'stop': '-kisstomato' }
+            }
+        )
 
-
-        #print( oProject )
-        #print( oPages )
+        # merge des fichiers particuliers
+        #generator.mergeFiles( sDirTemp + os.sep + 'requirements.txt', sDirOut + os.sep + 'requirements.txt',
+        #    { 'start': '# kisstomato-', 'stop': '-kisstomato' } )
 
     except Exception as e:
         exc_type, exc_obj, exc_tb = sys.exc_info()
