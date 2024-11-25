@@ -93,7 +93,7 @@
 			"items":[
 				{ "id": "desc", "text": "Description", "type": "text" },
 				{ "id": "require", "text": "Obligatoire", "type": "switch", "value": true },
-				{ "id": "type", "text": "Type de retour", "type": "list", "items": [
+				{ "id": "type", "text": "Type", "type": "list", "items": [
 					{ "text": "Non spécifié / inconnu", "value": "none" },
 					{ "text": "Booléen", "value": "boolean" },
 					{ "text": "Numérique", "value": "number" },
@@ -111,8 +111,15 @@
 		},
 		{ "id": "script", "text": "Script", "icon": "fa-solid fa-scroll", "children-type": [],
 			"items":[
-				{ "id": "desc", "text": "description", "type": "text" }
-			]
+				{ "id": "desc", "text": "description", "type": "text" },
+				{ "id": "print_desc", "text": "Afficher la description au démarrage", "type": "switch", "value": false }
+			],
+			"on-create": {
+				"add": [
+					{ "id": "fonction_arguments", "text": "Arguments", "readonly": true },
+					{ "id": "module_fonction", "text": "Fonctions", "readonly": true }
+				]
+			}
 		},
 		{ "id": "xxx_route", "text": "XXX Route", "icon": "fa-solid fa-table-cells-large", "children-type": [],
 			"items":[

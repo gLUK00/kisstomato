@@ -1,11 +1,12 @@
 import os, sys
 
 """
-{{ o.getDesc() }}
+Batch d'importation de l'historique des transactions
 """
-{% if o.printDescOnStart() %}
-print( "{{ o.getDesc().replace( '"', '\"' ) }}" )
-{% endif %}
+
+
+print( "Batch d'importation de l'historique des transactions" )
+
 
 # kisstomato-imports-start-user-code-kisstomato
 # kisstomato-imports-stop-user-code-kisstomato

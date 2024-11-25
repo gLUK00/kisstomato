@@ -277,7 +277,9 @@ function nodeNode2Form( oNode ){
 			}
 		}
 
-		oElement.items[ i ].value = oItem.value;
+		if( oItem != null ){
+			oElement.items[ i ].value = oItem.value;
+		}
 		oForm.push( oElement.items[ i ] );
 	}
 

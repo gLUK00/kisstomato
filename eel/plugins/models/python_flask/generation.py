@@ -5,6 +5,18 @@ from jinja2 import Environment, PackageLoader, select_autoescape, BaseLoader, Fi
 # importation du CORE
 from core import generator
 
+# referencement du repertoire parent
+currentdir = os.path.dirname(os.path.realpath(__file__))
+parentdir = os.path.dirname(currentdir)
+sys.path.append(parentdir)
+
+from python_flask.classes import *
+
+#from ..python_flask.classes import *
+#from python_flask.classes import *
+#from .classes import *
+# ImportError: attempted relative import with no known parent package
+
 # classe de generation des pages HTML
 class GenHTML:
     def __init__(self, oNode):
@@ -49,6 +61,21 @@ def generateFlaskCode2( oData ):
         print((exc_type, fname, exc_tb.tb_lineno))
 
     return sRapport
+
+# generation d'un fichier
+def _genFileFromTmpl( oNode, sFileTmpl, FileOut, cClass ):
+    sPathPlugin = os.path.dirname( os.path.abspath(__file__) )
+
+    sPathTemplate = ''
+    if sFileTmpl.find( os.sep ) != -1:
+        sPathTemplate = os.sep + sFileTmpl[ : sFileTmpl.find( os.sep ) - 1 ]
+    env = Environment( loader=FileSystemLoader( sPathPlugin + os.sep + 'templates' + sPathTemplate ) )
+
+    template = env.get_template( sFileTmpl )
+    sGenCode = template.render( o=cClass(oNode) )
+
+    with open( FileOut, "w", encoding="utf-8" ) as oFile:
+        oFile.write( sGenCode )
 
 # generation du code Flask
 def generateFlaskCode( oData ):
@@ -124,6 +151,8 @@ def generateFlaskCode( oData ):
 
                 if oNode[ 'li_attr' ][ 'type' ] == 'script':
 
+                    _genFileFromTmpl( oNode, 'script.py', sPath + os.sep + 'scripts' + os.sep + oNode[ 'text' ] + '.py', nodeScript )
+
                     continue
 
                 if oNode[ 'li_attr' ][ 'type' ] != 'directory':
@@ -142,6 +171,15 @@ def generateFlaskCode( oData ):
 
         #print( 'rrrrrrrrrrrrrrrrr' )
         #print( type( oProject[ 'data' ] ) )
+
+        # pour tous les scripts
+        oScripts = generator.getNodeById( 'scripts', oProject[ 'data' ] )
+        if oScripts and len( oScripts[ 'children' ] ) > 0:
+
+            # creation des scripts
+            for oScript in oScripts[ 'children' ]:
+
+                _genFileFromTmpl( oScript, 'script.py', sDirTemp + os.sep + 'scripts' + os.sep + oScript[ 'text' ] + '.py', nodeScript )
 
         # recupere le noeud "Pages"
         oPages = generator.getNodeById( 'pages', oProject[ 'data' ] )

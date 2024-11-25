@@ -1,11 +1,10 @@
 import os, sys
 
 """
-{{ o.getDesc() }}
+bnvbnvbn
 """
-{% if o.printDescOnStart() %}
-print( "{{ o.getDesc().replace( '"', '\"' ) }}" )
-{% endif %}
+
+
 
 # kisstomato-imports-start-user-code-kisstomato
 # kisstomato-imports-stop-user-code-kisstomato
