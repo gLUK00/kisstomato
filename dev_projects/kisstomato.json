@@ -97,7 +97,7 @@
                             "id": "ad62c8f4-49e0-4e9c-bf4b-70db769a1b85",
                             "text": "Arguments",
                             "li_attr": {
-                                "type": "fonction_arguments",
+                                "type": "app_arguments",
                                 "readonly": true
                             },
                             "icon": "fa-brands fa-galactic-republic",
@@ -164,7 +164,7 @@
                                             "id": "af0a64b9-adac-43fc-ba38-e69b6d651d9b",
                                             "text": "Arguments",
                                             "li_attr": {
-                                                "type": "fonction_arguments",
+                                                "type": "app_arguments",
                                                 "readonly": true
                                             },
                                             "icon": "fa-brands fa-galactic-republic",

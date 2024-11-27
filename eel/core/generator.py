@@ -1,4 +1,4 @@
-import os, glob, shutil, sys, operator
+import os, glob, shutil, sys
 
 from pathlib import Path
 
@@ -20,6 +20,28 @@ def getNodeById( sId, oNode ):
             return oChildSearch
 
     return None
+
+# recupere une liste de node en fonction du type
+def getNodesByTypes( oNode, sTypes ):
+    oTypes = sTypes.split( '/' )
+    #if not 'children' in oNode:
+    #    return []
+    #oNodes = oNode[ 'children' ]
+
+    #if len( oTypes ) == 1:
+    oNodes = oNode
+
+    for sType in oTypes:
+        oNewNodes = []
+        if 'children' in oNodes:
+            for oNode in oNodes[ 'children' ]:
+                if oNode[ 'li_attr' ][ 'type' ] == sType:
+                    oNewNodes.append( oNode )
+        if len( oNewNodes ) == 0:
+            return []
+        oNodes = oNewNodes
+    return oNodes
+
 
 # merge de fichiers
 def mergeFiles( sFileSource, sFileTarget, oTags ):

@@ -1,3 +1,4 @@
+from core import generator
 
 class nodeScript:
     def __init__(self, oNode):
@@ -15,3 +16,11 @@ class nodeScript:
     # determine si la description doit etre affichee au demarrage
     def printDescOnStart(self):
         return 'print_desc' in self.values and self.values[ 'print_desc' ] == True
+    
+    # recupere l'ensemble des arguments
+    def getArgs(self):
+        oArgs = generator.getNodesByTypes( self.node, 'script/app_arguments/argument' )
+
+        print( oArgs )
+
+        return 'rrrrrrrrrrrrr'

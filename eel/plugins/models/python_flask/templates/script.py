@@ -10,5 +10,7 @@ print( "{{ o.getDesc().replace( '"', '\"' ) }}" )
 # kisstomato-imports-start-user-code-kisstomato
 # kisstomato-imports-stop-user-code-kisstomato
 
+{{ o.getArgs() }}
+
 # kisstomato-main-start-user-code-kisstomato
 # kisstomato-main-stop-user-code-kisstomato

@@ -84,11 +84,11 @@
 			],
 			"on-create": {
 				"add": [
-					{ "id": "fonction_arguments", "text": "Arguments", "readonly": true }
+					{ "id": "app_arguments", "text": "Arguments", "readonly": true }
 				]
 			}
 		},
-		{ "id": "fonction_arguments", "text": "Arguments", "icon": "fa-brands fa-galactic-republic", "children-type": [ "argument" ] },
+		{ "id": "app_arguments", "text": "Arguments", "icon": "fa-brands fa-galactic-republic", "children-type": [ "argument" ] },
 		{ "id": "argument", "text": "Argument", "icon": "fa-solid fa-star-half-stroke", "children-type": [],
 			"items":[
 				{ "id": "desc", "text": "Description", "type": "text" },
@@ -116,7 +116,7 @@
 			],
 			"on-create": {
 				"add": [
-					{ "id": "fonction_arguments", "text": "Arguments", "readonly": true },
+					{ "id": "app_arguments", "text": "Arguments", "readonly": true },
 					{ "id": "module_fonction", "text": "Fonctions", "readonly": true }
 				]
 			}
