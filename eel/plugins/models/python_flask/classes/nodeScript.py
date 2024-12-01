@@ -8,6 +8,10 @@ class nodeScript:
         self.values = {}
         for oItem in oNode[ 'li_attr' ][ 'items' ]:
             self.values[ oItem[ 'id' ] ] = oItem[ 'value' ]
+    
+    # recupere le nom
+    def getName(self):
+        return self.node[ 'text' ]
 
     # recupere la description
     def getDesc(self):
@@ -20,7 +24,12 @@ class nodeScript:
     # recupere l'ensemble des arguments
     def getArgs(self):
         oArgs = generator.getNodesByTypes( self.node, 'script/app_arguments/argument' )
+        
+        oResults = []
+        for oArg in oArgs:
+            oResult = { 'name': oArg[ 'text' ] }
+            for oItem in oArg[ 'li_attr' ][ 'items' ]:
+                oResult[ oItem[ 'id' ] ] = oItem[ 'value' ]
+            oResults.append( oResult )
 
-        print( oArgs )
-
-        return 'rrrrrrrrrrrrr'
+        return oResults

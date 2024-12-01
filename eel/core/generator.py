@@ -22,25 +22,40 @@ def getNodeById( sId, oNode ):
     return None
 
 # recupere une liste de node en fonction du type
-def getNodesByTypes( oNode, sTypes ):
+def getNodesByTypes( oNodes, sTypes ):
+    if not type( oNodes ) is list:
+        oNodes = [ oNodes ]
+
     oTypes = sTypes.split( '/' )
     #if not 'children' in oNode:
     #    return []
     #oNodes = oNode[ 'children' ]
 
+    oResults = []
+    
+
     #if len( oTypes ) == 1:
-    oNodes = oNode
+    #oNodes = oNode
 
     for sType in oTypes:
-        oNewNodes = []
-        if 'children' in oNodes:
-            for oNode in oNodes[ 'children' ]:
+
+        # si c'est le derniers noeud
+        if len( oTypes ) == 1:
+            for oNode in oNodes:
                 if oNode[ 'li_attr' ][ 'type' ] == sType:
-                    oNewNodes.append( oNode )
-        if len( oNewNodes ) == 0:
+                    oResults += [ oNode ]
+            return oResults
+        
+        for oNode in oNodes:
+            if oNode[ 'li_attr' ][ 'type' ] == sType and 'children' in oNode:
+                oResults += oNode[ 'children' ]
+        
+        if len( oResults ) == 0:
             return []
-        oNodes = oNewNodes
-    return oNodes
+
+        return getNodesByTypes( oResults, '/'.join( oTypes[ 1 : ] ) )
+
+    return oResults
 
 
 # merge de fichiers

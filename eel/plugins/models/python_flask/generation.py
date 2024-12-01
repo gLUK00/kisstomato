@@ -69,7 +69,7 @@ def _genFileFromTmpl( oNode, sFileTmpl, FileOut, cClass ):
     sPathTemplate = ''
     if sFileTmpl.find( os.sep ) != -1:
         sPathTemplate = os.sep + sFileTmpl[ : sFileTmpl.find( os.sep ) - 1 ]
-    env = Environment( loader=FileSystemLoader( sPathPlugin + os.sep + 'templates' + sPathTemplate ) )
+    env = Environment( loader=FileSystemLoader( sPathPlugin + os.sep + 'templates' + sPathTemplate ), line_statement_prefix='&&' )
 
     template = env.get_template( sFileTmpl )
     sGenCode = template.render( o=cClass(oNode) )
