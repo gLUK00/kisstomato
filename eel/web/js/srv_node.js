@@ -250,12 +250,7 @@ function nodeAddNode( idParent, sText, oModelItem, oData ){
 // affichage du treeview
 function nodeRefreshTreeview(){
 	$('#tree').jstree(true).settings.core.data = oNodes;
-	$('#tree').jstree(true).bind("move_node.jstree", function (e, data) {
-		// data.rslt.o is a list of objects that were moved
-		// Inspect data using your fav dev tools to see what the properties are
-		console.debug( e );
-		console.debug( data );
-	}).refresh();
+	$('#tree').jstree(true).refresh();
 }
 
 // recupere un formulaire a partir d'un noeud et son type
