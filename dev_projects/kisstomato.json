@@ -237,6 +237,47 @@
                     "state": {
                         "opened": true
                     }
+                },
+                {
+                    "id": "d4796f7b-3e29-4e36-9a4a-7d7d6431cff0",
+                    "text": "yyyy",
+                    "li_attr": {
+                        "type": "script",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": ""
+                            },
+                            {
+                                "id": "print_desc",
+                                "value": false
+                            }
+                        ]
+                    },
+                    "icon": "fa-solid fa-scroll",
+                    "children": [
+                        {
+                            "id": "738f2797-6074-4cfb-a161-5f49891ed500",
+                            "text": "Arguments",
+                            "li_attr": {
+                                "type": "app_arguments",
+                                "readonly": true
+                            },
+                            "icon": "fa-brands fa-galactic-republic"
+                        },
+                        {
+                            "id": "aaa5f917-b740-4bf4-9ddc-0268a97ca07f",
+                            "text": "Fonctions",
+                            "li_attr": {
+                                "type": "module_fonction",
+                                "readonly": true
+                            },
+                            "icon": "fa-brands fa-stack-overflow"
+                        }
+                    ],
+                    "state": {
+                        "opened": true
+                    }
                 }
             ],
             "state": {

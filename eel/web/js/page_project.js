@@ -5,11 +5,14 @@ https://www.jstree.com/docs/json/
 */
 
 $( document ).ready( function(){
-	fullScreen();
+	//fullScreen();
 
 	// liaison de l'evenement d'affichage du selecteur d'un objet
 	tabSetShowSelectObject( nodeGetListIdHtml );
 } );
+
+// noeud selctionne
+var oSelectNode = null;
 
 // chargement da la navbar
 var oInfoProject = {};
@@ -371,39 +374,31 @@ $.contextMenu({
 $( document ).on( "click", ".jstree-node", function( e ) {
 	var sIdNode = $( this ).attr( 'id' );
 	var oNode = nodeGetNode( sIdNode );
-
-	console.log( 'ttttttttttttttttttt' );
-	console.debug( sIdNode );
-	console.debug( oNode );
+	var oParent = nodeGetParent( sIdNode );
+	oSelectNode = oNode;
 
 	// ne pas propager l'evenement vers le parent
 	e.stopPropagation();
-
-	// determine si l'element peut etre deplace dans son niveau
-	//var bMove = false;
-
-	//"move-on-parent": true
-
-	
 	
 	// determine si il y a des elements au dessus et au dessous
 	// si il y a plusieurs noeud du meme type au niveau du parent
 	var iCountUp = 0;
 	var iCountDown = 0;
 	var bIdPass = false;
-	for( var i=0; i<oNode.parent.children.length; i++){
-		if( oNode.parent.children[ i ].li_attr[ 'type' ] != oNode.li_attr[ 'type' ] ){
-			continue;
-		}
-		if( oNode.parent.children[ i ].id == sIdNode ){
-			bIdPass = true;
-		}else if( bIdPass ){
-			iCountDown++;
-		}else{
-			iCountUp++;
+	if( oParent != null ){
+		for( var i=0; i<oParent.children.length; i++){
+			if( oParent.children[ i ].li_attr[ 'type' ] != oNode.li_attr[ 'type' ] ){
+				continue;
+			}
+			if( oParent.children[ i ].id == sIdNode ){
+				bIdPass = true;
+			}else if( bIdPass ){
+				iCountDown++;
+			}else{
+				iCountUp++;
+			}
 		}
 	}
-	
 
 	var oModelItem = modelGetElementById( oNode.li_attr[ 'type' ] );
 	var bMove = oModelItem != null && oModelItem[ 'move-on-parent' ] != undefined && oModelItem[ 'move-on-parent' ];
@@ -419,7 +414,21 @@ $( document ).on( "click", ".jstree-node", function( e ) {
 	}else{
 		$( '#btn-up' ).addClass( "disabled" );
 	}
+} );
 
+// deplacement d'un noeud vers le haut
+$( document ).on( "click", "#btn-up", function( e ) {
+	
+
+	var oParent = nodeGetParent( oSelectNode.id );
+	for( var i=0; i<oParent.children.length; i++){
+
+	}
+
+} );
+
+// deplacement d'un noeud vers le bas
+$( document ).on( "click", "#btn-down", function( e ) {
 
 } );
 

@@ -102,26 +102,33 @@ function nodeGetAllNodes(){
 }
 
 // recherche un noeud en fonction de son id
+// avec option de retour du parent
 function nodeGetNode( id, _nodes, oParent ){
 	if( _nodes == undefined ){
 		_nodes = oNodes;
 	}
 	for( var i=0; i<_nodes.length; i++ ){
-		_nodes[ i ].parent = oParent;
+		//_nodes[ i ].parent = oParent;
 		if( oParent != undefined ){
 			//_nodes[ i ][ 'parent' ] = oParent;
 			_oParents[ _nodes[ i ][ 'id' ] ] = oParent;
 		}
 		if( _nodes[ i ].id == id ){
-			return _nodes[ i ];
+			return _nodes[ i ]
 		}else if( _nodes[ i ].children != undefined && _nodes[ i ].children.length > 0 ){
 			var oNode = nodeGetNode( id, _nodes[ i ].children, _nodes[ i ] );
 			if( oNode != null ){
-				return oNode;
+				return oNode
 			}
 		}
 	}
 	return null;
+}
+
+// recherche un noeud parent
+function nodeGetParent( id ){
+	var oParent = _oParents[ id ]
+	return oParent !== undefined ? oParent : null;
 }
 
 // supprime un noeud en fonction de son id
