@@ -367,6 +367,62 @@ $.contextMenu({
 	}
 });
 
+// selection d'un noeud
+$( document ).on( "click", ".jstree-node", function( e ) {
+	var sIdNode = $( this ).attr( 'id' );
+	var oNode = nodeGetNode( sIdNode );
+
+	console.log( 'ttttttttttttttttttt' );
+	console.debug( sIdNode );
+	console.debug( oNode );
+
+	// ne pas propager l'evenement vers le parent
+	e.stopPropagation();
+
+	// determine si l'element peut etre deplace dans son niveau
+	//var bMove = false;
+
+	//"move-on-parent": true
+
+	
+	
+	// determine si il y a des elements au dessus et au dessous
+	// si il y a plusieurs noeud du meme type au niveau du parent
+	var iCountUp = 0;
+	var iCountDown = 0;
+	var bIdPass = false;
+	for( var i=0; i<oNode.parent.children.length; i++){
+		if( oNode.parent.children[ i ].li_attr[ 'type' ] != oNode.li_attr[ 'type' ] ){
+			continue;
+		}
+		if( oNode.parent.children[ i ].id == sIdNode ){
+			bIdPass = true;
+		}else if( bIdPass ){
+			iCountDown++;
+		}else{
+			iCountUp++;
+		}
+	}
+	
+
+	var oModelItem = modelGetElementById( oNode.li_attr[ 'type' ] );
+	var bMove = oModelItem != null && oModelItem[ 'move-on-parent' ] != undefined && oModelItem[ 'move-on-parent' ];
+
+	// activation/desactivation des boutons
+	if( bMove && iCountDown > 0 ){
+		$( '#btn-down' ).removeClass( "disabled" );
+	}else{
+		$( '#btn-down' ).addClass( "disabled" );
+	}
+	if( bMove && iCountUp > 0 ){
+		$( '#btn-up' ).removeClass( "disabled" );
+	}else{
+		$( '#btn-up' ).addClass( "disabled" );
+	}
+
+
+} );
+
 // ouverture d'un noeud sur au double click
 $( document ).on( "dblclick", ".jstree-node", function( e ) {
 	var sIdNode = $( this ).attr( 'id' );

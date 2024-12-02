@@ -109,7 +109,7 @@
 				{ "id": "desc", "text": "description", "type": "text" }
 			]
 		},
-		{ "id": "script", "text": "Script", "icon": "fa-solid fa-scroll", "children-type": [],
+		{ "id": "script", "text": "Script", "icon": "fa-solid fa-scroll", "children-type": [], "move-on-parent": true,
 			"items":[
 				{ "id": "desc", "text": "description", "type": "text" },
 				{ "id": "print_desc", "text": "Afficher la description au démarrage", "type": "switch", "value": false }

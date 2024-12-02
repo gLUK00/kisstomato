@@ -107,6 +107,7 @@ function nodeGetNode( id, _nodes, oParent ){
 		_nodes = oNodes;
 	}
 	for( var i=0; i<_nodes.length; i++ ){
+		_nodes[ i ].parent = oParent;
 		if( oParent != undefined ){
 			//_nodes[ i ][ 'parent' ] = oParent;
 			_oParents[ _nodes[ i ][ 'id' ] ] = oParent;
