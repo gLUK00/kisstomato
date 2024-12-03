@@ -418,19 +418,58 @@ $( document ).on( "click", ".jstree-node", function( e ) {
 
 // deplacement d'un noeud vers le haut
 $( document ).on( "click", "#btn-up", function( e ) {
-	
-
+	var iIndexNode = 0;
+	var iIndexNodeUp = 0;
 	var oParent = nodeGetParent( oSelectNode.id );
 	for( var i=0; i<oParent.children.length; i++){
-
+		if( oParent.children[ i ].id == oSelectNode.id ){
+			iIndexNode = i;
+			break;
+		}
+		iIndexNodeUp = i;
 	}
 
+	// interversion des positions
+	var oNodeSave = Object.assign( {}, oParent.children[ iIndexNode ] )
+	oParent.children[ iIndexNode ] = oParent.children[ iIndexNodeUp ];
+	oParent.children[ iIndexNodeUp ] = oNodeSave;
+
+	endMoveNode( oSelectNode.id );
 } );
 
 // deplacement d'un noeud vers le bas
 $( document ).on( "click", "#btn-down", function( e ) {
+	var iIndexNode = 0;
+	var iIndexNodeDown = 0;
+	var oParent = nodeGetParent( oSelectNode.id );
+	for( var i=0; i<oParent.children.length; i++){
+		if( oParent.children[ i ].id == oSelectNode.id ){
+			iIndexNode = i;
+			iIndexNodeDown = i + 1;
+			break;
+		}
+	}
 
+	// interversion des positions
+	var oNodeSave = Object.assign( {}, oParent.children[ iIndexNode ] )
+	oParent.children[ iIndexNode ] = oParent.children[ iIndexNodeDown ];
+	oParent.children[ iIndexNodeDown ] = oNodeSave;
+
+	endMoveNode( oSelectNode.id );
 } );
+
+// finalisation du mouvement d'un noeud
+function endMoveNode( sIdNode ){
+	nodeRefreshTreeview();
+
+	// enregistrement du projet
+	modelSaveProjectModel( getUrlParameter( 'project' ), { 'name': oInfoProject[ 'name' ], 'desc': oInfoProject[ 'desc' ], 'properties': oPropertiesProject }, oNodes );
+
+	// simulation de click sur le noeud
+	setTimeout( () => { 
+		$( '#' + sIdNode ).click();
+	}, 100 );
+}
 
 // ouverture d'un noeud sur au double click
 $( document ).on( "dblclick", ".jstree-node", function( e ) {

@@ -89,7 +89,7 @@
 			}
 		},
 		{ "id": "app_arguments", "text": "Arguments", "icon": "fa-brands fa-galactic-republic", "children-type": [ "argument" ] },
-		{ "id": "argument", "text": "Argument", "icon": "fa-solid fa-star-half-stroke", "children-type": [],
+		{ "id": "argument", "text": "Argument", "icon": "fa-solid fa-star-half-stroke", "children-type": [], "move-on-parent": true,
 			"items":[
 				{ "id": "desc", "text": "Description", "type": "text" },
 				{ "id": "require", "text": "Obligatoire", "type": "switch", "value": true },
