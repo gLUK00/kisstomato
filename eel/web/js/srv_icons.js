@@ -38,6 +38,9 @@ $( document ).on( "click", ".icon_select", function() {
 
 	// memorisation de l'icone et propagation de l'evenement
 	iconsSelectEvents[ sId ]( sIcon );
+
+	// affichage du nom de l'icon pour information
+	$( '#icon_info_name' ).html( sIcon );
 } );
 
 // filter textuel
@@ -87,7 +90,7 @@ function iconsGetHtmlPicker( sIdDiv, fSelectIconAndColor ){
 	}
 	let sId = makeid();
 	sHtmlIcons = '<div id="' + sIdDiv + '" class="srv_icons" icon_selector="' + sId + '">\
-			Filtrer sur <input class="icon_filter" type="text" icon_selector="' + sId + '"/>\
+			Filtrer sur <input class="icon_filter" type="text" icon_selector="' + sId + '"/> <span id="icon_info_name"></span>\
 			<div class="icon_selector" id="icon_selector_' + sId + '">' + sHtmlIcons + '</div>\
 		</div>';
 

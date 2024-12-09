@@ -1,0 +1,329 @@
+{
+    "name": "pppp",
+    "desc": "klklkl",
+    "model": "kisstomato",
+    "relatif-path": true,
+    "data": [
+        {
+            "id": "roots",
+            "text": "Racines",
+            "icon": "fa-solid fa-cubes",
+            "li_attr": {
+                "readonly": true,
+                "children-type": [
+                    "root"
+                ]
+            },
+            "children": [
+                {
+                    "id": "048c3cc1-a8bb-4424-85ce-c9ff5371a212",
+                    "text": "ggg",
+                    "li_attr": {
+                        "type": "root",
+                        "items": [
+                            {
+                                "id": "icon",
+                                "value": {
+                                    "icon": "th",
+                                    "color": "#db2424"
+                                }
+                            },
+                            {
+                                "id": "desc",
+                                "value": "dgfh dfghfghfg"
+                            },
+                            {
+                                "id": "extension",
+                                "value": "string"
+                            }
+                        ]
+                    },
+                    "icon": "fa-brands fa-html5"
+                },
+                {
+                    "id": "b5fdf0e0-1f8c-44ab-9b9b-fad09f477664",
+                    "text": "jjj",
+                    "li_attr": {
+                        "type": "root",
+                        "items": [
+                            {
+                                "id": "icon",
+                                "value": {
+                                    "icon": "th",
+                                    "color": "#db2424"
+                                }
+                            },
+                            {
+                                "id": "desc",
+                                "value": "dgfh dfghfghfg"
+                            }
+                        ]
+                    },
+                    "icon": "fa-brands fa-html5"
+                },
+                {
+                    "id": "bbead607-ad30-4b05-bd6f-f53e43986194",
+                    "text": "hhhh",
+                    "li_attr": {
+                        "type": "root",
+                        "items": [
+                            {
+                                "id": "icon",
+                                "value": {
+                                    "icon": "th",
+                                    "color": "#db2424"
+                                }
+                            },
+                            {
+                                "id": "desc",
+                                "value": "dgfh dfghfghfg"
+                            }
+                        ]
+                    },
+                    "icon": "fa-brands fa-html5"
+                }
+            ],
+            "state": {
+                "opened": true
+            }
+        },
+        {
+            "id": "elements",
+            "text": "El\u00e9ments",
+            "icon": "fa-solid fa-cubes",
+            "li_attr": {
+                "readonly": true,
+                "children-type": [
+                    "element"
+                ]
+            }
+        },
+        {
+            "id": "properties",
+            "text": "Propri\u00e9t\u00e9s",
+            "icon": "fa-solid fa-cubes",
+            "li_attr": {
+                "readonly": true,
+                "children-type": [
+                    "property"
+                ]
+            }
+        },
+        {
+            "id": "classes",
+            "text": "Classe",
+            "icon": "fa-solid fa-cubes",
+            "li_attr": {
+                "readonly": true,
+                "children-type": [
+                    "classe"
+                ]
+            }
+        },
+        {
+            "id": "templates",
+            "text": "Templates",
+            "icon": "fa-solid fa-book",
+            "li_attr": {
+                "readonly": true,
+                "children-type": [
+                    "template",
+                    "directory_tmpl"
+                ]
+            },
+            "children": [
+                {
+                    "id": "1c9b7a0f-d1ca-4275-8a40-25ae486730fa",
+                    "text": "ooo",
+                    "li_attr": {
+                        "type": "template",
+                        "items": [
+                            {
+                                "id": "icon",
+                                "value": {
+                                    "icon": "",
+                                    "color": "#000000"
+                                }
+                            },
+                            {
+                                "id": "desc",
+                                "value": "mmmm"
+                            },
+                            {
+                                "id": "extension",
+                                "value": "text"
+                            }
+                        ]
+                    },
+                    "icon": "fa-brands fa-html5"
+                },
+                {
+                    "id": "610c84d9-4e47-4155-abca-e4a39aef2de8",
+                    "text": "jkhk",
+                    "li_attr": {
+                        "type": "template",
+                        "items": [
+                            {
+                                "id": "icon",
+                                "value": {
+                                    "icon": "",
+                                    "color": "#000000"
+                                }
+                            },
+                            {
+                                "id": "desc",
+                                "value": ""
+                            },
+                            {
+                                "id": "extension",
+                                "value": "text"
+                            }
+                        ]
+                    },
+                    "icon": "fa-brands fa-html5"
+                },
+                {
+                    "id": "b854dc92-8b8d-411d-96f5-d8ee769f5756",
+                    "text": "hhhh",
+                    "li_attr": {
+                        "type": "template",
+                        "items": [
+                            {
+                                "id": "icon",
+                                "value": {
+                                    "icon": "node-js",
+                                    "color": "#000000"
+                                }
+                            },
+                            {
+                                "id": "desc",
+                                "value": "n;:n,;:;"
+                            },
+                            {
+                                "id": "extension",
+                                "value": "text"
+                            }
+                        ]
+                    },
+                    "icon": "fa-brands fa-html5"
+                },
+                {
+                    "id": "dbb6cb91-7071-4176-be6e-6615d53ed36f",
+                    "text": "mm",
+                    "li_attr": {
+                        "type": "directory_tmpl"
+                    },
+                    "icon": "fa-solid fa-folder"
+                },
+                {
+                    "id": "eba1d80e-a470-4275-bda7-3c07d74dff5a",
+                    "text": "tt",
+                    "li_attr": {
+                        "type": "directory_tmpl"
+                    },
+                    "icon": "fa-solid fa-folder",
+                    "children": [
+                        {
+                            "id": "b628f489-bd83-4788-ba44-f0b87379bbd4",
+                            "text": "klklk",
+                            "li_attr": {
+                                "type": "template",
+                                "items": [
+                                    {
+                                        "id": "icon",
+                                        "value": {
+                                            "icon": "",
+                                            "color": "#000000"
+                                        }
+                                    },
+                                    {
+                                        "id": "desc",
+                                        "value": ""
+                                    },
+                                    {
+                                        "id": "extension",
+                                        "value": ""
+                                    }
+                                ]
+                            },
+                            "icon": "fa-brands fa-html5"
+                        },
+                        {
+                            "id": "f778cd34-3422-41c8-9778-e37849948b48",
+                            "text": "hhhh",
+                            "li_attr": {
+                                "type": "template",
+                                "items": [
+                                    {
+                                        "id": "icon",
+                                        "value": {
+                                            "icon": "",
+                                            "color": "#000000"
+                                        }
+                                    },
+                                    {
+                                        "id": "desc",
+                                        "value": "jjjj"
+                                    },
+                                    {
+                                        "id": "extension",
+                                        "value": "ggg"
+                                    }
+                                ]
+                            },
+                            "icon": "fa-brands fa-html5"
+                        }
+                    ],
+                    "state": {
+                        "opened": true
+                    }
+                }
+            ],
+            "state": {
+                "opened": true
+            }
+        },
+        {
+            "id": "javascripts",
+            "text": "Javascripts",
+            "icon": "fa-solid fa-book",
+            "li_attr": {
+                "readonly": true,
+                "children-type": [
+                    "javascript"
+                ]
+            },
+            "children": [
+                {
+                    "id": "59b29163-ecb1-4f5b-bff4-0585c672edc0",
+                    "text": "jjjj",
+                    "li_attr": {
+                        "type": "javascript",
+                        "items": [
+                            {
+                                "id": "icon",
+                                "value": {
+                                    "icon": "",
+                                    "color": "#000000"
+                                }
+                            },
+                            {
+                                "id": "desc",
+                                "value": ""
+                            },
+                            {
+                                "id": "extension",
+                                "value": ""
+                            }
+                        ]
+                    },
+                    "icon": "fa-brands fa-node-js"
+                }
+            ],
+            "state": {
+                "opened": true
+            }
+        }
+    ],
+    "properties": {}
+}
