@@ -303,7 +303,7 @@
                             {
                                 "id": "icon",
                                 "value": {
-                                    "icon": "",
+                                    "icon": "algolia",
                                     "color": "#000000"
                                 }
                             },

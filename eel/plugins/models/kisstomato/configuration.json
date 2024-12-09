@@ -18,7 +18,7 @@
 			]
 		},
 		{ "id": "directory_tmpl", "text": "Répertoire", "icon": "fa-solid fa-folder", "children-type": [ "directory_tmpl", "template" ], "move-on-parent": true },
-		{ "id": "javascript", "text": "Javascript", "icon": "fa fa-node-js", "children-type": [], "move-on-parent": true,
+		{ "id": "javascript", "text": "Javascript", "icon": "fa-brands fa-node-js", "children-type": [], "move-on-parent": true,
 			"items":[
 				{ "id": "icon", "text": "Icone", "type": "icon" },
 				{ "id": "desc", "text": "Description", "type": "text" },

@@ -301,16 +301,22 @@ function refreshTabs(){
 					var sCpIdField = sIdField;
 					sForm +=  '<div class="mb-3">' +
 						'<label class="form-label">' + oField.text + '</label>' +
-						'<table width="200px">' +
+						'<table>' +
 							'<tr>' +
-								'<td style="width:200px">' +
+								'<td style="width:70px">' +
 									'<div class="icon_selected" id="icon_' + sIdField + '">' +
 										( oField.value != undefined && oField.value.icon != '' ? iconsGetHtml( oField.value.icon, oField.value.color ) : '' ) +
 									'</div>' +
 									'<input type="hidden" id="icon_value_' + sIdField + '" value="' + ( oField.value != undefined ? oField.value.icon : '' ) + '">' +
+									'<input type="hidden" id="icon_style_' + sIdField + '" value="' + ( oField.value != undefined && oField.value.style != undefined ? oField.value.style : '' ) + '">' +
 								'</td>' +
-								'<td style="width:200px">' +
+								'<td style="width:70px">' +
 									'<input type="color" class="form-control form-control-color icon-color" field="' + sIdField + '" id="icon_color_' + sIdField + '" value="' + ( oField.value != undefined ? oField.value.color : '' ) + '" title="Choisir la couleur">' +
+								'</td>' +
+								'<td>' +
+									'<div id="div_style_icon_' + sCpIdField + '">' +
+										( oField.value != undefined && oField.value.icon != '' ? iconsGetHtmlStyle( oField.value.icon, oField.value.style ) : '' ) +
+									'</div>' +
 								'</td>' +
 							'</tr>' +
 						'</table>' +
@@ -325,6 +331,9 @@ function refreshTabs(){
 							if( sColor != '' ){
 								$( '#icon_' + sCpIdField + ' > i' ).css( 'color', sColor );
 							}
+
+							// mise a jour des styles
+							$( '#div_style_icon_' + sCpIdField ).html( iconsGetHtmlStyle( icon, null ) );
 						} ) +
 					'</div>';
 				}else if( oField.type == 'object' ){

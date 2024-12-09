@@ -28,7 +28,12 @@ $( document ).ready( function(){
 	document.styleSheets[0].insertRule('.icon_selector > div:hover {\
 			background-color: lightblue;\
 		}', 0);
+	document.styleSheets[0].insertRule('.icon_style {\
+			margin-left: 10px;\
+		}', 0);
 } );
+
+
 
 // selection d'un icone
 var iconsSelectEvents = {};
@@ -105,3 +110,24 @@ function iconsGetHtml( sIcon, sColor ){
 	var oIcon = iconsGetOne( sIcon );
 	return '<i class="fa-' + oIcon[ 'styles' ][ '0' ] + ' fa-' + sIcon + ' fa-2xl"' + ( sColor != undefined && sColor != '' ? ' style="color:' + sColor + '"' : '' ) + '></i>';
 }
+
+// recupere le code html de selection du style d'un icon
+function iconsGetHtmlStyle( sIcon, sStyle ){
+	var sHtmlStyles = '';
+	var oIcon = iconsGetOne( sIcon );
+
+	for( var i=0; i<oIcon[ 'styles' ].length; i++ ){
+		if( sStyle == oIcon[ 'styles' ][ i ] || ( [ undefined, null ].includes( sStyle ) && i == 0 ) ){
+			sHtmlStyles += '<button type="button" class="btn btn-primary btn-sm icon_style">' + oIcon[ 'styles' ][ i ] + '</button>';
+		}else{
+			sHtmlStyles += '<button type="button" class="btn btn-outline-primary btn-sm icon_style">' + oIcon[ 'styles' ][ i ] + '</button>';
+		}
+	}
+
+	return sHtmlStyles;
+}
+
+// selection du style
+$( document ).on( "click", ".icon_style", function() {
+
+} );
