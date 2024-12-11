@@ -261,6 +261,30 @@ function nodeRefreshTreeview(){
 	$('#tree').jstree(true).refresh();
 }
 
+// mise a jour des couleurs des noeuds
+function nodeRefreshColor( oNodes ){
+	if( Array.isArray( oNodes ) ){
+		for( var i=0; i<oNodes.length; i++ ){
+			nodeRefreshColor( oNodes[ i ] );
+		}
+		return;
+	}
+
+	// si il y a des enfants
+	if( oNodes[ 'children' ] !== undefined && oNodes[ 'children' ].length > 0 ){
+		nodeRefreshColor( oNodes[ 'children' ] );
+	}
+
+	// si l'element a une propriete de couleur
+	if( oNodes[ 'color' ] == undefined || oNodes[ 'color' ] == '' ){
+		return;
+	}
+
+	// application de la couleur
+	console.log( 'COLOR' );
+	console.log( oNodes );
+}
+
 // recupere un formulaire a partir d'un noeud et son type
 function nodeNode2Form( oNode ){
 	var oForm = [];

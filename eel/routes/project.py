@@ -88,6 +88,15 @@ def open_project( filename ):
     oProject = {}
     with open( filename, 'r', encoding="utf-8" ) as j:
         oProject = json.loads(j.read())
+
+        # recuperation du json du modele selectionne
+        oProject, bUpdate = plugin.exeMethodModel( oProject[ 'model' ], 'model', 'openProject', oProject )
+
+        # si le projet doit etre sauvegarde
+        if bUpdate:
+            with open( filename, "w", encoding="utf-8" ) as up:
+                up.write( json.dumps( oProject, default=config.dumperJson, indent=4 ) )
+
     oData = oProject[ 'data' ]
     oProject.pop( 'data' )
 

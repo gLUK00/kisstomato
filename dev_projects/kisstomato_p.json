@@ -25,7 +25,8 @@
                                 "id": "icon",
                                 "value": {
                                     "icon": "th",
-                                    "color": "#db2424"
+                                    "color": "#db2424",
+                                    "style": ""
                                 }
                             },
                             {
@@ -50,7 +51,8 @@
                                 "id": "icon",
                                 "value": {
                                     "icon": "th",
-                                    "color": "#db2424"
+                                    "color": "#db2424",
+                                    "style": ""
                                 }
                             },
                             {
@@ -71,7 +73,8 @@
                                 "id": "icon",
                                 "value": {
                                     "icon": "th",
-                                    "color": "#db2424"
+                                    "color": "#db2424",
+                                    "style": ""
                                 }
                             },
                             {
@@ -142,7 +145,8 @@
                                 "id": "icon",
                                 "value": {
                                     "icon": "",
-                                    "color": "#000000"
+                                    "color": "#000000",
+                                    "style": ""
                                 }
                             },
                             {
@@ -167,7 +171,8 @@
                                 "id": "icon",
                                 "value": {
                                     "icon": "",
-                                    "color": "#000000"
+                                    "color": "#000000",
+                                    "style": ""
                                 }
                             },
                             {
@@ -192,7 +197,8 @@
                                 "id": "icon",
                                 "value": {
                                     "icon": "node-js",
-                                    "color": "#000000"
+                                    "color": "#000000",
+                                    "style": ""
                                 }
                             },
                             {
@@ -233,7 +239,8 @@
                                         "id": "icon",
                                         "value": {
                                             "icon": "",
-                                            "color": "#000000"
+                                            "color": "#000000",
+                                            "style": ""
                                         }
                                     },
                                     {
@@ -257,8 +264,9 @@
                                     {
                                         "id": "icon",
                                         "value": {
-                                            "icon": "",
-                                            "color": "#000000"
+                                            "icon": "amazon",
+                                            "color": "#cc1919",
+                                            "style": ""
                                         }
                                     },
                                     {
@@ -287,6 +295,7 @@
             "id": "javascripts",
             "text": "Javascripts",
             "icon": "fa-solid fa-book",
+            "color": "#ff1414",
             "li_attr": {
                 "readonly": true,
                 "children-type": [
@@ -303,8 +312,9 @@
                             {
                                 "id": "icon",
                                 "value": {
-                                    "icon": "algolia",
-                                    "color": "#000000"
+                                    "icon": "adn",
+                                    "color": "#ff0000",
+                                    "style": "brands"
                                 }
                             },
                             {
@@ -325,5 +335,6 @@
             }
         }
     ],
-    "properties": {}
+    "properties": {},
+    "version": 2
 }
