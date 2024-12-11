@@ -16,70 +16,22 @@
             },
             "children": [
                 {
-                    "id": "048c3cc1-a8bb-4424-85ce-c9ff5371a212",
-                    "text": "ggg",
+                    "id": "668bc6c5-30b1-465d-a8fc-a83bb39ea8aa",
+                    "text": "dfdf",
                     "li_attr": {
                         "type": "root",
                         "items": [
                             {
                                 "id": "icon",
                                 "value": {
-                                    "icon": "th",
-                                    "color": "#db2424",
+                                    "icon": "",
+                                    "color": "#000000",
                                     "style": ""
                                 }
                             },
                             {
                                 "id": "desc",
-                                "value": "dgfh dfghfghfg"
-                            },
-                            {
-                                "id": "extension",
-                                "value": "string"
-                            }
-                        ]
-                    },
-                    "icon": "fa-brands fa-html5"
-                },
-                {
-                    "id": "b5fdf0e0-1f8c-44ab-9b9b-fad09f477664",
-                    "text": "jjj",
-                    "li_attr": {
-                        "type": "root",
-                        "items": [
-                            {
-                                "id": "icon",
-                                "value": {
-                                    "icon": "th",
-                                    "color": "#db2424",
-                                    "style": ""
-                                }
-                            },
-                            {
-                                "id": "desc",
-                                "value": "dgfh dfghfghfg"
-                            }
-                        ]
-                    },
-                    "icon": "fa-brands fa-html5"
-                },
-                {
-                    "id": "bbead607-ad30-4b05-bd6f-f53e43986194",
-                    "text": "hhhh",
-                    "li_attr": {
-                        "type": "root",
-                        "items": [
-                            {
-                                "id": "icon",
-                                "value": {
-                                    "icon": "th",
-                                    "color": "#db2424",
-                                    "style": ""
-                                }
-                            },
-                            {
-                                "id": "desc",
-                                "value": "dgfh dfghfghfg"
+                                "value": ""
                             }
                         ]
                     },
@@ -327,7 +279,8 @@
                             }
                         ]
                     },
-                    "icon": "fa-brands fa-node-js"
+                    "icon": "fa-brands fa-node-js",
+                    "color": "#ff1414"
                 }
             ],
             "state": {

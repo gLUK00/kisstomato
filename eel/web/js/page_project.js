@@ -55,10 +55,8 @@ eel.open_project( getUrlParameter( 'project' ) )( function( data ){
 			'data' : oNodes
 		}
 	});
-
-	console.log( 'open_project' );
-	console.log( data );
-	console.log( oModel );
+	$('#tree').on('loaded.jstree refresh.jstree', function () { nodeRefreshColor( oNodes ); });
+	
 } );
 
 

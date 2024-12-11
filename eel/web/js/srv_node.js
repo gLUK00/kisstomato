@@ -259,6 +259,7 @@ function nodeAddNode( idParent, sText, oModelItem, oData ){
 function nodeRefreshTreeview(){
 	$('#tree').jstree(true).settings.core.data = oNodes;
 	$('#tree').jstree(true).refresh();
+	//nodeRefreshColor( oNodes );
 }
 
 // mise a jour des couleurs des noeuds
@@ -281,8 +282,9 @@ function nodeRefreshColor( oNodes ){
 	}
 
 	// application de la couleur
-	console.log( 'COLOR' );
-	console.log( oNodes );
+	window.setTimeout( function(){
+		$( '#' + oNodes[ 'id' ] ).find( 'svg' ).css( 'color', oNodes[ 'color' ] );
+	}, 10 );
 }
 
 // recupere un formulaire a partir d'un noeud et son type

@@ -1,6 +1,4 @@
-# importation du CORE
-#from ....core import generator
-
+# numero de version
 _iCurrentVersion = 2
 
 # creation d'un projet
@@ -44,7 +42,6 @@ def openProject( oProject ):
 	# pour tous les elements racines
 	for oNode in oProject[ 'data' ]:
 		rewrite( oNode )
-	#generator.getNodesByTypes( data, 'icon' )
 
 	oProject[ 'version' ] = _iCurrentVersion
 	return oProject, True

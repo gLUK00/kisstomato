@@ -27,5 +27,8 @@
 		}
 		
 	],
-	"properties": []
+	"properties": [
+		{ "id": "impl-getJsonCreateNewProject", "text": "Implémentation de la méthode getJsonCreateNewProject", "type": "switch" },
+		{ "id": "impl-openProject", "text": "Implémentation de la méthode openProject", "type": "switch" }
+	]
 }
