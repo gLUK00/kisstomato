@@ -73,7 +73,7 @@ $( document ).on( "show.bs.modal", "#modalQuery,#modalList,#modalMessage,#notify
 } );
 
 // affichage d'une question yes/no
-function modalShowQuery( sTitle, sQuery, sTitleYes, fYes, sTitleNo, fNo ){
+async function modalShowQuery( sTitle, sQuery, sTitleYes, fYes, sTitleNo, fNo ){
 
 	// determine si la modale existe dans le DOM
 	if( $( '#modalQuery' ).length == 0 ){
@@ -109,7 +109,7 @@ function modalShowQuery( sTitle, sQuery, sTitleYes, fYes, sTitleNo, fNo ){
 }
 
 // selection d'un element d'une liste
-function modalShowList( sTitle, oItems, sKeyShow, fSelect ){
+async function modalShowList( sTitle, oItems, sKeyShow, fSelect ){
 
 	// determine si la modale existe dans le DOM
 	if( $( '#modalList' ).length == 0 ){
@@ -142,7 +142,7 @@ function modalShowList( sTitle, oItems, sKeyShow, fSelect ){
 }
 
 // renseignement d'un champ de saisie texte
-function modalShowInput( sTitle, sTitleYes, fYes, sTitleNo, fNo, sValue ){
+async function modalShowInput( sTitle, sTitleYes, fYes, sTitleNo, fNo, sValue ){
 
 	// determine si la modale existe dans le DOM
 	if( $( '#modalInput' ).length == 0 ){
@@ -185,7 +185,7 @@ function modalShowInput( sTitle, sTitleYes, fYes, sTitleNo, fNo, sValue ){
 }
 
 // affichage d'un message
-function modalShowMessage( sMessage, sStyle, sWidth ){
+async function modalShowMessage( sMessage, sStyle, sWidth ){
 
 	// determine si la modale existe dans le DOM
 	if( $( '#modalMessage' ).length == 0 ){
@@ -206,7 +206,7 @@ function modalShowMessage( sMessage, sStyle, sWidth ){
 }
 
 // affichage d'une notification
-function notifyShowMessage( sTitle, sMessage, sStyle ){
+async function notifyShowMessage( sTitle, sMessage, sStyle ){
 
 	// determine si la modale existe dans le DOM
 	if( $( '#notifyMessage' ).length == 0 ){
@@ -232,7 +232,7 @@ function notifyShowMessage( sTitle, sMessage, sStyle ){
 }
 
 // affichage d'un formulaire
-function modalShowForm( sTitle, sTitleYes, fYes, sTitleNo, fNo, oForm, oOptions ){
+async function modalShowForm( sTitle, sTitleYes, fYes, sTitleNo, fNo, oForm, oOptions ){
 
 	// determine si la modale existe dans le DOM
 	if( $( '#modalShowForm' ).length == 0 ){

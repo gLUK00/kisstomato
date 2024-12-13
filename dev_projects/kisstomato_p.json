@@ -256,31 +256,102 @@
             },
             "children": [
                 {
-                    "id": "59b29163-ecb1-4f5b-bff4-0585c672edc0",
-                    "text": "jjjj",
+                    "id": "961d5b85-ed28-4468-8d8e-7403dd80704f",
+                    "text": "ffffff",
                     "li_attr": {
                         "type": "javascript",
                         "items": [
                             {
-                                "id": "icon",
-                                "value": {
-                                    "icon": "adn",
-                                    "color": "#ff0000",
-                                    "style": "brands"
-                                }
-                            },
-                            {
                                 "id": "desc",
-                                "value": ""
-                            },
-                            {
-                                "id": "extension",
                                 "value": ""
                             }
                         ]
                     },
+                    "color": "#ff1414",
                     "icon": "fa-brands fa-node-js",
-                    "color": "#ff1414"
+                    "children": [
+                        {
+                            "id": "0e7ac6a3-941c-4fe0-9833-a8a2820789e5",
+                            "text": "Sections",
+                            "li_attr": {
+                                "type": "js_sections",
+                                "readonly": true
+                            },
+                            "icon": "fa-brands fa-buffer"
+                        },
+                        {
+                            "id": "1ae7ebf9-4115-40b6-a966-c648bcab8278",
+                            "text": "Fonctions",
+                            "li_attr": {
+                                "type": "fonctions",
+                                "readonly": true
+                            },
+                            "icon": "fa-solid fa-layer-group"
+                        }
+                    ],
+                    "state": {
+                        "opened": true
+                    }
+                },
+                {
+                    "id": "936747be-ada1-486e-92fc-f515739f39bf",
+                    "text": "fgdfgdf",
+                    "li_attr": {
+                        "type": "javascript",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": ""
+                            }
+                        ]
+                    },
+                    "color": "#ff1414",
+                    "icon": "fa-brands fa-node-js",
+                    "children": [
+                        {
+                            "id": "3bdd657d-4488-4518-8ed1-bd261a1efe27",
+                            "text": "Sections",
+                            "li_attr": {
+                                "type": "js_sections",
+                                "readonly": true
+                            },
+                            "color": "#9418e7",
+                            "icon": "fa-brands fa-buffer",
+                            "children": [
+                                {
+                                    "id": "51180cae-54ae-41b8-b74f-203548d1f9ac",
+                                    "text": "fgdfgdf",
+                                    "li_attr": {
+                                        "type": "section",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": ""
+                                            }
+                                        ]
+                                    },
+                                    "color": "#9151b3",
+                                    "icon": "fa-regular fa-bookmark"
+                                }
+                            ],
+                            "state": {
+                                "opened": true
+                            }
+                        },
+                        {
+                            "id": "498680c1-1187-4f56-95db-8178ae6390be",
+                            "text": "Fonctions",
+                            "li_attr": {
+                                "type": "fonctions",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group"
+                        }
+                    ],
+                    "state": {
+                        "opened": true
+                    }
                 }
             ],
             "state": {
