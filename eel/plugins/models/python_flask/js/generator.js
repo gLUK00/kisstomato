@@ -14,7 +14,6 @@ $( document ).on( "click", "#gen-code", function() {
 	oFormItemCheckbox[ 'value' ] = localStorage.getItem( 'flask-generator-save-params' ) !== null && localStorage.getItem( 'flask-generator-save-params' );
 
 	modalShowForm( 'Génération de code', 'Générer', function( oData ){
-		console.log( '--> generation' );
 
 		if( oData[ 'dir-temp' ].trim() == '' ){
 			return 'Le répertoire temporaire ne peut être vide !';
@@ -38,12 +37,6 @@ $( document ).on( "click", "#gen-code", function() {
 		eel.plugin_exec_method_model( oInfoProject[ 'model' ], 'generation', 'generateFlaskCode', oData )( function( result ){
 
 			// affichage du rapport de generation, asynchrone
-			console.log( 'plugin_exec_method_model js generateFlaskCode aaaa' );
-			console.log( oData );
-			console.log( result );
-
-			//alert( result );
-
 			modalShowMessage( result );
 		} );
 
@@ -53,5 +46,4 @@ $( document ).on( "click", "#gen-code", function() {
 		oFormItemOut,
 		oFormItemCheckbox
 	] );
-	console.log( 'yyyyy' );
 } );

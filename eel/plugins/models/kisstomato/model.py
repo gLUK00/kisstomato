@@ -8,12 +8,12 @@ def getJsonCreateNewProject( data ):
 	data[ 'version' ] = _iCurrentVersion
 
 	data[ 'data' ] = [
-		{ 'id': 'roots', 'text': 'Racines', 'icon': 'fa-solid fa-cubes', 'li_attr': { 'readonly': True, 'children-type': [ 'root' ] } },
-		{ 'id': 'elements', 'text': 'Eléments', 'icon': 'fa-solid fa-cubes', 'li_attr': { 'readonly': True, 'children-type': [ 'element' ] } },
-		{ 'id': 'properties', 'text': 'Propriétés', 'icon': 'fa-solid fa-cubes', 'li_attr': { 'readonly': True, 'children-type': [ 'property' ] } },
-		{ 'id': 'classes', 'text': 'Classe', 'icon': 'fa-solid fa-cubes', 'li_attr': { 'readonly': True, 'children-type': [ 'classe' ] } },
-		{ 'id': 'templates', 'text': 'Templates', 'icon': 'fa-solid fa-book', 'li_attr': { 'readonly': True, 'children-type': [ 'template', 'directory_tmpl' ] } },
-		{ 'id': 'javascripts', 'text': 'Javascripts', 'icon': 'fa-solid fa-book', 'color': '"#ff1414', 'li_attr': { 'readonly': True, 'children-type': [ 'javascript' ] } }
+		{ 'id': 'roots', 'text': 'Racines', 'icon': 'fa-solid fa-atom', 'color': '#9c2bf7', 'li_attr': { 'readonly': True, 'children-type': [ 'root' ] } },
+		{ 'id': 'elements', 'text': 'Eléments', 'icon': 'fa-brands fa-deezer', 'color': '#91ec36', 'li_attr': { 'readonly': True, 'children-type': [ 'element' ] } },
+		{ 'id': 'properties', 'text': 'Propriétés', 'icon': 'fa-solid fa-drafting-compass', 'color': '#58dfc4', 'li_attr': { 'readonly': True, 'children-type': [ 'property' ] } },
+		{ 'id': 'classes', 'text': 'Classe', 'icon': 'fa-solid fa-cubes', 'color': '#c47021', 'li_attr': { 'readonly': True, 'children-type': [ 'classe' ] } },
+		{ 'id': 'templates', 'text': 'Templates', 'icon': 'fa-solid fa-file-image', 'color': '#b9c421', 'li_attr': { 'readonly': True, 'children-type': [ 'template', 'directory_tmpl' ] } },
+		{ 'id': 'javascripts', 'text': 'Javascripts', 'icon': 'fa-brands fa-js-square', 'color': '#51bd94', 'li_attr': { 'readonly': True, 'children-type': [ 'javascript' ] } }
 	]
 
 	return data

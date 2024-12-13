@@ -1,51 +1,27 @@
 {
-    "name": "pppp",
-    "desc": "klklkl",
+    "name": "Plugin application flask",
+    "desc": "Plugin application flask",
     "model": "kisstomato",
     "relatif-path": true,
+    "version": 2,
     "data": [
         {
             "id": "roots",
             "text": "Racines",
-            "icon": "fa-solid fa-cubes",
+            "icon": "fa-solid fa-atom",
+            "color": "#9c2bf7",
             "li_attr": {
                 "readonly": true,
                 "children-type": [
                     "root"
                 ]
-            },
-            "children": [
-                {
-                    "id": "668bc6c5-30b1-465d-a8fc-a83bb39ea8aa",
-                    "text": "dfdf",
-                    "li_attr": {
-                        "type": "root",
-                        "items": [
-                            {
-                                "id": "icon",
-                                "value": {
-                                    "icon": "",
-                                    "color": "#000000",
-                                    "style": ""
-                                }
-                            },
-                            {
-                                "id": "desc",
-                                "value": ""
-                            }
-                        ]
-                    },
-                    "icon": "fa-brands fa-html5"
-                }
-            ],
-            "state": {
-                "opened": true
             }
         },
         {
             "id": "elements",
             "text": "El\u00e9ments",
-            "icon": "fa-solid fa-cubes",
+            "icon": "fa-brands fa-deezer",
+            "color": "#91ec36",
             "li_attr": {
                 "readonly": true,
                 "children-type": [
@@ -56,7 +32,8 @@
         {
             "id": "properties",
             "text": "Propri\u00e9t\u00e9s",
-            "icon": "fa-solid fa-cubes",
+            "icon": "fa-solid fa-drafting-compass",
+            "color": "#58dfc4",
             "li_attr": {
                 "readonly": true,
                 "children-type": [
@@ -68,6 +45,7 @@
             "id": "classes",
             "text": "Classe",
             "icon": "fa-solid fa-cubes",
+            "color": "#c47021",
             "li_attr": {
                 "readonly": true,
                 "children-type": [
@@ -78,287 +56,28 @@
         {
             "id": "templates",
             "text": "Templates",
-            "icon": "fa-solid fa-book",
+            "icon": "fa-solid fa-file-image",
+            "color": "#b9c421",
             "li_attr": {
                 "readonly": true,
                 "children-type": [
                     "template",
                     "directory_tmpl"
                 ]
-            },
-            "children": [
-                {
-                    "id": "1c9b7a0f-d1ca-4275-8a40-25ae486730fa",
-                    "text": "ooo",
-                    "li_attr": {
-                        "type": "template",
-                        "items": [
-                            {
-                                "id": "icon",
-                                "value": {
-                                    "icon": "",
-                                    "color": "#000000",
-                                    "style": ""
-                                }
-                            },
-                            {
-                                "id": "desc",
-                                "value": "mmmm"
-                            },
-                            {
-                                "id": "extension",
-                                "value": "text"
-                            }
-                        ]
-                    },
-                    "icon": "fa-brands fa-html5"
-                },
-                {
-                    "id": "610c84d9-4e47-4155-abca-e4a39aef2de8",
-                    "text": "jkhk",
-                    "li_attr": {
-                        "type": "template",
-                        "items": [
-                            {
-                                "id": "icon",
-                                "value": {
-                                    "icon": "",
-                                    "color": "#000000",
-                                    "style": ""
-                                }
-                            },
-                            {
-                                "id": "desc",
-                                "value": ""
-                            },
-                            {
-                                "id": "extension",
-                                "value": "text"
-                            }
-                        ]
-                    },
-                    "icon": "fa-brands fa-html5"
-                },
-                {
-                    "id": "b854dc92-8b8d-411d-96f5-d8ee769f5756",
-                    "text": "hhhh",
-                    "li_attr": {
-                        "type": "template",
-                        "items": [
-                            {
-                                "id": "icon",
-                                "value": {
-                                    "icon": "node-js",
-                                    "color": "#000000",
-                                    "style": ""
-                                }
-                            },
-                            {
-                                "id": "desc",
-                                "value": "n;:n,;:;"
-                            },
-                            {
-                                "id": "extension",
-                                "value": "text"
-                            }
-                        ]
-                    },
-                    "icon": "fa-brands fa-html5"
-                },
-                {
-                    "id": "dbb6cb91-7071-4176-be6e-6615d53ed36f",
-                    "text": "mm",
-                    "li_attr": {
-                        "type": "directory_tmpl"
-                    },
-                    "icon": "fa-solid fa-folder"
-                },
-                {
-                    "id": "eba1d80e-a470-4275-bda7-3c07d74dff5a",
-                    "text": "tt",
-                    "li_attr": {
-                        "type": "directory_tmpl"
-                    },
-                    "icon": "fa-solid fa-folder",
-                    "children": [
-                        {
-                            "id": "b628f489-bd83-4788-ba44-f0b87379bbd4",
-                            "text": "klklk",
-                            "li_attr": {
-                                "type": "template",
-                                "items": [
-                                    {
-                                        "id": "icon",
-                                        "value": {
-                                            "icon": "",
-                                            "color": "#000000",
-                                            "style": ""
-                                        }
-                                    },
-                                    {
-                                        "id": "desc",
-                                        "value": ""
-                                    },
-                                    {
-                                        "id": "extension",
-                                        "value": ""
-                                    }
-                                ]
-                            },
-                            "icon": "fa-brands fa-html5"
-                        },
-                        {
-                            "id": "f778cd34-3422-41c8-9778-e37849948b48",
-                            "text": "hhhh",
-                            "li_attr": {
-                                "type": "template",
-                                "items": [
-                                    {
-                                        "id": "icon",
-                                        "value": {
-                                            "icon": "amazon",
-                                            "color": "#cc1919",
-                                            "style": ""
-                                        }
-                                    },
-                                    {
-                                        "id": "desc",
-                                        "value": "jjjj"
-                                    },
-                                    {
-                                        "id": "extension",
-                                        "value": "ggg"
-                                    }
-                                ]
-                            },
-                            "icon": "fa-brands fa-html5"
-                        }
-                    ],
-                    "state": {
-                        "opened": true
-                    }
-                }
-            ],
-            "state": {
-                "opened": true
             }
         },
         {
             "id": "javascripts",
             "text": "Javascripts",
-            "icon": "fa-solid fa-book",
-            "color": "#ff1414",
+            "icon": "fa-brands fa-js-square",
+            "color": "#51bd94",
             "li_attr": {
                 "readonly": true,
                 "children-type": [
                     "javascript"
                 ]
-            },
-            "children": [
-                {
-                    "id": "961d5b85-ed28-4468-8d8e-7403dd80704f",
-                    "text": "ffffff",
-                    "li_attr": {
-                        "type": "javascript",
-                        "items": [
-                            {
-                                "id": "desc",
-                                "value": ""
-                            }
-                        ]
-                    },
-                    "color": "#ff1414",
-                    "icon": "fa-brands fa-node-js",
-                    "children": [
-                        {
-                            "id": "0e7ac6a3-941c-4fe0-9833-a8a2820789e5",
-                            "text": "Sections",
-                            "li_attr": {
-                                "type": "js_sections",
-                                "readonly": true
-                            },
-                            "icon": "fa-brands fa-buffer"
-                        },
-                        {
-                            "id": "1ae7ebf9-4115-40b6-a966-c648bcab8278",
-                            "text": "Fonctions",
-                            "li_attr": {
-                                "type": "fonctions",
-                                "readonly": true
-                            },
-                            "icon": "fa-solid fa-layer-group"
-                        }
-                    ],
-                    "state": {
-                        "opened": true
-                    }
-                },
-                {
-                    "id": "936747be-ada1-486e-92fc-f515739f39bf",
-                    "text": "fgdfgdf",
-                    "li_attr": {
-                        "type": "javascript",
-                        "items": [
-                            {
-                                "id": "desc",
-                                "value": ""
-                            }
-                        ]
-                    },
-                    "color": "#ff1414",
-                    "icon": "fa-brands fa-node-js",
-                    "children": [
-                        {
-                            "id": "3bdd657d-4488-4518-8ed1-bd261a1efe27",
-                            "text": "Sections",
-                            "li_attr": {
-                                "type": "js_sections",
-                                "readonly": true
-                            },
-                            "color": "#9418e7",
-                            "icon": "fa-brands fa-buffer",
-                            "children": [
-                                {
-                                    "id": "51180cae-54ae-41b8-b74f-203548d1f9ac",
-                                    "text": "fgdfgdf",
-                                    "li_attr": {
-                                        "type": "section",
-                                        "items": [
-                                            {
-                                                "id": "desc",
-                                                "value": ""
-                                            }
-                                        ]
-                                    },
-                                    "color": "#9151b3",
-                                    "icon": "fa-regular fa-bookmark"
-                                }
-                            ],
-                            "state": {
-                                "opened": true
-                            }
-                        },
-                        {
-                            "id": "498680c1-1187-4f56-95db-8178ae6390be",
-                            "text": "Fonctions",
-                            "li_attr": {
-                                "type": "fonctions",
-                                "readonly": true
-                            },
-                            "color": "#f0a728",
-                            "icon": "fa-solid fa-layer-group"
-                        }
-                    ],
-                    "state": {
-                        "opened": true
-                    }
-                }
-            ],
-            "state": {
-                "opened": true
             }
         }
     ],
-    "properties": {},
-    "version": 2
+    "properties": {}
 }

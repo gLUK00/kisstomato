@@ -65,11 +65,6 @@ $( document ).on( "show.bs.modal", "#modalQuery,#modalList,#modalMessage,#notify
 
 	// enregistrement de la nouvelle modale
 	oStaskModals.push( { 'id': $( this ).attr( 'id' ), 'html': $( this ).html() } );
-
-	console.log( 'show' );
-	console.log( $( this ) );
-	console.log( $( this ).attr( 'id' ) );
-
 } );
 
 // affichage d'une question yes/no
@@ -99,11 +94,11 @@ async function modalShowQuery( sTitle, sQuery, sTitleYes, fYes, sTitleNo, fNo ){
 
 	var myModal = new bootstrap.Modal( document.getElementById( 'modalQuery' ), {keyboard: false});
 
-	fModalQueryYes = function(){
+	fModalQueryYes = async function(){
 		myModal.hide();
 		fYes();
 	};
-	fModalQueryNo = fNo !== undefined ? fNo : function(){};
+	fModalQueryNo = fNo !== undefined ? fNo : async function(){};
 	
 	myModal.show();
 }
@@ -168,18 +163,18 @@ async function modalShowInput( sTitle, sTitleYes, fYes, sTitleNo, fNo, sValue ){
 
 	var oModal = document.getElementById( 'modalInput' );
 	var myModal = new bootstrap.Modal( oModal, {keyboard: false});
-	oModal.addEventListener('shown.bs.modal', function(){
+	oModal.addEventListener('shown.bs.modal', async function(){
 		if( sValue !== undefined ){
 			$( '#modal-input' ).val( sValue );
 		}
 		$( '#modal-input' ).focus();
 	})
 
-	fModalInputYes = function(){
+	fModalInputYes = async function(){
 		myModal.hide();
 		fYes( $( '#modal-input' ).val() );
 	};
-	fModalInputNo = fNo !== undefined ? fNo : function(){};
+	fModalInputNo = fNo !== undefined ? fNo : async function(){};
 	
 	myModal.show();
 }

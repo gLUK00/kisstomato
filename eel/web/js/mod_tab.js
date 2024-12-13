@@ -195,7 +195,7 @@ function tabFocusIfExist( sId ){
 }
 
 // ajout d'un onglet
-function tabAddTab( oTab ){
+async function tabAddTab( oTab ){
 	for( var i=0; i<oTabs.length; i++ ){
 		if( oTabs[ i ].focus ){
 			oTabs[ i ].focus = false;
@@ -206,7 +206,7 @@ function tabAddTab( oTab ){
 	refreshTabs();
 }
 
-function refreshTabs(){
+async function refreshTabs(){
 	//$( '#col_right' ).modTab( { tabs: oTabs } );
 
 	// determine l'index du tab affiche au premier plan
@@ -320,7 +320,7 @@ function refreshTabs(){
 								'</td>' +
 							'</tr>' +
 						'</table>' +
-						iconsGetHtmlPicker( 'div_select_icon_' + sCpIdField, function( icon ){
+						iconsGetHtmlPicker( 'div_select_icon_' + sCpIdField, async function( icon ){
 
 							// recupere l'icone
 							$( '#icon_' + sCpIdField ).html( iconsGetHtml( icon ) );
@@ -405,8 +405,6 @@ function refreshTabs(){
 				// attribution des valeurs
 				if( oField.value != undefined && $.inArray( oField.type, [ 'string', 'text', 'int', 'list', 'color', 'range', 'object' ] ) != -1 ){
 					$( '#' + sIdField ).val( oField.value );
-					//console.log( '#tab-field-' + oTab.id + '-' + oField.id );
-					//console.log( oField.value );
 				}else if( oField.value != undefined && $.inArray( oField.type, [ 'checkbox' ] ) != -1 ){
 					for( var b=0; b<oField.items.length; b++ ){
 						var oItem = oField.items[ b ];

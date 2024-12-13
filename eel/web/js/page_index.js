@@ -20,9 +20,6 @@ $( document ).on( "click", "#btn-ref-projet", function() {
 			// enregistrement du nouveau projet
 			eel.set_file_project( oData[ 'file' ].trim(), oData[ 'relatif-path' ] )( function( result ){
 
-				console.log( 'js set_file_project' );
-				console.log( result );
-
 				if( result === true ){
 					refreshProjects();
 				}
@@ -71,9 +68,6 @@ $( document ).on( "click", "#btn-new-projet", function() {
 				// enregistrement du nouveau projet
 				eel.get_create_file_project( oData )( function( result ){
 
-					console.log( 'js get_create_file_project' );
-					console.log( result );
-
 					if( result === true ){
 						refreshProjects();
 					}
@@ -100,8 +94,6 @@ $( document ).on( "click", ".del-project", function() {
 		function( oData ){
 
 			eel.del_project( fileProject, oData[ 'del-file' ] )( function( result ){
-				console.log( 'js del_project' );
-				console.log( result );
 
 				if( result === true ){
 					refreshProjects();

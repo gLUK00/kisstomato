@@ -1,5 +1,4 @@
-import json, os
-
+import json, os, base64
 configuration = None
 
 # recupere le chemin de base de l'application
