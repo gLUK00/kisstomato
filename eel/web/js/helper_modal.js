@@ -65,15 +65,10 @@ $( document ).on( "show.bs.modal", "#modalQuery,#modalList,#modalMessage,#notify
 
 	// enregistrement de la nouvelle modale
 	oStaskModals.push( { 'id': $( this ).attr( 'id' ), 'html': $( this ).html() } );
-
-	console.log( 'show' );
-	console.log( $( this ) );
-	console.log( $( this ).attr( 'id' ) );
-
 } );
 
 // affichage d'une question yes/no
-function modalShowQuery( sTitle, sQuery, sTitleYes, fYes, sTitleNo, fNo ){
+async function modalShowQuery( sTitle, sQuery, sTitleYes, fYes, sTitleNo, fNo ){
 
 	// determine si la modale existe dans le DOM
 	if( $( '#modalQuery' ).length == 0 ){
@@ -99,17 +94,17 @@ function modalShowQuery( sTitle, sQuery, sTitleYes, fYes, sTitleNo, fNo ){
 
 	var myModal = new bootstrap.Modal( document.getElementById( 'modalQuery' ), {keyboard: false});
 
-	fModalQueryYes = function(){
+	fModalQueryYes = async function(){
 		myModal.hide();
 		fYes();
 	};
-	fModalQueryNo = fNo !== undefined ? fNo : function(){};
+	fModalQueryNo = fNo !== undefined ? fNo : async function(){};
 	
 	myModal.show();
 }
 
 // selection d'un element d'une liste
-function modalShowList( sTitle, oItems, sKeyShow, fSelect ){
+async function modalShowList( sTitle, oItems, sKeyShow, fSelect ){
 
 	// determine si la modale existe dans le DOM
 	if( $( '#modalList' ).length == 0 ){
@@ -142,7 +137,7 @@ function modalShowList( sTitle, oItems, sKeyShow, fSelect ){
 }
 
 // renseignement d'un champ de saisie texte
-function modalShowInput( sTitle, sTitleYes, fYes, sTitleNo, fNo, sValue ){
+async function modalShowInput( sTitle, sTitleYes, fYes, sTitleNo, fNo, sValue ){
 
 	// determine si la modale existe dans le DOM
 	if( $( '#modalInput' ).length == 0 ){
@@ -168,24 +163,24 @@ function modalShowInput( sTitle, sTitleYes, fYes, sTitleNo, fNo, sValue ){
 
 	var oModal = document.getElementById( 'modalInput' );
 	var myModal = new bootstrap.Modal( oModal, {keyboard: false});
-	oModal.addEventListener('shown.bs.modal', function(){
+	oModal.addEventListener('shown.bs.modal', async function(){
 		if( sValue !== undefined ){
 			$( '#modal-input' ).val( sValue );
 		}
 		$( '#modal-input' ).focus();
 	})
 
-	fModalInputYes = function(){
+	fModalInputYes = async function(){
 		myModal.hide();
 		fYes( $( '#modal-input' ).val() );
 	};
-	fModalInputNo = fNo !== undefined ? fNo : function(){};
+	fModalInputNo = fNo !== undefined ? fNo : async function(){};
 	
 	myModal.show();
 }
 
 // affichage d'un message
-function modalShowMessage( sMessage, sStyle, sWidth ){
+async function modalShowMessage( sMessage, sStyle, sWidth ){
 
 	// determine si la modale existe dans le DOM
 	if( $( '#modalMessage' ).length == 0 ){
@@ -206,7 +201,7 @@ function modalShowMessage( sMessage, sStyle, sWidth ){
 }
 
 // affichage d'une notification
-function notifyShowMessage( sTitle, sMessage, sStyle ){
+async function notifyShowMessage( sTitle, sMessage, sStyle ){
 
 	// determine si la modale existe dans le DOM
 	if( $( '#notifyMessage' ).length == 0 ){
@@ -232,7 +227,7 @@ function notifyShowMessage( sTitle, sMessage, sStyle ){
 }
 
 // affichage d'un formulaire
-function modalShowForm( sTitle, sTitleYes, fYes, sTitleNo, fNo, oForm, oOptions ){
+async function modalShowForm( sTitle, sTitleYes, fYes, sTitleNo, fNo, oForm, oOptions ){
 
 	// determine si la modale existe dans le DOM
 	if( $( '#modalShowForm' ).length == 0 ){

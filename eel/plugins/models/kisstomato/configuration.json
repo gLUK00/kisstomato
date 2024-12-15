@@ -18,14 +18,54 @@
 			]
 		},
 		{ "id": "directory_tmpl", "text": "Répertoire", "icon": "fa-solid fa-folder", "children-type": [ "directory_tmpl", "template" ], "move-on-parent": true },
-		{ "id": "javascript", "text": "Javascript", "icon": "fa-brands fa-node-js", "children-type": [], "move-on-parent": true,
+		{ "id": "javascript", "text": "Javascript", "icon": "fa-brands fa-node-js", "color": "#ff1414", "children-type": [], "move-on-parent": true,
 			"items":[
-				{ "id": "icon", "text": "Icone", "type": "icon" },
+				{ "id": "desc", "text": "Description", "type": "text" }
+			],
+			"on-create": {
+				"add": [
+					{ "id": "js_sections", "text": "Sections", "readonly": true },
+					{ "id": "fonctions", "text": "Fonctions", "readonly": true }
+				]
+			}
+		},
+		{ "id": "js_sections", "text": "Sections", "icon": "fa-brands fa-buffer", "color": "#9418e7", "children-type": [ "section" ] },
+		{ "id": "section", "text": "Section", "icon": "fa-regular fa-bookmark", "color": "#9151b3", "children-type": [], "move-on-parent": true,
+			"items":[
+				{ "id": "desc", "text": "Description", "type": "text" }
+			]
+		},
+		{ "id": "fonctions", "text": "Fonctions", "icon": "fa-solid fa-layer-group", "color": "#f0a728", "children-type": [ "fonction" ] },
+		{ "id": "fonction", "text": "Fonction", "icon": "fa-regular fa-list-alt", "color": "#ca9f53", "children-type": [], "move-on-parent": true,
+			"items":[
+				{ "id": "desc", "text": "Description", "type": "text" }
+			],
+			"on-create": {
+				"add": [
+					{ "id": "arguments", "text": "Arguments", "readonly": true }
+				]
+			}
+		},
+		{ "id": "arguments", "text": "Arguments", "icon": "fa-solid fa-braille", "color": "#4f9a04", "children-type": [ "argument" ] },
+		{ "id": "argument", "text": "Argument", "icon": "fa-brands fa-centercode", "color": "#5c9226", "children-type": [], "move-on-parent": true,
+			"items":[
 				{ "id": "desc", "text": "Description", "type": "text" },
-				{ "id": "extension", "text": "Extension du fichier", "type": "string" }
+				{ "id": "require", "text": "Obligatoire", "type": "switch", "value": true },
+				{ "id": "type", "text": "Type", "type": "list", "items": [
+					{ "text": "Non spécifié / inconnu", "value": "none" },
+					{ "text": "Booléen", "value": "boolean" },
+					{ "text": "Numérique", "value": "number" },
+					{ "text": "Chaîne de caractères", "value": "string" },
+					{ "text": "Tableau", "value": "array" },
+					{ "text": "Objet", "value": "object" },
+					{ "text": "Fonction", "value": "function" }
+				] }
 			]
 		}
 		
 	],
-	"properties": []
+	"properties": [
+		{ "id": "impl-getJsonCreateNewProject", "text": "Implémentation de la méthode getJsonCreateNewProject", "type": "switch" },
+		{ "id": "impl-openProject", "text": "Implémentation de la méthode openProject", "type": "switch" }
+	]
 }

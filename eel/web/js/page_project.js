@@ -61,10 +61,8 @@ eel.open_project( getUrlParameter( 'project' ) )( function( data ){
 			'data' : oNodes
 		}
 	});
-
-	console.log( 'open_project' );
-	console.log( data );
-	console.log( oModel );
+	$('#tree').on('loaded.jstree ready.jstree refresh.jstree changed.jstree', function () { nodeRefreshColor( oNodes ); });
+	
 } );
 
 
@@ -190,11 +188,9 @@ function updateTab( tab ){
 
 // fonction d'ajout sur le menu contextuel
 function contextMenuAdd( oMenu ){
-	console.log( 'contextMenuAdd iiiiiiiiiiiiiiiiiiiiiiiii' );
-	console.log( oMenu );
 
 	// saisie du nom
-	modalShowInput( 'Nouvel élément : ' + oMenu[ 'item' ][ 'text' ], 'Oui', function( sResult ){
+	modalShowInput( 'Nouvel élément : ' + oMenu[ 'item' ][ 'text' ], 'Oui', async function( sResult ){
 
 		// si pas de contenu
 		if( oMenu[ 'item' ][ 'items' ] == undefined ){
@@ -209,7 +205,7 @@ function contextMenuAdd( oMenu ){
 		}
 
 		// saisie du contenu de l'element
-		var oTab = { id: generate_uuidv4(), text: sResult, state: 'new', form: oMenu[ 'item' ][ 'items' ], options: { parent: oMenu[ 'parent' ] }, eOnSave: function( tab ){
+		var oTab = { id: generate_uuidv4(), text: sResult, state: 'new', form: oMenu[ 'item' ][ 'items' ], options: { parent: oMenu[ 'parent' ] }, eOnSave: async function( tab ){
 
 			var oData = [];
 			for( var i=0; i<tab.form.length; i++ ){
@@ -225,15 +221,12 @@ function contextMenuAdd( oMenu ){
 			// remplace l'evenement eOnSave de l'onglet pour celui de la mise a jour
 			tab.eOnSave = updateTab;
 			
-		}, eOnCancel: function( tab ){
+		}, eOnCancel: async function( tab ){
 
 		} };
 
 		tabAddTab( oTab );
 
-
-		console.log( oMenu );
-		console.log( sResult );
 	}, 'Non' );
 }
 
@@ -258,7 +251,7 @@ function contextMenuRename( oItem ){
 
 // suppression d'un noeud
 function contextMenuDel( oItem ){
-	modalShowQuery( 'Supprimer un élément', 'Voulez vous vraiment supprimer l\' élément <b>' + oItem[ 'text' ] + '</b> ainsi que ses enfants ?', 'Oui', function(){
+	modalShowQuery( 'Supprimer un élément', 'Voulez vous vraiment supprimer l\' élément <b>' + oItem[ 'text' ] + '</b> ainsi que ses enfants ?', 'Oui', async function(){
 		
 		// supprime le noeud
 		nodeDeleteNode( oItem[ 'id' ] );
@@ -365,9 +358,6 @@ $.contextMenu({
 			oItems[ 'rename-element ' ] =  {name: "Renommer", callback: function(){ contextMenuRename( oNode ) }, icon: "fas a-solid fa-pen" };
 			oItems[ 'del-element ' ] =  {name: "Supprimer", callback: function(){ contextMenuDel( oNode ) }, icon: "fas fa-solid fa-eraser" };
 		}
-
-		/*console.log( oNode );
-		console.log( oItems );*/
 
 		return {
 			callback: function(){},

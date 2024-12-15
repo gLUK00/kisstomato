@@ -140,7 +140,7 @@ $( document ).on( "click", ".tabSave", function() {
 				}
 			}
 		}else if( oField.type == 'icon' ){
-			oField.value = { icon: $( '#icon_value_' + sIdField ).val(), color: $( '#icon_color_' + sIdField ).val() };
+			oField.value = { icon: $( '#icon_value_' + sIdField ).val(), color: $( '#icon_color_' + sIdField ).val(), style: $( '#icon_style_' + sIdField ).val() };
 		}
 	}
 
@@ -195,7 +195,7 @@ function tabFocusIfExist( sId ){
 }
 
 // ajout d'un onglet
-function tabAddTab( oTab ){
+async function tabAddTab( oTab ){
 	for( var i=0; i<oTabs.length; i++ ){
 		if( oTabs[ i ].focus ){
 			oTabs[ i ].focus = false;
@@ -206,7 +206,7 @@ function tabAddTab( oTab ){
 	refreshTabs();
 }
 
-function refreshTabs(){
+async function refreshTabs(){
 	//$( '#col_right' ).modTab( { tabs: oTabs } );
 
 	// determine l'index du tab affiche au premier plan
@@ -305,22 +305,22 @@ function refreshTabs(){
 							'<tr>' +
 								'<td style="width:70px">' +
 									'<div class="icon_selected" id="icon_' + sIdField + '">' +
-										( oField.value != undefined && oField.value.icon != '' ? iconsGetHtml( oField.value.icon, oField.value.color ) : '' ) +
+										( oField.value != undefined && oField.value.icon != '' ? iconsGetHtml( oField.value.icon, oField.value.color, oField.value.style ) : '' ) +
 									'</div>' +
 									'<input type="hidden" id="icon_value_' + sIdField + '" value="' + ( oField.value != undefined ? oField.value.icon : '' ) + '">' +
-									'<input type="hidden" id="icon_style_' + sIdField + '" value="' + ( oField.value != undefined && oField.value.style != undefined ? oField.value.style : '' ) + '">' +
+									'<input type="hidden" id="icon_style_' + sIdField + '" value="' + ( oField.value != undefined ? oField.value.style : '' ) + '">' +
 								'</td>' +
 								'<td style="width:70px">' +
 									'<input type="color" class="form-control form-control-color icon-color" field="' + sIdField + '" id="icon_color_' + sIdField + '" value="' + ( oField.value != undefined ? oField.value.color : '' ) + '" title="Choisir la couleur">' +
 								'</td>' +
 								'<td>' +
 									'<div id="div_style_icon_' + sCpIdField + '">' +
-										( oField.value != undefined && oField.value.icon != '' ? iconsGetHtmlStyle( oField.value.icon, oField.value.style ) : '' ) +
+										( oField.value != undefined && oField.value.icon != '' ? iconsGetHtmlStyle( oField.value.icon, oField.value.style, 'icon_style_' + sCpIdField ) : '' ) +
 									'</div>' +
 								'</td>' +
 							'</tr>' +
 						'</table>' +
-						iconsGetHtmlPicker( 'div_select_icon_' + sCpIdField, function( icon ){
+						iconsGetHtmlPicker( 'div_select_icon_' + sCpIdField, async function( icon ){
 
 							// recupere l'icone
 							$( '#icon_' + sCpIdField ).html( iconsGetHtml( icon ) );
@@ -333,7 +333,7 @@ function refreshTabs(){
 							}
 
 							// mise a jour des styles
-							$( '#div_style_icon_' + sCpIdField ).html( iconsGetHtmlStyle( icon, null ) );
+							$( '#div_style_icon_' + sCpIdField ).html( iconsGetHtmlStyle( icon, null, 'icon_style_' + sCpIdField ) );
 						} ) +
 					'</div>';
 				}else if( oField.type == 'object' ){
@@ -405,8 +405,6 @@ function refreshTabs(){
 				// attribution des valeurs
 				if( oField.value != undefined && $.inArray( oField.type, [ 'string', 'text', 'int', 'list', 'color', 'range', 'object' ] ) != -1 ){
 					$( '#' + sIdField ).val( oField.value );
-					//console.log( '#tab-field-' + oTab.id + '-' + oField.id );
-					//console.log( oField.value );
 				}else if( oField.value != undefined && $.inArray( oField.type, [ 'checkbox' ] ) != -1 ){
 					for( var b=0; b<oField.items.length; b++ ){
 						var oItem = oField.items[ b ];
@@ -444,6 +442,7 @@ function refreshTabs(){
 					}else if( oField.type == 'icon' ){
 						$( '#div_select_icon_' + sIdField ).hide();
 						$( '#icon_color_' + sIdField ).prop( "disabled", true );
+						$( '.icon_style[id_target=icon_style_' + sIdField + ']' ).prop( "disabled", true );
 					}
 				}
 			}

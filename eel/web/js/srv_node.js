@@ -202,6 +202,11 @@ function nodeAddNode( idParent, sText, oModelItem, oData ){
 		}
 	}
 
+	// si il a une couleur
+	if( oModelItem[ 'color' ] != undefined ){
+		oNewNode[ 'color' ] = oModelItem[ 'color' ];
+	}
+
 	// si il y a un icon sur le modele
 	if( oModelItem[ 'icon' ] != undefined ){
 		oNewNode[ 'icon' ] = oModelItem[ 'icon' ];
@@ -234,11 +239,17 @@ function nodeAddNode( idParent, sText, oModelItem, oData ){
 			// pour tous les elements a ajouter
 			for( var i=0; i<oModelItem[ 'on-create' ][ 'add' ].length; i++ ){
 				let oAddItem = oModelItem[ 'on-create' ][ 'add' ][ i ];
-				let oNewNode = { "id": oAddItem[ 'id' ], "li_attr": {} }
+				let oNewNodeItem = { "id": oAddItem[ 'id' ], "li_attr": {} }
+
+				// si il a une couleur
+				let oAddModelItem = modelGetElementById( oAddItem[ 'id' ] );
+				if( oAddModelItem[ 'color' ] != undefined ){
+					oNewNodeItem[ 'color' ] = oAddModelItem[ 'color' ];
+				}
 
 				// si c'est un mode en lecture seul
 				if( oAddItem[ 'readonly' ] != undefined ){
-					oNewNode[ 'li_attr' ][ 'readonly' ] = oAddItem[ 'readonly' ];
+					oNewNodeItem[ 'li_attr' ][ 'readonly' ] = oAddItem[ 'readonly' ];
 				}
 
 				// si il y a des donnees
@@ -247,7 +258,7 @@ function nodeAddNode( idParent, sText, oModelItem, oData ){
 					oNewData = oAddItem[ 'data' ];
 				}
 
-				nodeAddNode( sId, oAddItem[ 'text' ], oNewNode, oNewData );
+				nodeAddNode( sId, oAddItem[ 'text' ], oNewNodeItem, oNewData );
 			}
 		}
 	}
@@ -259,6 +270,43 @@ function nodeAddNode( idParent, sText, oModelItem, oData ){
 function nodeRefreshTreeview(){
 	$('#tree').jstree(true).settings.core.data = oNodes;
 	$('#tree').jstree(true).refresh();
+	//nodeRefreshColor( oNodes );
+}
+
+// mise a jour des couleurs des noeuds
+var _bFirstResfreshColor = [];
+async function nodeRefreshColor( oNodes, bFirst ){
+	let bItsFirst = false;
+	if( bFirst === undefined ){
+		_bFirstResfreshColor = [];
+		bItsFirst = true;
+	}
+	if( Array.isArray( oNodes ) ){
+		for( var i=0; i<oNodes.length; i++ ){
+			_bFirstResfreshColor.push.apply( _bFirstResfreshColor, nodeRefreshColor( oNodes[ i ], true ) );
+		}
+	}
+
+	// si il y a des enfants
+	if( oNodes[ 'children' ] !== undefined && oNodes[ 'children' ].length > 0 ){
+		_bFirstResfreshColor.push.apply( _bFirstResfreshColor, nodeRefreshColor( oNodes[ 'children' ], true ) );
+	}
+
+	// si l'element a une propriete de couleur
+	if( oNodes[ 'color' ] !== undefined && oNodes[ 'color' ] != '' ){
+		_bFirstResfreshColor.push( { id: oNodes[ 'id' ], color: oNodes[ 'color' ] })
+	}
+
+	if( !bItsFirst ){
+		return;
+	}
+
+	// application des couleurs
+	window.setTimeout( function(){
+		for( var i=0; i<_bFirstResfreshColor.length; i++ ){
+			$( '#' + _bFirstResfreshColor[ i ][ 'id' ] ).find( 'svg:first' ).css( 'color', _bFirstResfreshColor[ i ][ 'color' ] );
+		}
+	}, 10 );
 }
 
 // recupere un formulaire a partir d'un noeud et son type

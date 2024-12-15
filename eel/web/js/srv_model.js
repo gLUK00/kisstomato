@@ -15,9 +15,6 @@ function modelGetElementById( sId ){
 function modelSaveProjectModel( filename, properties, data, eOnSave ){
 	eel.update_project( filename, properties, data )( function( result ){
 
-		console.log( 'js update_project' );
-		console.log( result );
-
 		if( eOnSave != undefined ){
 			eOnSave();
 		}
