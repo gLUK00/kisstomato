@@ -12,6 +12,15 @@
 	overflow: auto;
 }
 
+#col_sep{
+	border:1px solid red;
+	width: 1px;
+}
+
+#col_right{
+	
+}
+
 #bar_tree{
 	border: 1px solid #d3d3d3;
 	border-radius: 3px;

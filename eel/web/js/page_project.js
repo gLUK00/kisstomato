@@ -5,7 +5,13 @@ https://www.jstree.com/docs/json/
 */
 
 $( document ).ready( function(){
-	//fullScreen();
+
+	// taille de la fenetre
+	let iwidth = window.innerWidth;
+	let iHeight = window.innerHeight;
+	if( iwidth < screen.width && screen.width > iHeight ){
+		window.resizeTo( iHeight, iHeight );
+	}
 
 	// liaison de l'evenement d'affichage du selecteur d'un objet
 	tabSetShowSelectObject( nodeGetListIdHtml );
