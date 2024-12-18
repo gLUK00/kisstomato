@@ -112,9 +112,8 @@ $( document ).on( "click", "#nav-tab > button", function( e ) {
 	$( '#tab-' + sId ).addClass( 'active show' );
 } );
 
-// click sur le bouton "enregistrer"
-$( document ).on( "click", ".tabSave", function() {
-	var sId = $( this ).attr( 'idTab' );
+// applique les valeurs du formulaire aux elements du modele
+function _tabUpdateForm( sId ){
 	var oTab = tabGetTab( sId );
 
 	// recupere les donnees du formulaire
@@ -124,6 +123,14 @@ $( document ).on( "click", ".tabSave", function() {
 
 		if( [ 'string', 'text', 'color', 'range', 'list', 'object' ].includes( oField.type ) ){
 			oField.value = $( '#' + sIdField ).val();
+		}else if( oField.type == 'list-key-val' ){
+			let oList = [];
+			let oKey = $( '#div-lisy-key-val-' + sIdField ).find( '.tab-list-key' );
+			let oVal = $( '#div-lisy-key-val-' + sIdField ).find( '.tab-list-val' );
+			for( var i=0; i<oKey.length; i++ ){
+				oList.push( { 'key': $( oKey[ i ] ).val(), 'value': $( oVal[ i ] ).val() })
+			}
+			oField.value = oList;
 		}else if( oField.type == 'switch' ){
 			oField.value = $( '#' + sIdField ).is( ':checked' );
 		}else if( oField.type == 'checkbox' ){
@@ -143,6 +150,17 @@ $( document ).on( "click", ".tabSave", function() {
 			oField.value = { icon: $( '#icon_value_' + sIdField ).val(), color: $( '#icon_color_' + sIdField ).val(), style: $( '#icon_style_' + sIdField ).val() };
 		}
 	}
+
+	return oTab.form;
+}
+
+// click sur le bouton "enregistrer"
+$( document ).on( "click", ".tabSave", function() {
+	var sId = $( this ).attr( 'idTab' );
+	var oTab = tabGetTab( sId );
+
+	// applique les valeurs des elements au formulaire
+	_tabUpdateForm( sId );
 
 	// change l'etat de l'onglet
 	oTab.state = 'view';
@@ -239,19 +257,19 @@ async function refreshTabs(){
 				var oField = oTab.form[ a ];
 				var sIdField = 'tab-field-' + oTab.id + '-' + oField.id;
 				if( oField.type == 'string' ){
-					sForm += '<div class="mb-3">' +
+					sForm += '<div class="mb-3" id="parent-' + sIdField + '">' +
 						'<label for="' + sIdField + '" class="form-label">' + oField.text + '</label>' +
-						'<input type="text" class="form-control" id="' + sIdField + '">' +
+						'<input type="text" class="form-control tab-form-field" id="' + sIdField + '">' +
 					'</div>';
 				}else if( oField.type == 'text' ){
-					sForm += '<div class="mb-3">' +
+					sForm += '<div class="mb-3" id="parent-' + sIdField + '">' +
 						'<label for="' + sIdField + '" class="form-label">' + oField.text + '</label>' +
-						'<textarea class="form-control" id="' + sIdField + '" rows="3"></textarea>' +
+						'<textarea class="form-control tab-form-field" id="' + sIdField + '" rows="3"></textarea>' +
 					'</div>';
 				}else if( oField.type == 'list' ){
-					sForm +=  '<div class="mb-3">' +
+					sForm +=  '<div class="mb-3" id="parent-' + sIdField + '">' +
 						'<label for="' + sIdField + '" class="form-label">' + oField.text + '</label>' +
-						'<select id="' + sIdField + '" class="form-select" aria-label="Default select example">';
+						'<select id="' + sIdField + '" class="form-select tab-form-field" aria-label="Default select example">';
 					for( var b=0; b<oField.items.length; b++ ){
 						var oItem = oField.items[ b ];
 						sForm += '<option value="' + oItem.value + '">' + oItem.text + '</option>';
@@ -259,47 +277,47 @@ async function refreshTabs(){
 					sForm += '</select>' +
 						'</div>';
 				}else if( oField.type == 'checkbox' ){
-					sForm +=  '<div class="mb-3">' +
+					sForm +=  '<div class="mb-3" id="parent-' + sIdField + '">' +
 						'<label class="form-label">' + oField.text + '</label>';
 					for( var b=0; b<oField.items.length; b++ ){
 						var oItem = oField.items[ b ];
 						sForm += '<div class="form-check">' +
-							'<input class="form-check-input" type="checkbox" value="' + oItem.value + '" id="' + sIdField + '-' + b + '">' +
+							'<input class="form-check-input tab-form-field" type="checkbox" value="' + oItem.value + '" id="' + sIdField + '-' + b + '">' +
 							'<label class="form-check-label" for="' + sIdField + '-' + b + '">' + oItem.text + '</label>' +
 						'</div>';
 					}
 					sForm += '</div>';
 				}else if( oField.type == 'radio' ){
-					sForm +=  '<div class="mb-3">' +
+					sForm +=  '<div class="mb-3" id="parent-' + sIdField + '">' +
 						'<label class="form-label">' + oField.text + '</label>';
 					for( var b=0; b<oField.items.length; b++ ){
 						var oItem = oField.items[ b ];
 						sForm += '<div class="form-check">' +
-							'<input class="select-radio-item form-check-input" type="radio" value="' + oItem.value + '" id="' + sIdField + '-' + b + '">' +
+							'<input class="select-radio-item form-check-input tab-form-field" type="radio" value="' + oItem.value + '" id="' + sIdField + '-' + b + '">' +
 							'<label class="form-check-label" for="' + sIdField + '-' + b + '">' + oItem.text + '</label>' +
 						'</div>';
 					}
 					sForm += '</div>';
 				}else if( oField.type == 'color' ){
-					sForm +=  '<div class="mb-3">' +
+					sForm +=  '<div class="mb-3" id="parent-' + sIdField + '">' +
 						'<label for="' + sIdField + '" class="form-label">' + oField.text + '</label>' +
-						'<input type="color" class="form-control form-control-color" id="' + sIdField + '" title="Choisir la couleur">' +
+						'<input type="color" class="form-control form-control-color tab-form-field" id="' + sIdField + '" title="Choisir la couleur">' +
 					'</div>';
 				}else if( oField.type == 'switch' ){
-					sForm +=  '<div class="form-check form-switch">' +
-						'<input class="form-check-input" type="checkbox" role="switch" id="' + sIdField + '">' +
+					sForm +=  '<div class="form-check form-switch" id="parent-' + sIdField + '">' +
+						'<input class="form-check-input tab-form-field" type="checkbox" role="switch" id="' + sIdField + '">' +
 						'<label class="form-check-label" for="' + sIdField + '">' + oField.text + '</label>' +
 					'</div>';
 				}else if( oField.type == 'range' ){
-					sForm +=  '<div class="mb-3">' +
+					sForm +=  '<div class="mb-3" id="parent-' + sIdField + '">' +
 						'<label for="' + sIdField + '" class="form-label">' + oField.text + '</label>' +
 						'<span class="select-range-show" style="float:right">' + ( oField.value != undefined ? oField.value : '' ) + '</span>' +
-						'<input type="range" class="form-range" id="' + sIdField + '" min="' + oField.min + '" max="' + oField.max + '">' +
+						'<input type="range" class="form-range tab-form-field" id="' + sIdField + '" min="' + oField.min + '" max="' + oField.max + '">' +
 					'</div>';
 				}else if( oField.type == 'icon' ){
 
 					var sCpIdField = sIdField;
-					sForm +=  '<div class="mb-3">' +
+					sForm +=  '<div class="mb-3" id="parent-' + sIdField + '">' +
 						'<label class="form-label">' + oField.text + '</label>' +
 						'<table>' +
 							'<tr>' +
@@ -307,11 +325,11 @@ async function refreshTabs(){
 									'<div class="icon_selected" id="icon_' + sIdField + '">' +
 										( oField.value != undefined && oField.value.icon != '' ? iconsGetHtml( oField.value.icon, oField.value.color, oField.value.style ) : '' ) +
 									'</div>' +
-									'<input type="hidden" id="icon_value_' + sIdField + '" value="' + ( oField.value != undefined ? oField.value.icon : '' ) + '">' +
-									'<input type="hidden" id="icon_style_' + sIdField + '" value="' + ( oField.value != undefined ? oField.value.style : '' ) + '">' +
+									'<input type="hidden" id="icon_value_' + sIdField + '" class="tab-form-field" value="' + ( oField.value != undefined ? oField.value.icon : '' ) + '">' +
+									'<input type="hidden" id="icon_style_' + sIdField + '" class="tab-form-field" value="' + ( oField.value != undefined ? oField.value.style : '' ) + '">' +
 								'</td>' +
 								'<td style="width:70px">' +
-									'<input type="color" class="form-control form-control-color icon-color" field="' + sIdField + '" id="icon_color_' + sIdField + '" value="' + ( oField.value != undefined ? oField.value.color : '' ) + '" title="Choisir la couleur">' +
+									'<input type="color" class="form-control form-control-color icon-color tab-form-field" field="' + sIdField + '" id="icon_color_' + sIdField + '" value="' + ( oField.value != undefined ? oField.value.color : '' ) + '" title="Choisir la couleur">' +
 								'</td>' +
 								'<td>' +
 									'<div id="div_style_icon_' + sCpIdField + '">' +
@@ -337,12 +355,12 @@ async function refreshTabs(){
 						} ) +
 					'</div>';
 				}else if( oField.type == 'object' ){
-					sForm +=  '<div class="mb-3">' +
+					sForm +=  '<div class="mb-3" id="parent-' + sIdField + '">' +
 						'<label class="form-label">' + oField.text + '</label>' +
 						'<table width="100%">' +
 							'<tr>' +
 								'<td>' +
-									'<input type="hidden" id="' + sIdField + '" value="' + oField.value + '">' +
+									'<input type="hidden" id="' + sIdField + '" class="tab-form-field" value="' + oField.value + '">' +
 									( oTab.state != 'view' ?
 										'<div class="object_select_path" id="object_select_' + sIdField + '">' + nodeGetHtmlName( nodeGetNode( oField.value ) ) + '</div>' :
 										'<div class="object_select_path" id="object_select_' + sIdField + '" style="background-color:#e9ecef;" disabled>' + nodeGetHtmlName( nodeGetNode( oField.value ) ) + '</div>'
@@ -359,8 +377,14 @@ async function refreshTabs(){
 							'</tr>' +
 						'</table>' +
 					'</div>';
+				}else if( oField.type == 'list-key-val' ){
+					sForm +=  '<div class="mb-3" id="parent-' + sIdField + '">' +
+						'<label for="' + sIdField + '" class="form-label">' + oField.text + '</label>' +
+						'<input type="hidden" id="' + sIdField + '" class="tab-form-field" value="' + oField.value + '">' +
+						'<div id="div-lisy-key-val-' + sIdField + '">' + tabGetHtmlListKeyVal( oField.value ) + '</div>' + 
+						'<button type="button" field="' + sIdField + '" class="btn btn-primary btn-sm btnTabListKeyValAdd" style="margin-top:5px">Ajouter un enregistrement</button>' +
+					'</div>';
 				}
-				
 			}
 		}
 
@@ -439,6 +463,8 @@ async function refreshTabs(){
 							var oItem = oField.items[ b ];
 							$( '#' + sIdField + '-' + b ).prop( "disabled", true );
 						}
+					}else if( oField.type == 'list-key-val' ){
+						$( '#parent-' + sIdField  ).find( '.btnTabListKeyValDel,.btnTabListKeyValAdd' ).hide();
 					}else if( oField.type == 'icon' ){
 						$( '#div_select_icon_' + sIdField ).hide();
 						$( '#icon_color_' + sIdField ).prop( "disabled", true );
@@ -447,11 +473,104 @@ async function refreshTabs(){
 				}
 			}
 		}
-		
+
+		tabUpdateField( oTab.id );
 	}
 }
 
-//recherche un tab en fonction de son id
+// affichage d'une liste clés / valeurs
+function tabGetHtmlListKeyVal( oValue ){
+	if( oValue == null || [ null, undefined, '', [] ].includes( oValue ) ){
+		return 'Auncu enregistrement';
+	}
+	var sHtml = '<table width="100%">';
+	for( var i=0; i<oValue.length; i++ ){
+		sHtml += '<tr>' +
+			'<td>Clé</td>' +
+			'<td><input type="text" class="form-control tab-form-field tab-list-key" style="width:100px" value="' + oValue[ i ].key + '"></td>' +
+			'<td>Valeur</td>' +
+			'<td><input type="text" class="form-control tab-form-field tab-list-val" value="' + oValue[ i ].value + '"></td>' +
+			'<td><button type="button" class="btn btn-danger btn-sm btnTabListKeyValDel" style="margin-left:10px"><i class="fa-solid fa-eraser"></i></button></td>' +
+		'</tr>';
+	}
+	
+	return sHtml + '</table>';
+}
+
+// click sur le bouton supprimer une ligne du tableau clé / valeur
+$( document ).on( "click", ".btnTabListKeyValDel", function() {
+	var sIdTab = $( this ).closest( '.tab-pane' ).attr( 'id' ).substr( 4 );
+	$( this ).closest( 'tr' ).remove();
+	tabUpdateField( sIdTab );
+} );
+
+// click sur l'ajout d'un nouvel enregistrement clé / valeur
+$( document ).on( "click", ".btnTabListKeyValAdd", function() {
+	var sIdTab = $( this ).closest( '.tab-pane' ).attr( 'id' ).substr( 4 );
+	var sIdField = $( this ).attr( 'field' );
+	var oTab = tabGetTab( sIdTab );
+	var oField = null;
+	for( var a=0; a<oTab.form.length; a++ ){
+		if( 'tab-field-' + oTab.id + '-' +  oTab.form[ a ].id == sIdField ){
+			oField = oTab.form[ a ];
+			break;
+		}
+	}
+	if( [ null, undefined, '' ].includes( oField.value ) ){
+		oField.value = [];
+	}else{
+
+		// determine si il y a deja une clé vide
+		for( var i=0; i<oField.value.length; i++ ){
+			if( oField.value[ i ].key.trim() == '' ){
+				return;
+			}
+		}
+	}
+
+	// ajout du nouvel enregistrement
+	oField.value.push( { 'key': '', 'value': '' } );
+
+	// mise a jour du HTML
+	$( '#div-lisy-key-val-' + sIdField ).html( tabGetHtmlListKeyVal( oField.value ) );
+	
+	// propagation de la mise a jour de la valeur
+	tabUpdateField( sIdTab );
+} );
+
+
+// sur changement d'une valeur du formaulaire
+$( document ).on( "change", ".tab-form-field", function() {
+	var sId = $( this ).closest( '.tab-pane' ).attr( 'id' ).substr( 4 );
+	tabUpdateField( sId )
+} );
+
+// sur la mise a jour d'un champ du formulaire
+async function tabUpdateField( sId ){
+	var oTab = tabGetTab( sId );
+	if( oTab.form == undefined || oTab.form.length == 0 ){
+		return;
+	}
+
+	// applique les valeurs des elements au formulaire
+	var oForm = _tabUpdateForm( sId );
+
+	// pour tous les champs dont l'affichage est conditionne
+	for( var a=0; a<oTab.form.length; a++ ){
+		var oField = oTab.form[ a ];
+		if( oField[ 'on-display' ] == undefined ){
+			continue;
+		}
+		var sJsOnDisplay = oField[ 'on-display' ];
+		var sIdField = 'tab-field-' + oTab.id + '-' + oField.id;
+
+		// determine si l'affichage doit etre masque
+		var bDisplay = window[ sJsOnDisplay ]( oForm );
+		$( '#parent-' + sIdField ).toggle( bDisplay );
+	}
+}
+
+// recherche un tab en fonction de son id
 function tabGetTab( sId ){
 	for( var i=0; i<oTabs.length; i++ ){
 		if( oTabs[ i ].id == sId ){

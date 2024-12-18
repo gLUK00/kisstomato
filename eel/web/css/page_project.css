@@ -8,17 +8,25 @@
 }
 
 #col_left{
-	#border:1px solid red;
 	overflow: auto;
 }
 
 #col_sep{
-	border:1px solid red;
+	border: 3px solid white;
 	width: 1px;
+	background-color: white;
+	padding: 1px;
+	border-radius: 10px;
+}
+
+#col_sep:hover{
+	cursor: col-resize;
+	border: 3px solid rgb(231, 231, 231);
+	background-color: rgb(145, 145, 145);
 }
 
 #col_right{
-	
+
 }
 
 #bar_tree{

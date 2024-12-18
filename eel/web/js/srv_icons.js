@@ -103,6 +103,9 @@ function iconsGetHtmlPicker( sIdDiv, fSelectIconAndColor ){
 // recupere le code html d'un icon
 function iconsGetHtml( sIcon, sColor, sStyle ){
 	var oIcon = iconsGetOne( sIcon );
+	if( oIcon == undefined ){
+		return '';
+	}
 	if( [ undefined, null, '' ].includes( sColor ) ){
 		sColor = '';
 	}else{

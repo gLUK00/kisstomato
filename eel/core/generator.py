@@ -1,6 +1,16 @@
 import os, glob, shutil, sys
+from jinja2 import Environment, FileSystemLoader
 
 from pathlib import Path
+
+# recupere une propriete d'un projet
+def getPropertyById( sId, oProject ):
+    if not 'properties' in oProject:
+        return None
+    for sKey in oProject[ 'properties' ]:
+        if sKey == sId:
+            return oProject[ 'properties' ][ sKey ]
+    return None
 
 # recupere les informations des projets
 def getNodeById( sId, oNode ):
@@ -200,3 +210,17 @@ def mergeDirs( sDirSource, sDirTarget, oConfig=None ):
         print((exc_type, fname, exc_tb.tb_lineno))
 
     return sRapport
+
+# generation d'un fichier d'un plugin
+def genFileFromTmpl( sPathPlugin, oNode, sFileTmpl, FileOut, cClass ):
+
+    sPathTemplate = ''
+    if sFileTmpl.find( os.sep ) != -1:
+        sPathTemplate = os.sep + sFileTmpl[ : sFileTmpl.find( os.sep ) - 1 ]
+    env = Environment( loader=FileSystemLoader( sPathPlugin + os.sep + 'templates' + sPathTemplate ), line_statement_prefix='&&' )
+
+    template = env.get_template( sFileTmpl )
+    sGenCode = template.render( o=cClass(oNode) )
+
+    with open( FileOut, "w", encoding="utf-8" ) as oFile:
+        oFile.write( sGenCode )

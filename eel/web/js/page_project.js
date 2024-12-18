@@ -17,6 +17,28 @@ $( document ).ready( function(){
 	tabSetShowSelectObject( nodeGetListIdHtml );
 } );
 
+// redimensionnement de la largeur du treeview
+var _bSelectSep = false;
+$( document ).on( "click", "#col_sep", function( e ) {
+	_bSelectSep = !_bSelectSep;
+	e.stopPropagation();
+} );
+$( document ).on( "mouseleave", "#col_sep", function( e ) {
+	$( this ).css( 'background-color', _bSelectSep ? 'rgb(145, 145, 145)' : 'white' );
+} );
+$( document ).on( "click", "#tbl_body", function( e ) {
+	if( !_bSelectSep ){
+		return;
+	}
+	_bSelectSep = false;
+} );
+$( document ).on( "mousemove", "#tbl_body", function( e ) {
+	if( !_bSelectSep ){
+		return;
+	}
+	$( '#col_left' ).attr( 'width', ( e.originalEvent.clientX - 8 ) + 'px' );
+} );
+
 // noeud selctionne
 var oSelectNode = null;
 
@@ -61,7 +83,7 @@ eel.open_project( getUrlParameter( 'project' ) )( function( data ){
 			'data' : oNodes
 		}
 	});
-	$('#tree').on('loaded.jstree ready.jstree refresh.jstree changed.jstree', function () { nodeRefreshColor( oNodes ); });
+	$('#tree').on('open_node.jstree loaded.jstree ready.jstree refresh.jstree changed.jstree', async function () { nodeRefreshColor( oNodes ); });
 	
 } );
 
