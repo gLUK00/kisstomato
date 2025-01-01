@@ -465,6 +465,7 @@ async function refreshTabs(){
 						}
 					}else if( oField.type == 'list-key-val' ){
 						$( '#parent-' + sIdField  ).find( '.btnTabListKeyValDel,.btnTabListKeyValAdd' ).hide();
+						$( '#parent-' + sIdField  ).find( '.tab-list-key,.tab-list-val' ).prop( "disabled", true );
 					}else if( oField.type == 'icon' ){
 						$( '#div_select_icon_' + sIdField ).hide();
 						$( '#icon_color_' + sIdField ).prop( "disabled", true );

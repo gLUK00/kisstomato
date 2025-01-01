@@ -16,7 +16,62 @@
                     "root"
                 ]
             },
-            "children": [],
+            "children": [
+                {
+                    "id": "49c7fa19-1ec0-4f48-817c-0a0a7c075edb",
+                    "text": "classes",
+                    "li_attr": {
+                        "type": "root",
+                        "items": [
+                            {
+                                "id": "ref_element",
+                                "value": "4f2d124e-9a59-4381-a5cf-e9513974781c"
+                            },
+                            {
+                                "id": "readonly",
+                                "value": true
+                            }
+                        ]
+                    },
+                    "color": "#e099e5",
+                    "icon": "fa-brands fa-html5",
+                    "children": [
+                        {
+                            "id": "2c7e83a1-3ec2-46e5-b31e-45abc98c0c88",
+                            "text": "Enfants",
+                            "li_attr": {
+                                "type": "link_childs",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group",
+                            "children": [
+                                {
+                                    "id": "88104a0c-0f01-4239-93a4-5e02a39a7b09",
+                                    "text": "ffffff",
+                                    "li_attr": {
+                                        "type": "link_child",
+                                        "items": [
+                                            {
+                                                "id": "ref_element",
+                                                "value": "384a1abd-08d1-47a6-8617-9a09af6e8ceb"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#7ff77d",
+                                    "icon": "fa-brands fa-alipay"
+                                }
+                            ],
+                            "state": {
+                                "opened": true
+                            }
+                        }
+                    ],
+                    "state": {
+                        "opened": true
+                    }
+                }
+            ],
             "state": {
                 "opened": true
             }
@@ -100,8 +155,8 @@
                                                         "value": "ffff"
                                                     },
                                                     {
-                                                        "key": "",
-                                                        "value": ""
+                                                        "key": "h",
+                                                        "value": "kkk"
                                                     }
                                                 ]
                                             },
@@ -118,6 +173,78 @@
                             "state": {
                                 "opened": true
                             }
+                        }
+                    ],
+                    "state": {
+                        "opened": true
+                    }
+                },
+                {
+                    "id": "4f2d124e-9a59-4381-a5cf-e9513974781c",
+                    "text": "aaa bbb",
+                    "li_attr": {
+                        "type": "element",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": ""
+                            },
+                            {
+                                "id": "icon",
+                                "value": {
+                                    "icon": "",
+                                    "color": "#000000",
+                                    "style": ""
+                                }
+                            },
+                            {
+                                "id": "move-on-parent",
+                                "value": true
+                            }
+                        ]
+                    },
+                    "color": "#ca9f53",
+                    "icon": "fa-regular fa-list-alt",
+                    "children": [
+                        {
+                            "id": "0c159ff7-9674-4d4a-a911-e0a0f5925623",
+                            "text": "Children type",
+                            "li_attr": {
+                                "type": "element_childrens_type",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group",
+                            "children": [
+                                {
+                                    "id": "6eb1ec9d-c075-4397-9237-500e7b0de56a",
+                                    "text": "ffffff",
+                                    "li_attr": {
+                                        "type": "element_children_type",
+                                        "items": [
+                                            {
+                                                "id": "ref_element",
+                                                "value": "384a1abd-08d1-47a6-8617-9a09af6e8ceb"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#7ff77d",
+                                    "icon": "fa-brands fa-alipay"
+                                }
+                            ],
+                            "state": {
+                                "opened": true
+                            }
+                        },
+                        {
+                            "id": "ecdb347d-ec6b-43df-bce5-5eaf04e6fe2d",
+                            "text": "Items",
+                            "li_attr": {
+                                "type": "items",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group"
                         }
                     ],
                     "state": {

@@ -10,7 +10,7 @@ currentdir = os.path.dirname(os.path.realpath(__file__))
 parentdir = os.path.dirname(currentdir)
 sys.path.append(parentdir)
 
-from python_flask.classes import *
+from kisstomato.classes import *
 
 # generation du code
 def generateKisstomatoCode( oData ):
@@ -43,7 +43,7 @@ def generateKisstomatoCode( oData ):
         bPropGetJson = generator.getPropertyById( 'impl-getJsonCreateNewProject', oProject ) != False
         bPropOpenProject = generator.getPropertyById( 'impl-getJsonCreateNewProject', oProject ) != False
         if bPropGetJson or bPropOpenProject:
-            generator.genFileFromTmpl( sPathPlugin, oProject, 'script.py', sDirTemp + 'model.py', nodeScript )
+            generator.genFileFromTmpl( sPathPlugin, oProject, 'model.py', sDirTemp + os.sep + 'model.py', model )
 
 
         """"properties": [
@@ -79,5 +79,6 @@ def generateKisstomatoCode( oData ):
         print("------ ERROR ------")
         print(str( e ))
         print((exc_type, fname, exc_tb.tb_lineno))
+        sRapport += '\nError : ' + str( e ) + '\n' + str(exc_type) + ' : ' + str(fname) + ' : ' + str(exc_tb.tb_lineno)
 
     return sRapport

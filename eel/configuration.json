@@ -2,6 +2,6 @@
     "port": 27000,
     "projects": [
         "{path_base}/../dev_projects/kisstomato.json",
-        "{path_base}\\..\\..\\..\\..\\..\\..\\../Users/S31155/Documents/share_vm/si_macif/kisstomato/dev_projects/kisstomato_p.json"
+        "{path_base}/../dev_projects/kisstomato_p.json"
     ]
 }

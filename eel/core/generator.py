@@ -57,7 +57,7 @@ def getNodesByTypes( oNodes, sTypes ):
             return oResults
         
         for oNode in oNodes:
-            if oNode[ 'li_attr' ][ 'type' ] == sType and 'children' in oNode:
+            if ( ( 'type' not in oNode[ 'li_attr' ] and oNode[ 'id' ] == sType ) or ( 'type' in oNode[ 'li_attr' ] and oNode[ 'li_attr' ][ 'type' ] == sType ) ) and 'children' in oNode:
                 oResults += oNode[ 'children' ]
         
         if len( oResults ) == 0:
@@ -213,14 +213,21 @@ def mergeDirs( sDirSource, sDirTarget, oConfig=None ):
 
 # generation d'un fichier d'un plugin
 def genFileFromTmpl( sPathPlugin, oNode, sFileTmpl, FileOut, cClass ):
+    try:
 
-    sPathTemplate = ''
-    if sFileTmpl.find( os.sep ) != -1:
-        sPathTemplate = os.sep + sFileTmpl[ : sFileTmpl.find( os.sep ) - 1 ]
-    env = Environment( loader=FileSystemLoader( sPathPlugin + os.sep + 'templates' + sPathTemplate ), line_statement_prefix='&&' )
+        sPathTemplate = ''
+        if sFileTmpl.find( os.sep ) != -1:
+            sPathTemplate = os.sep + sFileTmpl[ : sFileTmpl.find( os.sep ) - 1 ]
+        env = Environment( loader=FileSystemLoader( sPathPlugin + os.sep + 'templates' + sPathTemplate ), line_statement_prefix='&&' )
 
-    template = env.get_template( sFileTmpl )
-    sGenCode = template.render( o=cClass(oNode) )
+        template = env.get_template( sFileTmpl )
+        sGenCode = template.render( o=cClass(oNode) )
 
-    with open( FileOut, "w", encoding="utf-8" ) as oFile:
-        oFile.write( sGenCode )
+        with open( FileOut, "w", encoding="utf-8" ) as oFile:
+            oFile.write( sGenCode )
+        
+    except Exception as e:
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        
+        raise 'genFileFromTmpl : ' + str(e) + ' : ' + str(exc_type) + ' : ' + str(fname) + ' : ' + str(exc_tb.tb_lineno)
