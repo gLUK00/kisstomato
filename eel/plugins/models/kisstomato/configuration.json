@@ -4,7 +4,8 @@
 
 		{ "id": "root", "text": "Racine", "icon": "fa-brands fa-html5", "color": "#e099e5", "children-type": [], "move-on-parent": true,
 			"items":[
-				{ "id": "ref_element", "text": "Elément", "type": "object", "filter-type": "element" }
+				{ "id": "id", "text": "Identifiant", "type": "string" },
+				{ "id": "icon", "text": "Icone", "type": "icon" }
 			],
 			"on-create": {
 				"add": [

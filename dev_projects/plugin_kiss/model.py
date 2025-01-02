@@ -17,7 +17,7 @@ def getJsonCreateNewProject( data ):
     # kisstomato-getJsonCreateNewProject-a-stop-user-code-kisstomato
     
     oRoots = []
-    oRoots.append( { "id": "templates", "text": "Templates", "icon": "fa-brands fa-html5", "color": "#4f4dff", "li_attr": { "readonly": True, "children-type": ["template"] } } )
+    oRoots.append( { "id": "templates", "text": "Templates", "icon": "fa-brands fa-html5", "color": "#4f4dff", "li_attr": { "readonly": True, "children-type": [] } } )
     data[ 'data' ] = oRoots
 
     # kisstomato-getJsonCreateNewProject-b-start-user-code-kisstomato

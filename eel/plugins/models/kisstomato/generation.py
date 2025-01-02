@@ -40,10 +40,9 @@ def generateKisstomatoCode( oData ):
             oProject = json.loads(j.read())
 
         # pour le fichier model.py
-        bPropGetJson = generator.getPropertyById( 'impl-getJsonCreateNewProject', oProject ) != False
-        bPropOpenProject = generator.getPropertyById( 'impl-getJsonCreateNewProject', oProject ) != False
-        if bPropGetJson or bPropOpenProject:
-            generator.genFileFromTmpl( sPathPlugin, oProject, 'model.py', sDirTemp + os.sep + 'model.py', model )
+        sRapport += 'Generation du fichier model.py\n'
+        generator.genFileFromTmpl( sPathPlugin, oProject, 'model.py', sDirTemp + os.sep + 'model.py', model )
+            
 
 
         """"properties": [

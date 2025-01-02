@@ -45,7 +45,7 @@ $( document ).on( "click", "#gen-code", function() {
 		eel.plugin_exec_method_model( oInfoProject[ 'model' ], 'generation', 'generateKisstomatoCode', oData )( function( result ){
 
 			// affichage du rapport de generation, asynchrone
-			modalShowMessage( result );
+			modalShowMessage( result.replaceAll( '\n', '<br/>' ) );
 		} );
 
 		return true;
