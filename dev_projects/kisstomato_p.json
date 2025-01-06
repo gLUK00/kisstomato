@@ -300,6 +300,89 @@
                                     },
                                     "color": "#ff1414",
                                     "icon": "fa-brands fa-node-js"
+                                },
+                                {
+                                    "id": "7e5d68fe-aa9e-476b-b0f6-d93bff083db2",
+                                    "text": "M\u00e9thodes",
+                                    "li_attr": {
+                                        "type": "item",
+                                        "items": [
+                                            {
+                                                "id": "id",
+                                                "value": "methodes"
+                                            },
+                                            {
+                                                "id": "type",
+                                                "value": "checkbox"
+                                            },
+                                            {
+                                                "id": "type_object",
+                                                "value": "undefined"
+                                            },
+                                            {
+                                                "id": "type_object_filter",
+                                                "value": ""
+                                            },
+                                            {
+                                                "id": "type_list",
+                                                "value": [
+                                                    {
+                                                        "key": "GET",
+                                                        "value": "get"
+                                                    },
+                                                    {
+                                                        "key": "POST",
+                                                        "value": "post"
+                                                    },
+                                                    {
+                                                        "key": "HEAD",
+                                                        "value": "head"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "readonly",
+                                                "value": false
+                                            }
+                                        ]
+                                    },
+                                    "color": "#ff1414",
+                                    "icon": "fa-brands fa-node-js"
+                                },
+                                {
+                                    "id": "8bd9b0ba-5d26-4fc8-aea4-ae71e6855866",
+                                    "text": "D\u00e9corateur de s\u00e9curit\u00e9",
+                                    "li_attr": {
+                                        "type": "item",
+                                        "items": [
+                                            {
+                                                "id": "id",
+                                                "value": "secure-decorator"
+                                            },
+                                            {
+                                                "id": "type",
+                                                "value": "object"
+                                            },
+                                            {
+                                                "id": "type_object",
+                                                "value": "undefined"
+                                            },
+                                            {
+                                                "id": "type_object_filter",
+                                                "value": "decorator"
+                                            },
+                                            {
+                                                "id": "type_list",
+                                                "value": []
+                                            },
+                                            {
+                                                "id": "readonly",
+                                                "value": false
+                                            }
+                                        ]
+                                    },
+                                    "color": "#ff1414",
+                                    "icon": "fa-brands fa-node-js"
                                 }
                             ],
                             "state": {
