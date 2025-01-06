@@ -310,14 +310,16 @@ async function nodeRefreshColor( oNodes, bFirst ){
 }
 
 // recupere un formulaire a partir d'un noeud et son type
-function nodeNode2Form( oNode ){
+function nodeNode2Form( oRefNode ){
 	var oForm = [];
+	var oNode = JSON.parse(JSON.stringify( oRefNode ));
 
 	// recherche de l'element dans le modele
 	var oElement = null;
 	for( var i=0; i<oModel[ 'elements' ].length; i++ ){
 		if( oNode[ 'li_attr' ][ 'type' ] == oModel[ 'elements' ][ i ].id ){
-			oElement = Object.assign( {}, oModel[ 'elements' ][ i ] );
+			//oElement = Object.assign( {}, oModel[ 'elements' ][ i ] );
+			oElement = JSON.parse(JSON.stringify( oModel[ 'elements' ][ i ] ));
 			break;
 		}
 	}
@@ -328,7 +330,8 @@ function nodeNode2Form( oNode ){
 		var oItem = null;
 		for( var a=0; a<oNode[ 'li_attr' ][ 'items' ].length; a++ ){
 			if( oNode[ 'li_attr' ][ 'items' ][ a ].id == oElement.items[ i ].id ){
-				oItem = oNode[ 'li_attr' ][ 'items' ][ a ];
+				//oItem = Object.assign( [], oNode[ 'li_attr' ][ 'items' ][ a ] );
+				oItem = JSON.parse(JSON.stringify( oNode[ 'li_attr' ][ 'items' ][ a ] ));
 				break;
 			}
 		}
