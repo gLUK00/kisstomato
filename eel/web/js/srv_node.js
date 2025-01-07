@@ -318,7 +318,6 @@ function nodeNode2Form( oRefNode ){
 	var oElement = null;
 	for( var i=0; i<oModel[ 'elements' ].length; i++ ){
 		if( oNode[ 'li_attr' ][ 'type' ] == oModel[ 'elements' ][ i ].id ){
-			//oElement = Object.assign( {}, oModel[ 'elements' ][ i ] );
 			oElement = JSON.parse(JSON.stringify( oModel[ 'elements' ][ i ] ));
 			break;
 		}
@@ -330,7 +329,6 @@ function nodeNode2Form( oRefNode ){
 		var oItem = null;
 		for( var a=0; a<oNode[ 'li_attr' ][ 'items' ].length; a++ ){
 			if( oNode[ 'li_attr' ][ 'items' ][ a ].id == oElement.items[ i ].id ){
-				//oItem = Object.assign( [], oNode[ 'li_attr' ][ 'items' ][ a ] );
 				oItem = JSON.parse(JSON.stringify( oNode[ 'li_attr' ][ 'items' ][ a ] ));
 				break;
 			}

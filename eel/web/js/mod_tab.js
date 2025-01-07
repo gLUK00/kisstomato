@@ -148,6 +148,10 @@ function _tabUpdateForm( sId ){
 			}
 		}else if( oField.type == 'icon' ){
 			oField.value = { icon: $( '#icon_value_' + sIdField ).val(), color: $( '#icon_color_' + sIdField ).val(), style: $( '#icon_style_' + sIdField ).val() };
+		}else{
+
+			// execution du plugin
+			pluginFieldForm2val( sIdField, oField );
 		}
 	}
 
@@ -378,12 +382,16 @@ async function refreshTabs(){
 						'</table>' +
 					'</div>';
 				}else if( oField.type == 'list-key-val' ){
-					sForm +=  '<div class="mb-3" id="parent-' + sIdField + '">' +
+					sForm += '<div class="mb-3" id="parent-' + sIdField + '">' +
 						'<label for="' + sIdField + '" class="form-label">' + oField.text + '</label>' +
 						'<input type="hidden" id="' + sIdField + '" class="tab-form-field" value="' + oField.value + '">' +
 						'<div id="div-lisy-key-val-' + sIdField + '">' + tabGetHtmlListKeyVal( oField.value ) + '</div>' + 
 						'<button type="button" field="' + sIdField + '" class="btn btn-primary btn-sm btnTabListKeyValAdd" style="margin-top:5px">Ajouter un enregistrement</button>' +
 					'</div>';
+				}else{
+
+					// execution du plugin
+					sForm += pluginFieldGetHtml( sIdField, oField );
 				}
 			}
 		}
@@ -470,6 +478,10 @@ async function refreshTabs(){
 						$( '#div_select_icon_' + sIdField ).hide();
 						$( '#icon_color_' + sIdField ).prop( "disabled", true );
 						$( '.icon_style[id_target=icon_style_' + sIdField + ']' ).prop( "disabled", true );
+					}else{
+
+						// execution du plugin
+						pluginFieldSetView( sIdField, oField );
 					}
 				}
 			}

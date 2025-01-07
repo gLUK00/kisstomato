@@ -15,6 +15,24 @@ def get_javascript( model, file ):
 
     path_base = os.path.dirname( os.path.dirname( os.path.realpath( __file__ ) ) )
     sFile = path_base + os.sep + 'plugins' + os.sep + 'models' + os.sep + model + os.sep + 'js' + os.sep + file
+    if not os.path.isfile( sFile ):
+        print( 'Error : get_javascript : fichier introuvable : ' + sFile )
+        return ''
+
+    sContent = ''
+    with open( sFile, "r", encoding="utf-8" ) as oFile:
+        sContent = oFile.read()
+
+    return str( sContent )
+
+# telechargement du fichier javascript d'un field
+def get_javascript_field( field ):
+
+    path_base = os.path.dirname( os.path.dirname( os.path.realpath( __file__ ) ) )
+    sFile = path_base + os.sep + 'plugins' + os.sep + 'fields' + os.sep + field + os.sep + 'js' + os.sep + 'field.js'
+    if not os.path.isfile( sFile ):
+        print( 'Error : get_javascript_field : fichier introuvable : ' + sFile )
+        return ''
 
     sContent = ''
     with open( sFile, "r", encoding="utf-8" ) as oFile:

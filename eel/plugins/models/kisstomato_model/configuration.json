@@ -1,11 +1,12 @@
 {
-	"title": "Plugin KissTomato",
+	"title": "Plugin KissTomato Model",
 	"elements": [
 
 		{ "id": "root", "text": "Racine", "icon": "fa-brands fa-html5", "color": "#e099e5", "children-type": [], "move-on-parent": true,
 			"items":[
 				{ "id": "id", "text": "Identifiant", "type": "string" },
-				{ "id": "icon", "text": "Icone", "type": "icon" }
+				{ "id": "icon", "text": "Icone", "type": "icon" },
+				{ "id": "test_field", "text": "QR cOde", "type": "qrcode" }
 			],
 			"on-create": {
 				"add": [
