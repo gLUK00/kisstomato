@@ -30,9 +30,16 @@
 			"on-create": {
 				"add": [
 					{ "id": "element_childrens_type", "text": "Children type", "readonly": true },
-					{ "id": "items", "text": "Items", "readonly": true }
+					{ "id": "items", "text": "Items", "readonly": true },
+					{ "id": "on_create_add", "text": "Add on-create", "readonly": true }
 				]
 			}
+		},
+		{ "id": "on_create_add", "text": "Add on-create", "icon": "fa-solid fa-layer-group", "color": "#f0a728", "children-type": [ "element_on_create_add" ] },
+		{ "id": "element_on_create_add", "text": "Elément", "icon": "fa-brands fa-alipay", "color": "#7ff77d", "children-type": [], "move-on-parent": true,
+			"items":[
+				{ "id": "ref_element", "text": "Elément", "type": "object", "filter-type": "element" }
+			]
 		},
 		{ "id": "element_childrens_type", "text": "Enfants", "icon": "fa-solid fa-layer-group", "color": "#f0a728", "children-type": [ "element_children_type" ] },
 		{ "id": "element_children_type", "text": "Enfant", "icon": "fa-brands fa-alipay", "color": "#7ff77d", "children-type": [], "move-on-parent": true,

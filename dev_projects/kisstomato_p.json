@@ -178,6 +178,16 @@
                             "state": {
                                 "opened": true
                             }
+                        },
+                        {
+                            "id": "4d5c1a01-aadf-45a1-bec6-241495bff829",
+                            "text": "Add on-create",
+                            "li_attr": {
+                                "type": "on_create_add",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group"
                         }
                     ],
                     "state": {
@@ -388,6 +398,78 @@
                             "state": {
                                 "opened": true
                             }
+                        }
+                    ],
+                    "state": {
+                        "opened": true
+                    }
+                },
+                {
+                    "id": "ec118450-667b-4af6-a0b5-ae8cb6e5ffe7",
+                    "text": "ffffff",
+                    "li_attr": {
+                        "type": "element",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": ""
+                            },
+                            {
+                                "id": "icon",
+                                "value": {
+                                    "icon": "",
+                                    "color": "#000000",
+                                    "style": ""
+                                }
+                            },
+                            {
+                                "id": "move-on-parent",
+                                "value": false
+                            }
+                        ]
+                    },
+                    "color": "#ca9f53",
+                    "icon": "fa-regular fa-list-alt",
+                    "children": [
+                        {
+                            "id": "f9aece74-404a-42d8-8354-d3435010f599",
+                            "text": "Children type",
+                            "li_attr": {
+                                "type": "element_childrens_type",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group"
+                        },
+                        {
+                            "id": "0f7ed25f-6d94-4932-a521-69b03a8e850b",
+                            "text": "Items",
+                            "li_attr": {
+                                "type": "items",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group"
+                        },
+                        {
+                            "id": "4d5c1a01-aadf-45a1-bec6-241495bff830",
+                            "text": "Add on-create",
+                            "li_attr": {
+                                "type": "on_create_add",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group"
+                        },
+                        {
+                            "id": "4d5c1a01-aadf-45a1-bec6-241495bff828",
+                            "text": "Add on-create",
+                            "li_attr": {
+                                "type": "on_create_add",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group"
                         }
                     ],
                     "state": {
