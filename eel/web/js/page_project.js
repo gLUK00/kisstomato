@@ -70,7 +70,7 @@ eel.open_project( getUrlParameter( 'project' ) )( function( data ){
 	}
 
 	// importation des fichiers javascript des champs
-	
+	pluginFieldImportJs( data );
 
 	// creation des noeuds
 	//oNodes = [];

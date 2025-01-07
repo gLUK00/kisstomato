@@ -14,6 +14,11 @@ function pluginLoadFieldJS( sField, fCode, oField ){
 	} );
 }
 
+// importation des plugins des champs
+function pluginFieldImportJs( oProject ){
+	
+}
+
 // generation du visuel (edition)
 function pluginFieldGetHtml( sIdField, oField ){
 
