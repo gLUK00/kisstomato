@@ -62,12 +62,15 @@ eel.open_project( getUrlParameter( 'project' ) )( function( data ){
 	//oModel = data[ 'model' ][ 'elements' ];
 	oModel = data[ 'model' ];
 
-	// importation des fichiers javascript
+	// importation des fichiers javascript du model
 	for( var i=0; i<data[ 'js' ].length; i++ ){
 		eel.get_javascript( data[ 'info' ][ 'model' ], data[ 'js' ][ i ] )( function( sJsCode ){
 			eval( sJsCode );
 		} );
 	}
+
+	// importation des fichiers javascript des champs
+	
 
 	// creation des noeuds
 	//oNodes = [];
