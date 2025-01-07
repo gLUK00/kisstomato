@@ -1,7 +1,8 @@
 // chargement du fichier javascript
 _pluginFields = {};
-function pluginLoadFieldJS( sField ){
+function pluginLoadFieldJS( sField, fCode, oField ){
 	if( _pluginFields[ sField ] != undefined ){
+		fCode( sIdField, oField );
 		return;
 	}
 	
@@ -9,6 +10,7 @@ function pluginLoadFieldJS( sField ){
 	eel.get_javascript_field( sField )( function( sJsCode ){
 		eval( sJsCode );
 		_pluginFields[ sField ] = sJsCode != '';
+		fCode( sIdField, oField );
 	} );
 }
 
@@ -17,15 +19,10 @@ function pluginFieldGetHtml( sIdField, oField ){
 
 
 	let fCode = function( sIdField, oField  ){
-
+		eval( 'pluginFieldGetHtml_qrcode( sIdField, oField )' );
 	};
 
-	get_javascript_field( field )
-
-	// chargement du fichier javascript
-	eel.get_javascript_field( oField.type )( function( sJsCode ){
-		eval( sJsCode );
-	} );
+	get_javascript_field( sIdField, fCode, oField );
 }
 
 // passage du visuel en mode "view"
