@@ -1,41 +1,19 @@
-// chargement du fichier javascript
-_pluginFields = {};
-function pluginLoadFieldJS( sField, fCode, oField ){
-	if( _pluginFields[ sField ] != undefined ){
-		fCode( sIdField, oField );
-		return;
-	}
-	
-	// chargement du fichier javascript
-	eel.get_javascript_field( sField )( function( sJsCode ){
-		eval( sJsCode );
-		_pluginFields[ sField ] = sJsCode != '';
-		fCode( sIdField, oField );
-	} );
-}
-
-// importation des plugins des champs
-function pluginFieldImportJs( oProject ){
-	
-}
-
 // generation du visuel (edition)
 function pluginFieldGetHtml( sIdField, oField ){
+	return window[ 'pluginFieldGetHtml_' + oField.type ]( sIdField, oField );
+}
 
-
-	let fCode = function( sIdField, oField  ){
-		eval( 'pluginFieldGetHtml_qrcode( sIdField, oField )' );
-	};
-
-	get_javascript_field( sIdField, fCode, oField );
+// apres la generation du HTML
+function pluginFieldAfterHtml( sIdField, oField ){
+	return window[ 'pluginFieldAfterHtml_' + oField.type ]( sIdField, oField );
 }
 
 // passage du visuel en mode "view"
 function pluginFieldSetView( sIdField, oField ){
-
+	return window[ 'pluginFieldSetView_' + oField.type ]( sIdField, oField );
 }
 
 // recuperation de la valeur en fonction du visuel
 function pluginFieldForm2val( sIdField, oField ){
-
+	return window[ 'pluginFieldForm2val_' + oField.type ]( sIdField, oField );
 }

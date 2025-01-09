@@ -110,8 +110,20 @@ def open_project( filename ):
 
     # determine si le modele a des fichiers javascript
     oJs = []
+
+    # recupere les fichiers du modeles
     for sJsFile in glob.glob( config.getPathBase() + os.sep + 'plugins' + os.sep + 'models' + os.sep + oProject[ 'model' ] + os.sep + 'js' + os.sep + '*.js' ):
-        oJs.append( sJsFile.split( os.sep )[ -1 ] )
+        oJs.append( { 'type': 'model', 'file': sJsFile.split( os.sep )[ -1 ] } )
+
+    # recupere les fields des plugins des champs
+    for sJsFile in glob.glob( config.getPathBase() + os.sep + 'plugins' + os.sep + 'fields' + os.sep + '*' + os.sep + 'field.js' ):
+
+        # recupere le fichier "field.js"
+        oJs.append( { 'type': 'field', 'file':  os.sep.join( sJsFile.split( os.sep )[ -2: ] ) } )
+
+        # si il y a des sous fichiers JS
+        for sSubJsFile in glob.glob( os.sep.join( sJsFile.split( os.sep )[ :-1 ] ) + os.sep + 'js' + os.sep + '*.js' ):
+            oJs.append( { 'type': 'field', 'file': os.sep.join( sSubJsFile.split( os.sep )[ -3: ] ) } )
 
     return { 'file': filename, 'info': oProject, 'model': oModel, 'data': oData, 'properties': oProperties, 'js': oJs }
 

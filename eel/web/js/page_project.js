@@ -59,18 +59,24 @@ eel.open_project( getUrlParameter( 'project' ) )( function( data ){
 	}
 
 	// recupere le modele
-	//oModel = data[ 'model' ][ 'elements' ];
 	oModel = data[ 'model' ];
 
 	// importation des fichiers javascript du model
 	for( var i=0; i<data[ 'js' ].length; i++ ){
-		eel.get_javascript( data[ 'info' ][ 'model' ], data[ 'js' ][ i ] )( function( sJsCode ){
-			eval( sJsCode );
-		} );
+		if( data[ 'js' ][ i ][ 'type' ] == 'model' ){
+			eel.get_javascript( data[ 'info' ][ 'model' ], data[ 'js' ][ i ][ 'file' ] )( function( sJsCode ){
+				const el = document.createElement("script");
+				el.src = URL.createObjectURL(new Blob([sJsCode], { type: 'text/javascript' }));
+				document.head.appendChild(el);
+			} );
+		}else if( data[ 'js' ][ i ][ 'type' ] == 'field' ){
+			eel.plugin_get_javascript_field( data[ 'js' ][ i ][ 'file' ] )( function( sJsCode ){
+				const el = document.createElement("script");
+				el.src = URL.createObjectURL(new Blob([sJsCode], { type: 'text/javascript' }));
+				document.head.appendChild(el);
+			} );
+		}
 	}
-
-	// importation des fichiers javascript des champs
-	pluginFieldImportJs( data );
 
 	// creation des noeuds
 	//oNodes = [];

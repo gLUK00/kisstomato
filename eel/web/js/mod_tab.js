@@ -151,7 +151,7 @@ function _tabUpdateForm( sId ){
 		}else{
 
 			// execution du plugin
-			pluginFieldForm2val( sIdField, oField );
+			oField.value = pluginFieldForm2val( sIdField, oField );
 		}
 	}
 
@@ -240,6 +240,9 @@ async function refreshTabs(){
 			break;
 		}
 	}
+
+	// pour tous les champs => plugins
+	let oPluginFields = [];
 
 	// pour tous les onglets
 	var sTabs = '';
@@ -392,6 +395,7 @@ async function refreshTabs(){
 
 					// execution du plugin
 					sForm += pluginFieldGetHtml( sIdField, oField );
+					oPluginFields.push( { 'id': sIdField, 'field' : oField  } );
 				}
 			}
 		}
@@ -421,6 +425,11 @@ async function refreshTabs(){
 			sForms +
 		'</div>'
 	);
+
+	// pour tous les champs apres generation du HTML
+	for( var i=0; i<oPluginFields.length; i++ ){
+		pluginFieldAfterHtml( oPluginFields[ i ][ 'id' ], oPluginFields[ i ][ 'field' ] );
+	}
 
 	// attribution des valeurs
 	for( var i=0; i<oTabs.length; i++ ){
@@ -478,6 +487,8 @@ async function refreshTabs(){
 						$( '#div_select_icon_' + sIdField ).hide();
 						$( '#icon_color_' + sIdField ).prop( "disabled", true );
 						$( '.icon_style[id_target=icon_style_' + sIdField + ']' ).prop( "disabled", true );
+					}else if( oField.type == 'object' ){
+
 					}else{
 
 						// execution du plugin
