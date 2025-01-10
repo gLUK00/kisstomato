@@ -63,11 +63,7 @@
 				]
 			}
 		},
-		{ "id": "module_fonction", "text": "Fonctions", "icon": "fa-brands fa-stack-overflow", "children-type": [ "fonction" ],
-			"items":[
-				{ "id": "desc", "text": "description", "type": "text" }
-			]
-		},
+		{ "id": "module_fonction", "text": "Fonctions", "icon": "fa-brands fa-stack-overflow", "children-type": [ "fonction" ] },
 		{ "id": "fonction", "text": "Fonction", "icon": "fa-solid fa-trowel-bricks", "children-type": [],
 			"items":[
 				{ "id": "desc", "text": "description", "type": "text" },
@@ -121,6 +117,22 @@
 				]
 			}
 		},
+		{ "id": "property", "text": "Propriété", "icon": "fa-solid fa-scroll", "children-type": [], "move-on-parent": true,
+			"items":[
+				{ "id": "desc", "text": "description", "type": "text" },
+				{ "id": "print_desc", "text": "Afficher la description au démarrage", "type": "switch", "value": false }
+			],
+			"on-create": {
+				"add": [
+					{ "id": "app_arguments", "text": "Arguments", "readonly": true },
+					{ "id": "module_fonction", "text": "Fonctions", "readonly": true }
+				]
+			}
+		},
+
+
+		
+
 		{ "id": "xxx_route", "text": "XXX Route", "icon": "fa-solid fa-table-cells-large", "children-type": [],
 			"items":[
 				{ "id": "desc", "text": "titre", "type": "text" },

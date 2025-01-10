@@ -10,7 +10,7 @@ currentdir = os.path.dirname(os.path.realpath(__file__))
 parentdir = os.path.dirname(currentdir)
 sys.path.append(parentdir)
 
-from kisstomato.classes import *
+from kisstomato_model.classes import *
 
 # generation du code
 def generateKisstomatoCode( oData ):
@@ -42,7 +42,10 @@ def generateKisstomatoCode( oData ):
         # pour le fichier model.py
         sRapport += 'Generation du fichier model.py\n'
         generator.genFileFromTmpl( sPathPlugin, oProject, 'model.py', sDirTemp + os.sep + 'model.py', model )
-            
+
+        # pour le fichier configuration.json
+        sRapport += 'Generation du fichier configuration.json\n'
+        generator.genFileFromTmpl( sPathPlugin, oProject, 'configuration.json', sDirTemp + os.sep + 'configuration.json', configJson )
 
 
         """"properties": [

@@ -17,7 +17,11 @@ def getJsonCreateNewProject( data ):
     # kisstomato-getJsonCreateNewProject-a-stop-user-code-kisstomato
     
     oRoots = []
-    oRoots.append( { "id": "templates", "text": "Templates", "icon": "fa-brands fa-html5", "color": "#4f4dff", "li_attr": { "readonly": True, "children-type": ["template"] } } )
+    oRoots.append( { "id": "templates", "text": "Templates", "icon": "fa-solid fa-book", "color": "#56b6c2", "li_attr": { "readonly": True, "children-type": ["template", "directory-template"] } } )
+    oRoots.append( { "id": "routes", "text": "Routes", "icon": "fa-brands fa-hubspot", "color": "#b366ff", "li_attr": { "readonly": True, "children-type": ["route", "directory-route"] } } )
+    oRoots.append( { "id": "modules", "text": "Modules", "icon": "fa-solid fa-cubes", "color": "#f77373", "li_attr": { "readonly": True, "children-type": ["module-package"] } } )
+    oRoots.append( { "id": "decorators", "text": "Décorateurs", "icon": "fa-solid fa-photo-video", "color": "#ec4b4b", "li_attr": { "readonly": True, "children-type": ["decorator"] } } )
+    oRoots.append( { "id": "scripts", "text": "Scripts", "icon": "fa-solid fa-scroll", "color": "#263ef2", "li_attr": { "readonly": True, "children-type": ["script"] } } )
     data[ 'data' ] = oRoots
 
     # kisstomato-getJsonCreateNewProject-b-start-user-code-kisstomato

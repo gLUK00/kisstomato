@@ -11,6 +11,7 @@ en cours :
 a faire :
 - a la fermeture du projet, proposer de sauvegarder les onglets ouverts, sous la forme d'un interupteur a off
 - proposer une option d'enregistrement du chemin du projet au format relatif
+- memoriser l'ouverture des noeuds dans l'arbre
 
 fait :
 

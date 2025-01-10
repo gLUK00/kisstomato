@@ -149,11 +149,31 @@
 					{ "text": "Fonction", "value": "function" }
 				] }
 			]
+		},
+
+		{ "id": "property", "text": "Propriété", "icon": "fa-solid fa-scroll", "children-type": [], "move-on-parent": true,
+			"items":[
+				{ "id": "id", "text": "Identifiant", "type": "string" },
+				{ "id": "type", "text": "Type", "type": "list", "items": [
+					{ "text": "String", "value": "string" },
+					{ "text": "Text", "value": "text" },
+					{ "text": "Object", "value": "object" },
+					{ "text": "List", "value": "list" },
+					{ "text": "List clés / valeurs", "value": "list-key-val" },
+					{ "text": "Checkbox", "value": "checkbox" },
+					{ "text": "Radio", "value": "radio" },
+					{ "text": "Color", "value": "color" },
+					{ "text": "Icone", "value": "icone" },
+					{ "text": "Switch", "value": "switch" },
+					{ "text": "Range", "value": "range" }
+				] }
+			]
 		}
 		
 	],
 	"properties": [
 		{ "id": "impl-getJsonCreateNewProject", "text": "Implémentation de la méthode getJsonCreateNewProject", "type": "switch" },
-		{ "id": "impl-openProject", "text": "Implémentation de la méthode openProject", "type": "switch" }
+		{ "id": "impl-openProject", "text": "Implémentation de la méthode openProject", "type": "switch" },
+		{ "id": "model-title", "text": "Titre du modèle", "type": "string" }
 	]
 }
