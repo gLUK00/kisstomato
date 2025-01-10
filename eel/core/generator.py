@@ -229,5 +229,8 @@ def genFileFromTmpl( sPathPlugin, oNode, sFileTmpl, FileOut, cClass ):
     except Exception as e:
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        print("------ ERROR genFileFromTmpl ------")
+        print(str( e ))
+        print((exc_type, fname, exc_tb.tb_lineno))
         
         raise 'genFileFromTmpl : ' + str(e) + ' : ' + str(exc_type) + ' : ' + str(fname) + ' : ' + str(exc_tb.tb_lineno)

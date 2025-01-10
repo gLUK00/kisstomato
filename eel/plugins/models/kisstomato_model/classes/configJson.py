@@ -1,9 +1,14 @@
 from core import generator, nodeElement
 
 class configJson(nodeElement):
-    oRoots = []
+    oEls = []
     def __init__(self, oProject):
         self.project = oProject
+        self.oEls = generator.getNodesByTypes( self.project[ 'data' ], 'elements/element' )
+        for oEl in self.oEls:
+            oEl[ 'items' ] = self._getItems( oEl )
+
+        print( 'rrrrrrrrrrrrrrr' )
         """self.oRoots = []
         
         # recupere les noeuds root

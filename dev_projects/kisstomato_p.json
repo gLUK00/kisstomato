@@ -2248,7 +2248,7 @@
         },
         {
             "id": "classes",
-            "text": "Classe",
+            "text": "Classes",
             "icon": "fa-solid fa-cubes",
             "color": "#c47021",
             "li_attr": {
