@@ -228,7 +228,7 @@ function nodeAddNode( idParent, sText, oModelItem, oData ){
 	oNodeParent[ 'children' ].push( oNewNode );
 
 	// ouvre le parent
-	oNodeParent[ 'state' ] = { "opened": true };
+	//oNodeParent[ 'state' ] = { "opened": true };
 
 	// si il y a des actions a effectuer sur la creation du nouvelle element
 	if( oModelItem[ 'on-create' ] != undefined ){
@@ -307,6 +307,52 @@ async function nodeRefreshColor( oNodes, bFirst ){
 			$( '#' + _bFirstResfreshColor[ i ][ 'id' ] ).find( 'svg:first' ).css( 'color', _bFirstResfreshColor[ i ][ 'color' ] );
 		}
 	}, 10 );
+}
+
+// memorisation des etats des noeuds
+async function nodeOpenClose( e, oNode ){
+
+	// enregistrement de l'etat du noeud
+	if( localStorage.getItem( 'kisstomato-state-treeview' ) == null ){
+		localStorage.setItem( 'kisstomato-state-treeview', JSON.stringify( {} ) );
+	}
+	let oStates = JSON.parse( localStorage.getItem( 'kisstomato-state-treeview' ) );
+	oStates[ oNode.node.id ] = oNode.node.state.opened;
+	localStorage.setItem( 'kisstomato-state-treeview', JSON.stringify( oStates ) );
+}
+
+// mise a jour des etats des noeuds
+function setStateOpenClode( oNodes ){
+	if( Array.isArray( oNodes ) ){
+		for( var i=0; i<oNodes.length; i++ ){
+			setStateOpenClode( oNodes[ i ] )
+		}
+		return;
+	}
+
+	// si il y a des enfants
+	if( oNodes[ 'children' ] !== undefined && oNodes[ 'children' ].length > 0 ){
+		setStateOpenClode( oNodes[ 'children' ] );
+	}
+
+	// controle de l'etat
+	if( localStorage.getItem( 'kisstomato-state-treeview' ) == null ){
+		return;
+	}
+	let oStates = JSON.parse( localStorage.getItem( 'kisstomato-state-treeview' ) );
+	let oState =  oStates[ oNodes.id ];
+	if( oState == undefined ){
+		return;
+	}
+
+	// application de l'etat du noeud
+	if( oNodes[ 'state' ] == undefined ){
+		oNodes[ 'state' ] = {};
+	}
+	if( oNodes[ 'state' ][ 'opened' ] == undefined ){
+		oNodes[ 'state' ][ 'opened' ] = false;
+	}
+	oNodes[ 'state' ][ 'opened' ] = oState;
 }
 
 // recupere un formulaire a partir d'un noeud et son type

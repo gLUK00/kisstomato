@@ -1,35 +1,57 @@
 {
     "title": "{{ o.project[ 'properties' ][ 'model-title' ] }}",
-	"elements": [
+	"elements":	[
 &&  if o.oEls|length > 0
 &&      for oE in o.oEls
 		{
-			"id": "{{ oE[ 'id' ] }}", "text": "{{ oE[ 'items' ][ 'desc' ] }}"{% if 'icon' in oE %}, "icon": "{{ oE[ 'icon' ] }}"{% endif %}{% if 'color' in oE %}, "color": "{{ oE[ 'color' ] }}"{% endif %}
-		}
+			"id": "{{ oE[ 'text' ] }}", "text": "{{ oE[ 'items' ][ 'desc' ][ 'value' ] }}"{% if 'icon' in oE %}, "icon": "{{ oE[ 'icon' ] }}"{% endif %}{% if 'color' in oE %}, "color": "{{ oE[ 'color' ] }}"{% endif %}, "children-type": [{{ oE[ 'children-type' ] }}]{% if oE[ 'move-on-parent' ] %}, "move-on-parent": true{% endif %}
+&&  		if oE[ 'child-items' ]|length > 0
+
+			,"items":[
+&&      		for oCI in oE[ 'child-items' ]
+				{ "id": "{{ oCI[ 'text' ] }}", "text": "{{ oCI[ 'items' ][ 'desc' ][ 'value' ] }}", "type": "{{ oCI[ 'items' ][ 'type' ][ 'value' ] }}"{{ '' -}}
+&&  				if 'on_display' in oCI[ 'items' ] and oCI[ 'items' ][ 'on_display' ][ 'value' ] != ''
+, "on-display": "{{ oCI[ 'items' ][ 'on_display' ][ 'value' ] }}"{{ '' -}}
+&&  				endif
+
+&&  				if oCI[ 'items' ][ 'type' ][ 'value' ] in [ 'list', 'checkbox', 'radio' ]
+, "items": [
+&&  					if oCI[ 'items' ][ 'type_list' ][ 'value' ]|length > 0
+&&      					for oCIL in oCI[ 'items' ][ 'type_list' ][ 'value' ]
+					{ "text": "{{ oCIL[ 'value' ] }}", "value": "{{ oCIL[ 'key' ] }}" }{% if oCIL != oCI[ 'items' ][ 'type_list' ][ 'value' ][ -1 ] %},{% endif %}
+&&      					endfor
+&&  					endif
+				]{{ '' -}}
+&&  				elif oCI[ 'items' ][ 'type' ][ 'value' ] == 'object'
+, "filter-type": "{{ o.getTypeFromId( oCI[ 'items' ][ 'type_object' ][ 'value' ] ) }}"{{ '' -}}
+&&  				endif
+ }{% if oCI != oE[ 'child-items' ][ -1 ] %},{% endif %}
+&&      		endfor
+			]
+&&  		endif
+		}{% if oE != o.oEls[ -1 ] %},{% endif %}
 &&      endfor
 &&  endif
     ],
 	"properties": [
+&&  if o.oPrs|length > 0
+&&      for oP in o.oPrs
+		{ "id": "{{ oP[ 'text' ] }}", "text": "{{ oP[ 'items' ][ 'desc' ][ 'value' ] }}", "type": "{{ oP[ 'items' ][ 'type' ][ 'value' ] }}"{{ '' -}}
+&&  		if oP[ 'items' ][ 'type' ][ 'value' ] in [ 'list', 'checkbox', 'radio' ]
+
+
+, "items": [
+&&  			if oP[ 'items' ][ 'type_list' ][ 'value' ]|length > 0
+&&      			for oPIL in oP[ 'items' ][ 'type_list' ][ 'value' ]
+			{ "text": "{{ oPIL[ 'value' ] }}", "value": "{{ oPIL[ 'key' ] }}" }{% if oPIL != oP[ 'items' ][ 'type_list' ][ 'value' ][ -1 ] %},{% endif %}
+&&      			endfor
+&&  			endif
+		]{{ '' -}}
+
+
+&&  		endif
+ }{% if oP != o.oPrs[ -1 ] %},{% endif %}
+&&      endfor
+&&  endif
 	]
 }
-
-
-
-{ "id": "route-directory", "text": "Répertoire", "icon": "fa-solid fa-folder", "children-type": [ "route", "route-directory" ] },
-		{ "id": "route", "text": "Route", "icon": "fa-solid fa-code-compare", "children-type": [],
-			"items":[
-				{ "id": "desc", "text": "Description", "type": "text" },
-				{ "id": "uri", "text": "URI", "type": "string" },
-				{ "id": "methodes", "text": "Méthodes", "type": "checkbox", "items": [
-					{ "text": "GET", "value": "get" },
-					{ "text": "POST", "value": "post" },
-					{ "text": "HEAD", "value": "head" }
-				] },
-				{ "id": "secure-decorator", "text": "Décorateur de sécurité", "type": "object", "filter-type": "decorator" }
-			],
-			"on-create": {
-				"add": [
-					{ "id": "routes_parameters", "text": "Paramètres", "readonly": true }
-				]
-			}
-		},

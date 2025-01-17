@@ -50,7 +50,7 @@
 		{ "id": "items", "text": "Items", "icon": "fa-solid fa-layer-group", "color": "#f0a728", "children-type": [ "item" ] },
 		{ "id": "item", "text": "Item", "icon": "fa-brands fa-node-js", "color": "#ff1414", "children-type": [], "move-on-parent": true,
 			"items":[
-				{ "id": "id", "text": "Identifiant", "type": "string" },
+				{ "id": "desc", "text": "Description", "type": "string" },
 				{ "id": "type", "text": "Type", "type": "list", "items": [
 					{ "text": "String", "value": "string" },
 					{ "text": "Text", "value": "text" },
@@ -65,9 +65,8 @@
 					{ "text": "Range", "value": "range" }
 				] },
 				{ "id": "type_object", "text": "Link Object", "type": "object", "on-display": "formShowItemTypeObject", "filter-type": "element" },
-				{ "id": "type_object_filter", "text": "Filter Object", "type": "string", "on-display": "formShowItemTypeObject" },
 				{ "id": "type_list", "text": "Clés / valeurs", "type": "list-key-val" },
-				{ "id": "readonly", "text": "Readonly", "type": "switch" }
+				{ "id": "on_display", "text": "On display", "type": "string" }
 			]
 		},
 
@@ -153,7 +152,7 @@
 
 		{ "id": "property", "text": "Propriété", "icon": "fa-solid fa-scroll", "children-type": [], "move-on-parent": true,
 			"items":[
-				{ "id": "id", "text": "Identifiant", "type": "string" },
+				{ "id": "desc", "text": "Description", "type": "string" },
 				{ "id": "type", "text": "Type", "type": "list", "items": [
 					{ "text": "String", "value": "string" },
 					{ "text": "Text", "value": "text" },
@@ -166,7 +165,10 @@
 					{ "text": "Icone", "value": "icone" },
 					{ "text": "Switch", "value": "switch" },
 					{ "text": "Range", "value": "range" }
-				] }
+				] },
+				{ "id": "type_object", "text": "Link Object", "type": "object", "on-display": "formShowItemTypeObject", "filter-type": "element" },
+				{ "id": "type_list", "text": "Clés / valeurs", "type": "list-key-val" },
+				{ "id": "on_display", "text": "On display", "type": "string" }
 			]
 		}
 		

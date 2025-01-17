@@ -84,15 +84,9 @@
                                     "color": "#7ff77d",
                                     "icon": "fa-brands fa-alipay"
                                 }
-                            ],
-                            "state": {
-                                "opened": true
-                            }
+                            ]
                         }
-                    ],
-                    "state": {
-                        "opened": true
-                    }
+                    ]
                 },
                 {
                     "id": "cb07f70c-80c8-446b-9724-931ae2fcfd55",
@@ -161,15 +155,9 @@
                                     "color": "#7ff77d",
                                     "icon": "fa-brands fa-alipay"
                                 }
-                            ],
-                            "state": {
-                                "opened": true
-                            }
+                            ]
                         }
-                    ],
-                    "state": {
-                        "opened": true
-                    }
+                    ]
                 },
                 {
                     "id": "1a803ed0-f257-45db-9006-4dfc86988f49",
@@ -223,15 +211,9 @@
                                     "color": "#7ff77d",
                                     "icon": "fa-brands fa-alipay"
                                 }
-                            ],
-                            "state": {
-                                "opened": true
-                            }
+                            ]
                         }
-                    ],
-                    "state": {
-                        "opened": true
-                    }
+                    ]
                 },
                 {
                     "id": "b5b8830f-d002-425a-bc3c-5a5c231a3c38",
@@ -285,15 +267,9 @@
                                     "color": "#7ff77d",
                                     "icon": "fa-brands fa-alipay"
                                 }
-                            ],
-                            "state": {
-                                "opened": true
-                            }
+                            ]
                         }
-                    ],
-                    "state": {
-                        "opened": true
-                    }
+                    ]
                 },
                 {
                     "id": "29afa9f4-8ea6-417b-a847-131d7933e31d",
@@ -347,20 +323,11 @@
                                     "color": "#7ff77d",
                                     "icon": "fa-brands fa-alipay"
                                 }
-                            ],
-                            "state": {
-                                "opened": true
-                            }
+                            ]
                         }
-                    ],
-                    "state": {
-                        "opened": true
-                    }
+                    ]
                 }
-            ],
-            "state": {
-                "opened": true
-            }
+            ]
         },
         {
             "id": "elements",
@@ -441,10 +408,7 @@
                                     "color": "#7ff77d",
                                     "icon": "fa-brands fa-alipay"
                                 }
-                            ],
-                            "state": {
-                                "opened": true
-                            }
+                            ]
                         },
                         {
                             "id": "524df6e8-d132-4eae-8573-7d2c6da7ba21",
@@ -466,10 +430,7 @@
                             "color": "#f0a728",
                             "icon": "fa-solid fa-layer-group"
                         }
-                    ],
-                    "state": {
-                        "opened": true
-                    }
+                    ]
                 },
                 {
                     "id": "39e644df-6be9-4b71-b51d-e032b0ef8994",
@@ -538,10 +499,7 @@
                                     "color": "#7ff77d",
                                     "icon": "fa-brands fa-alipay"
                                 }
-                            ],
-                            "state": {
-                                "opened": true
-                            }
+                            ]
                         },
                         {
                             "id": "2dc1e4cd-2cbb-463a-8b2b-001f17f2546f",
@@ -563,10 +521,7 @@
                             "color": "#f0a728",
                             "icon": "fa-solid fa-layer-group"
                         }
-                    ],
-                    "state": {
-                        "opened": true
-                    }
+                    ]
                 },
                 {
                     "id": "ae1386fd-48ed-425a-8192-e53022523fc9",
@@ -620,10 +575,7 @@
                                     "color": "#7ff77d",
                                     "icon": "fa-brands fa-alipay"
                                 }
-                            ],
-                            "state": {
-                                "opened": true
-                            }
+                            ]
                         },
                         {
                             "id": "3787db5f-4ce0-416d-bf52-9090962d04e6",
@@ -645,10 +597,7 @@
                             "color": "#f0a728",
                             "icon": "fa-solid fa-layer-group"
                         }
-                    ],
-                    "state": {
-                        "opened": true
-                    }
+                    ]
                 },
                 {
                     "id": "fb8e373d-f643-4b6e-a534-0aebf7eec7da",
@@ -699,33 +648,34 @@
                             "children": [
                                 {
                                     "id": "4c37ae37-f3d9-4888-baf5-9498104b6af9",
-                                    "text": "Description",
+                                    "text": "desc",
                                     "li_attr": {
                                         "type": "item",
                                         "items": [
                                             {
-                                                "id": "id",
-                                                "value": "desc"
+                                                "id": "desc",
+                                                "value": "Description"
                                             },
                                             {
                                                 "id": "type",
-                                                "value": "text"
+                                                "value": "string"
                                             },
                                             {
                                                 "id": "type_object",
-                                                "value": "undefined"
-                                            },
-                                            {
-                                                "id": "type_object_filter",
                                                 "value": ""
                                             },
                                             {
                                                 "id": "type_list",
-                                                "value": []
+                                                "value": [
+                                                    {
+                                                        "key": "",
+                                                        "value": ""
+                                                    }
+                                                ]
                                             },
                                             {
-                                                "id": "readonly",
-                                                "value": false
+                                                "id": "on_display",
+                                                "value": "aaaaa"
                                             }
                                         ]
                                     },
@@ -734,13 +684,13 @@
                                 },
                                 {
                                     "id": "81ff70ba-929a-4659-a887-70c2ce6b9fc0",
-                                    "text": "Obligatoire",
+                                    "text": "require",
                                     "li_attr": {
                                         "type": "item",
                                         "items": [
                                             {
-                                                "id": "id",
-                                                "value": "require"
+                                                "id": "desc",
+                                                "value": "Obligatoire"
                                             },
                                             {
                                                 "id": "type",
@@ -769,13 +719,13 @@
                                 },
                                 {
                                     "id": "30c8a2cf-856a-46d8-9274-3be1aa5afb37",
-                                    "text": "Type de retour",
+                                    "text": "type",
                                     "li_attr": {
                                         "type": "item",
                                         "items": [
                                             {
-                                                "id": "id",
-                                                "value": "type"
+                                                "id": "desc",
+                                                "value": "Type de retour"
                                             },
                                             {
                                                 "id": "type",
@@ -823,10 +773,7 @@
                                     "color": "#ff1414",
                                     "icon": "fa-brands fa-node-js"
                                 }
-                            ],
-                            "state": {
-                                "opened": true
-                            }
+                            ]
                         },
                         {
                             "id": "1f0e9d4f-3f6f-4fa3-99ea-6613225aa2fb",
@@ -838,10 +785,7 @@
                             "color": "#f0a728",
                             "icon": "fa-solid fa-layer-group"
                         }
-                    ],
-                    "state": {
-                        "opened": true
-                    }
+                    ]
                 },
                 {
                     "id": "d2d828aa-7a5f-445d-abaf-c66ac44e67b4",
@@ -892,13 +836,13 @@
                             "children": [
                                 {
                                     "id": "9e8016d6-2c50-4dc3-9f39-cebed2b16bd6",
-                                    "text": "Description",
+                                    "text": "desc",
                                     "li_attr": {
                                         "type": "item",
                                         "items": [
                                             {
-                                                "id": "id",
-                                                "value": "desc"
+                                                "id": "desc",
+                                                "value": "Description"
                                             },
                                             {
                                                 "id": "type",
@@ -927,13 +871,13 @@
                                 },
                                 {
                                     "id": "3423a592-4b40-4cba-8c13-2519e8a0b569",
-                                    "text": "URI",
+                                    "text": "uri",
                                     "li_attr": {
                                         "type": "item",
                                         "items": [
                                             {
-                                                "id": "id",
-                                                "value": "uri"
+                                                "id": "desc",
+                                                "value": "URI"
                                             },
                                             {
                                                 "id": "type",
@@ -962,13 +906,13 @@
                                 },
                                 {
                                     "id": "7e5d68fe-aa9e-476b-b0f6-d93bff083db2",
-                                    "text": "M\u00e9thodes",
+                                    "text": "methodes",
                                     "li_attr": {
                                         "type": "item",
                                         "items": [
                                             {
-                                                "id": "id",
-                                                "value": "methodes"
+                                                "id": "desc",
+                                                "value": "M\u00e9thodes"
                                             },
                                             {
                                                 "id": "type",
@@ -1010,13 +954,13 @@
                                 },
                                 {
                                     "id": "8bd9b0ba-5d26-4fc8-aea4-ae71e6855866",
-                                    "text": "D\u00e9corateur de s\u00e9curit\u00e9",
+                                    "text": "secure",
                                     "li_attr": {
                                         "type": "item",
                                         "items": [
                                             {
-                                                "id": "id",
-                                                "value": "secure-decorator"
+                                                "id": "desc",
+                                                "value": "decorator D\u00e9corateur de s\u00e9curit\u00e9"
                                             },
                                             {
                                                 "id": "type",
@@ -1024,29 +968,18 @@
                                             },
                                             {
                                                 "id": "type_object",
-                                                "value": "undefined"
-                                            },
-                                            {
-                                                "id": "type_object_filter",
-                                                "value": "decorator"
+                                                "value": "f989eafd-b38d-48b7-bbd8-57a0ce18572d"
                                             },
                                             {
                                                 "id": "type_list",
                                                 "value": []
-                                            },
-                                            {
-                                                "id": "readonly",
-                                                "value": false
                                             }
                                         ]
                                     },
                                     "color": "#ff1414",
                                     "icon": "fa-brands fa-node-js"
                                 }
-                            ],
-                            "state": {
-                                "opened": true
-                            }
+                            ]
                         },
                         {
                             "id": "3d8cd477-7ecf-4a9e-9cde-3cad0523371d",
@@ -1058,10 +991,7 @@
                             "color": "#f0a728",
                             "icon": "fa-solid fa-layer-group"
                         }
-                    ],
-                    "state": {
-                        "opened": true
-                    }
+                    ]
                 },
                 {
                     "id": "74c5889b-5405-4ee4-b7ee-9c4786f959ce",
@@ -1112,13 +1042,13 @@
                             "children": [
                                 {
                                     "id": "51b039a0-1156-4e24-89b3-760887cd0ea0",
-                                    "text": "contenu",
+                                    "text": "desc",
                                     "li_attr": {
                                         "type": "item",
                                         "items": [
                                             {
-                                                "id": "id",
-                                                "value": "desc"
+                                                "id": "desc",
+                                                "value": "contenu"
                                             },
                                             {
                                                 "id": "type",
@@ -1145,10 +1075,7 @@
                                     "color": "#ff1414",
                                     "icon": "fa-brands fa-node-js"
                                 }
-                            ],
-                            "state": {
-                                "opened": true
-                            }
+                            ]
                         },
                         {
                             "id": "4d5c1a01-aadf-45a1-bec6-241495bff829",
@@ -1160,10 +1087,7 @@
                             "color": "#f0a728",
                             "icon": "fa-solid fa-layer-group"
                         }
-                    ],
-                    "state": {
-                        "opened": true
-                    }
+                    ]
                 },
                 {
                     "id": "3c4989fd-d9cf-493b-a6a4-a0b13cac61b6",
@@ -1214,13 +1138,13 @@
                             "children": [
                                 {
                                     "id": "8a2dbf99-359d-4a53-8d82-7eef5b02c92e",
-                                    "text": "Description",
+                                    "text": "desc",
                                     "li_attr": {
                                         "type": "item",
                                         "items": [
                                             {
-                                                "id": "id",
-                                                "value": "desc"
+                                                "id": "desc",
+                                                "value": "Description"
                                             },
                                             {
                                                 "id": "type",
@@ -1247,10 +1171,7 @@
                                     "color": "#ff1414",
                                     "icon": "fa-brands fa-node-js"
                                 }
-                            ],
-                            "state": {
-                                "opened": true
-                            }
+                            ]
                         },
                         {
                             "id": "7b3c1c16-0651-4afe-bedf-f1c9d916740b",
@@ -1262,10 +1183,7 @@
                             "color": "#f0a728",
                             "icon": "fa-solid fa-layer-group"
                         }
-                    ],
-                    "state": {
-                        "opened": true
-                    }
+                    ]
                 },
                 {
                     "id": "b899e293-7ca3-4a62-ace1-221304041100",
@@ -1316,13 +1234,13 @@
                             "children": [
                                 {
                                     "id": "19352421-7df2-47ff-9960-9aac19c068b7",
-                                    "text": "Description",
+                                    "text": "desc",
                                     "li_attr": {
                                         "type": "item",
                                         "items": [
                                             {
-                                                "id": "id",
-                                                "value": "desc"
+                                                "id": "desc",
+                                                "value": "Description"
                                             },
                                             {
                                                 "id": "type",
@@ -1349,10 +1267,7 @@
                                     "color": "#ff1414",
                                     "icon": "fa-brands fa-node-js"
                                 }
-                            ],
-                            "state": {
-                                "opened": true
-                            }
+                            ]
                         },
                         {
                             "id": "ecee46a4-6c63-4114-8f7e-0624dfa0bd53",
@@ -1364,10 +1279,7 @@
                             "color": "#f0a728",
                             "icon": "fa-solid fa-layer-group"
                         }
-                    ],
-                    "state": {
-                        "opened": true
-                    }
+                    ]
                 },
                 {
                     "id": "f989eafd-b38d-48b7-bbd8-57a0ce18572d",
@@ -1418,13 +1330,13 @@
                             "children": [
                                 {
                                     "id": "2f2758c2-39a8-416d-8073-b9b939f02764",
-                                    "text": "Description",
+                                    "text": "desc",
                                     "li_attr": {
                                         "type": "item",
                                         "items": [
                                             {
-                                                "id": "id",
-                                                "value": "desc"
+                                                "id": "desc",
+                                                "value": "Description"
                                             },
                                             {
                                                 "id": "type",
@@ -1451,10 +1363,7 @@
                                     "color": "#ff1414",
                                     "icon": "fa-brands fa-node-js"
                                 }
-                            ],
-                            "state": {
-                                "opened": true
-                            }
+                            ]
                         },
                         {
                             "id": "68643765-db7f-4cdd-b77e-38d72ae80884",
@@ -1466,10 +1375,7 @@
                             "color": "#f0a728",
                             "icon": "fa-solid fa-layer-group"
                         }
-                    ],
-                    "state": {
-                        "opened": true
-                    }
+                    ]
                 },
                 {
                     "id": "38221eb3-b585-4bb9-8dd9-5322aec527ff",
@@ -1523,10 +1429,7 @@
                                     "color": "#7ff77d",
                                     "icon": "fa-brands fa-alipay"
                                 }
-                            ],
-                            "state": {
-                                "opened": true
-                            }
+                            ]
                         },
                         {
                             "id": "0baa3b20-16b4-4eab-9168-a00cddfedca4",
@@ -1548,10 +1451,7 @@
                             "color": "#f0a728",
                             "icon": "fa-solid fa-layer-group"
                         }
-                    ],
-                    "state": {
-                        "opened": true
-                    }
+                    ]
                 },
                 {
                     "id": "17d383ec-809a-4266-891a-6817317a5074",
@@ -1602,13 +1502,13 @@
                             "children": [
                                 {
                                     "id": "65fb7e26-1a0e-47db-9dab-97826077a6e8",
-                                    "text": "Description",
+                                    "text": "desc",
                                     "li_attr": {
                                         "type": "item",
                                         "items": [
                                             {
-                                                "id": "id",
-                                                "value": "desc"
+                                                "id": "desc",
+                                                "value": "Description"
                                             },
                                             {
                                                 "id": "type",
@@ -1637,13 +1537,13 @@
                                 },
                                 {
                                     "id": "d12135c5-b854-48a3-b384-358e2af12088",
-                                    "text": "G\u00e9n\u00e9rer d'exception",
+                                    "text": "exception",
                                     "li_attr": {
                                         "type": "item",
                                         "items": [
                                             {
-                                                "id": "id",
-                                                "value": "exception"
+                                                "id": "desc",
+                                                "value": "G\u00e9n\u00e9rer d'exception"
                                             },
                                             {
                                                 "id": "type",
@@ -1672,13 +1572,13 @@
                                 },
                                 {
                                     "id": "c824e77c-5caf-464e-95e0-e28310010625",
-                                    "text": "Type de retour",
+                                    "text": "return",
                                     "li_attr": {
                                         "type": "item",
                                         "items": [
                                             {
-                                                "id": "id",
-                                                "value": "return"
+                                                "id": "desc",
+                                                "value": "Type de retour"
                                             },
                                             {
                                                 "id": "type",
@@ -1734,10 +1634,7 @@
                                     "color": "#ff1414",
                                     "icon": "fa-brands fa-node-js"
                                 }
-                            ],
-                            "state": {
-                                "opened": true
-                            }
+                            ]
                         },
                         {
                             "id": "c52479ec-747d-413a-83a7-0d6fa4983465",
@@ -1764,15 +1661,9 @@
                                     "color": "#7ff77d",
                                     "icon": "fa-brands fa-alipay"
                                 }
-                            ],
-                            "state": {
-                                "opened": true
-                            }
+                            ]
                         }
-                    ],
-                    "state": {
-                        "opened": true
-                    }
+                    ]
                 },
                 {
                     "id": "0739e725-98f9-4cd1-a466-ac70785bb6d2",
@@ -1826,10 +1717,7 @@
                                     "color": "#7ff77d",
                                     "icon": "fa-brands fa-alipay"
                                 }
-                            ],
-                            "state": {
-                                "opened": true
-                            }
+                            ]
                         },
                         {
                             "id": "f35b01cf-156e-407d-912c-d73f4962d3ff",
@@ -1851,10 +1739,7 @@
                             "color": "#f0a728",
                             "icon": "fa-solid fa-layer-group"
                         }
-                    ],
-                    "state": {
-                        "opened": true
-                    }
+                    ]
                 },
                 {
                     "id": "3ab57d00-8dad-4a65-9031-6b43bbf38dc7",
@@ -1905,13 +1790,13 @@
                             "children": [
                                 {
                                     "id": "366b8228-8a1f-4f9c-a66f-48039edf344e",
-                                    "text": "Description",
+                                    "text": "desc",
                                     "li_attr": {
                                         "type": "item",
                                         "items": [
                                             {
-                                                "id": "id",
-                                                "value": "desc"
+                                                "id": "desc",
+                                                "value": "Description"
                                             },
                                             {
                                                 "id": "type",
@@ -1922,16 +1807,12 @@
                                                 "value": "undefined"
                                             },
                                             {
-                                                "id": "type_object_filter",
-                                                "value": ""
-                                            },
-                                            {
                                                 "id": "type_list",
                                                 "value": []
                                             },
                                             {
-                                                "id": "readonly",
-                                                "value": false
+                                                "id": "on_display",
+                                                "value": ""
                                             }
                                         ]
                                     },
@@ -1940,13 +1821,13 @@
                                 },
                                 {
                                     "id": "bb7c01dd-2149-4db4-9e6b-0deb6533a2b3",
-                                    "text": "Obligatoire",
+                                    "text": "require",
                                     "li_attr": {
                                         "type": "item",
                                         "items": [
                                             {
-                                                "id": "id",
-                                                "value": "require"
+                                                "id": "desc",
+                                                "value": "Obligatoire"
                                             },
                                             {
                                                 "id": "type",
@@ -1975,13 +1856,13 @@
                                 },
                                 {
                                     "id": "ec300732-3fd2-497f-a479-e070db997ddd",
-                                    "text": "Type",
+                                    "text": "type",
                                     "li_attr": {
                                         "type": "item",
                                         "items": [
                                             {
-                                                "id": "id",
-                                                "value": "type"
+                                                "id": "desc",
+                                                "value": "Type"
                                             },
                                             {
                                                 "id": "type",
@@ -2037,10 +1918,7 @@
                                     "color": "#ff1414",
                                     "icon": "fa-brands fa-node-js"
                                 }
-                            ],
-                            "state": {
-                                "opened": true
-                            }
+                            ]
                         },
                         {
                             "id": "095a381f-9c17-4461-9507-6acbb1c9ff81",
@@ -2052,10 +1930,7 @@
                             "color": "#f0a728",
                             "icon": "fa-solid fa-layer-group"
                         }
-                    ],
-                    "state": {
-                        "opened": true
-                    }
+                    ]
                 },
                 {
                     "id": "a4f4b896-2fda-41b3-bc47-e1711d7cb9b6",
@@ -2106,13 +1981,13 @@
                             "children": [
                                 {
                                     "id": "e132d7e1-d437-4a41-9d11-b5929db27fda",
-                                    "text": "Description",
+                                    "text": "desc",
                                     "li_attr": {
                                         "type": "item",
                                         "items": [
                                             {
-                                                "id": "id",
-                                                "value": "desc"
+                                                "id": "desc",
+                                                "value": "Description"
                                             },
                                             {
                                                 "id": "type",
@@ -2141,13 +2016,13 @@
                                 },
                                 {
                                     "id": "f028bb11-b640-4e22-8ae5-42ed7f20af72",
-                                    "text": "Afficher description",
+                                    "text": "print_desc",
                                     "li_attr": {
                                         "type": "item",
                                         "items": [
                                             {
-                                                "id": "id",
-                                                "value": "print_desc"
+                                                "id": "desc",
+                                                "value": "Afficher description"
                                             },
                                             {
                                                 "id": "type",
@@ -2174,10 +2049,7 @@
                                     "color": "#ff1414",
                                     "icon": "fa-brands fa-node-js"
                                 }
-                            ],
-                            "state": {
-                                "opened": true
-                            }
+                            ]
                         },
                         {
                             "id": "6bc2d801-7e79-4592-a1dd-c9ba34ba6b73",
@@ -2219,20 +2091,11 @@
                                     "color": "#7ff77d",
                                     "icon": "fa-brands fa-alipay"
                                 }
-                            ],
-                            "state": {
-                                "opened": true
-                            }
+                            ]
                         }
-                    ],
-                    "state": {
-                        "opened": true
-                    }
+                    ]
                 }
-            ],
-            "state": {
-                "opened": true
-            }
+            ]
         },
         {
             "id": "properties",
@@ -2244,7 +2107,126 @@
                 "children-type": [
                     "property"
                 ]
-            }
+            },
+            "children": [
+                {
+                    "id": "2f54e4ad-c25d-4ca9-b6de-eaa0b7a9efdc",
+                    "text": "token-validator",
+                    "li_attr": {
+                        "type": "property",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "Validation par token"
+                            },
+                            {
+                                "id": "type",
+                                "value": "switch"
+                            }
+                        ]
+                    },
+                    "icon": "fa-solid fa-scroll"
+                },
+                {
+                    "id": "a3ab5802-2f0f-47f4-86e3-606074a537a8",
+                    "text": "secure-decorator",
+                    "li_attr": {
+                        "type": "property",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "D\u00e9corateur de s\u00e9curit\u00e9"
+                            },
+                            {
+                                "id": "type",
+                                "value": "object"
+                            },
+                            {
+                                "id": "type_object",
+                                "value": "f989eafd-b38d-48b7-bbd8-57a0ce18572d"
+                            },
+                            {
+                                "id": "type_list",
+                                "value": []
+                            },
+                            {
+                                "id": "on_display",
+                                "value": ""
+                            }
+                        ]
+                    },
+                    "icon": "fa-solid fa-scroll"
+                },
+                {
+                    "id": "b1965225-e898-49d9-b7d1-9d6f01dde595",
+                    "text": "path-base-templates",
+                    "li_attr": {
+                        "type": "property",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "Chemin de base des templates"
+                            },
+                            {
+                                "id": "type",
+                                "value": "string"
+                            },
+                            {
+                                "id": "type_object",
+                                "value": "f989eafd-b38d-48b7-bbd8-57a0ce18572d"
+                            },
+                            {
+                                "id": "type_list",
+                                "value": []
+                            },
+                            {
+                                "id": "on_display",
+                                "value": ""
+                            }
+                        ]
+                    },
+                    "icon": "fa-solid fa-scroll"
+                },
+                {
+                    "id": "7a05dfc0-fcb4-413f-826e-1ef46fc58ad0",
+                    "text": "path-base-routes",
+                    "li_attr": {
+                        "type": "property",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "Chemin de base des routes"
+                            },
+                            {
+                                "id": "type",
+                                "value": "list"
+                            },
+                            {
+                                "id": "type_object",
+                                "value": "f989eafd-b38d-48b7-bbd8-57a0ce18572d"
+                            },
+                            {
+                                "id": "type_list",
+                                "value": [
+                                    {
+                                        "key": "rr",
+                                        "value": "rtttt"
+                                    },
+                                    {
+                                        "key": "f",
+                                        "value": "dgfsdg"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "on_display",
+                                "value": ""
+                            }
+                        ]
+                    },
+                    "icon": "fa-solid fa-scroll"
+                }
+            ]
         },
         {
             "id": "classes",
@@ -2257,10 +2239,7 @@
                     "classe"
                 ]
             },
-            "children": [],
-            "state": {
-                "opened": true
-            }
+            "children": []
         },
         {
             "id": "templates",
@@ -2274,10 +2253,7 @@
                     "directory_tmpl"
                 ]
             },
-            "children": [],
-            "state": {
-                "opened": true
-            }
+            "children": []
         },
         {
             "id": "javascripts",
@@ -2290,10 +2266,7 @@
                     "javascript"
                 ]
             },
-            "children": [],
-            "state": {
-                "opened": true
-            }
+            "children": []
         }
     ],
     "properties": {

@@ -4,48 +4,52 @@ class configJson(nodeElement):
     oEls = []
     def __init__(self, oProject):
         self.project = oProject
+
+        # pour les elements
         self.oEls = generator.getNodesByTypes( self.project[ 'data' ], 'elements/element' )
         for oEl in self.oEls:
             oEl[ 'items' ] = self._getItems( oEl )
 
-        print( 'rrrrrrrrrrrrrrr' )
-        """self.oRoots = []
+            # recupere les types d'enfants
+            sChildrenType = ''
         
-        # recupere les noeuds root
-        # controle la presence des references enfants
-        oTmpRoots = generator.getNodesByTypes( self.project[ 'data' ], 'roots/root' )
-        for oTmpRoot in oTmpRoots:
-            oItems = self._getItems( oTmpRoot )
-            oRoot = { 'id': oItems[ 'id' ][ 'value' ], 'text': oTmpRoot[ 'text' ] }
-            if 'icon' in oItems and oItems[ 'icon' ][ 'value' ] != '':
-                oRoot[ 'icon' ] = 'fa-' + oItems[ 'icon' ][ 'value' ][ 'style' ] + ' fa-' + oItems[ 'icon' ][ 'value' ][ 'icon' ]
-                oRoot[ 'color' ] = oItems[ 'icon' ][ 'value' ][ 'color' ]
-            
-            # pour tous les types d'enfants
-            sTypes = ''
-            oChilds = generator.getNodesByTypes( oTmpRoot, 'root/link_childs/link_child' )
-            for oRefChild in oChilds:
-                oRefItems = self._getItems( oRefChild )
+            # controle la presence des references enfants
+            oTmpChilds = generator.getNodesByTypes( oEl, 'element/element_childrens_type/element_children_type' )
+            for oTmpChild in oTmpChilds:
+                oRefItems = self._getItems( oTmpChild )
                 if 'ref_element' not in oRefItems:
                     continue
-                
+
                 # recupere le type
                 oRefNodeType = generator.getNodeById( oRefItems[ 'ref_element' ][ 'value' ], self.project[ 'data' ] )
                 if not oRefNodeType:
                     continue
-                if sTypes != '':
-                    sTypes += ', '
-                sTypes += '"' + oRefNodeType[ 'text' ].lower() + '"'
-            oRoot[ 'children-type' ] = sTypes
+                if sChildrenType != '':
+                    sChildrenType += ', '
+                sChildrenType += '"' + oRefNodeType[ 'text' ].lower() + '"'
             
-            self.oRoots.append( oRoot )"""
-    
-    """
-    # determine si la methode "getJsonCreateNewProject" doit etre implementee
-    def asGetJsonCreateNewProject(self):
-        return 'properties' in self.project and self.project[ 'properties' ][ 'impl-getJsonCreateNewProject' ]
+            oEl[ 'children-type' ] = sChildrenType
 
-    # determine si la methode "openProject" doit etre implementee
-    def asOpenProject(self):
-        return 'properties' in self.project and self.project[ 'properties' ][ 'impl-openProject' ]
-    """
+            # controle si il y a des enfants "item"
+            oChildItems = []
+            oTmpChilds = generator.getNodesByTypes( oEl, 'element/items/item' )
+            for oTmpChild in oTmpChilds:
+                oTmpChild[ 'items' ] = self._getItems( oTmpChild )
+                oChildItems.append( oTmpChild )
+
+            oEl[ 'child-items' ] = oChildItems
+
+            # determine si l'element peut etre deplace
+            oEl[ 'move-on-parent' ] = "move-on-parent" in oEl[ 'items' ] and oEl[ 'items' ][ 'move-on-parent' ]
+        
+        # pour les proprietes
+        self.oPrs = generator.getNodesByTypes( self.project[ 'data' ], 'properties/property' )
+        for oPr in self.oPrs:
+            oPr[ 'items' ] = self._getItems( oPr )
+
+    # retourne le type d'element en fonction de l'id du noeud
+    def getTypeFromId( self, sId ):
+        oRefNodeType = generator.getNodeById( sId, self.project[ 'data' ] )
+        if not oRefNodeType:
+            return ''
+        return oRefNodeType[ 'text' ]

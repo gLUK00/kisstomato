@@ -87,13 +87,20 @@ eel.open_project( getUrlParameter( 'project' ) )( function( data ){
 		oNodes.push( oItem );
 	}
 
+	// application des etats d'ouvertures et fermetures de noeuds
+	setStateOpenClode( oNodes );
+
 	$('#tree').jstree({
 		"core" : {
 			'data' : oNodes
 		}
 	});
+
+	// coloration des noeuds
 	$('#tree').on('open_node.jstree loaded.jstree ready.jstree refresh.jstree changed.jstree', async function () { nodeRefreshColor( oNodes ); });
-	
+
+	// memorisation des ouvertures et fermetures des noeuds
+	$('#tree').on('after_close.jstree after_open.jstree', async function ( e, node ) { nodeOpenClose( e, node ); });
 } );
 
 
@@ -103,7 +110,6 @@ eel.open_project( getUrlParameter( 'project' ) )( function( data ){
 
 
 /*
-
 
 chargement factice
 
