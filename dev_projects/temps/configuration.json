@@ -1,7 +1,6 @@
 {
     "title": "Application Python Flask",
-	"elements":
-	[
+	"elements":	[
 		{
 			"id": "directory-route", "text": "Répertoire", "icon": "fa-regular fa-list-alt", "color": "#ca9f53", "children-type": ["directory-route", "route"], "move-on-parent": true
 		},

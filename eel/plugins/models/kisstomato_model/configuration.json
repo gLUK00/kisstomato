@@ -77,10 +77,12 @@
 			],
 			"on-create": {
 				"add": [
+					{ "id": "constructor_args", "text": "Constructeur", "readonly": true },
 					{ "id": "methodes", "text": "Méthodes", "readonly": true }
 				]
 			}
 		},
+		{ "id": "constructor_args", "text": "Constructeur", "icon": "fa-solid fa-layer-group", "color": "#f0a728", "children-type": [ "argument" ] },
 		{ "id": "methodes", "text": "Méthodes", "icon": "fa-solid fa-layer-group", "color": "#f0a728", "children-type": [ "methode" ] },
 		{ "id": "methode", "text": "Méthode", "icon": "fa-regular fa-list-alt", "color": "#ca9f53", "children-type": [], "move-on-parent": true,
 			"items":[
