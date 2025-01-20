@@ -33,6 +33,12 @@ def generateKisstomatoCode( oData ):
         sDirOut = oData[ 'dir-out' ]
         if not os.path.isdir( sDirOut ):
             os.makedirs( sDirOut, mode = 0o777 )
+        
+        # creation des repertoires de base
+        oBaseDirs = [ 'classes', 'js', 'templates' ];
+        for sDir in oBaseDirs:
+            if not os.path.isdir( sDirTemp + os.sep + sDir ):
+                os.makedirs( sDirTemp + os.sep + sDir, mode = 0o777 )
 
         # recuperation du projet
         oProject = None
@@ -46,6 +52,18 @@ def generateKisstomatoCode( oData ):
         # pour le fichier configuration.json
         sRapport += 'Generation du fichier configuration.json\n'
         generator.genFileFromTmpl( sPathPlugin, oProject, 'configuration.json', sDirTemp + os.sep + 'configuration.json', configJson )
+
+        # pour toutes les classes
+        sRapport += 'Generation des classes :\n<ul>'
+        oClasses = generator.getNodesByTypes( oProject[ 'data' ], 'classes/classe' )
+        for oClasse in oClasses:
+            sRapport += '<li>' + oClasse[ 'text' ] + '</li>\n'
+            generator.genFileFromTmpl( sPathPlugin, oClasse, 'classe.py', sDirTemp + os.sep + 'classes' + os.sep + oClasse[ 'text' ] + '.py', tmpClasse )
+        
+
+        sRapport += '</ul>\n'
+
+        # pour le fichier __init__.py
 
 
         """"properties": [

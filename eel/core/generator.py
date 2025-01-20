@@ -223,6 +223,7 @@ def genFileFromTmpl( sPathPlugin, oNode, sFileTmpl, FileOut, cClass ):
         template = env.get_template( sFileTmpl )
         sGenCode = template.render( o=cClass(oNode) )
 
+        os.makedirs( os.path.dirname( FileOut ), exist_ok=True )
         with open( FileOut, "w", encoding="utf-8" ) as oFile:
             oFile.write( sGenCode )
         
