@@ -329,7 +329,7 @@
                 }
             ],
             "state": {
-                "opened": true
+                "opened": false
             }
         },
         {
@@ -2103,7 +2103,7 @@
                 }
             ],
             "state": {
-                "opened": true
+                "opened": false
             }
         },
         {
@@ -2300,7 +2300,10 @@
                                     "color": "#5c9226",
                                     "icon": "fa-brands fa-centercode"
                                 }
-                            ]
+                            ],
+                            "state": {
+                                "opened": true
+                            }
                         },
                         {
                             "id": "d955d15e-c688-4f7f-bd7d-6c8124db2bf2",
@@ -2321,6 +2324,10 @@
                                             {
                                                 "id": "desc",
                                                 "value": "recupere le nom"
+                                            },
+                                            {
+                                                "id": "return-val",
+                                                "value": true
                                             }
                                         ]
                                     },
@@ -2335,11 +2342,15 @@
                                                 "readonly": true
                                             },
                                             "color": "#4f9a04",
-                                            "icon": "fa-solid fa-braille"
+                                            "icon": "fa-solid fa-braille",
+                                            "children": [],
+                                            "state": {
+                                                "opened": true
+                                            }
                                         }
                                     ],
                                     "state": {
-                                        "opened": false
+                                        "opened": true
                                     }
                                 },
                                 {
@@ -2351,6 +2362,10 @@
                                             {
                                                 "id": "desc",
                                                 "value": "recupere la description"
+                                            },
+                                            {
+                                                "id": "return-val",
+                                                "value": true
                                             }
                                         ]
                                     },
@@ -2367,7 +2382,10 @@
                                             "color": "#4f9a04",
                                             "icon": "fa-solid fa-braille"
                                         }
-                                    ]
+                                    ],
+                                    "state": {
+                                        "opened": false
+                                    }
                                 },
                                 {
                                     "id": "89eb69d8-b227-4cc8-9d0b-60286b7be2eb",
@@ -2378,6 +2396,10 @@
                                             {
                                                 "id": "desc",
                                                 "value": "determine si la description doit etre affichee au demarrage"
+                                            },
+                                            {
+                                                "id": "return-val",
+                                                "value": false
                                             }
                                         ]
                                     },
@@ -2394,7 +2416,10 @@
                                             "color": "#4f9a04",
                                             "icon": "fa-solid fa-braille"
                                         }
-                                    ]
+                                    ],
+                                    "state": {
+                                        "opened": false
+                                    }
                                 },
                                 {
                                     "id": "79faf819-0be7-4b98-9eeb-a21fa3e1f7e4",
@@ -2405,6 +2430,10 @@
                                             {
                                                 "id": "desc",
                                                 "value": "recupere l'ensemble des arguments"
+                                            },
+                                            {
+                                                "id": "return-val",
+                                                "value": true
                                             }
                                         ]
                                     },
@@ -2421,7 +2450,10 @@
                                             "color": "#4f9a04",
                                             "icon": "fa-solid fa-braille"
                                         }
-                                    ]
+                                    ],
+                                    "state": {
+                                        "opened": false
+                                    }
                                 }
                             ],
                             "state": {
@@ -2450,7 +2482,52 @@
                     "directory_tmpl"
                 ]
             },
-            "children": []
+            "children": [
+                {
+                    "id": "6e4a67a6-3ed9-4038-a35f-8c366ded2cbc",
+                    "text": "base",
+                    "li_attr": {
+                        "type": "directory_tmpl"
+                    },
+                    "color": "#ccb833",
+                    "icon": "fa-solid fa-folder",
+                    "children": [
+                        {
+                            "id": "6abd633b-1097-4b42-b241-e6c8e2814422",
+                            "text": "requirements.txt",
+                            "li_attr": {
+                                "type": "template",
+                                "items": [
+                                    {
+                                        "id": "desc",
+                                        "value": ""
+                                    }
+                                ]
+                            },
+                            "color": "#7ff77d",
+                            "icon": "fa-brands fa-alipay"
+                        }
+                    ]
+                },
+                {
+                    "id": "17598d38-2d87-42ce-b273-38f494f30bdc",
+                    "text": "script.py",
+                    "li_attr": {
+                        "type": "template",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": ""
+                            }
+                        ]
+                    },
+                    "color": "#7ff77d",
+                    "icon": "fa-brands fa-alipay"
+                }
+            ],
+            "state": {
+                "opened": true
+            }
         },
         {
             "id": "javascripts",
@@ -2463,7 +2540,214 @@
                     "javascript"
                 ]
             },
-            "children": []
+            "children": [
+                {
+                    "id": "2be57a17-0fb3-4b1b-9fce-0817d285094d",
+                    "text": "front",
+                    "li_attr": {
+                        "type": "javascript",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "interface principale"
+                            }
+                        ]
+                    },
+                    "color": "#ff1414",
+                    "icon": "fa-brands fa-node-js",
+                    "children": [
+                        {
+                            "id": "492fed5c-9f91-4a79-b835-7beada03f58e",
+                            "text": "Sections",
+                            "li_attr": {
+                                "type": "js_sections",
+                                "readonly": true
+                            },
+                            "color": "#9418e7",
+                            "icon": "fa-brands fa-buffer",
+                            "children": [
+                                {
+                                    "id": "28746ee9-85f7-4821-a723-894d36c070ca",
+                                    "text": "windows_e",
+                                    "li_attr": {
+                                        "type": "section",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "\u00e9v\u00e8nement window de redimensionnent"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#9151b3",
+                                    "icon": "fa-regular fa-bookmark"
+                                }
+                            ],
+                            "state": {
+                                "opened": true
+                            }
+                        },
+                        {
+                            "id": "f482b1be-6a95-4967-9508-188079637f22",
+                            "text": "Fonctions",
+                            "li_attr": {
+                                "type": "fonctions",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group",
+                            "children": [
+                                {
+                                    "id": "2276e992-2a9f-44e2-9c26-4f6d06898474",
+                                    "text": "caculer",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "produit une addition"
+                                            },
+                                            {
+                                                "id": "return-val",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    "color": "#ca9f53",
+                                    "icon": "fa-regular fa-list-alt",
+                                    "children": [
+                                        {
+                                            "id": "a3c38512-1909-4f21-b1c4-18decd158585",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#4f9a04",
+                                            "icon": "fa-solid fa-braille",
+                                            "children": [
+                                                {
+                                                    "id": "07423a04-7272-421e-9eda-4810eb4f9a2d",
+                                                    "text": "a",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "valeur A"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "number"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#5c9226",
+                                                    "icon": "fa-brands fa-centercode"
+                                                },
+                                                {
+                                                    "id": "9bc48a0a-44fb-4f88-b5cb-46b634c91de8",
+                                                    "text": "b",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "valeur B"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "number"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#5c9226",
+                                                    "icon": "fa-brands fa-centercode"
+                                                }
+                                            ],
+                                            "state": {
+                                                "opened": true
+                                            }
+                                        }
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
+                                }
+                            ],
+                            "state": {
+                                "opened": true
+                            }
+                        },
+                        {
+                            "id": "9458ea72-a335-4de5-8b23-b4e966eba93b",
+                            "text": "JQuerys",
+                            "li_attr": {
+                                "type": "jquerys",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group",
+                            "children": [
+                                {
+                                    "id": "acfa5607-d799-4569-b798-dfd8875ce2f1",
+                                    "text": "chargement",
+                                    "li_attr": {
+                                        "type": "jquery_ready",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "lors du chargement"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#ca9f53",
+                                    "icon": "fa-regular fa-list-alt"
+                                },
+                                {
+                                    "id": "f253900f-ef1a-4105-b47e-0ae446056bf5",
+                                    "text": "clickGenCode",
+                                    "li_attr": {
+                                        "type": "jquery_on",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "click sur la g\u00e9n\u00e9ration de code"
+                                            },
+                                            {
+                                                "id": "event",
+                                                "value": "click"
+                                            },
+                                            {
+                                                "id": "selector",
+                                                "value": "#gen-code"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#ca9f53",
+                                    "icon": "fa-regular fa-list-alt"
+                                }
+                            ],
+                            "state": {
+                                "opened": true
+                            }
+                        }
+                    ],
+                    "state": {
+                        "opened": true
+                    }
+                }
+            ],
+            "state": {
+                "opened": false
+            }
         }
     ],
     "properties": {

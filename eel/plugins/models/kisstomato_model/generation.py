@@ -55,15 +55,24 @@ def generateKisstomatoCode( oData ):
 
         # pour toutes les classes
         sRapport += 'Generation des classes :\n<ul>'
-        oClasses = generator.getNodesByTypes( oProject[ 'data' ], 'classes/classe' )
-        for oClasse in oClasses:
-            sRapport += '<li>' + oClasse[ 'text' ] + '</li>\n'
+        for oClasse in generator.getNodesByTypes( oProject[ 'data' ], 'classes/classe' ):
+            sRapport += '<li>' + oClasse[ 'text' ] + '</li>'
             generator.genFileFromTmpl( sPathPlugin, oClasse, 'classe.py', sDirTemp + os.sep + 'classes' + os.sep + oClasse[ 'text' ] + '.py', tmpClasse )
-        
-
-        sRapport += '</ul>\n'
+        sRapport += '</ul>'
 
         # pour le fichier __init__.py
+        sRapport += 'Generation du fichier classes/__init__.py\n'
+        generator.genFileFromTmpl( sPathPlugin, oProject, 'classe__init__.py', sDirTemp + os.sep + 'classes' + os.sep + '__init__.py', initClasse )
+
+        # pour tous les fichiers javascript
+        sRapport += 'Generation des javascripts :\n<ul>'
+        for oJS in generator.getNodesByTypes( oProject[ 'data' ], 'javascripts/javascript' ):
+            sRapport += '<li>' + oJS[ 'text' ] + '</li>\n'
+            generator.genFileFromTmpl( sPathPlugin, oJS, 'javascript.js', sDirTemp + os.sep + 'js' + os.sep + oJS[ 'text' ] + '.js', javascript )
+        sRapport += '</ul>\n'
+
+        # pour tous les templates
+
 
 
         """"properties": [

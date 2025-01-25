@@ -1,10 +1,10 @@
-# kisstomato-imports-a-start-user-code-kisstomato
-# kisstomato-imports-a-stop-user-code-kisstomato
+# kisstomato-classe-a-start-user-code-kisstomato
+# kisstomato-classe-a-stop-user-code-kisstomato
 
 from core import generator
 
-# kisstomato-imports-b-start-user-code-kisstomato
-# kisstomato-imports-b-stop-user-code-kisstomato
+# kisstomato-classe-b-start-user-code-kisstomato
+# kisstomato-classe-b-stop-user-code-kisstomato
 
 # Script autonome
 # Argument :
@@ -21,23 +21,24 @@ class nodeScript:
 
     # recupere le nom
     def getName(self):
+        oResult = null
 
         # kisstomato-methode-getName-start-user-code-kisstomato
         # kisstomato-methode-getName-stop-user-code-kisstomato
 
-        return
+        return oResult
 
     # recupere la description
     def getDesc(self):
+        oResult = null
 
         # kisstomato-methode-getDesc-start-user-code-kisstomato
         # kisstomato-methode-getDesc-stop-user-code-kisstomato
 
-        return
+        return oResult
 
     # determine si la description doit etre affichee au demarrage
     def printDescOnStart(self):
-
         # kisstomato-methode-printDescOnStart-start-user-code-kisstomato
         # kisstomato-methode-printDescOnStart-stop-user-code-kisstomato
 
@@ -45,11 +46,15 @@ class nodeScript:
 
     # recupere l'ensemble des arguments
     def getArgs(self):
+        oResult = null
 
         # kisstomato-methode-getArgs-start-user-code-kisstomato
         # kisstomato-methode-getArgs-stop-user-code-kisstomato
 
-        return
+        return oResult
 
     # kisstomato-methodes-a-start-user-code-kisstomato
     # kisstomato-methodes-a-stop-user-code-kisstomato
+
+# kisstomato-classe-c-start-user-code-kisstomato
+# kisstomato-classe-c-stop-user-code-kisstomato

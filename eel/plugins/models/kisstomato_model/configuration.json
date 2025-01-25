@@ -86,7 +86,8 @@
 		{ "id": "methodes", "text": "Méthodes", "icon": "fa-solid fa-layer-group", "color": "#f0a728", "children-type": [ "methode" ] },
 		{ "id": "methode", "text": "Méthode", "icon": "fa-regular fa-list-alt", "color": "#ca9f53", "children-type": [], "move-on-parent": true,
 			"items":[
-				{ "id": "desc", "text": "Description", "type": "text" }
+				{ "id": "desc", "text": "Description", "type": "text" },
+				{ "id": "return-val", "text": "Retourne une valeur", "type": "switch", "value": false }
 			],
 			"on-create": {
 				"add": [
@@ -97,13 +98,9 @@
 		
 		{ "id": "on_reate_adds", "text": "On Create Add", "icon": "fa-solid fa-layer-group", "color": "#f0a728", "children-type": [ "on_reate_add" ] },
 		
-		
-
-
 		{ "id": "template", "text": "Template", "icon": "fa-brands fa-alipay", "color": "#7ff77d", "children-type": [], "move-on-parent": true,
 			"items":[
-				{ "id": "desc", "text": "Description", "type": "text" },
-				{ "id": "extesion", "text": "Extension du fichier", "value": "string" }
+				{ "id": "desc", "text": "Description", "type": "text" }
 			]
 		},
 		{ "id": "directory_tmpl", "text": "Répertoire", "icon": "fa-solid fa-folder", "color": "#ccb833", "children-type": [ "directory_tmpl", "template" ], "move-on-parent": true },
@@ -114,7 +111,8 @@
 			"on-create": {
 				"add": [
 					{ "id": "js_sections", "text": "Sections", "readonly": true },
-					{ "id": "fonctions", "text": "Fonctions", "readonly": true }
+					{ "id": "fonctions", "text": "Fonctions", "readonly": true },
+					{ "id": "jquerys", "text": "JQuerys", "readonly": true }
 				]
 			}
 		},
@@ -127,7 +125,8 @@
 		{ "id": "fonctions", "text": "Fonctions", "icon": "fa-solid fa-layer-group", "color": "#f0a728", "children-type": [ "fonction" ] },
 		{ "id": "fonction", "text": "Fonction", "icon": "fa-regular fa-list-alt", "color": "#ca9f53", "children-type": [], "move-on-parent": true,
 			"items":[
-				{ "id": "desc", "text": "Description", "type": "text" }
+				{ "id": "desc", "text": "Description", "type": "text" },
+				{ "id": "return-val", "text": "Retourne une valeur", "type": "switch", "value": false }
 			],
 			"on-create": {
 				"add": [
@@ -135,6 +134,20 @@
 				]
 			}
 		},
+		{ "id": "jquerys", "text": "JQuerys", "icon": "fa-solid fa-layer-group", "color": "#f0a728", "children-type": [ "jquery_ready", "jquery_on" ] },
+		{ "id": "jquery_ready", "text": "Ready", "icon": "fa-regular fa-list-alt", "color": "#ca9f53", "children-type": [], "move-on-parent": true,
+			"items":[
+				{ "id": "desc", "text": "Description", "type": "text" }
+			]
+		},
+		{ "id": "jquery_on", "text": "On", "icon": "fa-regular fa-list-alt", "color": "#ca9f53", "children-type": [], "move-on-parent": true,
+			"items":[
+				{ "id": "desc", "text": "Description", "type": "text" },
+				{ "id": "event", "text": "Evenement", "type": "string" },
+				{ "id": "selector", "text": "Selecteur", "type": "string" }
+			]
+		},
+
 		{ "id": "arguments", "text": "Arguments", "icon": "fa-solid fa-braille", "color": "#4f9a04", "children-type": [ "argument" ] },
 		{ "id": "argument", "text": "Argument", "icon": "fa-brands fa-centercode", "color": "#5c9226", "children-type": [], "move-on-parent": true,
 			"items":[

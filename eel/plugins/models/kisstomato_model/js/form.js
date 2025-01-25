@@ -1,4 +1,4 @@
-// sur l'affichage d'un noeud de type "item"4
+// sur l'affichage d'un noeud de type "item"
 window[ 'formShowItemTypeObject' ] = function( oForm ){
 
     for( var a=0; a<oForm.length; a++ ){

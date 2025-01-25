@@ -1,10 +1,10 @@
-# kisstomato-imports-a-start-user-code-kisstomato
-# kisstomato-imports-a-stop-user-code-kisstomato
+# kisstomato-classe-a-start-user-code-kisstomato
+# kisstomato-classe-a-stop-user-code-kisstomato
 
 from core import generator
 
-# kisstomato-imports-b-start-user-code-kisstomato
-# kisstomato-imports-b-stop-user-code-kisstomato
+# kisstomato-classe-b-start-user-code-kisstomato
+# kisstomato-classe-b-stop-user-code-kisstomato
 
 # {{ o.desc }}
 &&  if o.args|length > 0
@@ -36,13 +36,20 @@ class {{ o.node[ 'text' ] }}:
 &&          endfor
 &&      endif
     def {{ oM.name }}(self{% for oArg in oM.args %}, {{ oArg[ 'name' ] }}{% endfor %}):
+&&              if oM[ 'return-val' ]
+        oResult = null
+
+&&              endif
 
         # kisstomato-methode-{{ oM.name }}-start-user-code-kisstomato
         # kisstomato-methode-{{ oM.name }}-stop-user-code-kisstomato
 
-        return
+        return{% if oM[ 'return-val' ] %} oResult{% endif %}
 
 &&  endfor
 
     # kisstomato-methodes-a-start-user-code-kisstomato
     # kisstomato-methodes-a-stop-user-code-kisstomato
+
+# kisstomato-classe-c-start-user-code-kisstomato
+# kisstomato-classe-c-stop-user-code-kisstomato
