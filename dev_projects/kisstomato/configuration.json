@@ -1,196 +1,133 @@
 {
-    "title": "Application Python Flask",
-	"elements": [
+    "title": "Exp. Plugin Application Python Flask",
+	"elements":	[
 		{
-			"id": "directory-route", "text": "Répertoire", "icon": "fa-regular fa-list-alt", "color": "#ca9f53", "children-type": ["directory-route", "route"]
+			"id": "directory-route", "text": "directory-route", "icon": "fa-solid fa-folder", "color": "#dbd64d", "children-type": ["directory-route", "route"], "move-on-parent": true
 		},
 		{
-			"id": "directory-template", "text": "", "icon": "fa-regular fa-list-alt", "color": "#ca9f53", "children-type": ["directory-template", "template"]
+			"id": "directory-template", "text": "directory-template", "icon": "fa-solid fa-folder", "color": "#a6a6a6", "children-type": ["directory-template", "template"], "move-on-parent": true
 		},
 		{
-			"id": "routes-parameters", "text": "Paramètres", "icon": "fa-regular fa-list-alt", "color": "#ca9f53", "children-type": ["route-parameter"]
+			"id": "file-routes", "text": "file-routes", "icon": "fa-solid fa-archive", "color": "#d637e1", "children-type": ["route"], "move-on-parent": true
 		},
 		{
-			"id": "route-parameter", "text": "Paramètre", "icon": "fa-regular fa-list-alt", "color": "#ca9f53", "children-type": []
+			"id": "routes-parameters", "text": "routes-parameters", "icon": "fa-brands fa-galactic-republic", "color": "#4ddb69", "children-type": ["route-parameter"], "move-on-parent": true
+		},
+		{
+			"id": "route-parameter", "text": "route-parameter", "icon": "fa-solid fa-star-of-life", "color": "#4ddbb0", "children-type": [], "move-on-parent": true
 			,"items":[
-				{ "id": "desc", "text": "Description", "type": "object" , "filter-type": "element"
-}
-				,{ "id": "require", "text": "Obligatoire", "type": "switch" }
-				,{ "id": "type", "text": "Type de retour", "type": "list" , "items": [
-					{ "text": "Non spécifié / inconnu", "value": "none" }
-					,{ "text": "Booléen", "value": "boolean" }
-					,{ "text": "Numérique", "value": "number" }
-					,{ "text": "Chaîne de caractères", "value": "string" }
-					,{ "text": "Json", "value": "json" }
+				{ "id": "desc", "text": "Description", "type": "string", "on-display": "aaaaa" },
+				{ "id": "require", "text": "Obligatoire", "type": "switch" },
+				{ "id": "type", "text": "Type de retour", "type": "list", "items": [
+					{ "text": "Non spécifié / inconnu", "value": "none" },
+					{ "text": "Booléen", "value": "boolean" },
+					{ "text": "Numérique", "value": "number" },
+					{ "text": "Chaîne de caractères", "value": "string" },
+					{ "text": "Json", "value": "json" }
 				] }
-			],
-		},
-		{
-			"id": "route", "text": "", "icon": "fa-regular fa-list-alt", "color": "#ca9f53", "children-type": []
-			,"items":[
-				{ "id": "desc", "text": "Description", "type": "text" }
-				,{ "id": "uri", "text": "URI", "type": "text" }
-				,{ "id": "methodes", "text": "Méthodes", "type": "checkbox" , "items": [
-					{ "text": "get", "value": "GET" }
-					,{ "text": "post", "value": "POST" }
-					,{ "text": "head", "value": "HEAD" }
-				] }
-				,{ "id": "secure-decorator", "text": "Décorateur de sécurité", "type": "object" , "filter-type": ""
-}
-			],
-		},
-		{
-			"id": "template", "text": "Element de template", "icon": "fa-regular fa-list-alt", "color": "#ca9f53", "children-type": []
-			,"items":[
-				{ "id": "desc", "text": "contenu", "type": "text" }
-			],
-		},
-		{
-			"id": "module-package", "text": "Package / répertoire", "icon": "fa-regular fa-list-alt", "color": "#ca9f53", "children-type": []
-			,"items":[
-				{ "id": "desc", "text": "Description", "type": "string" }
-			],
-		},
-		{
-			"id": "module", "text": "Module", "icon": "fa-regular fa-list-alt", "color": "#ca9f53", "children-type": []
-			,"items":[
-				{ "id": "desc", "text": "Description", "type": "string" }
-			],
-		},
-		{
-			"id": "decorator", "text": "Décorateur", "icon": "fa-regular fa-list-alt", "color": "#ca9f53", "children-type": []
-			,"items":[
-				{ "id": "desc", "text": "Description", "type": "string" }
-			],
-		},
-		{
-			"id": "fonctions", "text": "Fonctions", "icon": "fa-regular fa-list-alt", "color": "#ca9f53", "children-type": ["fonction"]
-		},
-		{
-			"id": "fonction", "text": "Fonction", "icon": "fa-regular fa-list-alt", "color": "#ca9f53", "children-type": []
-			,"items":[
-				{ "id": "desc", "text": "Description", "type": "text" }
-				,{ "id": "exception", "text": "Générer d'exception", "type": "switch" }
-				,{ "id": "return", "text": "Type de retour", "type": "list" , "items": [
-					{ "text": "Aucun retour", "value": "none" }
-					,{ "text": "Booléen", "value": "boolean" }
-					,{ "text": "Numérique", "value": "number" }
-					,{ "text": "Chaîne de caractères", "value": "string" }
-					,{ "text": "Tableau", "value": "array" }
-					,{ "text": "Objet", "value": "object" }
-					,{ "text": "Fonction", "value": "function" }
-				] }
-			],
-		},
-		{
-			"id": "arguments", "text": "Arguments", "icon": "fa-regular fa-list-alt", "color": "#ca9f53", "children-type": ["argument"]
-		},
-		{
-			"id": "argument", "text": "Argument", "icon": "fa-regular fa-list-alt", "color": "#ca9f53", "children-type": []
-			,"items":[
-				{ "id": "desc", "text": "Description", "type": "text" }
-				,{ "id": "require", "text": "Obligatoire", "type": "switch" }
-				,{ "id": "type", "text": "Type", "type": "list" , "items": [
-					{ "text": "Non spécifié / inconnu", "value": "none" }
-					,{ "text": "Booléen", "value": "boolean" }
-					,{ "text": "Numérique", "value": "number" }
-					,{ "text": "Chaîne de caractères", "value": "string" }
-					,{ "text": "Tableau", "value": "array" }
-					,{ "text": "Objet", "value": "object" }
-					,{ "text": "Fonction", "value": "function" }
-				] }
-			],
-		},
-		{
-			"id": "script", "text": "Script", "icon": "fa-regular fa-list-alt", "color": "#ca9f53", "children-type": []
-			,"items":[
-				{ "id": "desc", "text": "Description", "type": "text" }
-				,{ "id": "print_desc", "text": "Afficher description", "type": "switch" }
-			],
-		},
-    ],
-	"properties": [
-	]
-}
-
-
-"move-on-parent": true ???
-
-"items": [
-                                            {
-                                                "id": "id",
-                                                "value": "return"
-                                            },
-                                            {
-                                                "id": "type",
-                                                "value": "list"
-                                            },
-                                            {
-                                                "id": "type_object",
-                                                "value": "f989eafd-b38d-48b7-bbd8-57a0ce18572d"
-                                            },
-                                            {
-                                                "id": "type_object_filter",
-                                                "value": ""
-                                            },
-                                            {
-                                                "id": "type_list",
-                                                "value": [
-                                                    {
-                                                        "key": "none",
-                                                        "value": "Aucun retour"
-                                                    },
-                                                    {
-                                                        "key": "boolean",
-                                                        "value": "Bool\u00e9en"
-                                                    },
-                                                    {
-                                                        "key": "number",
-                                                        "value": "Num\u00e9rique"
-                                                    },
-                                                    {
-                                                        "key": "string",
-                                                        "value": "Cha\u00eene de caract\u00e8res"
-                                                    },
-                                                    {
-                                                        "key": "array",
-                                                        "value": "Tableau"
-                                                    },
-                                                    {
-                                                        "key": "object",
-                                                        "value": "Objet"
-                                                    },
-                                                    {
-                                                        "key": "function",
-                                                        "value": "Fonction"
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                "id": "readonly",
-                                                "value": false
-                                            }
-
-
-{ "id": "item", "text": "Item", "icon": "fa-brands fa-node-js", "color": "#ff1414", "children-type": [], "move-on-parent": true,
-			"items":[
-				{ "id": "id", "text": "Identifiant", "type": "string" },
-				{ "id": "type", "text": "Type", "type": "list", "items": [
-					{ "text": "String", "value": "string" },
-					{ "text": "Text", "value": "text" },
-					{ "text": "Object", "value": "object" },
-					{ "text": "List", "value": "list" },
-					{ "text": "List clés / valeurs", "value": "list-key-val" },
-					{ "text": "Checkbox", "value": "checkbox" },
-					{ "text": "Radio", "value": "radio" },
-					{ "text": "Color", "value": "color" },
-					{ "text": "Icone", "value": "icone" },
-					{ "text": "Switch", "value": "switch" },
-					{ "text": "Range", "value": "range" }
-				] },
-				{ "id": "type_object", "text": "Link Object", "type": "object", "on-display": "formShowItemTypeObject", "filter-type": "element" },
-				{ "id": "type_object_filter", "text": "Filter Object", "type": "string", "on-display": "formShowItemTypeObject" },
-				{ "id": "type_list", "text": "Clés / valeurs", "type": "list-key-val" },
-				
 			]
 		},
+		{
+			"id": "route", "text": "route", "icon": "fa-solid fa-file-code", "color": "#ff4d4d", "children-type": [], "move-on-parent": true
+			,"items":[
+				{ "id": "desc", "text": "Description", "type": "text" },
+				{ "id": "uri", "text": "URI", "type": "string" },
+				{ "id": "methodes", "text": "Méthodes", "type": "checkbox", "items": [
+					{ "text": "get", "value": "GET" },
+					{ "text": "post", "value": "POST" },
+					{ "text": "head", "value": "HEAD" }
+				] },
+				{ "id": "secure", "text": "decorator Décorateur de sécurité", "type": "object", "filter-type": "decorator" }
+			]
+		},
+		{
+			"id": "template", "text": "template", "icon": "fa-brands fa-html5", "color": "#6b86ef", "children-type": [], "move-on-parent": true
+			,"items":[
+				{ "id": "desc", "text": "contenu", "type": "text" }
+			]
+		},
+		{
+			"id": "module-package", "text": "module-package", "icon": "fa-solid fa-boxes", "color": "#93b33d", "children-type": [], "move-on-parent": true
+			,"items":[
+				{ "id": "desc", "text": "Description", "type": "string" }
+			]
+		},
+		{
+			"id": "module", "text": "module", "icon": "fa-solid fa-box", "color": "#b8d567", "children-type": [], "move-on-parent": true
+			,"items":[
+				{ "id": "desc", "text": "Description", "type": "string" }
+			]
+		},
+		{
+			"id": "decorator", "text": "decorator", "icon": "fa-solid fa-camera-retro", "color": "#ec74ba", "children-type": [], "move-on-parent": true
+			,"items":[
+				{ "id": "desc", "text": "Description", "type": "string" }
+			]
+		},
+		{
+			"id": "fonctions", "text": "fonctions", "icon": "fa-brands fa-stack-overflow", "color": "#d57277", "children-type": ["fonction"], "move-on-parent": true
+		},
+		{
+			"id": "fonction", "text": "fonction", "icon": "fa-brands fa-accusoft", "color": "#f9a658", "children-type": [], "move-on-parent": true
+			,"items":[
+				{ "id": "desc", "text": "Description", "type": "text" },
+				{ "id": "exception", "text": "Générer d'exception", "type": "switch" },
+				{ "id": "return", "text": "Type de retour", "type": "list", "items": [
+					{ "text": "Aucun retour", "value": "none" },
+					{ "text": "Booléen", "value": "boolean" },
+					{ "text": "Numérique", "value": "number" },
+					{ "text": "Chaîne de caractères", "value": "string" },
+					{ "text": "Tableau", "value": "array" },
+					{ "text": "Objet", "value": "object" },
+					{ "text": "Fonction", "value": "function" }
+				] }
+			]
+			,"on-create": {
+				"add": [
+					{ "id": "arguments", "text": "Arguments", "readonly": true }
+				]
+			}
+		},
+		{
+			"id": "arguments", "text": "arguments", "icon": "fa-solid fa-th-large", "color": "#50edb8", "children-type": ["argument"], "move-on-parent": true
+		},
+		{
+			"id": "argument", "text": "argument", "icon": "fa-solid fa-star-of-life", "color": "#ec74ba", "children-type": [], "move-on-parent": true
+			,"items":[
+				{ "id": "desc", "text": "Description", "type": "text" },
+				{ "id": "require", "text": "Obligatoire", "type": "switch" },
+				{ "id": "type", "text": "Type", "type": "list", "items": [
+					{ "text": "Non spécifié / inconnu", "value": "none" },
+					{ "text": "Booléen", "value": "boolean" },
+					{ "text": "Numérique", "value": "number" },
+					{ "text": "Chaîne de caractères", "value": "string" },
+					{ "text": "Tableau", "value": "array" },
+					{ "text": "Objet", "value": "object" },
+					{ "text": "Fonction", "value": "function" }
+				] }
+			]
+		},
+		{
+			"id": "script", "text": "script", "icon": "fa-solid fa-scroll", "color": "#c972d5", "children-type": [], "move-on-parent": true
+			,"items":[
+				{ "id": "desc", "text": "Description", "type": "text" },
+				{ "id": "print_desc", "text": "Afficher description", "type": "switch" }
+			]
+			,"on-create": {
+				"add": [
+					{ "id": "arguments", "text": "Arguments", "readonly": true },
+					{ "id": "fonctions", "text": "Fonctions", "readonly": true }
+				]
+			}
+		}
+    ],
+	"properties": [
+		{ "id": "token-validator", "text": "Validation par token", "type": "switch" },
+		{ "id": "secure-decorator", "text": "Décorateur de sécurité", "type": "object" },
+		{ "id": "path-base-templates", "text": "Chemin de base des templates", "type": "string" },
+		{ "id": "path-base-routes", "text": "Chemin de base des routes", "type": "list", "items": [
+			{ "text": "rtttt", "value": "rr" },
+			{ "text": "dgfsdg", "value": "f" }
+		] }
+	]
+}

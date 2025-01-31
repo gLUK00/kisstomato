@@ -70,6 +70,7 @@ def getNodesByTypes( oNodes, sTypes ):
 
 # merge de fichiers
 def mergeFiles( sFileSource, sFileTarget, oTags ):
+    sRapport = ''
 
     # recuperation du contenu source et cible
     sContentSrc = Path( sFileSource ).read_text()
@@ -154,7 +155,7 @@ def mergeFiles( sFileSource, sFileTarget, oTags ):
 
 
 # merge de repertoires
-def mergeDirs( sDirSource, sDirTarget, oConfig=None ):
+def mergeDirs( sDirSource, sDirTarget, oConfig=None, oExcludeFiles=None ):
     sRapport = ''
     try:
 
@@ -194,7 +195,12 @@ def mergeDirs( sDirSource, sDirTarget, oConfig=None ):
                 shutil.copyfile( sElement, sElementTarget )
                 continue
 
-            sRapport += 'Merge des fichiers : ' + sElement + ' et ' + sElementTarget +  '\n'
+            # determine si le fichier doit etre exclus
+            if oExcludeFiles and sElement in oExcludeFiles:
+                sRapport += 'Exclusion du fichier : ' + sPathNameElement + '\n'
+                continue
+
+            sRapport += 'Merge des fichiers : ' + sPathNameElement + ' et ' + sElementTarget + '\n'
             oConfigMerge = {}
             if '.' + sPathNameElement in oConfig.keys():
                 oConfigMerge = oConfig[ '.' + sPathNameElement ]

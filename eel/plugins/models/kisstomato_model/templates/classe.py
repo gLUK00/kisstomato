@@ -37,7 +37,7 @@ class {{ o.node[ 'text' ] }}:
 &&      endif
     def {{ oM.name }}(self{% for oArg in oM.args %}, {{ oArg[ 'name' ] }}{% endfor %}):
 &&              if oM[ 'return-val' ]
-        oResult = null
+        oResult = None
 
 &&              endif
 

@@ -23,3 +23,12 @@ def getOne( modele ):
     sPathConfModel = glob.glob( config.getPathBase() + os.sep + 'plugins' + os.sep + 'models' + os.sep + modele + os.sep + 'configuration.json' )[ 0 ]
     f = open( sPathConfModel, 'r', encoding="utf-8" )
     return json.load(f)
+
+# recupere l'element d'un modele a partir de son ID
+def getElementById( sId, oModele ):
+
+    for oEle in oModele[ "elements" ]:
+        if oEle[ "id" ] == sId:
+            return oEle
+
+    return None

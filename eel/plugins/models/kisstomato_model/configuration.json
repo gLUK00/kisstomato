@@ -70,6 +70,16 @@
 			]
 		},
 
+		{ "id": "module", "text": "Module", "icon": "fa-brands fa-airbnb", "color": "#d38c3c", "children-type": [], "move-on-parent": true,
+			"items":[
+				{ "id": "desc", "text": "Description", "type": "text" }
+			],
+			"on-create": {
+				"add": [
+					{ "id": "fonctions", "text": "Fonctions", "readonly": true }
+				]
+			}
+		},
 
 		{ "id": "classe", "text": "Classe", "icon": "fa-brands fa-airbnb", "color": "#d38c3c", "children-type": [], "move-on-parent": true,
 			"items":[
@@ -87,7 +97,8 @@
 		{ "id": "methode", "text": "Méthode", "icon": "fa-regular fa-list-alt", "color": "#ca9f53", "children-type": [], "move-on-parent": true,
 			"items":[
 				{ "id": "desc", "text": "Description", "type": "text" },
-				{ "id": "return-val", "text": "Retourne une valeur", "type": "switch", "value": false }
+				{ "id": "return-val", "text": "Retourne une valeur", "type": "switch", "value": false },
+				{ "id": "exception", "text": "Peut générer un exception", "type": "switch", "value": false }
 			],
 			"on-create": {
 				"add": [
@@ -126,7 +137,8 @@
 		{ "id": "fonction", "text": "Fonction", "icon": "fa-regular fa-list-alt", "color": "#ca9f53", "children-type": [], "move-on-parent": true,
 			"items":[
 				{ "id": "desc", "text": "Description", "type": "text" },
-				{ "id": "return-val", "text": "Retourne une valeur", "type": "switch", "value": false }
+				{ "id": "return-val", "text": "Retourne une valeur", "type": "switch", "value": false },
+				{ "id": "exception", "text": "Peut générer un exception", "type": "switch", "value": false }
 			],
 			"on-create": {
 				"add": [

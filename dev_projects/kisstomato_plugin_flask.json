@@ -1,0 +1,415 @@
+{
+    "name": "Exp. Plugin application flask",
+    "desc": "desc plugin",
+    "model": "exp_flask",
+    "relatif-path": true,
+    "version": 2,
+    "data": [
+        {
+            "id": "templates",
+            "text": "Templates",
+            "icon": "fa-solid fa-book",
+            "color": "#56b6c2",
+            "li_attr": {
+                "readonly": true,
+                "children-type": [
+                    "template",
+                    "directory-template"
+                ]
+            },
+            "children": [
+                {
+                    "id": "150cc628-f1ea-4427-b60b-67499026c08a",
+                    "text": "index",
+                    "li_attr": {
+                        "type": "template",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "page d'accueil"
+                            }
+                        ]
+                    },
+                    "color": "#6b86ef",
+                    "icon": "fa-brands fa-html5"
+                },
+                {
+                    "id": "fc992a26-2633-4de8-9df5-438815270368",
+                    "text": "ooo",
+                    "li_attr": {
+                        "type": "template",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": ""
+                            }
+                        ]
+                    },
+                    "color": "#6b86ef",
+                    "icon": "fa-brands fa-html5"
+                }
+            ],
+            "state": {
+                "opened": false
+            }
+        },
+        {
+            "id": "routes",
+            "text": "Routes",
+            "icon": "fa-brands fa-hubspot",
+            "color": "#b366ff",
+            "li_attr": {
+                "readonly": true,
+                "children-type": [
+                    "file-routes",
+                    "directory-route"
+                ]
+            },
+            "children": [
+                {
+                    "id": "e52b8253-daa4-4bbf-a533-e4cb9b8d41e5",
+                    "text": "index",
+                    "li_attr": {
+                        "type": "file-routes"
+                    },
+                    "color": "#d637e1",
+                    "icon": "fa-solid fa-archive",
+                    "children": [
+                        {
+                            "id": "3f0bfc91-c5af-4901-a8e0-3c80f39b40ef",
+                            "text": "home",
+                            "li_attr": {
+                                "type": "route",
+                                "items": [
+                                    {
+                                        "id": "desc",
+                                        "value": "page d'accueil"
+                                    },
+                                    {
+                                        "id": "uri",
+                                        "value": ""
+                                    },
+                                    {
+                                        "id": "methodes",
+                                        "value": [
+                                            "GET",
+                                            "POST",
+                                            "HEAD"
+                                        ]
+                                    },
+                                    {
+                                        "id": "secure",
+                                        "value": "undefined"
+                                    }
+                                ]
+                            },
+                            "color": "#ff4d4d",
+                            "icon": "fa-solid fa-file-code"
+                        }
+                    ],
+                    "state": {
+                        "opened": true
+                    }
+                }
+            ],
+            "state": {
+                "opened": true
+            }
+        },
+        {
+            "id": "modules",
+            "text": "Modules",
+            "icon": "fa-solid fa-cubes",
+            "color": "#f77373",
+            "li_attr": {
+                "readonly": true,
+                "children-type": [
+                    "module"
+                ]
+            },
+            "children": [
+                {
+                    "id": "aaa66713-ce76-4878-8e43-44220750047e",
+                    "text": "generation",
+                    "li_attr": {
+                        "type": "module",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "G\u00e9n\u00e9ration du code"
+                            }
+                        ]
+                    },
+                    "color": "#b8d567",
+                    "icon": "fa-solid fa-box",
+                    "children": [
+                        {
+                            "id": "ebbfd2f6-db31-4ac8-ab03-725705421a6b",
+                            "text": "Fonctions",
+                            "li_attr": {
+                                "type": "fonctions",
+                                "readonly": true
+                            },
+                            "color": "#d57277",
+                            "icon": "fa-brands fa-stack-overflow",
+                            "children": [
+                                {
+                                    "id": "8ae36b8d-c229-458e-9107-af3d05070f80",
+                                    "text": "generateFlaskCode",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "G\u00e9n\u00e9ration de l'application Flask"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": true
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "none"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "9415aa82-3056-4f1c-9132-623d7fb940af",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "children": [
+                                                {
+                                                    "id": "df2641cc-60bc-4fab-9c60-375514bd9db3",
+                                                    "text": "data",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Donn\u00e9es du formulaire JS"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "object"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "state": {
+                "opened": true
+            }
+        },
+        {
+            "id": "decorators",
+            "text": "D\u00e9corateurs",
+            "icon": "fa-solid fa-photo-video",
+            "color": "#ec4b4b",
+            "li_attr": {
+                "readonly": true,
+                "children-type": [
+                    "decorator"
+                ]
+            }
+        },
+        {
+            "id": "scripts",
+            "text": "Scripts",
+            "icon": "fa-solid fa-scroll",
+            "color": "#263ef2",
+            "li_attr": {
+                "readonly": true,
+                "children-type": [
+                    "script"
+                ]
+            },
+            "children": [
+                {
+                    "id": "b9591049-8325-4af4-a135-26e230b9be16",
+                    "text": "initialisation",
+                    "li_attr": {
+                        "type": "script",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "script d'initialisation :\n- cr\u00e9ation et mise \u00e0 jour de la BDD,\n- v\u00e9rification des connexions."
+                            },
+                            {
+                                "id": "print_desc",
+                                "value": true
+                            }
+                        ]
+                    },
+                    "color": "#c972d5",
+                    "icon": "fa-solid fa-scroll",
+                    "children": [
+                        {
+                            "id": "af220a32-e29e-4e8c-863f-4ef10f4e076e",
+                            "text": "Arguments",
+                            "li_attr": {
+                                "type": "arguments",
+                                "readonly": true
+                            },
+                            "color": "#50edb8",
+                            "icon": "fa-solid fa-th-large"
+                        },
+                        {
+                            "id": "b866c272-63a5-4f17-85e2-530341499d39",
+                            "text": "Fonctions",
+                            "li_attr": {
+                                "type": "fonctions",
+                                "readonly": true
+                            },
+                            "color": "#d57277",
+                            "icon": "fa-brands fa-stack-overflow",
+                            "children": [
+                                {
+                                    "id": "cbb6c080-5268-4732-971e-47e223257a63",
+                                    "text": "initBdd",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Cr\u00e9ation de la base de donn\u00e9es"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": true
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "boolean"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "08bbf887-2573-4220-bd6b-3fb8e5bee786",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "children": [
+                                                {
+                                                    "id": "32947430-d3fa-4aa4-a8e9-0ce9fb592a33",
+                                                    "text": "conf",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "configuration de la BDD"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "object"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                }
+                                            ],
+                                            "state": {
+                                                "opened": true
+                                            }
+                                        }
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
+                                }
+                            ],
+                            "state": {
+                                "opened": true
+                            }
+                        }
+                    ],
+                    "state": {
+                        "opened": true
+                    }
+                },
+                {
+                    "id": "60f5b78e-a76c-4ff6-a119-ecc51e1847f9",
+                    "text": "importation",
+                    "li_attr": {
+                        "type": "script",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "Batch d'importation de l'historique des transactions"
+                            },
+                            {
+                                "id": "print_desc",
+                                "value": true
+                            }
+                        ]
+                    },
+                    "color": "#c972d5",
+                    "icon": "fa-solid fa-scroll",
+                    "children": [
+                        {
+                            "id": "c0d2a52b-5a6f-4c4f-82ce-9cf88a7c8e9f",
+                            "text": "Arguments",
+                            "li_attr": {
+                                "type": "arguments",
+                                "readonly": true
+                            },
+                            "color": "#50edb8",
+                            "icon": "fa-solid fa-th-large"
+                        },
+                        {
+                            "id": "9a6a8fb1-e2b6-48b3-b581-a0020b2098bf",
+                            "text": "Fonctions",
+                            "li_attr": {
+                                "type": "fonctions",
+                                "readonly": true
+                            },
+                            "color": "#d57277",
+                            "icon": "fa-brands fa-stack-overflow"
+                        }
+                    ],
+                    "state": {
+                        "opened": true
+                    }
+                }
+            ],
+            "state": {
+                "opened": true
+            }
+        }
+    ],
+    "properties": {}
+}

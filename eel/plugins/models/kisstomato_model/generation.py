@@ -53,6 +53,13 @@ def generateKisstomatoCode( oData ):
         sRapport += 'Generation du fichier configuration.json\n'
         generator.genFileFromTmpl( sPathPlugin, oProject, 'configuration.json', sDirTemp + os.sep + 'configuration.json', configJson )
 
+        # pour tous les modules
+        sRapport += 'Generation des modules :\n<ul>'
+        for oModule in generator.getNodesByTypes( oProject[ 'data' ], 'modules/module' ):
+            sRapport += '<li>' + oModule[ 'text' ] + '</li>'
+            generator.genFileFromTmpl( sPathPlugin, oModule, 'module.py', sDirTemp + os.sep + oModule[ 'text' ] + '.py', module )
+        sRapport += '</ul>'
+
         # pour toutes les classes
         sRapport += 'Generation des classes :\n<ul>'
         for oClasse in generator.getNodesByTypes( oProject[ 'data' ], 'classes/classe' ):
@@ -72,13 +79,35 @@ def generateKisstomatoCode( oData ):
         sRapport += '</ul>\n'
 
         # pour tous les templates
+        def genTmplInDir( oNode, sDirParent='' ):
+            oEFiles = []
+            sType = oNode[ 'id' ] if 'type' not in oNode[ 'li_attr' ] else oNode[ 'li_attr' ][ 'type' ]
+
+            # pour tous les templates
+            for oTempl in generator.getNodesByTypes( oNode, sType + '/template' ):
+                open( sDirParent + os.sep + oTempl[ 'text' ], 'a' ).close()
+                oEFiles.append( sDirParent + os.sep + oTempl[ 'text' ] )
+
+            # pour tous les dossiers
+            for oDir in generator.getNodesByTypes( oNode, sType + '/directory_tmpl' ):
+
+                # creation du repertoire
+                if not os.path.isdir( sDirParent + os.sep + oDir[ 'text' ] ):
+                    os.makedirs( sDirParent + os.sep + oDir[ 'text' ], mode = 0o777 )
+
+                # recherche recurcive
+                oEFiles += genTmplInDir( oDir, sDirParent + os.sep + oDir[ 'text' ] )
+            return oEFiles
+
+        # liste des fichiers a exclures
+        oExcludeFiles = genTmplInDir( generator.getNodeById( 'templates', oProject[ 'data' ] ), sDirTemp + os.sep + 'templates' )
 
 
+        """"
 
-        """"properties": [
-		{ "id": "impl-getJsonCreateNewProject", "text": "Implémentation de la méthode getJsonCreateNewProject", "type": "switch" },
-		{ "id": "impl-openProject", "text": "Implémentation de la méthode openProject", "type": "switch" }
-	]"""
+        
+            
+"""
 
         # pour tous les scripts
         """oScripts = generator.getNodeById( 'scripts', oProject[ 'data' ] )
@@ -92,10 +121,13 @@ def generateKisstomatoCode( oData ):
 
         # merge avec le repertoire cible
         sRapport += 'Fusion avec l\'existant :\n' + generator.mergeDirs( sDirTemp, sDirOut,
-            {
+            oConfig={
                 'html': { 'start': '<!-- kisstomato-', 'stop': ' -->' },
+                'js': { 'start': '// kisstomato-', 'stop': '-kisstomato' },
+                'py': { 'start': '# kisstomato-', 'stop': '-kisstomato' },
                 './requirements.txt': { 'start': '# kisstomato-', 'stop': '-kisstomato' }
-            }
+            },
+            oExcludeFiles=oExcludeFiles
         )
 
         # merge des fichiers particuliers

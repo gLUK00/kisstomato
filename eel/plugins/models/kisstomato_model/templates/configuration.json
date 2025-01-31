@@ -4,7 +4,7 @@
 &&  if o.oEls|length > 0
 &&      for oE in o.oEls
 		{
-			"id": "{{ oE[ 'text' ] }}", "text": "{{ oE[ 'items' ][ 'desc' ][ 'value' ] }}"{% if 'icon' in oE %}, "icon": "{{ oE[ 'icon' ] }}"{% endif %}{% if 'color' in oE %}, "color": "{{ oE[ 'color' ] }}"{% endif %}, "children-type": [{{ oE[ 'children-type' ] }}]{% if oE[ 'move-on-parent' ] %}, "move-on-parent": true{% endif %}
+			"id": "{{ oE[ 'text' ] }}", "text": "{{ oE[ 'text' ] }}"{% if 'icon' in oE %}, "icon": "{{ oE[ 'icon' ] }}"{% endif %}{% if 'color' in oE %}, "color": "{{ oE[ 'color' ] }}"{% endif %}, "children-type": [{{ oE[ 'children-type' ] }}]{% if oE[ 'move-on-parent' ] %}, "move-on-parent": true{% endif %}
 &&  		if oE[ 'child-items' ]|length > 0
 
 			,"items":[
@@ -28,6 +28,16 @@
  }{% if oCI != oE[ 'child-items' ][ -1 ] %},{% endif %}
 &&      		endfor
 			]
+&&  		endif
+&&  		if oE[ 'on-create-add' ]|length > 0
+
+			,"on-create": {
+				"add": [
+&&      		for oOC in oE[ 'on-create-add' ]
+					{ "id": "{{ oOC[ 'id' ] }}", "text": "{{ oOC[ 'text' ] }}", "readonly": true }{% if oOC != oE[ 'on-create-add' ][ -1 ] %},{% endif %}
+&&      		endfor
+				]
+			}
 &&  		endif
 		}{% if oE != o.oEls[ -1 ] %},{% endif %}
 &&      endfor

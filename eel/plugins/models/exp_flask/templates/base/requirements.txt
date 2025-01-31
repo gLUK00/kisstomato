@@ -1,0 +1,8 @@
+Flask==3.1.0
+flask-cors
+cryptography
+Flask-SocketIO
+flasgger
+Flask-APScheduler
+# kisstomato-requirements-start-user-code-kisstomato
+# kisstomato-requirements-stop-user-code-kisstomato

@@ -21,7 +21,7 @@ class nodeScript:
 
     # recupere le nom
     def getName(self):
-        oResult = None
+        oResult = null
 
         # kisstomato-methode-getName-start-user-code-kisstomato
         # kisstomato-methode-getName-stop-user-code-kisstomato
@@ -30,7 +30,7 @@ class nodeScript:
 
     # recupere la description
     def getDesc(self):
-        oResult = None
+        oResult = null
 
         # kisstomato-methode-getDesc-start-user-code-kisstomato
         # kisstomato-methode-getDesc-stop-user-code-kisstomato
@@ -46,7 +46,7 @@ class nodeScript:
 
     # recupere l'ensemble des arguments
     def getArgs(self):
-        oResult = None
+        oResult = null
 
         # kisstomato-methode-getArgs-start-user-code-kisstomato
         # kisstomato-methode-getArgs-stop-user-code-kisstomato
