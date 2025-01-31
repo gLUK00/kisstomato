@@ -1,0 +1,83 @@
+@import "app.css";
+
+body {
+    overflow:auto;
+}
+
+.env_area {
+    display: flex;
+    flex-wrap: nowrap;
+}
+.env_area > div {
+    background-color: #f1f1f1;
+    width: 50px;
+    margin: 10px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 20px;
+}
+.env_area > div.selected {
+    background-color: #ffffff;
+}
+
+
+.inv_table {
+    border: 1px solid silver;
+}
+.inv_table tr th {
+    background-color: gainsboro;
+    font-weight: bold;
+}
+.inv_table tr td {
+    border: 1px solid silver;
+}
+
+.inv_block {
+    vertical-align: top;
+    background-color: #f1f1f1;
+    display: inline-block;
+    padding: 5px;
+}
+
+
+
+
+.vip {
+    background-color: #d9ead3;
+    border: 2px solid silver;
+    padding: 2px;
+    margin-bottom: 6px;
+    margin-right: 6px;
+    max-width: calc(100% - 10px);
+    width: calc(100% - 10px);
+}
+
+.tomcat {
+    background-color: #cfe2f3;
+    border: 2px solid silver;
+    padding: 2px;
+    margin-bottom: 6px;
+    margin-right: 6px;
+    max-width: calc(100% - 10px);
+    width: calc(100% - 10px);
+}
+
+.oracle {
+    background-color: #f0ffee;
+    border: 2px solid silver;
+    padding: 2px;
+    margin-bottom: 6px;
+    margin-right: 6px;
+    max-width: calc(100% - 10px);
+    width: calc(100% - 10px);
+}
+
+.apache {
+    background-color: #ead1dc;
+    border: 2px solid silver;
+    padding: 2px;
+    margin-bottom: 6px;
+    margin-right: 6px;
+    max-width: calc(100% - 10px);
+    width: calc(100% - 10px);
+}
