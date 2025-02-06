@@ -23,11 +23,32 @@ def generateFlaskCode(data):
     oResult = None
 
     # kisstomato-fonction-generateFlaskCode-init-start-user-code-kisstomato
+    sPathPlugin = os.path.dirname( os.path.abspath(__file__) )
+    oResult = 'Le rapport de génération\n\n'
     # kisstomato-fonction-generateFlaskCode-init-stop-user-code-kisstomato
 
     try:
         # kisstomato-fonction-generateFlaskCode-try-start-user-code-kisstomato
-        oResult = 'tttt'
+        
+        # si les parametres doivent etre sauvegardes
+        if "save-params" in data and data[ "save-params" ]:
+
+            print( 'enregistrement des parametres' )
+
+        # supprime et creer le repertoire temporaire
+        sDirTemp = data[ 'dir-temp' ]
+        if os.path.isdir( sDirTemp ):
+            shutil.rmtree( sDirTemp )
+        os.makedirs( sDirTemp, mode = 0o777 )
+
+        # si le repertoire de sortie n'existe pas
+        sDirOut = data[ 'dir-out' ]
+        if not os.path.isdir( sDirOut ):
+            os.makedirs( sDirOut, mode = 0o777 )
+        
+        
+        
+        
         # kisstomato-fonction-generateFlaskCode-try-stop-user-code-kisstomato
 
     except Exception as e:
