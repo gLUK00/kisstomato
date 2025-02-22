@@ -125,6 +125,7 @@ def generateKisstomatoCode( oData ):
                 'html': { 'start': '<!-- kisstomato-', 'stop': ' -->' },
                 'js': { 'start': '// kisstomato-', 'stop': '-kisstomato' },
                 'py': { 'start': '# kisstomato-', 'stop': '-kisstomato' },
+                'sh': { 'start': '# kisstomato-', 'stop': '-kisstomato' },
                 './requirements.txt': { 'start': '# kisstomato-', 'stop': '-kisstomato' }
             },
             oExcludeFiles=oExcludeFiles

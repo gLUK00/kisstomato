@@ -1,0 +1,63 @@
+#header {
+  background-color: white;
+  text-align: center;
+  vertical-align: middle;
+  right: 10px;
+  position: absolute;
+  width: calc(100% - 210px);
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#header div {
+  display: inline-flex;
+  margin: 6px;
+  align-items: center;
+  font-size: 18px;
+}
+
+#header-checkbox {
+  display: flex;
+  align-items: center;
+  margin-right: 16px;
+}
+label > span {
+  margin-right: 5px;
+}
+#header-checkbox > * {
+  cursor: default;
+}
+.header-left,
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
+#header-previous {
+  margin-right: 10px;
+  margin-left: 10px;
+  display: none;
+}
+
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+.title {
+  text-align: center;
+  display: block;
+  font-size: 25px;
+  margin: 6px;
+}
+
+.sub-title {
+  text-align: center;
+  display: block;
+  font-weight: bolder;
+  margin: 6px;
+}

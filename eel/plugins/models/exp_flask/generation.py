@@ -46,6 +46,20 @@ def generateFlaskCode(data):
         if not os.path.isdir( sDirOut ):
             os.makedirs( sDirOut, mode = 0o777 )
         
+        # copie des fichiers de base
+        oResult += 'Copie des fichiers de base :\n' + generator.mergeDirs( sPathPlugin + os.sep + 'templates' + os.sep + 'base', sDirTemp )
+        
+        # merge avec le repertoire cible
+        oResult += 'Fusion avec l\'existant :\n' + generator.mergeDirs( sDirTemp, sDirOut,
+            oConfig={
+                'html': { 'start': '<!-- kisstomato-', 'stop': ' -->' },
+                'js': { 'start': '// kisstomato-', 'stop': '-kisstomato' },
+                'py': { 'start': '# kisstomato-', 'stop': '-kisstomato' },
+                'sh': { 'start': '# kisstomato-', 'stop': '-kisstomato' },
+                'bat': { 'start': 'rem kisstomato-', 'stop': '-kisstomato' },
+                './requirements.txt': { 'start': '# kisstomato-', 'stop': '-kisstomato' }
+            }
+        )
         
         
         
@@ -57,6 +71,10 @@ def generateFlaskCode(data):
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
         # kisstomato-exception-generateFlaskCode-b-start-user-code-kisstomato
+        print("------ ERROR ------")
+        print(str( e ))
+        print((exc_type, fname, exc_tb.tb_lineno))
+        oResult += '\nError : ' + str( e ) + '\n' + str(exc_type) + ' : ' + str(fname) + ' : ' + str(exc_tb.tb_lineno)
         # kisstomato-exception-generateFlaskCode-b-stop-user-code-kisstomato
 
     # kisstomato-return-generateFlaskCode-return-start-user-code-kisstomato
