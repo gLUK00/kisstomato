@@ -1,5 +1,6 @@
 
 simple_front/node_modules/**
-eel/venv/**
+#eel/venv/**
 *.pyc
 example/**
+**/venv/**
