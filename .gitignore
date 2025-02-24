@@ -4,3 +4,4 @@ simple_front/node_modules/**
 *.pyc
 example/**
 **/venv/**
+dev_projects/**

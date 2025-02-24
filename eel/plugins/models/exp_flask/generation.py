@@ -10,6 +10,7 @@ currentdir = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(currentdir)
 
 from classes import *
+from helpers import io
 
 # kisstomato-module-b-start-user-code-kisstomato
 # kisstomato-module-b-stop-user-code-kisstomato
@@ -45,6 +46,26 @@ def generateFlaskCode(data):
         sDirOut = data[ 'dir-out' ]
         if not os.path.isdir( sDirOut ):
             os.makedirs( sDirOut, mode = 0o777 )
+        
+        # creation d'un fichier de configuration de base
+        oConf = {
+            'port': 8080,
+            'host': '0.0.0.0',
+            'debug': True
+        }
+        
+        # si il y a un fichier de configuration existant
+        if os.path.isfile( sDirOut + os.sep + 'configuration.json' ):
+            
+            # recupere les valeurs de l'existant
+            oConfEXist = json.load( open( sDirOut + os.sep + 'configuration.json' ) )
+            for sKey in oConf:
+                if sKey not in oConfEXist:
+                    oConfEXist[ sKey ] = oConf[ sKey ]
+            oConf = oConfEXist
+        
+        # creation du fichier de configuration
+        io.createJsonFile( sDirTemp + os.sep + 'configuration.json', oConf )
         
         # copie des fichiers de base
         oResult += 'Copie des fichiers de base :\n' + generator.mergeDirs( sPathPlugin + os.sep + 'templates' + os.sep + 'base', sDirTemp )

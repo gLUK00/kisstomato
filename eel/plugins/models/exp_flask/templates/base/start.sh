@@ -13,14 +13,17 @@ source venv/bin/activate
 # kisstomato-start-sh-c-start-user-code-kisstomato
 # kisstomato-start-sh-c-stop-user-code-kisstomato
 
-# lancement de l'application
+# installation des packages
 pip install -r requirements.txt
+
+# definition du fichier de configuration
+conf="configuration.json"
 
 # kisstomato-start-sh-d-start-user-code-kisstomato
 # kisstomato-start-sh-d-stop-user-code-kisstomato
 
 # lancement de l'application
-python3 api.py
+python3 api.py $conf
 
 # kisstomato-start-sh-e-start-user-code-kisstomato
 # kisstomato-start-sh-e-stop-user-code-kisstomato

@@ -10,10 +10,13 @@ rem kisstomato-start-sh-b-stop-user-code-kisstomato
 
 pip install -r requirements.txt
 
+rem definition du fichier de configuration
+SET conf="configuration.json"
+
 rem kisstomato-start-sh-c-start-user-code-kisstomato
 rem kisstomato-start-sh-c-stop-user-code-kisstomato
 
-python flask_app.py
+python flask_app.py %conf%
 
 rem kisstomato-start-sh-d-start-user-code-kisstomato
 rem kisstomato-start-sh-d-stop-user-code-kisstomato
