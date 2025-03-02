@@ -1,4 +1,4 @@
-import os, gl
+import os, gl, sys, json
 
 from flask import Flask, render_template
 from flask_cors import CORS
@@ -15,6 +15,10 @@ CORS(app)
 # mise en place du socket
 gl.socketio = SocketIO( app, cors_allowed_origins="*" )
 
+# recuperation du fichier de configuration
+configFile = os.path.dirname(os.path.realpath(__file__)) + os.sep + sys.argv[ 1 ]
+gl.config = json.load( open( configFile ) )
+
 # importation des routes
 from fl_routes import routes
 
@@ -24,4 +28,4 @@ app.register_blueprint(routes)
 def home():
    return render_template('index.html')
 
-gl.socketio.run(app, host="0.0.0.0", port=8080, debug=True, allow_unsafe_werkzeug=True)
+gl.socketio.run(app, host=gl.config[ 'host' ], port=gl.config[ 'port' ], debug=gl.config[ 'debug' ], allow_unsafe_werkzeug=True)

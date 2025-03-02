@@ -1,4 +1,4 @@
-import os, gl
+import os, gl, sys
 
 from flask import Flask, render_template
 from flask_cors import CORS
@@ -14,6 +14,10 @@ CORS(app)
 
 # mise en place du socket
 gl.socketio = SocketIO( app, cors_allowed_origins="*" )
+
+# recuperation du fichier de configuration
+configFile = sys.argv[ 1 ]
+print( configFile )
 
 # importation des routes
 from fl_routes import routes

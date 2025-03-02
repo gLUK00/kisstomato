@@ -23,7 +23,7 @@ conf="configuration.json"
 # kisstomato-start-sh-d-stop-user-code-kisstomato
 
 # lancement de l'application
-python3 api.py $conf
+python3 flask_app.py $conf
 
 # kisstomato-start-sh-e-start-user-code-kisstomato
 # kisstomato-start-sh-e-stop-user-code-kisstomato

@@ -193,6 +193,15 @@ $( document ).on( "click", "#properties_project", function( e ) {
 			oProperty[ 'value' ] = oPropertiesProject[ oProperty[ 'id' ] ];
 		}
 
+		// pour les listes
+		if( oProperty[ 'type' ] == 'list' ){
+			oProperty[ 'k-key' ] = 'value';
+			oProperty[ 'k-value' ] = 'text';
+			oProperty[ 'value' ] = oProperty[ 'items' ];
+
+			
+		}
+
 		oData.push( oProperty );
 	}
 
