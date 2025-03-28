@@ -51,7 +51,7 @@ eel.open_project( getUrlParameter( 'project' ) )( function( data ){
 	// alimente le type
 	oInfoProject = data[ 'info' ];
 	$( 'title' ).html( data[ 'model' ][ 'title' ] + ' : ' + oInfoProject[ 'name' ] );
-	$( '#project_title' ).html( data[ 'model' ][ 'title' ] + ' : ' + oInfoProject[ 'name' ] );
+	$( '#project_title' ).html( '<span class="badge text-bg-info">' + data[ 'model' ][ 'title' ] + '</span> ' + oInfoProject[ 'name' ] );
 
 	// si le projet a des proprietes
 	if( data[ 'properties' ] !== undefined ){
@@ -215,7 +215,9 @@ $( document ).on( "click", "#properties_project", function( e ) {
 			oPropertiesProject[ oProperty[ 'id' ] ] = oResults[ 'prop-' + oProperty[ 'id' ] ];
 		}
 
-		modelSaveProjectModel( getUrlParameter( 'project' ), { 'name': oInfoProject[ 'name' ], 'desc': oInfoProject[ 'desc' ], 'properties': oPropertiesProject }, oNodes );
+		modelSaveProjectModel( getUrlParameter( 'project' ), { 'name': oInfoProject[ 'name' ], 'desc': oInfoProject[ 'desc' ], 'properties': oPropertiesProject }, oNodes, function(){
+			$( '#project_title' ).html( '<span class="badge text-bg-info">' + oModel[ 'title' ] + '</span> ' + oInfoProject[ 'name' ] );
+		} );
 		return true;
 
 

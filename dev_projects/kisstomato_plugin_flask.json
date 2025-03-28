@@ -1,6 +1,6 @@
 {
-    "name": "Exp. Plugin application flask",
-    "desc": "desc plugin",
+    "name": "Agent IA",
+    "desc": "ma premier application Flask",
     "model": "exp_flask",
     "relatif-path": true,
     "version": 2,
@@ -35,7 +35,7 @@
                 },
                 {
                     "id": "fc992a26-2633-4de8-9df5-438815270368",
-                    "text": "ooo",
+                    "text": "login",
                     "li_attr": {
                         "type": "template",
                         "items": [
@@ -50,7 +50,7 @@
                 }
             ],
             "state": {
-                "opened": false
+                "opened": true
             }
         },
         {
@@ -129,14 +129,14 @@
             },
             "children": [
                 {
-                    "id": "aaa66713-ce76-4878-8e43-44220750047e",
-                    "text": "generation",
+                    "id": "d205fb33-cd15-457a-984a-87cdf0fb51c5",
+                    "text": "configuration",
                     "li_attr": {
                         "type": "module",
                         "items": [
                             {
                                 "id": "desc",
-                                "value": "G\u00e9n\u00e9ration du code"
+                                "value": "gestion de la configuration"
                             }
                         ]
                     },
@@ -144,7 +144,7 @@
                     "icon": "fa-solid fa-box",
                     "children": [
                         {
-                            "id": "ebbfd2f6-db31-4ac8-ab03-725705421a6b",
+                            "id": "e9a98c04-c931-42f7-8ebb-6b4cd52e931b",
                             "text": "Fonctions",
                             "li_attr": {
                                 "type": "fonctions",
@@ -154,14 +154,14 @@
                             "icon": "fa-brands fa-stack-overflow",
                             "children": [
                                 {
-                                    "id": "8ae36b8d-c229-458e-9107-af3d05070f80",
-                                    "text": "generateFlaskCode",
+                                    "id": "0167840d-c428-43ed-b788-37b8c7b4050f",
+                                    "text": "load",
                                     "li_attr": {
                                         "type": "fonction",
                                         "items": [
                                             {
                                                 "id": "desc",
-                                                "value": "G\u00e9n\u00e9ration de l'application Flask"
+                                                "value": "chargement de la configuration"
                                             },
                                             {
                                                 "id": "exception",
@@ -177,7 +177,7 @@
                                     "icon": "fa-brands fa-accusoft",
                                     "children": [
                                         {
-                                            "id": "9415aa82-3056-4f1c-9132-623d7fb940af",
+                                            "id": "8945d5ff-1d03-47b6-b2b0-1c51372b2950",
                                             "text": "Arguments",
                                             "li_attr": {
                                                 "type": "arguments",
@@ -187,14 +187,14 @@
                                             "icon": "fa-solid fa-th-large",
                                             "children": [
                                                 {
-                                                    "id": "df2641cc-60bc-4fab-9c60-375514bd9db3",
-                                                    "text": "data",
+                                                    "id": "6a04e218-6ec4-4e05-b4bd-3f49e2a23cad",
+                                                    "text": "conf",
                                                     "li_attr": {
                                                         "type": "argument",
                                                         "items": [
                                                             {
                                                                 "id": "desc",
-                                                                "value": "Donn\u00e9es du formulaire JS"
+                                                                "value": "nom du fichier de configuration"
                                                             },
                                                             {
                                                                 "id": "require",
@@ -202,7 +202,7 @@
                                                             },
                                                             {
                                                                 "id": "type",
-                                                                "value": "object"
+                                                                "value": "string"
                                                             }
                                                         ]
                                                     },
@@ -334,7 +334,7 @@
                                                             },
                                                             {
                                                                 "id": "type",
-                                                                "value": "object"
+                                                                "value": "string"
                                                             }
                                                         ]
                                                     },
@@ -388,7 +388,35 @@
                                 "readonly": true
                             },
                             "color": "#50edb8",
-                            "icon": "fa-solid fa-th-large"
+                            "icon": "fa-solid fa-th-large",
+                            "children": [
+                                {
+                                    "id": "2e6602cd-ea6a-42a5-b4f0-281ffb85c0c6",
+                                    "text": "pair",
+                                    "li_attr": {
+                                        "type": "argument",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": ""
+                                            },
+                                            {
+                                                "id": "require",
+                                                "value": true
+                                            },
+                                            {
+                                                "id": "type",
+                                                "value": "string"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#ec74ba",
+                                    "icon": "fa-solid fa-star-of-life"
+                                }
+                            ],
+                            "state": {
+                                "opened": true
+                            }
                         },
                         {
                             "id": "9a6a8fb1-e2b6-48b3-b581-a0020b2098bf",
@@ -411,5 +439,10 @@
             }
         }
     ],
-    "properties": {}
+    "properties": {
+        "token-validator": false,
+        "secure-decorator": "undefined",
+        "path-base-templates": "",
+        "path-base-routes": "3f0bfc91-c5af-4901-a8e0-3c80f39b40ef"
+    }
 }

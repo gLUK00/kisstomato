@@ -1,7 +1,7 @@
 # kisstomato-classe-a-start-user-code-kisstomato
 # kisstomato-classe-a-stop-user-code-kisstomato
 
-from core import generator
+from core import generator, nodeElement
 
 # kisstomato-classe-b-start-user-code-kisstomato
 # kisstomato-classe-b-stop-user-code-kisstomato
@@ -13,7 +13,7 @@ from core import generator
 # - {{ oArg[ 'name' ] }} : {{ oArg[ 'type' ] }} : {% if oArg[ 'require' ] %}(obligatoire) {% endif %}{{ oArg[ 'desc' ] }}
 &&      endfor
 &&  endif
-class {{ o.node[ 'text' ] }}:
+class {{ o.node[ 'text' ] }}(nodeElement):
     def __init__(self{% for oArg in o.args %}, {{ oArg[ 'name' ] }}{% endfor %}):
 &&  for oArg in o.args
         # kisstomato-init-a-start-user-code-kisstomato

@@ -10,9 +10,9 @@ currentdir = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(currentdir)
 
 from classes import *
-from helpers import io
 
 # kisstomato-module-b-start-user-code-kisstomato
+from helpers import io
 # kisstomato-module-b-stop-user-code-kisstomato
 
 # Génération du code
@@ -46,6 +46,23 @@ def generateFlaskCode(data):
         sDirOut = data[ 'dir-out' ]
         if not os.path.isdir( sDirOut ):
             os.makedirs( sDirOut, mode = 0o777 )
+        
+        # recuperation du projet
+        oProject = None
+        with open( data[ 'file' ], 'r' ) as j:
+            oProject = json.loads(j.read())
+        
+        # generation des scripts
+        oScripts = generator.getNodesByTypes( oProject[ 'data' ], 'scripts/script' )
+        if len( oScripts ) > 0:
+            os.makedirs( sDirTemp + os.sep + 'scripts', mode = 0o777 )
+            
+            # pour tous les scripts
+            for oScript in oScripts:
+                
+                # pour le fichier model.py
+                oResult += 'Generation du fichier script.py\n'
+                generator.genFileFromTmpl( sPathPlugin, oScript, 'script.py', sDirTemp + os.sep + 'scripts' + os.sep + oScript[ 'text' ] + '.py', nodeScript )
         
         # creation d'un fichier de configuration de base
         oConf = {

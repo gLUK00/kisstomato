@@ -16,7 +16,7 @@ function modelSaveProjectModel( filename, properties, data, eOnSave ){
 	eel.update_project( filename, properties, data )( function( result ){
 
 		if( eOnSave != undefined ){
-			eOnSave();
+			eOnSave( result );
 		}
 	} );
 }

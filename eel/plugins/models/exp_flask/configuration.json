@@ -124,9 +124,6 @@
 		{ "id": "token-validator", "text": "Validation par token", "type": "switch" },
 		{ "id": "secure-decorator", "text": "Décorateur de sécurité", "type": "object" },
 		{ "id": "path-base-templates", "text": "Chemin de base des templates", "type": "string" },
-		{ "id": "path-base-routes", "text": "Chemin de base des routes", "type": "list", "items": [
-			{ "text": "rtttt", "value": "rr" },
-			{ "text": "dgfsdg", "value": "f" }
-		] }
+		{ "id": "path-base-routes", "text": "Chemin de base des routes", "type": "object" }
 	]
 }

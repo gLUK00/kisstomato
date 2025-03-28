@@ -335,9 +335,15 @@
                                     "color": "#7ff77d",
                                     "icon": "fa-brands fa-alipay"
                                 }
-                            ]
+                            ],
+                            "state": {
+                                "opened": true
+                            }
                         }
-                    ]
+                    ],
+                    "state": {
+                        "opened": true
+                    }
                 }
             ],
             "state": {
@@ -2249,24 +2255,15 @@
                             },
                             {
                                 "id": "type",
-                                "value": "list"
+                                "value": "object"
                             },
                             {
                                 "id": "type_object",
-                                "value": "f989eafd-b38d-48b7-bbd8-57a0ce18572d"
+                                "value": "d2d828aa-7a5f-445d-abaf-c66ac44e67b4"
                             },
                             {
                                 "id": "type_list",
-                                "value": [
-                                    {
-                                        "key": "rr",
-                                        "value": "rtttt"
-                                    },
-                                    {
-                                        "key": "f",
-                                        "value": "dgfsdg"
-                                    }
-                                ]
+                                "value": []
                             },
                             {
                                 "id": "on_display",
@@ -2278,7 +2275,7 @@
                 }
             ],
             "state": {
-                "opened": false
+                "opened": true
             }
         },
         {
@@ -2558,6 +2555,10 @@
                                             },
                                             {
                                                 "id": "return-val",
+                                                "value": true
+                                            },
+                                            {
+                                                "id": "exception",
                                                 "value": false
                                             }
                                         ]
@@ -2688,7 +2689,7 @@
                 }
             ],
             "state": {
-                "opened": false
+                "opened": true
             }
         },
         {

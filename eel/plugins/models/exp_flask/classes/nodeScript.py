@@ -1,7 +1,7 @@
 # kisstomato-classe-a-start-user-code-kisstomato
 # kisstomato-classe-a-stop-user-code-kisstomato
 
-from core import generator
+from core import generator, nodeElement
 
 # kisstomato-classe-b-start-user-code-kisstomato
 # kisstomato-classe-b-stop-user-code-kisstomato
@@ -9,7 +9,7 @@ from core import generator
 # Script autonome
 # Argument :
 # - node : object : (obligatoire) noeud du script
-class nodeScript:
+class nodeScript(nodeElement):
     def __init__(self, node):
         # kisstomato-init-a-start-user-code-kisstomato
         # kisstomato-init-a-stop-user-code-kisstomato
@@ -17,6 +17,12 @@ class nodeScript:
         self.node = node
 
         # kisstomato-init-b-start-user-code-kisstomato
+        self.items = self._getItems( node )
+        
+        self.args = []
+        for oArg in generator.getNodesByTypes( self.node, 'script/arguments/argument' ):
+            oItems = self._getItems( oArg )
+            self.args.append( { "name": oArg[ "text" ], "desc": oItems[ "desc" ][ 'value' ], "require": oItems[ "require" ][ 'value' ] == True, "type": oItems[ "type" ][ 'value' ] })
         # kisstomato-init-b-stop-user-code-kisstomato
 
     # recupere le nom
@@ -24,6 +30,7 @@ class nodeScript:
         oResult = None
 
         # kisstomato-methode-getName-start-user-code-kisstomato
+        oResult = self.node[ 'text' ]
         # kisstomato-methode-getName-stop-user-code-kisstomato
 
         return oResult
@@ -33,22 +40,27 @@ class nodeScript:
         oResult = None
 
         # kisstomato-methode-getDesc-start-user-code-kisstomato
+        oResult = self.items[ 'desc' ][ 'value' ]
         # kisstomato-methode-getDesc-stop-user-code-kisstomato
 
         return oResult
 
     # determine si la description doit etre affichee au demarrage
     def printDescOnStart(self):
+        oResult = None
+
         # kisstomato-methode-printDescOnStart-start-user-code-kisstomato
+        oResult = self.items[ 'print_desc' ][ 'value' ] == True
         # kisstomato-methode-printDescOnStart-stop-user-code-kisstomato
 
-        return
+        return oResult
 
     # recupere l'ensemble des arguments
     def getArgs(self):
         oResult = None
 
         # kisstomato-methode-getArgs-start-user-code-kisstomato
+        oResult = self.args
         # kisstomato-methode-getArgs-stop-user-code-kisstomato
 
         return oResult

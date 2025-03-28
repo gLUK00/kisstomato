@@ -18,8 +18,6 @@ gl.socketio = SocketIO( app, cors_allowed_origins="*" )
 # recuperation du fichier de configuration
 configFile = os.path.dirname(os.path.realpath(__file__)) + os.sep + sys.argv[ 1 ]
 gl.config = json.load( open( configFile ) )
-print( configFile )
-print( gl.config )
 
 # importation des routes
 from fl_routes import routes

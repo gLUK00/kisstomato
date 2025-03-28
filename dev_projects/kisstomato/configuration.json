@@ -47,16 +47,15 @@
 			]
 		},
 		{
-			"id": "module-package", "text": "module-package", "icon": "fa-solid fa-boxes", "color": "#93b33d", "children-type": [], "move-on-parent": true
-			,"items":[
-				{ "id": "desc", "text": "Description", "type": "string" }
-			]
-		},
-		{
 			"id": "module", "text": "module", "icon": "fa-solid fa-box", "color": "#b8d567", "children-type": [], "move-on-parent": true
 			,"items":[
 				{ "id": "desc", "text": "Description", "type": "string" }
 			]
+			,"on-create": {
+				"add": [
+					{ "id": "fonctions", "text": "Fonctions", "readonly": true }
+				]
+			}
 		},
 		{
 			"id": "decorator", "text": "decorator", "icon": "fa-solid fa-camera-retro", "color": "#ec74ba", "children-type": [], "move-on-parent": true
@@ -125,9 +124,6 @@
 		{ "id": "token-validator", "text": "Validation par token", "type": "switch" },
 		{ "id": "secure-decorator", "text": "Décorateur de sécurité", "type": "object" },
 		{ "id": "path-base-templates", "text": "Chemin de base des templates", "type": "string" },
-		{ "id": "path-base-routes", "text": "Chemin de base des routes", "type": "list", "items": [
-			{ "text": "rtttt", "value": "rr" },
-			{ "text": "dgfsdg", "value": "f" }
-		] }
+		{ "id": "path-base-routes", "text": "Chemin de base des routes", "type": "object" }
 	]
 }

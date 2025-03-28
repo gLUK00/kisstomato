@@ -21,7 +21,7 @@ class nodeScript:
 
     # recupere le nom
     def getName(self):
-        oResult = null
+        oResult = None
 
         # kisstomato-methode-getName-start-user-code-kisstomato
         # kisstomato-methode-getName-stop-user-code-kisstomato
@@ -30,7 +30,7 @@ class nodeScript:
 
     # recupere la description
     def getDesc(self):
-        oResult = null
+        oResult = None
 
         # kisstomato-methode-getDesc-start-user-code-kisstomato
         # kisstomato-methode-getDesc-stop-user-code-kisstomato
@@ -39,14 +39,16 @@ class nodeScript:
 
     # determine si la description doit etre affichee au demarrage
     def printDescOnStart(self):
+        oResult = None
+
         # kisstomato-methode-printDescOnStart-start-user-code-kisstomato
         # kisstomato-methode-printDescOnStart-stop-user-code-kisstomato
 
-        return
+        return oResult
 
     # recupere l'ensemble des arguments
     def getArgs(self):
-        oResult = null
+        oResult = None
 
         # kisstomato-methode-getArgs-start-user-code-kisstomato
         # kisstomato-methode-getArgs-stop-user-code-kisstomato
