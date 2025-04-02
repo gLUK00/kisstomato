@@ -204,7 +204,7 @@
                             "children": [
                                 {
                                     "id": "19c2e681-6349-4b6c-896f-9899c15da2aa",
-                                    "text": "",
+                                    "text": "module",
                                     "li_attr": {
                                         "type": "link_child",
                                         "items": [
@@ -2137,6 +2137,21 @@
                                     },
                                     "color": "#7ff77d",
                                     "icon": "fa-brands fa-alipay"
+                                },
+                                {
+                                    "id": "972f61d7-eb48-4d0d-846b-9ae38b675944",
+                                    "text": "sections",
+                                    "li_attr": {
+                                        "type": "element_on_create_add",
+                                        "items": [
+                                            {
+                                                "id": "ref_element",
+                                                "value": "281ed1f3-52be-4255-8af5-cf1ee3fc3866"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#7ff77d",
+                                    "icon": "fa-brands fa-alipay"
                                 }
                             ],
                             "state": {
@@ -2147,6 +2162,174 @@
                     "state": {
                         "opened": true
                     }
+                },
+                {
+                    "id": "281ed1f3-52be-4255-8af5-cf1ee3fc3866",
+                    "text": "sections",
+                    "li_attr": {
+                        "type": "element",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "Liste des sections"
+                            },
+                            {
+                                "id": "icon",
+                                "value": {
+                                    "icon": "border-all",
+                                    "color": "#3382cc",
+                                    "style": "solid"
+                                }
+                            },
+                            {
+                                "id": "move-on-parent",
+                                "value": false
+                            }
+                        ]
+                    },
+                    "color": "#ca9f53",
+                    "icon": "fa-regular fa-list-alt",
+                    "children": [
+                        {
+                            "id": "2b17a88d-de7c-4a5d-9ae2-da3f143afb97",
+                            "text": "Children type",
+                            "li_attr": {
+                                "type": "element_childrens_type",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group",
+                            "children": [
+                                {
+                                    "id": "d8451082-ff66-41f9-9dba-bf9f2ef5e2ee",
+                                    "text": "section",
+                                    "li_attr": {
+                                        "type": "element_children_type",
+                                        "items": [
+                                            {
+                                                "id": "ref_element",
+                                                "value": "f80b6006-9357-4446-96b2-daa0c7b103d5"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#7ff77d",
+                                    "icon": "fa-brands fa-alipay"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "3761415a-7d41-4fe5-9084-bdde06764d4b",
+                            "text": "Items",
+                            "li_attr": {
+                                "type": "items",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group"
+                        },
+                        {
+                            "id": "1f6e6e61-f729-44a8-ab20-4e4faf4d31ab",
+                            "text": "Add on-create",
+                            "li_attr": {
+                                "type": "on_create_add",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group"
+                        }
+                    ]
+                },
+                {
+                    "id": "f80b6006-9357-4446-96b2-daa0c7b103d5",
+                    "text": "section",
+                    "li_attr": {
+                        "type": "element",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "Une section"
+                            },
+                            {
+                                "id": "icon",
+                                "value": {
+                                    "icon": "border-style",
+                                    "color": "#177ede",
+                                    "style": "solid"
+                                }
+                            },
+                            {
+                                "id": "move-on-parent",
+                                "value": true
+                            }
+                        ]
+                    },
+                    "color": "#ca9f53",
+                    "icon": "fa-regular fa-list-alt",
+                    "children": [
+                        {
+                            "id": "bc0f04b2-d42e-4b93-9a06-2ae1f75745f4",
+                            "text": "Children type",
+                            "li_attr": {
+                                "type": "element_childrens_type",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group"
+                        },
+                        {
+                            "id": "6b3df616-5f2e-4ec1-aa0c-01efc5681b4b",
+                            "text": "Items",
+                            "li_attr": {
+                                "type": "items",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group",
+                            "children": [
+                                {
+                                    "id": "2fa99b9f-9df2-473d-833e-72c474655169",
+                                    "text": "desc",
+                                    "li_attr": {
+                                        "type": "item",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "description"
+                                            },
+                                            {
+                                                "id": "type",
+                                                "value": "text"
+                                            },
+                                            {
+                                                "id": "type_object",
+                                                "value": "undefined"
+                                            },
+                                            {
+                                                "id": "type_list",
+                                                "value": []
+                                            },
+                                            {
+                                                "id": "on_display",
+                                                "value": ""
+                                            }
+                                        ]
+                                    },
+                                    "color": "#ff1414",
+                                    "icon": "fa-brands fa-node-js"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "639a8777-a72c-4c23-a658-9be33fee9d9e",
+                            "text": "Add on-create",
+                            "li_attr": {
+                                "type": "on_create_add",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group"
+                        }
+                    ]
                 }
             ],
             "state": {
@@ -2506,7 +2689,7 @@
                                         }
                                     ],
                                     "state": {
-                                        "opened": true
+                                        "opened": false
                                     }
                                 },
                                 {
@@ -2540,7 +2723,7 @@
                                         }
                                     ],
                                     "state": {
-                                        "opened": false
+                                        "opened": true
                                     }
                                 },
                                 {
@@ -2624,10 +2807,293 @@
                     "state": {
                         "opened": true
                     }
+                },
+                {
+                    "id": "ea26ce1c-69ea-4b62-b119-5241f81c0b46",
+                    "text": "module",
+                    "li_attr": {
+                        "type": "classe",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "classe de g\u00e9n\u00e9ration des modules"
+                            }
+                        ]
+                    },
+                    "color": "#d38c3c",
+                    "icon": "fa-brands fa-airbnb",
+                    "children": [
+                        {
+                            "id": "c9e48f12-7524-4074-a4c1-264f37cb2e1d",
+                            "text": "Constructeur",
+                            "li_attr": {
+                                "type": "constructor_args",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group",
+                            "children": [
+                                {
+                                    "id": "2cac766c-1636-4345-991f-222a40580122",
+                                    "text": "node",
+                                    "li_attr": {
+                                        "type": "argument",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "noeud du module"
+                                            },
+                                            {
+                                                "id": "require",
+                                                "value": true
+                                            },
+                                            {
+                                                "id": "type",
+                                                "value": "object"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#5c9226",
+                                    "icon": "fa-brands fa-centercode"
+                                }
+                            ],
+                            "state": {
+                                "opened": true
+                            }
+                        },
+                        {
+                            "id": "c6297239-1e2b-440c-bb35-489192763772",
+                            "text": "M\u00e9thodes",
+                            "li_attr": {
+                                "type": "methodes",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group",
+                            "children": [
+                                {
+                                    "id": "553cd7c6-0466-4c83-a352-7e06fd59cc2e",
+                                    "text": "getName",
+                                    "li_attr": {
+                                        "type": "methode",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "recupere le nom"
+                                            },
+                                            {
+                                                "id": "return-val",
+                                                "value": true
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            }
+                                        ]
+                                    },
+                                    "color": "#ca9f53",
+                                    "icon": "fa-regular fa-list-alt",
+                                    "children": [
+                                        {
+                                            "id": "4dbf7ec4-3003-4e49-a020-0a49ff2daf06",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#4f9a04",
+                                            "icon": "fa-solid fa-braille"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "44e1cab3-4133-4a26-a506-fbe079e8a2bc",
+                                    "text": "getDesc",
+                                    "li_attr": {
+                                        "type": "methode",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "recupere la description"
+                                            },
+                                            {
+                                                "id": "return-val",
+                                                "value": true
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            }
+                                        ]
+                                    },
+                                    "color": "#ca9f53",
+                                    "icon": "fa-regular fa-list-alt",
+                                    "children": [
+                                        {
+                                            "id": "99bc4cc9-f242-4b82-8574-ffb01243270d",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#4f9a04",
+                                            "icon": "fa-solid fa-braille"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "7061e528-425a-4dd6-8b34-15ad56b45032",
+                                    "text": "getFunctions",
+                                    "li_attr": {
+                                        "type": "methode",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "recupere la liste des fonctions"
+                                            },
+                                            {
+                                                "id": "return-val",
+                                                "value": true
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            }
+                                        ]
+                                    },
+                                    "color": "#ca9f53",
+                                    "icon": "fa-regular fa-list-alt",
+                                    "children": [
+                                        {
+                                            "id": "386b2a30-ba82-4e3f-a7ae-162527ffcf0f",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#4f9a04",
+                                            "icon": "fa-solid fa-braille"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "state": {
+                                "opened": true
+                            }
+                        }
+                    ],
+                    "state": {
+                        "opened": true
+                    }
+                },
+                {
+                    "id": "d1481a6b-b066-4770-80d1-9e49b86116c9",
+                    "text": "initPackage",
+                    "li_attr": {
+                        "type": "classe",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "Gestion du fichier __init__.py"
+                            }
+                        ]
+                    },
+                    "color": "#d38c3c",
+                    "icon": "fa-brands fa-airbnb",
+                    "children": [
+                        {
+                            "id": "bf392074-26ad-4354-8d16-d23fbce41b77",
+                            "text": "Constructeur",
+                            "li_attr": {
+                                "type": "constructor_args",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group",
+                            "children": [
+                                {
+                                    "id": "e7d41079-3896-4630-8b6c-2d0c8d948d34",
+                                    "text": "classes",
+                                    "li_attr": {
+                                        "type": "argument",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Liste des classes"
+                                            },
+                                            {
+                                                "id": "require",
+                                                "value": true
+                                            },
+                                            {
+                                                "id": "type",
+                                                "value": "array"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#5c9226",
+                                    "icon": "fa-brands fa-centercode"
+                                }
+                            ],
+                            "state": {
+                                "opened": true
+                            }
+                        },
+                        {
+                            "id": "f6dba7be-3720-4c9e-a643-dac5ace46165",
+                            "text": "M\u00e9thodes",
+                            "li_attr": {
+                                "type": "methodes",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group",
+                            "children": [
+                                {
+                                    "id": "d4423b1e-3259-4e53-8499-7845c4cdffa1",
+                                    "text": "getClasses",
+                                    "li_attr": {
+                                        "type": "methode",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Retourne la liste des classes"
+                                            },
+                                            {
+                                                "id": "return-val",
+                                                "value": true
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            }
+                                        ]
+                                    },
+                                    "color": "#ca9f53",
+                                    "icon": "fa-regular fa-list-alt",
+                                    "children": [
+                                        {
+                                            "id": "92a2fb92-0b20-4886-abcd-18977784f4e0",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#4f9a04",
+                                            "icon": "fa-solid fa-braille"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "state": {
+                        "opened": true
+                    }
                 }
             ],
             "state": {
-                "opened": false
+                "opened": true
             }
         },
         {
@@ -2681,6 +3147,21 @@
                             {
                                 "id": "desc",
                                 "value": ""
+                            }
+                        ]
+                    },
+                    "color": "#7ff77d",
+                    "icon": "fa-brands fa-alipay"
+                },
+                {
+                    "id": "0b07c513-8eea-4bef-8d10-b651b8b9973d",
+                    "text": "initPackage.py",
+                    "li_attr": {
+                        "type": "template",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "Gestion du fichier __init__.py"
                             }
                         ]
                     },
@@ -2909,7 +3390,7 @@
                 }
             ],
             "state": {
-                "opened": false
+                "opened": true
             }
         }
     ],

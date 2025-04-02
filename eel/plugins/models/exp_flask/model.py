@@ -1,5 +1,7 @@
 # kisstomato-imports-start-user-code-kisstomato
 
+import uuid
+
 # importation du CORE
 from core import model
 
@@ -9,7 +11,7 @@ from core import model
 _iCurrentVersion = 1
 
 # kisstomato-init-a-start-user-code-kisstomato
-_iCurrentVersion = 2
+_iCurrentVersion = 4
 # kisstomato-init-a-stop-user-code-kisstomato
 
 # creation d'un projet
@@ -46,9 +48,10 @@ def openProject( oProject ):
     
     # kisstomato-openProject-b-start-user-code-kisstomato
     """
+    
+    """
     global oModel
     oModel = model.getOne( oProject[ 'model' ] )
-    """
     # kisstomato-openProject-b-stop-user-code-kisstomato
 
     # mise a jour de la nouvelle version
@@ -56,13 +59,44 @@ def openProject( oProject ):
 
         # kisstomato-openProject-rewrite-a-start-user-code-kisstomato
         """
+        
+        """
         global oModel
         if 'type' in oNode[ 'li_attr' ]:
             sType = oNode[ 'li_attr' ][ 'type' ]
+            
+            # determine si il y a des enfants en mode on-create > add
             oEle = model.getElementById( sType, oModel )
-            oNode[ 'color' ] = oEle[ 'color' ]
-            oNode[ 'icon' ] = oEle[ 'icon' ]
-        """
+            if 'on-create' in oEle and 'add' in oEle[ 'on-create' ]:
+                
+                # pour tous les sous elements
+                for oSubEle in oEle[ 'on-create' ][ 'add' ]:
+                    
+                    # determine la presence dans le noeud
+                    bExist = False
+                    for oChild in oNode[ 'children' ]:
+                        if oChild[ 'li_attr' ][ 'type' ] == oSubEle[ 'id' ]:
+                            bExist = True
+                            break
+                    
+                    # creation du sous element
+                    if not bExist:
+                    
+                        bReadonly = oSubEle[ 'readonly' ]
+                        sText = oSubEle[ 'text' ]
+                        oSubEleA = model.getElementById( oSubEle[ 'id' ], oModel )
+                        oNewNode = {
+                            'id': str( uuid.uuid4() ),
+                            'text': sText,
+                            'li_attr': { 'type': oSubEle[ 'id' ] }
+                        }
+                        if 'color' in oSubEleA:
+                            oNewNode[ 'color' ] = oSubEleA[ 'color' ]
+                        if 'icon' in oSubEleA:
+                            oNewNode[ 'icon' ] = oSubEleA[ 'icon' ]
+                        if bReadonly:
+                            oNewNode[ 'li_attr' ][ 'readonly' ] = bReadonly
+                        oNode[ 'children' ].append( oNewNode )
 
         # kisstomato-openProject-rewrite-a-stop-user-code-kisstomato
 

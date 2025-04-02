@@ -1,2 +1,0 @@
-socketio = None
-config = None

@@ -115,9 +115,19 @@
 			,"on-create": {
 				"add": [
 					{ "id": "arguments", "text": "Arguments", "readonly": true },
-					{ "id": "fonctions", "text": "Fonctions", "readonly": true }
+					{ "id": "fonctions", "text": "Fonctions", "readonly": true },
+					{ "id": "sections", "text": "Liste des sections", "readonly": true }
 				]
 			}
+		},
+		{
+			"id": "sections", "text": "sections", "icon": "fa-solid fa-border-all", "color": "#3382cc", "children-type": ["section"], "move-on-parent": true
+		},
+		{
+			"id": "section", "text": "section", "icon": "fa-solid fa-border-style", "color": "#177ede", "children-type": [], "move-on-parent": true
+			,"items":[
+				{ "id": "desc", "text": "description", "type": "text" }
+			]
 		}
     ],
 	"properties": [

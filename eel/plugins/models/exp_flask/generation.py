@@ -64,6 +64,24 @@ def generateFlaskCode(data):
                 oResult += 'Generation du fichier script.py\n'
                 generator.genFileFromTmpl( sPathPlugin, oScript, 'script.py', sDirTemp + os.sep + 'scripts' + os.sep + oScript[ 'text' ] + '.py', nodeScript )
         
+        # generation des modules
+        oModules = generator.getNodesByTypes( oProject[ 'data' ], 'modules/module' )
+        if len( oModules ) > 0:
+            os.makedirs( sDirTemp + os.sep + 'modules', mode = 0o777 )
+            
+            # pour tous les modules
+            oClasses = []
+            for oModule in oModules:
+                
+                # pour le fichier model.py
+                oResult += 'Generation du fichier module.py\n'
+                generator.genFileFromTmpl( sPathPlugin, oModule, 'module.py', sDirTemp + os.sep + 'modules' + os.sep + oModule[ 'text' ] + '.py', module )
+                oClasses.append( oModule[ 'text' ] )
+            
+            # creation du fichier de package
+            oResult += 'Generation du fichier __init__.py des modules\n'
+            generator.genFileFromTmpl( sPathPlugin, oClasses, 'initPackage.py', sDirTemp + os.sep + 'modules' + os.sep + '__init__.py', initPackage )
+        
         # creation d'un fichier de configuration de base
         oConf = {
             'port': 8080,

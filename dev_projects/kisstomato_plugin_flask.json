@@ -3,7 +3,7 @@
     "desc": "ma premier application Flask",
     "model": "exp_flask",
     "relatif-path": true,
-    "version": 2,
+    "version": 4,
     "data": [
         {
             "id": "templates",
@@ -198,7 +198,7 @@
                                                             },
                                                             {
                                                                 "id": "require",
-                                                                "value": true
+                                                                "value": false
                                                             },
                                                             {
                                                                 "id": "type",
@@ -209,11 +209,114 @@
                                                     "color": "#ec74ba",
                                                     "icon": "fa-solid fa-star-of-life"
                                                 }
-                                            ]
+                                            ],
+                                            "state": {
+                                                "opened": true
+                                            }
+                                        }
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
+                                }
+                            ],
+                            "state": {
+                                "opened": true
+                            }
+                        }
+                    ],
+                    "state": {
+                        "opened": true
+                    }
+                },
+                {
+                    "id": "5e9747e8-f09d-46a9-8100-d591eafde9dd",
+                    "text": "bdd",
+                    "li_attr": {
+                        "type": "module",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "module d\u2019acc\u00e8s \u00e0 la base de donn\u00e9e"
+                            }
+                        ]
+                    },
+                    "color": "#b8d567",
+                    "icon": "fa-solid fa-box",
+                    "children": [
+                        {
+                            "id": "bff6c193-42d0-43a9-89b9-a9da6e55ee13",
+                            "text": "Fonctions",
+                            "li_attr": {
+                                "type": "fonctions",
+                                "readonly": true
+                            },
+                            "color": "#d57277",
+                            "icon": "fa-brands fa-stack-overflow",
+                            "children": [
+                                {
+                                    "id": "a6babf4a-2e80-4ed3-9576-4b884b20707c",
+                                    "text": "getBdd",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "r\u00e9cup\u00e9ration de la base de donn\u00e9e"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "object"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "a2d41211-cadd-4c50-b9dc-f22e1c4f7955",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large"
                                         }
                                     ]
                                 }
                             ]
+                        }
+                    ]
+                },
+                {
+                    "id": "16e2d5d4-703b-4df7-bef6-96dd617fb7cf",
+                    "text": "cache",
+                    "li_attr": {
+                        "type": "module",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "module de gestion du cache"
+                            }
+                        ]
+                    },
+                    "color": "#b8d567",
+                    "icon": "fa-solid fa-box",
+                    "children": [
+                        {
+                            "id": "06b3c700-af5c-47a1-91b1-6309a6625777",
+                            "text": "Fonctions",
+                            "li_attr": {
+                                "type": "fonctions",
+                                "readonly": true
+                            },
+                            "color": "#d57277",
+                            "icon": "fa-brands fa-stack-overflow"
                         }
                     ]
                 }
@@ -355,6 +458,16 @@
                             "state": {
                                 "opened": true
                             }
+                        },
+                        {
+                            "id": "2d3b9e07-1827-4603-8f52-cbb0de3b21fe",
+                            "text": "Liste des sections",
+                            "li_attr": {
+                                "type": "sections",
+                                "readonly": true
+                            },
+                            "color": "#3382cc",
+                            "icon": "fa-solid fa-border-all"
                         }
                     ],
                     "state": {
@@ -427,6 +540,16 @@
                             },
                             "color": "#d57277",
                             "icon": "fa-brands fa-stack-overflow"
+                        },
+                        {
+                            "id": "f8b28a86-bd72-4f74-b49c-9b144671a1a7",
+                            "text": "Liste des sections",
+                            "li_attr": {
+                                "type": "sections",
+                                "readonly": true
+                            },
+                            "color": "#3382cc",
+                            "icon": "fa-solid fa-border-all"
                         }
                     ],
                     "state": {
