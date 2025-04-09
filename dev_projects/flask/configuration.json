@@ -1,5 +1,19 @@
 {
     "port": 8080,
     "host": "0.0.0.0",
-    "debug": true
+    "debug": true,
+    "mongo": {
+        "user": "root",
+        "pass": "mypass",
+        "host": "localhost",
+        "port": "27017",
+        "bdd": "trade_ia"
+    },
+    "services": {
+        "get-pairs": "https://api.kraken.com/0/public/AssetPairs",
+        "get-trades": "https://api.kraken.com/0/public/Trades?pair={pair}&since={since}"
+    },
+    "paths": {
+        "cache": "/media/hidalgo/hidalgo_emmanuel1/trade_ia"
+    }
 }

@@ -1,18 +1,19 @@
 
 
 en cours :
-- generation du code HTML
--- coder : deplacement des assets
--- mettre des fichiers dans le repertoire : /home/hidalgo/Documents/projects/kisstomato/eel/plugins/models/html_maker
--- continuer a coder dans le mergeDirs en fonction de la conf
--- si pas de conf copier/ecraser la cible
+
 
 
 a faire :
 - a la fermeture du projet, proposer de sauvegarder les onglets ouverts, sous la forme d'un interupteur a off
 - proposer une option d'enregistrement du chemin du projet au format relatif
 - memoriser l'ouverture des noeuds dans l'arbre
+- assurer la generation du code lors du renomage de noeud
 
 fait :
-
+- generation du code HTML
+-- coder : deplacement des assets
+-- mettre des fichiers dans le repertoire : /home/hidalgo/Documents/projects/kisstomato/eel/plugins/models/html_maker
+-- continuer a coder dans le mergeDirs en fonction de la conf
+-- si pas de conf copier/ecraser la cible
 

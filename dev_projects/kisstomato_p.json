@@ -1262,23 +1262,19 @@
                                             },
                                             {
                                                 "id": "type",
-                                                "value": "string"
+                                                "value": "text"
                                             },
                                             {
                                                 "id": "type_object",
                                                 "value": "undefined"
                                             },
                                             {
-                                                "id": "type_object_filter",
-                                                "value": ""
-                                            },
-                                            {
                                                 "id": "type_list",
                                                 "value": []
                                             },
                                             {
-                                                "id": "readonly",
-                                                "value": false
+                                                "id": "on_display",
+                                                "value": ""
                                             }
                                         ]
                                     },
@@ -1322,7 +1318,7 @@
                         }
                     ],
                     "state": {
-                        "opened": true
+                        "opened": false
                     }
                 },
                 {
@@ -1497,7 +1493,7 @@
                         }
                     ],
                     "state": {
-                        "opened": true
+                        "opened": false
                     }
                 },
                 {
@@ -2096,7 +2092,10 @@
                                     "color": "#ff1414",
                                     "icon": "fa-brands fa-node-js"
                                 }
-                            ]
+                            ],
+                            "state": {
+                                "opened": false
+                            }
                         },
                         {
                             "id": "6bc2d801-7e79-4592-a1dd-c9ba34ba6b73",
@@ -2237,7 +2236,10 @@
                             "color": "#f0a728",
                             "icon": "fa-solid fa-layer-group"
                         }
-                    ]
+                    ],
+                    "state": {
+                        "opened": true
+                    }
                 },
                 {
                     "id": "f80b6006-9357-4446-96b2-daa0c7b103d5",
@@ -2317,7 +2319,10 @@
                                     "color": "#ff1414",
                                     "icon": "fa-brands fa-node-js"
                                 }
-                            ]
+                            ],
+                            "state": {
+                                "opened": true
+                            }
                         },
                         {
                             "id": "639a8777-a72c-4c23-a658-9be33fee9d9e",
@@ -2329,11 +2334,14 @@
                             "color": "#f0a728",
                             "icon": "fa-solid fa-layer-group"
                         }
-                    ]
+                    ],
+                    "state": {
+                        "opened": true
+                    }
                 }
             ],
             "state": {
-                "opened": false
+                "opened": true
             }
         },
         {
@@ -2797,6 +2805,79 @@
                                     "state": {
                                         "opened": false
                                     }
+                                },
+                                {
+                                    "id": "62d757c3-1aa5-4512-8e4b-0c1a6c43919a",
+                                    "text": "getSections",
+                                    "li_attr": {
+                                        "type": "methode",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Retourne la liste des sections"
+                                            },
+                                            {
+                                                "id": "return-val",
+                                                "value": true
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            }
+                                        ]
+                                    },
+                                    "color": "#ca9f53",
+                                    "icon": "fa-regular fa-list-alt",
+                                    "children": [
+                                        {
+                                            "id": "de9ed0eb-1d17-4511-a08d-b4d58b988407",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#4f9a04",
+                                            "icon": "fa-solid fa-braille"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "51d0f177-a37b-4c5d-aace-0f1a5c0b7f6d",
+                                    "text": "getFunctions",
+                                    "li_attr": {
+                                        "type": "methode",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "recupere la liste des fonctions"
+                                            },
+                                            {
+                                                "id": "return-val",
+                                                "value": true
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            }
+                                        ]
+                                    },
+                                    "color": "#ca9f53",
+                                    "icon": "fa-regular fa-list-alt",
+                                    "children": [
+                                        {
+                                            "id": "8713fde4-1288-40f5-bf00-5a7eda7d41d0",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#4f9a04",
+                                            "icon": "fa-solid fa-braille"
+                                        }
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
                                 }
                             ],
                             "state": {
@@ -2904,7 +2985,10 @@
                                             "color": "#4f9a04",
                                             "icon": "fa-solid fa-braille"
                                         }
-                                    ]
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
                                 },
                                 {
                                     "id": "44e1cab3-4133-4a26-a506-fbe079e8a2bc",
@@ -2974,7 +3058,10 @@
                                             "color": "#4f9a04",
                                             "icon": "fa-solid fa-braille"
                                         }
-                                    ]
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
                                 }
                             ],
                             "state": {

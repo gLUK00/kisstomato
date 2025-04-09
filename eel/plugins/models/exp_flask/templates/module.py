@@ -17,8 +17,8 @@
 # - {{ oArg[ 'name' ] }} : {{ oArg[ 'type' ] }} : {% if oArg[ 'require' ] %}(obligatoire) {% else %}(facultatif) {% endif %}{{ oArg[ 'desc' ] }}
 &&      endfor
 &&  endif
-def {{ oF.name }}(self{% for oArg in oF.args %}, {{ oArg[ 'name' ] }}{% if not oArg[ 'require' ] %}=None{% endif %}{% endfor %}):
-&&      if oF[ 'return' ]
+def {{ oF.name }}({% for oArg in oF.args %}{{ oArg[ 'name' ] }}{% if not oArg[ 'require' ] %}=None{% endif %}{{ "" if loop.last else ", " }}{% endfor %}):
+&&      if oF[ 'return' ] and oF[ 'return' ] != 'none'
     oResult = None
 
 &&      endif
@@ -26,7 +26,7 @@ def {{ oF.name }}(self{% for oArg in oF.args %}, {{ oArg[ 'name' ] }}{% if not o
     # kisstomato-methode-{{ oF.name }}-start-user-code-kisstomato
     # kisstomato-methode-{{ oF.name }}-stop-user-code-kisstomato
 
-&&      if oF[ 'return' ]
+&&      if oF[ 'return' ] and oF[ 'return' ] != 'none'
     return oResult
 
 &&      endif

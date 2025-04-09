@@ -226,7 +226,7 @@
                         }
                     ],
                     "state": {
-                        "opened": true
+                        "opened": false
                     }
                 },
                 {
@@ -287,11 +287,20 @@
                                             "color": "#50edb8",
                                             "icon": "fa-solid fa-th-large"
                                         }
-                                    ]
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
                                 }
-                            ]
+                            ],
+                            "state": {
+                                "opened": true
+                            }
                         }
-                    ]
+                    ],
+                    "state": {
+                        "opened": false
+                    }
                 },
                 {
                     "id": "16e2d5d4-703b-4df7-bef6-96dd617fb7cf",
@@ -316,9 +325,434 @@
                                 "readonly": true
                             },
                             "color": "#d57277",
-                            "icon": "fa-brands fa-stack-overflow"
+                            "icon": "fa-brands fa-stack-overflow",
+                            "children": [
+                                {
+                                    "id": "845af560-82d0-400c-80b9-f270eafc293d",
+                                    "text": "initCache",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Initialisation du cache"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "none"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "1b2be806-2b70-4b8c-85d4-3f8a0431c940",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "children": [
+                                                {
+                                                    "id": "8a43ae4c-80ae-4503-9906-bb241be77e55",
+                                                    "text": "path",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Chemin du cache"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
+                                },
+                                {
+                                    "id": "a1bad96d-ce2d-464c-a547-3686765e2e91",
+                                    "text": "cacheExists",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "D\u00e9termin\u00e9 si une cl\u00e9 de cache existe"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "boolean"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "eec62fea-23b0-4dcd-baf0-998454f0cff5",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "children": [
+                                                {
+                                                    "id": "178f491e-5a73-4e2b-a84c-48bf7f68914b",
+                                                    "text": "key",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Identifiant du cache"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                }
+                                            ],
+                                            "state": {
+                                                "opened": false
+                                            }
+                                        }
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
+                                },
+                                {
+                                    "id": "117cebcf-9db6-41e5-ab71-ac114061e25d",
+                                    "text": "getDataCache",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Retourne les donn\u00e9es d'un cache"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "object"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "03557988-c1d3-461c-8617-0e567215e706",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "children": [
+                                                {
+                                                    "id": "dafdd021-d385-47f2-961c-77d861b7b5ae",
+                                                    "text": "key",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Identifiant du cache"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                }
+                                            ],
+                                            "state": {
+                                                "opened": true
+                                            }
+                                        }
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
+                                },
+                                {
+                                    "id": "9bf7cf32-2fcb-4299-a129-372410e80294",
+                                    "text": "setDataCache",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Enregistrement d'un cache"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "none"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "5d51a10e-b700-454b-9fe3-95f8acba74c7",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "children": [
+                                                {
+                                                    "id": "bb881a30-6f37-49c8-9a2b-252a9ee869fb",
+                                                    "text": "key",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Identifiant du cache"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                },
+                                                {
+                                                    "id": "7dddd010-deec-4e9f-9013-06ac170dc4c9",
+                                                    "text": "data",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Donn\u00e9es du cache"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "object"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                }
+                                            ],
+                                            "state": {
+                                                "opened": true
+                                            }
+                                        }
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
+                                }
+                            ],
+                            "state": {
+                                "opened": true
+                            }
                         }
-                    ]
+                    ],
+                    "state": {
+                        "opened": false
+                    }
+                },
+                {
+                    "id": "cead3ade-0ace-4f28-a211-f18caed32e5c",
+                    "text": "services",
+                    "li_attr": {
+                        "type": "module",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "Services en ligne"
+                            }
+                        ]
+                    },
+                    "color": "#b8d567",
+                    "icon": "fa-solid fa-box",
+                    "children": [
+                        {
+                            "id": "cf5abb65-9b46-42e2-82e0-d9e3981605a4",
+                            "text": "Fonctions",
+                            "li_attr": {
+                                "type": "fonctions",
+                                "readonly": true
+                            },
+                            "color": "#d57277",
+                            "icon": "fa-brands fa-stack-overflow",
+                            "children": [
+                                {
+                                    "id": "54682fee-7380-4064-a48f-33ad53901a65",
+                                    "text": "getPairs",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Recup\u00e8re la liste des paires"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "array"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "86120b8f-05b2-4e51-a811-c0f9d5dcb19d",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large"
+                                        }
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
+                                },
+                                {
+                                    "id": "e4655a7e-c871-40da-9462-a8bcfe929fbf",
+                                    "text": "getTradesFiles",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Retourne la liste des fichiers d'historiques des trades"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "array"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "1004b966-5c5e-47d0-a95d-d50aeb289e6c",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "children": [
+                                                {
+                                                    "id": "7e289bdf-76f9-411f-81eb-86047312ff8d",
+                                                    "text": "pair",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Paire \u00e0 r\u00e9cup\u00e9rer"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "state": {
+                                "opened": true
+                            }
+                        }
+                    ],
+                    "state": {
+                        "opened": true
+                    }
                 }
             ],
             "state": {
@@ -467,7 +901,57 @@
                                 "readonly": true
                             },
                             "color": "#3382cc",
-                            "icon": "fa-solid fa-border-all"
+                            "icon": "fa-solid fa-border-all",
+                            "children": [
+                                {
+                                    "id": "e2758503-fe7b-4c22-8ba5-1cd05672621c",
+                                    "text": "initBdd",
+                                    "li_attr": {
+                                        "type": "section",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Initialisation de la base de donn\u00e9es"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#177ede",
+                                    "icon": "fa-solid fa-border-style"
+                                },
+                                {
+                                    "id": "a68f716c-71aa-4fed-b226-af8b8eb69955",
+                                    "text": "cache",
+                                    "li_attr": {
+                                        "type": "section",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Initialisation du cache"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#177ede",
+                                    "icon": "fa-solid fa-border-style"
+                                },
+                                {
+                                    "id": "73fbddd9-3d45-4fab-a69d-c719d510d89d",
+                                    "text": "recuperation-paires",
+                                    "li_attr": {
+                                        "type": "section",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "recuperation des paires"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#177ede",
+                                    "icon": "fa-solid fa-border-style"
+                                }
+                            ],
+                            "state": {
+                                "opened": true
+                            }
                         }
                     ],
                     "state": {
@@ -549,7 +1033,54 @@
                                 "readonly": true
                             },
                             "color": "#3382cc",
-                            "icon": "fa-solid fa-border-all"
+                            "icon": "fa-solid fa-border-all",
+                            "children": [
+                                {
+                                    "id": "2f949585-30d6-4773-91b8-29cfdd494aad",
+                                    "text": "controle",
+                                    "li_attr": {
+                                        "type": "section",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Contr\u00f4le de la paire"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#177ede",
+                                    "icon": "fa-solid fa-border-style"
+                                },
+                                {
+                                    "id": "0967d6fb-dc52-439c-9b50-8a67b11473de",
+                                    "text": "confirmation",
+                                    "li_attr": {
+                                        "type": "section",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Demande de confirmation avec proc\u00e9dure d'import"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#177ede",
+                                    "icon": "fa-solid fa-border-style"
+                                },
+                                {
+                                    "id": "7a8e38be-4f7a-449f-8f7b-0b844afd4330",
+                                    "text": "importation",
+                                    "li_attr": {
+                                        "type": "section",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Proc\u00e9dure d'importation"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#177ede",
+                                    "icon": "fa-solid fa-border-style"
+                                }
+                            ]
                         }
                     ],
                     "state": {

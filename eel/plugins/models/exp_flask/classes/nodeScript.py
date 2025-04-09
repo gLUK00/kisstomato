@@ -22,7 +22,25 @@ class nodeScript(nodeElement):
         self.args = []
         for oArg in generator.getNodesByTypes( self.node, 'script/arguments/argument' ):
             oItems = self._getItems( oArg )
-            self.args.append( { "name": oArg[ "text" ], "desc": oItems[ "desc" ][ 'value' ], "require": oItems[ "require" ][ 'value' ] == True, "type": oItems[ "type" ][ 'value' ] })
+            self.args.append( { "name": oArg[ "text" ], "desc": oItems[ "desc" ][ 'value' ], "require": oItems[ "require" ][ 'value' ] == True, "type": oItems[ "type" ][ 'value' ] } )
+        
+        self.sections = []
+        for oSection in generator.getNodesByTypes( self.node, 'script/sections/section' ):
+            oItems = self._getItems( oSection )
+            self.sections.append( { "name": oSection[ "text" ], "desc": oItems[ "desc" ][ 'value' ] } )
+        
+        self.functions = []
+        for oFonction in generator.getNodesByTypes( self.node, 'script/fonctions/fonction' ):
+            oItems = self._getItems( oFonction )
+            
+            # recupere les arguments
+            oArgs = []
+            for oArg in generator.getNodesByTypes( oFonction, 'fonction/arguments/argument' ):
+                oArgItems = self._getItems( oArg )
+                oArgs.append( { "name": oArg[ "text" ], "desc": oArgItems[ "desc" ][ 'value' ], "require": oArgItems[ "require" ][ 'value' ] == True, 'type': oArgItems[ "type" ][ 'value' ] } )
+            
+            self.functions.append( { "name": oFonction[ "text" ], "desc": oItems[ "desc" ][ 'value' ], "exception": oItems[ "exception" ][ 'value' ] == True, "return": oItems[ "return" ][ 'value' ], 'args': oArgs })
+        
         # kisstomato-init-b-stop-user-code-kisstomato
 
     # recupere le nom
@@ -62,6 +80,26 @@ class nodeScript(nodeElement):
         # kisstomato-methode-getArgs-start-user-code-kisstomato
         oResult = self.args
         # kisstomato-methode-getArgs-stop-user-code-kisstomato
+
+        return oResult
+
+    # Retourne la liste des sections
+    def getSections(self):
+        oResult = None
+
+        # kisstomato-methode-getSections-start-user-code-kisstomato
+        oResult = self.sections
+        # kisstomato-methode-getSections-stop-user-code-kisstomato
+
+        return oResult
+
+    # recupere la liste des fonctions
+    def getFunctions(self):
+        oResult = None
+
+        # kisstomato-methode-getFunctions-start-user-code-kisstomato
+        oResult = self.functions
+        # kisstomato-methode-getFunctions-stop-user-code-kisstomato
 
         return oResult
 
