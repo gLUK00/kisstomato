@@ -289,6 +289,244 @@
                                         }
                                     ],
                                     "state": {
+                                        "opened": false
+                                    }
+                                },
+                                {
+                                    "id": "e2b6e460-2bba-428a-b8d6-276f3d8bbed8",
+                                    "text": "collectionExist",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Determine si une collection existe"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "boolean"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "87be113d-c3f6-404a-8cbb-ab414ec20a90",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "children": [
+                                                {
+                                                    "id": "0e1ed942-cbdf-48ca-8021-aef4d3ce3258",
+                                                    "text": "collection",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Nom de la collection"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "725ed581-2b3d-4cbe-a83a-aff96095820c",
+                                    "text": "dropCollection",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Supprime une collection"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "none"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "d4952243-cca5-4955-8a13-27fb54cdf9e4",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "children": [
+                                                {
+                                                    "id": "7ddf3653-1bf0-49c2-a3ae-03ba52c8e040",
+                                                    "text": "collection",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Nom de la collection"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                }
+                                            ],
+                                            "state": {
+                                                "opened": true
+                                            }
+                                        }
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
+                                },
+                                {
+                                    "id": "adf49483-fe57-47d7-b88a-b31eb6c1b7a6",
+                                    "text": "importHistory",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Importation de l'historique des transactions"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "none"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "95f75af3-e066-484f-a341-e982ebb25916",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "children": [
+                                                {
+                                                    "id": "e5b49e8c-d5ea-4a0f-943a-858bea0ec181",
+                                                    "text": "collection",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Collection cible"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                },
+                                                {
+                                                    "id": "8f57ec99-c3ee-48d4-ac89-c539bd6739f5",
+                                                    "text": "pair",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Paire \u00e0 importer"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                },
+                                                {
+                                                    "id": "0aac8bbb-3dfd-4d7d-ab05-2d3862f46d09",
+                                                    "text": "listFiles",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Cl\u00e9 du cache correspondante aux fichiers"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                }
+                                            ],
+                                            "state": {
+                                                "opened": true
+                                            }
+                                        }
+                                    ],
+                                    "state": {
                                         "opened": true
                                     }
                                 }
@@ -299,7 +537,7 @@
                         }
                     ],
                     "state": {
-                        "opened": false
+                        "opened": true
                     }
                 },
                 {
@@ -610,6 +848,72 @@
                                     "state": {
                                         "opened": true
                                     }
+                                },
+                                {
+                                    "id": "8aa8da2b-146d-4748-b69b-a1662450bc9d",
+                                    "text": "getAllFiles",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "R\u00e9cupere l'ensemble des fichiers d'un r\u00e9pertoire"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "array"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "17305194-860b-4228-9ec1-7e0b4f61914a",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "children": [
+                                                {
+                                                    "id": "45d5c144-b796-455c-b428-6d102fd6800f",
+                                                    "text": "keyDir",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Cl\u00e9 du r\u00e9pertoire du cache"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                }
+                                            ],
+                                            "state": {
+                                                "opened": true
+                                            }
+                                        }
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
                                 }
                             ],
                             "state": {
@@ -618,7 +922,7 @@
                         }
                     ],
                     "state": {
-                        "opened": false
+                        "opened": true
                     }
                 },
                 {
@@ -740,9 +1044,15 @@
                                                     "color": "#ec74ba",
                                                     "icon": "fa-solid fa-star-of-life"
                                                 }
-                                            ]
+                                            ],
+                                            "state": {
+                                                "opened": true
+                                            }
                                         }
-                                    ]
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
                                 }
                             ],
                             "state": {
@@ -1051,21 +1361,6 @@
                                     "icon": "fa-solid fa-border-style"
                                 },
                                 {
-                                    "id": "0967d6fb-dc52-439c-9b50-8a67b11473de",
-                                    "text": "confirmation",
-                                    "li_attr": {
-                                        "type": "section",
-                                        "items": [
-                                            {
-                                                "id": "desc",
-                                                "value": "Demande de confirmation avec proc\u00e9dure d'import"
-                                            }
-                                        ]
-                                    },
-                                    "color": "#177ede",
-                                    "icon": "fa-solid fa-border-style"
-                                },
-                                {
                                     "id": "7a8e38be-4f7a-449f-8f7b-0b844afd4330",
                                     "text": "importation",
                                     "li_attr": {
@@ -1079,13 +1374,124 @@
                                     },
                                     "color": "#177ede",
                                     "icon": "fa-solid fa-border-style"
+                                },
+                                {
+                                    "id": "68ef3ed6-edc3-42e9-acb6-11885eea9d72",
+                                    "text": "enregistrement",
+                                    "li_attr": {
+                                        "type": "section",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Enregistrement en BDD"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#177ede",
+                                    "icon": "fa-solid fa-border-style"
                                 }
-                            ]
+                            ],
+                            "state": {
+                                "opened": true
+                            }
                         }
                     ],
                     "state": {
                         "opened": true
                     }
+                },
+                {
+                    "id": "ad982695-317a-4940-9ecc-f3a8c7587da8",
+                    "text": "dataset",
+                    "li_attr": {
+                        "type": "script",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "Script de cr\u00e9ation d'un dataset"
+                            },
+                            {
+                                "id": "print_desc",
+                                "value": true
+                            }
+                        ]
+                    },
+                    "color": "#c972d5",
+                    "icon": "fa-solid fa-scroll",
+                    "children": [
+                        {
+                            "id": "d1c8f739-426f-4d67-aa64-028958af9f1f",
+                            "text": "Arguments",
+                            "li_attr": {
+                                "type": "arguments",
+                                "readonly": true
+                            },
+                            "color": "#50edb8",
+                            "icon": "fa-solid fa-th-large",
+                            "children": [
+                                {
+                                    "id": "e3fd7fc6-d45c-46c1-b402-b91b0baf7a0c",
+                                    "text": "pair",
+                                    "li_attr": {
+                                        "type": "argument",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Paire correspondante au dataset cible"
+                                            },
+                                            {
+                                                "id": "require",
+                                                "value": true
+                                            },
+                                            {
+                                                "id": "type",
+                                                "value": "string"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#ec74ba",
+                                    "icon": "fa-solid fa-star-of-life"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "9421043f-0e00-42da-9897-1b2e606ba763",
+                            "text": "Fonctions",
+                            "li_attr": {
+                                "type": "fonctions",
+                                "readonly": true
+                            },
+                            "color": "#d57277",
+                            "icon": "fa-brands fa-stack-overflow"
+                        },
+                        {
+                            "id": "afe020c4-f30e-401f-bc06-3506c33845c1",
+                            "text": "Liste des sections",
+                            "li_attr": {
+                                "type": "sections",
+                                "readonly": true
+                            },
+                            "color": "#3382cc",
+                            "icon": "fa-solid fa-border-all",
+                            "children": [
+                                {
+                                    "id": "b903d090-059d-4227-8579-d02bf0fed92f",
+                                    "text": "controle",
+                                    "li_attr": {
+                                        "type": "section",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Contr\u00f4le la pr\u00e9sence des donn\u00e9es d'historiques"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#177ede",
+                                    "icon": "fa-solid fa-border-style"
+                                }
+                            ]
+                        }
+                    ]
                 }
             ],
             "state": {
