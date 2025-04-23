@@ -18,6 +18,68 @@
             },
             "children": [
                 {
+                    "id": "3962e240-ca68-47e1-8ef9-1e6f2172e9af",
+                    "text": "Classes",
+                    "li_attr": {
+                        "type": "root",
+                        "items": [
+                            {
+                                "id": "id",
+                                "value": "classes"
+                            },
+                            {
+                                "id": "icon",
+                                "value": {
+                                    "icon": "boxes",
+                                    "color": "#37c347",
+                                    "style": "solid"
+                                }
+                            },
+                            {
+                                "id": "test_field",
+                                "value": "tab-field-d8c0469b-1844-4033-a6f0-2e64c53a8dcc-test_field"
+                            }
+                        ]
+                    },
+                    "color": "#e099e5",
+                    "icon": "fa-brands fa-html5",
+                    "children": [
+                        {
+                            "id": "abe2c7ec-f882-4599-a490-671e63e7ecc2",
+                            "text": "Enfants",
+                            "li_attr": {
+                                "type": "link_childs",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group",
+                            "children": [
+                                {
+                                    "id": "37f1db06-df65-4d17-b0e9-89b7462dc252",
+                                    "text": "classe",
+                                    "li_attr": {
+                                        "type": "link_child",
+                                        "items": [
+                                            {
+                                                "id": "ref_element",
+                                                "value": "b01663e3-10c1-41fd-824f-3197b5b76879"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#7ff77d",
+                                    "icon": "fa-brands fa-alipay"
+                                }
+                            ],
+                            "state": {
+                                "opened": true
+                            }
+                        }
+                    ],
+                    "state": {
+                        "opened": true
+                    }
+                },
+                {
                     "id": "50a7f811-07a9-407f-b676-884941ae79e1",
                     "text": "Templates",
                     "li_attr": {
@@ -362,6 +424,206 @@
                 ]
             },
             "children": [
+                {
+                    "id": "b01663e3-10c1-41fd-824f-3197b5b76879",
+                    "text": "classe",
+                    "li_attr": {
+                        "type": "element",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "Classe python"
+                            },
+                            {
+                                "id": "icon",
+                                "value": {
+                                    "icon": "archive",
+                                    "color": "#2e9e59",
+                                    "style": "solid"
+                                }
+                            },
+                            {
+                                "id": "move-on-parent",
+                                "value": false
+                            }
+                        ]
+                    },
+                    "color": "#ca9f53",
+                    "icon": "fa-regular fa-list-alt",
+                    "children": [
+                        {
+                            "id": "103528f8-31c1-46a8-83f1-3cde76a11d68",
+                            "text": "Children type",
+                            "li_attr": {
+                                "type": "element_childrens_type",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group"
+                        },
+                        {
+                            "id": "e9e62916-be78-483f-98d9-798fe93527f1",
+                            "text": "Items",
+                            "li_attr": {
+                                "type": "items",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group",
+                            "children": [
+                                {
+                                    "id": "7eb8bacf-e6e3-452a-b406-d7cf5b2f3881",
+                                    "text": "desc",
+                                    "li_attr": {
+                                        "type": "item",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Description de la classe"
+                                            },
+                                            {
+                                                "id": "type",
+                                                "value": "text"
+                                            },
+                                            {
+                                                "id": "type_object",
+                                                "value": "undefined"
+                                            },
+                                            {
+                                                "id": "type_list",
+                                                "value": []
+                                            },
+                                            {
+                                                "id": "on_display",
+                                                "value": ""
+                                            }
+                                        ]
+                                    },
+                                    "color": "#ff1414",
+                                    "icon": "fa-brands fa-node-js"
+                                }
+                            ],
+                            "state": {
+                                "opened": true
+                            }
+                        },
+                        {
+                            "id": "3733fa5e-65fe-4bf5-bc0f-32b842023193",
+                            "text": "Add on-create",
+                            "li_attr": {
+                                "type": "on_create_add",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group",
+                            "children": [
+                                {
+                                    "id": "2c4bbcbc-3ccf-479e-9d2a-bc3aa4a5e707",
+                                    "text": "methodes",
+                                    "li_attr": {
+                                        "type": "element_on_create_add",
+                                        "items": [
+                                            {
+                                                "id": "ref_element",
+                                                "value": "970d657a-a7b3-4053-92ef-db9e7da8e8b6"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#7ff77d",
+                                    "icon": "fa-brands fa-alipay"
+                                }
+                            ],
+                            "state": {
+                                "opened": true
+                            }
+                        }
+                    ],
+                    "state": {
+                        "opened": true
+                    }
+                },
+                {
+                    "id": "970d657a-a7b3-4053-92ef-db9e7da8e8b6",
+                    "text": "classe-methodes",
+                    "li_attr": {
+                        "type": "element",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "methodes"
+                            },
+                            {
+                                "id": "icon",
+                                "value": {
+                                    "icon": "allergies",
+                                    "color": "#2e829e",
+                                    "style": "solid"
+                                }
+                            },
+                            {
+                                "id": "move-on-parent",
+                                "value": false
+                            }
+                        ]
+                    },
+                    "color": "#ca9f53",
+                    "icon": "fa-regular fa-list-alt",
+                    "children": [
+                        {
+                            "id": "9f9df9cc-1411-4212-863a-4f2eb724ba55",
+                            "text": "Children type",
+                            "li_attr": {
+                                "type": "element_childrens_type",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group",
+                            "children": [
+                                {
+                                    "id": "1410bc4e-d242-4bb9-b481-0a8e791d4dc0",
+                                    "text": "fonction",
+                                    "li_attr": {
+                                        "type": "element_children_type",
+                                        "items": [
+                                            {
+                                                "id": "ref_element",
+                                                "value": "17d383ec-809a-4266-891a-6817317a5074"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#7ff77d",
+                                    "icon": "fa-brands fa-alipay"
+                                }
+                            ],
+                            "state": {
+                                "opened": true
+                            }
+                        },
+                        {
+                            "id": "38f4ac60-9f3d-4d0d-ad0c-3738a560c065",
+                            "text": "Items",
+                            "li_attr": {
+                                "type": "items",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group"
+                        },
+                        {
+                            "id": "fd61fca6-2d37-4602-96d6-4863db5710f7",
+                            "text": "Add on-create",
+                            "li_attr": {
+                                "type": "on_create_add",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group"
+                        }
+                    ],
+                    "state": {
+                        "opened": false
+                    }
+                },
                 {
                     "id": "e619790e-3b02-4f25-81c9-d55b77fba123",
                     "text": "directory-route",
@@ -1318,7 +1580,7 @@
                         }
                     ],
                     "state": {
-                        "opened": false
+                        "opened": true
                     }
                 },
                 {
@@ -1469,7 +1731,10 @@
                                     "color": "#7ff77d",
                                     "icon": "fa-brands fa-alipay"
                                 }
-                            ]
+                            ],
+                            "state": {
+                                "opened": false
+                            }
                         },
                         {
                             "id": "0baa3b20-16b4-4eab-9168-a00cddfedca4",
@@ -1760,7 +2025,10 @@
                                     "color": "#7ff77d",
                                     "icon": "fa-brands fa-alipay"
                                 }
-                            ]
+                            ],
+                            "state": {
+                                "opened": true
+                            }
                         },
                         {
                             "id": "f35b01cf-156e-407d-912c-d73f4962d3ff",
@@ -1782,7 +2050,10 @@
                             "color": "#f0a728",
                             "icon": "fa-solid fa-layer-group"
                         }
-                    ]
+                    ],
+                    "state": {
+                        "opened": true
+                    }
                 },
                 {
                     "id": "3ab57d00-8dad-4a65-9031-6b43bbf38dc7",
@@ -2159,7 +2430,7 @@
                         }
                     ],
                     "state": {
-                        "opened": true
+                        "opened": false
                     }
                 },
                 {
@@ -2238,7 +2509,7 @@
                         }
                     ],
                     "state": {
-                        "opened": true
+                        "opened": false
                     }
                 },
                 {
@@ -2336,7 +2607,7 @@
                         }
                     ],
                     "state": {
-                        "opened": true
+                        "opened": false
                     }
                 }
             ],
@@ -2599,6 +2870,175 @@
                 ]
             },
             "children": [
+                {
+                    "id": "9022a271-0e9b-4341-b90c-a998c02af6c0",
+                    "text": "classe",
+                    "li_attr": {
+                        "type": "classe",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "Classe de g\u00e9n\u00e9ration des classes"
+                            }
+                        ]
+                    },
+                    "color": "#d38c3c",
+                    "icon": "fa-brands fa-airbnb",
+                    "children": [
+                        {
+                            "id": "eb0ed857-079c-4d05-9775-247affe14953",
+                            "text": "Constructeur",
+                            "li_attr": {
+                                "type": "constructor_args",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group",
+                            "children": [
+                                {
+                                    "id": "f1a16cf5-db7f-41e7-b207-0406aa4e277f",
+                                    "text": "node",
+                                    "li_attr": {
+                                        "type": "argument",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "node de la classe"
+                                            },
+                                            {
+                                                "id": "require",
+                                                "value": true
+                                            },
+                                            {
+                                                "id": "type",
+                                                "value": "object"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#5c9226",
+                                    "icon": "fa-brands fa-centercode"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "accbdefc-e74f-4e7e-abfe-c89d25a6e927",
+                            "text": "M\u00e9thodes",
+                            "li_attr": {
+                                "type": "methodes",
+                                "readonly": true
+                            },
+                            "color": "#f0a728",
+                            "icon": "fa-solid fa-layer-group",
+                            "children": [
+                                {
+                                    "id": "0db406a6-ed84-4bd1-86a8-7f251d042a9c",
+                                    "text": "getName",
+                                    "li_attr": {
+                                        "type": "methode",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Retourne le nom de la classe"
+                                            },
+                                            {
+                                                "id": "return-val",
+                                                "value": true
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            }
+                                        ]
+                                    },
+                                    "color": "#ca9f53",
+                                    "icon": "fa-regular fa-list-alt",
+                                    "children": [
+                                        {
+                                            "id": "d677b4ab-d0f5-4e12-93a1-3957786efc7b",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#4f9a04",
+                                            "icon": "fa-solid fa-braille"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "7751a01b-2a50-4eb1-865a-e5bce6a9b4f7",
+                                    "text": "getArgsInit",
+                                    "li_attr": {
+                                        "type": "methode",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Retourne les arguments du constructeur"
+                                            },
+                                            {
+                                                "id": "return-val",
+                                                "value": true
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            }
+                                        ]
+                                    },
+                                    "color": "#ca9f53",
+                                    "icon": "fa-regular fa-list-alt",
+                                    "children": [
+                                        {
+                                            "id": "0ea9663a-931a-4a9e-a7ad-d0140f1b72ae",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#4f9a04",
+                                            "icon": "fa-solid fa-braille"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "e6bf4dd8-15ee-4b8b-9917-d6bf23933c05",
+                                    "text": "getMethodes",
+                                    "li_attr": {
+                                        "type": "methode",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Retourne la listes des m\u00e9thodes"
+                                            },
+                                            {
+                                                "id": "return-val",
+                                                "value": true
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            }
+                                        ]
+                                    },
+                                    "color": "#ca9f53",
+                                    "icon": "fa-regular fa-list-alt",
+                                    "children": [
+                                        {
+                                            "id": "4b4733f4-b4e1-407c-a4ec-24ca342f168f",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#4f9a04",
+                                            "icon": "fa-solid fa-braille"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
                 {
                     "id": "6258dacd-88b5-45bf-a265-b9efc5411e76",
                     "text": "nodeScript",
@@ -3249,6 +3689,36 @@
                             {
                                 "id": "desc",
                                 "value": "Gestion du fichier __init__.py"
+                            }
+                        ]
+                    },
+                    "color": "#7ff77d",
+                    "icon": "fa-brands fa-alipay"
+                },
+                {
+                    "id": "d35468cf-459d-460c-a118-86d48d3cd7f7",
+                    "text": "module.py",
+                    "li_attr": {
+                        "type": "template",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "Template des modules"
+                            }
+                        ]
+                    },
+                    "color": "#7ff77d",
+                    "icon": "fa-brands fa-alipay"
+                },
+                {
+                    "id": "2deb0bc3-0bc8-4a27-ab52-1382d4cfa1fa",
+                    "text": "classe.py",
+                    "li_attr": {
+                        "type": "template",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "Template des classes"
                             }
                         ]
                     },

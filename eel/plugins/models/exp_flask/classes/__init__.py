@@ -1,6 +1,8 @@
 # kisstomato-init-a-start-user-code-kisstomato
 # kisstomato-init-a-stop-user-code-kisstomato
 
+from .classe import *
+
 from .nodeScript import *
 
 from .module import *

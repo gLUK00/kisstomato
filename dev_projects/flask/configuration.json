@@ -7,7 +7,11 @@
         "pass": "mypass",
         "host": "localhost",
         "port": "27017",
-        "bdd": "trade_ia"
+        "bdd": "trade_ia",
+        "cols": {
+            "history_pair": "history_{pair}",
+            "images_pair": "images_{pair}"
+        }
     },
     "services": {
         "get-pairs": "https://api.kraken.com/0/public/AssetPairs",

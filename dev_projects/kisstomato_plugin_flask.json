@@ -3,8 +3,184 @@
     "desc": "ma premier application Flask",
     "model": "exp_flask",
     "relatif-path": true,
-    "version": 4,
+    "version": 5,
     "data": [
+        {
+            "id": "classes",
+            "text": "Classes",
+            "icon": "fa-solid fa-boxes",
+            "color": "#37c347",
+            "li_attr": {
+                "readonly": true,
+                "children-type": [
+                    "classe"
+                ]
+            },
+            "state": {
+                "opened": true
+            },
+            "children": [
+                {
+                    "id": "8a6cc121-c8ba-42d3-a5c0-d017e9aa4091",
+                    "text": "bufferHistory",
+                    "li_attr": {
+                        "type": "classe",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "Buffer d'historique d'une paire"
+                            }
+                        ]
+                    },
+                    "color": "#2e9e59",
+                    "icon": "fa-solid fa-archive",
+                    "children": [
+                        {
+                            "id": "67a4ca6c-4238-41a1-a92f-d042680fabdb",
+                            "text": "Methodes",
+                            "li_attr": {
+                                "type": "classe-methodes",
+                                "readonly": true
+                            },
+                            "color": "#2e829e",
+                            "icon": "fa-solid fa-allergies",
+                            "children": [
+                                {
+                                    "id": "687165fe-6e93-4918-92d2-08184fab113f",
+                                    "text": "__init__",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Constructeur"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "none"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "82326557-5f4f-401a-a186-8c7e1f7db00f",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "children": [
+                                                {
+                                                    "id": "a4b92696-29cb-4ce7-8ab0-236c24333c8f",
+                                                    "text": "pair",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Paire \u00e0 prendre en compte"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "c86a5bf5-c6d6-4443-982a-b9ba126ffca0",
+                                    "text": "__iter__",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Iterateur"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "object"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "d9217ab1-234a-48b8-a311-927a76387985",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "1810c975-ec1c-43cc-8396-4e259a1588d9",
+                                    "text": "__next__",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Retourne la plage suivante"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "array"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "e9f01ee6-69c7-48d8-a414-e2896b36b555",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
         {
             "id": "templates",
             "text": "Templates",
@@ -50,7 +226,7 @@
                 }
             ],
             "state": {
-                "opened": true
+                "opened": false
             }
         },
         {
@@ -113,7 +289,7 @@
                 }
             ],
             "state": {
-                "opened": true
+                "opened": false
             }
         },
         {
@@ -350,7 +526,10 @@
                                                 }
                                             ]
                                         }
-                                    ]
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
                                 },
                                 {
                                     "id": "725ed581-2b3d-4cbe-a83a-aff96095820c",
@@ -398,6 +577,29 @@
                                                             {
                                                                 "id": "require",
                                                                 "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                },
+                                                {
+                                                    "id": "fa989d8d-3999-4561-9126-b9a19ea78699",
+                                                    "text": "createIndex",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Nom de l'index \u00e0 cr\u00e9er"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": false
                                                             },
                                                             {
                                                                 "id": "type",
@@ -537,7 +739,7 @@
                         }
                     ],
                     "state": {
-                        "opened": true
+                        "opened": false
                     }
                 },
                 {
@@ -922,7 +1124,7 @@
                         }
                     ],
                     "state": {
-                        "opened": true
+                        "opened": false
                     }
                 },
                 {
@@ -1061,12 +1263,179 @@
                         }
                     ],
                     "state": {
+                        "opened": false
+                    }
+                },
+                {
+                    "id": "d1afefe6-e8da-406f-ba7d-c07531f89b63",
+                    "text": "datasets",
+                    "li_attr": {
+                        "type": "module",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "Module de gestion des Datasets"
+                            }
+                        ]
+                    },
+                    "color": "#b8d567",
+                    "icon": "fa-solid fa-box",
+                    "children": [
+                        {
+                            "id": "3218891f-cd00-4189-8612-de788939464d",
+                            "text": "Fonctions",
+                            "li_attr": {
+                                "type": "fonctions",
+                                "readonly": true
+                            },
+                            "color": "#d57277",
+                            "icon": "fa-brands fa-stack-overflow",
+                            "children": [
+                                {
+                                    "id": "08ac6979-bd87-483f-946e-eb5ea0c3c82e",
+                                    "text": "init",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Initialisation d'un Dataset"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "none"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "cd98d6a3-cbe2-45e7-a0f9-2862972e58c7",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "children": [
+                                                {
+                                                    "id": "e69b4430-e1e7-4163-9b8f-805e8ed69f7c",
+                                                    "text": "pair",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Paire associ\u00e9e \u00e0 l'historique des transactions"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                }
+                                            ],
+                                            "state": {
+                                                "opened": true
+                                            }
+                                        }
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
+                                },
+                                {
+                                    "id": "a5edcb90-f587-4ba6-806d-f8295e098949",
+                                    "text": "create",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Cr\u00e9ation d'un dataset \u00e0 partir de l'historique des transactions"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "none"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "bbafd99e-735c-47f4-a72a-0bcb0a645784",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "children": [
+                                                {
+                                                    "id": "e61be26a-7d6e-4599-b2d3-e4159adf9289",
+                                                    "text": "pair",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Paire associ\u00e9e \u00e0 l'historique des transactions"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                }
+                                            ],
+                                            "state": {
+                                                "opened": true
+                                            }
+                                        }
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
+                                }
+                            ],
+                            "state": {
+                                "opened": true
+                            }
+                        }
+                    ],
+                    "state": {
                         "opened": true
                     }
                 }
             ],
             "state": {
-                "opened": true
+                "opened": false
             }
         },
         {
@@ -1452,7 +1821,10 @@
                                     "color": "#ec74ba",
                                     "icon": "fa-solid fa-star-of-life"
                                 }
-                            ]
+                            ],
+                            "state": {
+                                "opened": true
+                            }
                         },
                         {
                             "id": "9421043f-0e00-42da-9897-1b2e606ba763",
@@ -1482,20 +1854,56 @@
                                         "items": [
                                             {
                                                 "id": "desc",
+                                                "value": "Contr\u00f4le de la paire"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#177ede",
+                                    "icon": "fa-solid fa-border-style"
+                                },
+                                {
+                                    "id": "00dcc488-60d9-4cd2-b159-6d320c15c8dc",
+                                    "text": "collection-exist",
+                                    "li_attr": {
+                                        "type": "section",
+                                        "items": [
+                                            {
+                                                "id": "desc",
                                                 "value": "Contr\u00f4le la pr\u00e9sence des donn\u00e9es d'historiques"
                                             }
                                         ]
                                     },
                                     "color": "#177ede",
                                     "icon": "fa-solid fa-border-style"
+                                },
+                                {
+                                    "id": "aaa34d8d-afc7-4321-960f-b6780af23910",
+                                    "text": "create-image",
+                                    "li_attr": {
+                                        "type": "section",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Construction des images d'entr\u00e9es"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#177ede",
+                                    "icon": "fa-solid fa-border-style"
                                 }
-                            ]
+                            ],
+                            "state": {
+                                "opened": true
+                            }
                         }
-                    ]
+                    ],
+                    "state": {
+                        "opened": true
+                    }
                 }
             ],
             "state": {
-                "opened": true
+                "opened": false
             }
         }
     ],

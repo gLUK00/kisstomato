@@ -2,6 +2,20 @@
     "title": "Exp. Plugin Application Python Flask",
 	"elements":	[
 		{
+			"id": "classe", "text": "classe", "icon": "fa-solid fa-archive", "color": "#2e9e59", "children-type": [], "move-on-parent": true
+			,"items":[
+				{ "id": "desc", "text": "Description de la classe", "type": "text" }
+			]
+			,"on-create": {
+				"add": [
+					{ "id": "classe-methodes", "text": "methodes", "readonly": true }
+				]
+			}
+		},
+		{
+			"id": "classe-methodes", "text": "classe-methodes", "icon": "fa-solid fa-allergies", "color": "#2e829e", "children-type": ["fonction"], "move-on-parent": true
+		},
+		{
 			"id": "directory-route", "text": "directory-route", "icon": "fa-solid fa-folder", "color": "#dbd64d", "children-type": ["directory-route", "route"], "move-on-parent": true
 		},
 		{

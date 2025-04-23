@@ -11,7 +11,7 @@ from core import model
 _iCurrentVersion = 1
 
 # kisstomato-init-a-start-user-code-kisstomato
-_iCurrentVersion = 4
+_iCurrentVersion = 5
 # kisstomato-init-a-stop-user-code-kisstomato
 
 # creation d'un projet
@@ -24,6 +24,7 @@ def getJsonCreateNewProject( data ):
     # kisstomato-getJsonCreateNewProject-a-stop-user-code-kisstomato
     
     oRoots = []
+    oRoots.append( { "id": "classes", "text": "Classes", "icon": "fa-solid fa-boxes", "color": "#37c347", "li_attr": { "readonly": True, "children-type": ["classe"] } } )
     oRoots.append( { "id": "templates", "text": "Templates", "icon": "fa-solid fa-book", "color": "#56b6c2", "li_attr": { "readonly": True, "children-type": ["template", "directory-template"] } } )
     oRoots.append( { "id": "routes", "text": "Routes", "icon": "fa-brands fa-hubspot", "color": "#b366ff", "li_attr": { "readonly": True, "children-type": ["directory-route", "file-routes"] } } )
     oRoots.append( { "id": "modules", "text": "Modules", "icon": "fa-solid fa-cubes", "color": "#f77373", "li_attr": { "readonly": True, "children-type": ["module"] } } )
@@ -47,9 +48,6 @@ def openProject( oProject ):
         return oProject, False
     
     # kisstomato-openProject-b-start-user-code-kisstomato
-    """
-    
-    """
     global oModel
     oModel = model.getOne( oProject[ 'model' ] )
     # kisstomato-openProject-b-stop-user-code-kisstomato
@@ -109,6 +107,24 @@ def openProject( oProject ):
         # kisstomato-openProject-rewrite-b-stop-user-code-kisstomato
     
     # kisstomato-openProject-c-start-user-code-kisstomato
+    
+    # controle des elements racines
+    oNewRoot = []
+    oRootElements = getJsonCreateNewProject( {} )
+    for oRootEle in oRootElements[ 'data' ]:
+        bExist = False
+        for oNode in oProject[ 'data' ]:
+            if oNode[ 'id' ] == oRootEle[ 'id' ]:
+                bExist = True
+                oNewRoot.append( oNode )
+                break
+        if not bExist:
+            oNewRoot.append( oRootEle )
+    
+    # remplacement des noeuds racines
+    if len( oNewRoot ) != len( oProject[ 'data' ] ):
+        oProject[ 'data' ] = oNewRoot
+    
     # kisstomato-openProject-c-stop-user-code-kisstomato
 
     # pour tous les elements racines
