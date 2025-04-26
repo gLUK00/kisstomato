@@ -10,7 +10,9 @@ module de gestion du cache
 # kisstomato-module-properties-start-user-code-kisstomato
 # kisstomato-module-properties-stop-user-code-kisstomato
 
-# Initialisation du cache
+"""
+Initialisation du cache
+"""
 # Argument :
 # - path : string : (obligatoire) Chemin du cache
 def initCache(path):
@@ -19,7 +21,9 @@ def initCache(path):
         os.mkdir( path )
     # kisstomato-methode-initCache-stop-user-code-kisstomato
 
-# Déterminé si une clé de cache existe
+"""
+Déterminé si une clé de cache existe
+"""
 # Argument :
 # - key : string : (obligatoire) Identifiant du cache
 def cacheExists(key):
@@ -31,7 +35,9 @@ def cacheExists(key):
 
     return oResult
 
-# Retourne les données d'un cache
+"""
+Retourne les données d'un cache
+"""
 # Argument :
 # - key : string : (obligatoire) Identifiant du cache
 def getDataCache(key):
@@ -56,7 +62,9 @@ def getDataCache(key):
 
     return oResult
 
-# Enregistrement d'un cache
+"""
+Enregistrement d'un cache
+"""
 # Arguments :
 # - key : string : (obligatoire) Identifiant du cache
 # - data : object : (obligatoire) Données du cache
@@ -72,7 +80,9 @@ def setDataCache(key, data):
     oFile.close()
     # kisstomato-methode-setDataCache-stop-user-code-kisstomato
 
-# Récupere l'ensemble des fichiers d'un répertoire
+"""
+Récupere l'ensemble des fichiers d'un répertoire
+"""
 # Argument :
 # - keyDir : string : (obligatoire) Clé du répertoire du cache
 def getAllFiles(keyDir):

@@ -6,38 +6,37 @@
 """
 
 class {{ o.getName() }}:
+
     # kisstomato-class-properties-start-user-code-kisstomato
     # kisstomato-class-properties-stop-user-code-kisstomato
-    def __init__(self, required_arg, optional_arg=None):
-        """
-        Constructeur de la classe.
 
-        :param required_arg: Argument obligatoire.
-        :param optional_arg: Argument facultatif (par défaut None).
-        """
-        self.required_arg = required_arg
-        self.optional_arg = optional_arg
+    def __init__(self{% if o.getArgsInit()|length > 0 %}{% for oArg in o.getArgsInit() %}, {{ oArg[ 'name' ] }}{% if not oArg[ 'require' ] %}=None{% endif %}{% endfor %}{% endif %}):
+        # kisstomato-class-init-start-user-code-kisstomato
+        pass
+        # kisstomato-class-init-stop-user-code-kisstomato
 
-    def method_with_required_arg(self, required_arg):
-        """
-        Méthode avec un argument obligatoire.
+&& for oF in o.getMethodes()
+    """
+    {{ oF.desc }}
+    """
+&&  if oF.args|length > 0
+# Argument{% if oF.args|length > 1 %}s{% endif %} :
+&&      for oArg in oF.args
+# - {{ oArg[ 'name' ] }} : {{ oArg[ 'type' ] }} : {% if oArg[ 'require' ] %}(obligatoire) {% else %}(facultatif) {% endif %}{{ oArg[ 'desc' ] }}
+&&      endfor
+&&  endif
+    def {{ oF.name }}(self{% if oF.args|length > 0 %}{% for oArg in oF.args %}, {{ oArg[ 'name' ] }}{% if not oArg[ 'require' ] %}=None{% endif %}{% endfor %}{% endif %}):
+&&      if oF[ 'return' ] and oF[ 'return' ] != 'none'
+        oResult = None
 
-        :param required_arg: Argument obligatoire.
-        """
-        print(f"Argument obligatoire: {required_arg}")
+&&      endif
 
-    def method_with_optional_arg(self, required_arg, optional_arg="default_value"):
-        """
-        Méthode avec un argument obligatoire et un argument facultatif.
+        # kisstomato-class-methode-{{ oF.name }}-start-user-code-kisstomato
+        pass
+        # kisstomato-class-methode-{{ oF.name }}-stop-user-code-kisstomato
 
-        :param required_arg: Argument obligatoire.
-        :param optional_arg: Argument facultatif (par défaut 'default_value').
-        """
-        print(f"Argument obligatoire: {required_arg}")
-        print(f"Argument facultatif: {optional_arg}")
-
-
-# Exemple d'utilisation
-example = ExampleClass("valeur_obligatoire", optional_arg="valeur_facultative")
-example.method_with_required_arg("valeur_obligatoire")
-example.method_with_optional_arg("valeur_obligatoire", optional_arg="autre_valeur")
+&&      if oF[ 'return' ] and oF[ 'return' ] != 'none'
+        return oResult
+&&      endif
+&& endfor
+        

@@ -539,7 +539,7 @@
                         }
                     ],
                     "state": {
-                        "opened": true
+                        "opened": false
                     }
                 },
                 {
@@ -621,7 +621,7 @@
                         }
                     ],
                     "state": {
-                        "opened": false
+                        "opened": true
                     }
                 },
                 {
@@ -2612,7 +2612,7 @@
                 }
             ],
             "state": {
-                "opened": true
+                "opened": false
             }
         },
         {
@@ -2966,6 +2966,41 @@
                                     ]
                                 },
                                 {
+                                    "id": "3847b2c5-2258-4d6f-811f-ab033e060be4",
+                                    "text": "getDesc",
+                                    "li_attr": {
+                                        "type": "methode",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "recupere la description"
+                                            },
+                                            {
+                                                "id": "return-val",
+                                                "value": true
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            }
+                                        ]
+                                    },
+                                    "color": "#ca9f53",
+                                    "icon": "fa-regular fa-list-alt",
+                                    "children": [
+                                        {
+                                            "id": "8ec79ab4-33ae-4578-9cb5-4f2283bda193",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#4f9a04",
+                                            "icon": "fa-solid fa-braille"
+                                        }
+                                    ]
+                                },
+                                {
                                     "id": "7751a01b-2a50-4eb1-865a-e5bce6a9b4f7",
                                     "text": "getArgsInit",
                                     "li_attr": {
@@ -2998,7 +3033,10 @@
                                             "color": "#4f9a04",
                                             "icon": "fa-solid fa-braille"
                                         }
-                                    ]
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
                                 },
                                 {
                                     "id": "e6bf4dd8-15ee-4b8b-9917-d6bf23933c05",
@@ -3035,9 +3073,15 @@
                                         }
                                     ]
                                 }
-                            ]
+                            ],
+                            "state": {
+                                "opened": true
+                            }
                         }
-                    ]
+                    ],
+                    "state": {
+                        "opened": true
+                    }
                 },
                 {
                     "id": "6258dacd-88b5-45bf-a265-b9efc5411e76",
@@ -3510,7 +3554,7 @@
                         }
                     ],
                     "state": {
-                        "opened": true
+                        "opened": false
                     }
                 },
                 {

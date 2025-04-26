@@ -11,7 +11,9 @@ Services en ligne
 # kisstomato-module-properties-start-user-code-kisstomato
 # kisstomato-module-properties-stop-user-code-kisstomato
 
-# Recupère la liste des paires
+"""
+Recupère la liste des paires
+"""
 def getPairs():
     oResult = None
 
@@ -27,7 +29,9 @@ def getPairs():
 
     return oResult
 
-# Retourne la liste des fichiers d'historiques des trades
+"""
+Retourne la liste des fichiers d'historiques des trades
+"""
 # Argument :
 # - pair : string : (obligatoire) Paire à récupérer
 def getTradesFiles(pair):

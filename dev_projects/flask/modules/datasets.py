@@ -1,7 +1,8 @@
 # kisstomato-module-import-start-user-code-kisstomato
-import gl, json, pymongo
+import gl, json, pymongo, datetime
 from pymongo import MongoClient
 from modules import bdd
+from classes import bufferHistory
 # kisstomato-module-import-stop-user-code-kisstomato
 
 """
@@ -11,7 +12,9 @@ Module de gestion des Datasets
 # kisstomato-module-properties-start-user-code-kisstomato
 # kisstomato-module-properties-stop-user-code-kisstomato
 
-# Initialisation d'un Dataset
+"""
+Initialisation d'un Dataset
+"""
 # Argument :
 # - pair : string : (obligatoire) Paire associée à l'historique des transactions
 def init(pair):
@@ -22,11 +25,52 @@ def init(pair):
 
     # kisstomato-methode-init-stop-user-code-kisstomato
 
-# Création d'un dataset à partir de l'historique des transactions
+"""
+Création d'un dataset à partir de l'historique des transactions
+"""
 # Argument :
 # - pair : string : (obligatoire) Paire associée à l'historique des transactions
 def create(pair):
     # kisstomato-methode-create-start-user-code-kisstomato
+
+    # initialisation du buffer
+    oBuffer = bufferHistory( pair )
+
+    iDebug = 0
+
+    # pour toutes les tranches
+    for oRange in oBuffer:
+
+        print( '-----------------------' )
+        print( len( oRange ) )
+
+        print( oRange[ 0 ] )
+        print( oRange[ -1 ] )
+
+
+
+        print( datetime.datetime.strptime( str( datetime.datetime.fromtimestamp( int( oRange[ 0 ][ 'time' ] ) ) ), '%Y-%m-%d %H:%M:%S' ) )
+        print( datetime.datetime.strptime( str( datetime.datetime.fromtimestamp( int( oRange[ -1 ][ 'time' ] ) ) ), '%Y-%m-%d %H:%M:%S' ) )
+        
+        """iDiffTime = int( oRange[ -1 ][ 'time' ] ) - int( oRange[ 0 ][ 'time' ] )
+        print( iDiffTime )
+
+        print( '-------------------------- simu' )
+        iDiffTime = 9849620 - int( oRange[ 0 ][ 'time' ] )
+        
+        print( datetime.datetime.strptime( str( datetime.datetime.fromtimestamp( int( oRange[ 0 ][ 'time' ] ) ) ), '%Y-%m-%d %H:%M:%S' ) )
+        print( datetime.datetime.strptime( str( datetime.datetime.fromtimestamp( int( oRange[ 0][ 'time' ] ) + 9849620 ) ), '%Y-%m-%d %H:%M:%S' ) )
+        
+        iDiffTime = int( oRange[ -1 ][ 'time' ] ) - 9849620
+        print( iDiffTime )
+        """
+        iDebug += 1
+
+        if iDebug == 10:
+            exit()
+
+    exit()
+    
 
     sColHistory = gl.config[ "mongo" ][ "cols" ][ "history_pair" ].replace( "{pair}", pair )
     sColImages = gl.config[ "mongo" ][ "cols" ][ "images_pair" ].replace( "{pair}", pair )
@@ -59,7 +103,9 @@ def create(pair):
 
     # kisstomato-methode-create-stop-user-code-kisstomato
 
-# Normalise une valeur sur un place de 0 à 1
+"""
+Normalise une valeur sur un place de 0 à 1
+"""
 # Arguments :
 # - iVal : number : (obligatoire) Valeur d'entrée
 # - iMin : number : (obligatoire) Valeur minimum
@@ -76,7 +122,9 @@ def normalize(iVal, iMin, iMax):
 
     return oResult
 
-# Retourne un vecteur de carte du ciel à partir d'un timestamp
+"""
+Retourne un vecteur de carte du ciel à partir d'un timestamp
+"""
 # Argument :
 # - iTime : number : (obligatoire) Timestamp de référence
 def skymap2time(iTime):

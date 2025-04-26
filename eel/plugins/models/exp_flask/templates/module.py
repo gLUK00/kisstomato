@@ -10,7 +10,9 @@
 
 && for oF in o.getFunctions()
 
-# {{ oF.desc }}
+"""
+{{ oF.desc }}
+"""
 &&  if oF.args|length > 0
 # Argument{% if oF.args|length > 1 %}s{% endif %} :
 &&      for oArg in oF.args

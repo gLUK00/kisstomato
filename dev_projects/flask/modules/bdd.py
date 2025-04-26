@@ -11,7 +11,9 @@ module d’accès à la base de donnée
 _oBdd = None
 # kisstomato-module-properties-stop-user-code-kisstomato
 
-# récupération de la base de donnée
+"""
+récupération de la base de donnée
+"""
 def getBdd():
     oResult = None
 
@@ -25,7 +27,9 @@ def getBdd():
 
     return oResult
 
-# Determine si une collection existe
+"""
+Determine si une collection existe
+"""
 # Argument :
 # - collection : string : (obligatoire) Nom de la collection
 def collectionExist(collection):
@@ -35,14 +39,16 @@ def collectionExist(collection):
 
     oBdd = getBdd()
     oResult = collection in oBdd.list_collection_names()
-    print( collection )
-    print( oBdd.list_collection_names() )
+    #print( collection )
+    #print( oBdd.list_collection_names() )
 
     # kisstomato-methode-collectionExist-stop-user-code-kisstomato
 
     return oResult
 
-# Supprime une collection
+"""
+Supprime une collection
+"""
 # Arguments :
 # - collection : string : (obligatoire) Nom de la collection
 # - createIndex : string : (facultatif) Nom de l'index à créer
@@ -57,7 +63,9 @@ def dropCollection(collection, createIndex=None):
 
     # kisstomato-methode-dropCollection-stop-user-code-kisstomato
 
-# Importation de l'historique des transactions
+"""
+Importation de l'historique des transactions
+"""
 # Arguments :
 # - collection : string : (obligatoire) Collection cible
 # - pair : string : (obligatoire) Paire à importer

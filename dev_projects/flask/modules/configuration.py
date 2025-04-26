@@ -9,7 +9,9 @@ gestion de la configuration
 # kisstomato-module-properties-start-user-code-kisstomato
 # kisstomato-module-properties-stop-user-code-kisstomato
 
-# chargement de la configuration
+"""
+chargement de la configuration
+"""
 # Argument :
 # - conf : string : (facultatif) nom du fichier de configuration
 def load(conf=None):
