@@ -7,7 +7,7 @@ import sys, os
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 import gl
-from modules import configuration, bdd, cache, services, datasets
+from modules import configuration, bdd, services, datasets
 # kisstomato-script-import-stop-user-code-kisstomato
 
 """

@@ -1,6 +1,5 @@
 # kisstomato-module-import-start-user-code-kisstomato
-import os, requests, json, time, gl, glob
-from datetime import datetime
+import os, json, gl, glob
 # kisstomato-module-import-stop-user-code-kisstomato
 
 """
