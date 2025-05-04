@@ -1,5 +1,5 @@
 # kisstomato-module-import-start-user-code-kisstomato
-import gl, json, pymongo, datetime
+import gl, json, pymongo, datetime, pandas as pd
 from pymongo import MongoClient
 from modules import bdd
 from classes import bufferHistory
@@ -26,6 +26,140 @@ def init(pair):
     # kisstomato-methode-init-stop-user-code-kisstomato
 
 """
+Création des moyennes mobiles
+"""
+# Argument :
+# - pair : string : (obligatoire) Paire associée à l'historique des transactions
+def createMM(pair):
+    # kisstomato-methode-createMM-start-user-code-kisstomato
+    
+    # initialisation du buffer
+    oBuffer = bufferHistory( pair, sizeImage=7272900 )
+    
+    # pour la minutes en cours
+    oMinute = []
+    
+    # pour toutes les tranches
+    iIndexMinutes = -1
+    for oRange in oBuffer:
+        
+        # pour la premiere minute
+        if iIndexMinutes == -1: 
+            date_time = datetime.datetime.fromtimestamp( oRange[ 0 ][ 'time' ] )
+            ts = pd.Timestamp( date_time )
+            iIndexMinutes = int( ts.round('1min').timestamp() ) - ( 2 * 3600 )
+        
+        # recupere les donnees
+        iIndexLine = -1
+        for oLine in oRange:
+            iIndexLine += 1
+            if oLine[ 'time' ] >= iIndexMinutes and oLine[ 'time' ] < iIndexMinutes + 60:
+                oMinute.append( oLine )
+            else:
+                break
+        
+        # troncature du range
+        oRange = oRange[ iIndexLine : ]
+        
+        # compilation de la minute
+        oItem = { "volume": 0,
+            "price": 0,
+            "vp": 0,
+            "progress_up":0,
+            "progress_down": 0,
+            "nbr_buy_limit": 0,
+            "nbr_buy_market": 0,
+            "nbr_sell_limit": 0,
+            "nbr_sell_market": 0,
+            "nbr_price_similar": 0,
+            "nbr_volume_similar": 0,
+            "nbr_buy_round_price": 0,
+            "nbr_sell_round_price": 0,
+            "nbr_buy_round_qte": 0,
+            "nbr_sell_round_qte": 0,
+            "count": len( oMinute ),
+            "time": iIndexMinutes }
+        
+        # pour tous les prix et les quantites similaires
+        oPrices = oQuantities = []
+        
+        # pour tous les elements de la plage
+        for oLine in oMinute:
+            
+            # le volume total
+            oItem[ "volume" ] += float( oLine[ "qte" ] )
+            
+            # le montant
+            oItem[ "price" ] += float( oLine[ "val" ] )
+            
+            # le volume prix et quantite
+            oItem[ "vp" ] += float( oLine[ "val" ] ) * float( oLine[ "qte" ] )
+            
+            # pour les actions
+            if oLine[ "action" ] == 'b':
+                if oLine[ "type" ] == 'l':
+                    oItem[ "nbr_buy_limit" ] += 1
+                else:
+                    oItem[ "nbr_buy_market" ] += 1
+            else:
+                if oLine[ "type" ] == 'l':
+                    oItem[ "nbr_sell_limit" ] += 1
+                else:
+                    oItem[ "nbr_sell_market" ] += 1
+            
+            # pour les tarifs similaires
+            if oItem[ "price" ] not in oPrices:
+                oPrices.append( oLine[ "val" ] )
+            else:
+                oItem[ "nbr_price_similar" ] += 1
+            
+            # pour les quantites similaires
+            if oLine[ "qte" ] not in oQuantities:
+                oQuantities.append( oLine[ "qte" ] )
+            else:
+                oItem[ "nbr_volume_similar" ] += 1
+            
+            # pour les prix ronds
+            if float( oLine[ "val" ] ) == round( float( oLine[ "val" ] ) ):
+                if oLine[ "action" ] == 'b':
+                    oItem[ "nbr_buy_round_price" ] += 1
+                else:
+                    oItem[ "nbr_sell_round_price" ] += 1
+                    
+            # pour les quantites rondes
+            if float( oLine[ "qte" ] ) == round( float( oLine[ "qte" ] ) ):
+                if oLine[ "action" ] == 'b':
+                    oItem[ "nbr_buy_round_qte" ] += 1
+                else:
+                    oItem[ "nbr_sell_round_qte" ] += 1
+
+        # si la minute est vide
+        if oItem[ "count" ] == 0:
+            iIndexMinutes += 60
+            oMinute = []
+            continue
+
+        # compilation des resultats
+        oItem[ "price" ] = oItem[ "price" ] / oItem[ "count" ]
+        #oItem[ "time" ] = iIndexMinutes
+        
+        # enregistrement de la minute
+        sColMM = gl.config[ "mongo" ][ "cols" ][ "mm_pair" ].replace( "{pair}", pair.lower() )
+        oColHistory = bdd.getBdd()[ sColMM ]
+        oColHistory.insert_one( { "time": iIndexMinutes, "1m": oItem, "5m": None, "15m": None, "30m": None, "1h": None, "2h": None, "4h": None, "8h": None, "12h": None, "1j": None, "2j": None, "5j": None, "15j": None, "1M": None } )
+        
+        # increment de la minute
+        iIndexMinutes += 60
+        oMinute = []
+        
+        
+    #1538147830.9176438
+    #1513393355.5
+    
+    pass
+    # kisstomato-methode-createMM-stop-user-code-kisstomato
+
+"""
 Création d'un dataset à partir de l'historique des transactions
 """
 # Argument :
@@ -40,6 +174,8 @@ def create(pair):
 
     # pour toutes les tranches
     for oRange in oBuffer:
+        
+        
 
         print( '-----------------------' )
         print( len( oRange ) )
@@ -264,10 +400,29 @@ le nombre de vente en compte rond (quantité),
 
         """
     
+    # pour toutes les plages sans la derniere
+    for i in range( len( oResult ) ):
+        
+        # si la plage est vide
+        if oResult[ i ][ "count" ] == 0:
+            continue
+        
+        # recherche de l'index de la plage precedente
+        iIndexPrec = i + 1
+        while oResult[ iIndexPrec ][ "count" ] == 0:
+            iIndexPrec += 1
+        
+        # calcul de la progression
+        iDiff = oResult[ i ][ "price" ] - oResult[ iIndexPrec ][ "price" ]
+        if iDiff > 0:
+            oResult[ i ][ "progress_up" ] = abs( iDiff / ( oResult[ iIndexPrec ][ "price" ] / 100 ) )
+            oResult[ i ][ "progress_down" ] = 0
+        elif iDiff < 0:
+            oResult[ i ][ "progress_up" ] = 0
+            oResult[ i ][ "progress_down" ] = abs( iDiff / ( oResult[ iIndexPrec ][ "price" ] / 100 ) )
     
     # suppression de la derniere plage
     oResult = oResult[ : -1 ]
-    
     
     # kisstomato-methode-genImage-stop-user-code-kisstomato
 

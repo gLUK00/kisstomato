@@ -14,11 +14,15 @@ class bufferHistory:
     # kisstomato-class-properties-start-user-code-kisstomato
     # kisstomato-class-properties-stop-user-code-kisstomato
 
-    def __init__(self, pair):
+    def __init__(self, pair, sizeBuffer=None, sizeImage=None):
         # kisstomato-class-init-start-user-code-kisstomato
         self.pair = pair
         self.sizeBuffer = 12000000 # nombre de secondes du buffer
+        if sizeBuffer != None:
+            self.sizeBuffer = sizeBuffer
         self.sizeImage = 9849620 # pour 114j 4:20
+        if sizeImage != None:
+            self.sizeImage = sizeImage
 
         sColHistory = gl.config[ "mongo" ][ "cols" ][ "history_pair" ].replace( "{pair}", pair )
 

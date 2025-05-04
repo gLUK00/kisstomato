@@ -10,6 +10,7 @@
         "bdd": "trade_ia",
         "cols": {
             "history_pair": "history_{pair}",
+            "mm_pair": "mm_{pair}",
             "images_pair": "images_{pair}"
         }
     },

@@ -56,7 +56,8 @@ def dropCollection(collection, createIndex=None):
     # kisstomato-methode-dropCollection-start-user-code-kisstomato
 
     oBdd = getBdd()
-    oBdd[ collection ].drop()
+    if collectionExist( collection ):
+        oBdd[ collection ].drop()
     oBdd.create_collection( collection )
     if createIndex != None:
         oBdd[ collection ].create_index( createIndex )

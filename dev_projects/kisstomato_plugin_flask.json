@@ -100,6 +100,52 @@
                                                     },
                                                     "color": "#ec74ba",
                                                     "icon": "fa-solid fa-star-of-life"
+                                                },
+                                                {
+                                                    "id": "83d5e1f7-45a6-4619-8bc0-1514bc2212e7",
+                                                    "text": "sizeBuffer",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Taille du buffer"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": false
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "number"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                },
+                                                {
+                                                    "id": "521bf99f-31ad-43bf-b84c-e45e1060369a",
+                                                    "text": "sizeImage",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Taille des plages"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": false
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "number"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
                                                 }
                                             ],
                                             "state": {
@@ -1281,7 +1327,7 @@
                         }
                     ],
                     "state": {
-                        "opened": false
+                        "opened": true
                     }
                 },
                 {
@@ -1374,6 +1420,66 @@
                                     "state": {
                                         "opened": true
                                     }
+                                },
+                                {
+                                    "id": "10aba8af-ef5f-4791-ab4b-6cc9b20ee40a",
+                                    "text": "createMM",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Cr\u00e9ation des moyennes mobiles"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "none"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "80ca4d2d-f4ef-49b2-b15b-066f6f66bb0b",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "children": [
+                                                {
+                                                    "id": "ee01f87b-7dff-4315-ad05-02da00fab140",
+                                                    "text": "pair",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Paire associ\u00e9e \u00e0 l'historique des transactions"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                }
+                                            ]
+                                        }
+                                    ]
                                 },
                                 {
                                     "id": "a5edcb90-f587-4ba6-806d-f8295e098949",
@@ -1499,7 +1605,10 @@
                                                 }
                                             ]
                                         }
-                                    ]
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
                                 },
                                 {
                                     "id": "df69b09f-57b6-4e8b-a357-b6e341342a54",
@@ -2123,6 +2232,21 @@
                                             {
                                                 "id": "desc",
                                                 "value": "Contr\u00f4le la pr\u00e9sence des donn\u00e9es d'historiques"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#177ede",
+                                    "icon": "fa-solid fa-border-style"
+                                },
+                                {
+                                    "id": "7636bdbe-1ce8-4f7d-b639-ce2f01645343",
+                                    "text": "create-mm",
+                                    "li_attr": {
+                                        "type": "section",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Cr\u00e9ation des moyennes mobiles"
                                             }
                                         ]
                                     },

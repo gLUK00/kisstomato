@@ -86,12 +86,36 @@ print( "\n>> CONTRÔLE LA PRÉSENCE DES DONNÉES D'HISTORIQUES\n" )
 # kisstomato-script-section-collection-exist-start-user-code-kisstomato
 
 # determine si la collection existe
-cColName = gl.config[ "mongo" ][ "cols" ][ "history_pair" ].replace( "{pair}", sInPair.lower() )
-if not bdd.collectionExist( cColName ):
+sColName = gl.config[ "mongo" ][ "cols" ][ "history_pair" ].replace( "{pair}", sInPair.lower() )
+if not bdd.collectionExist( sColName ):
     print( "Collection introuvable" )
     exit()
 
 # kisstomato-script-section-collection-exist-stop-user-code-kisstomato
+
+"""
+Création des moyennes mobiles
+"""
+print( "\n>> CRÉATION DES MOYENNES MOBILES\n" )
+# kisstomato-script-section-create-mm-start-user-code-kisstomato
+
+sColMM = gl.config[ "mongo" ][ "cols" ][ "mm_pair" ].replace( "{pair}", sInPair.lower() )
+bCreateCol = True
+if bdd.collectionExist( sColMM ) and input( 'Calcul des moyennes mobiles (o/N) ? ' ).lower() in [ '', 'n' ]:
+    bCreateCol = False
+
+# calcul des moyennes mobiles
+if bCreateCol:
+
+    # creation de la collection
+    bdd.dropCollection( sColMM, createIndex='time' )
+
+    # creation des moyennes mobiles
+    datasets.createMM( sInPair.lower() )
+    print( "Moyennes mobiles créées" )
+
+exit()
+# kisstomato-script-section-create-mm-stop-user-code-kisstomato
 
 """
 Construction des images d'entrées

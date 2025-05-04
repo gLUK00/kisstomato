@@ -5,6 +5,7 @@ en cours :
 
 
 a faire :
+- compiler les minutes
 - a la fermeture du projet, proposer de sauvegarder les onglets ouverts, sous la forme d'un interupteur a off
 - proposer une option d'enregistrement du chemin du projet au format relatif
 - memoriser l'ouverture des noeuds dans l'arbre
@@ -17,3 +18,6 @@ fait :
 -- continuer a coder dans le mergeDirs en fonction de la conf
 -- si pas de conf copier/ecraser la cible
 
+
+# tuto agent IA
+https://notebooklm.google.com/notebook/be2ece52-0a62-4a35-95fe-6dfa998013e6?original_referer=https:%2F%2Fwww.google.com%23&pli=1
