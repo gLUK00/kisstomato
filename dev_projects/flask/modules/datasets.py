@@ -1,7 +1,7 @@
 # kisstomato-module-import-start-user-code-kisstomato
 import gl, json, pymongo, datetime, pandas as pd
 from pymongo import MongoClient
-from modules import bdd
+from modules import bdd, converter
 from classes import bufferHistory
 # kisstomato-module-import-stop-user-code-kisstomato
 
@@ -28,26 +28,43 @@ def init(pair):
 """
 Création des moyennes mobiles
 """
-# Argument :
+# Arguments :
 # - pair : string : (obligatoire) Paire associée à l'historique des transactions
-def createMM(pair):
+# - startTime : number : (facultatif) Temps de référence du début
+def createMM(pair, startTime=None):
     # kisstomato-methode-createMM-start-user-code-kisstomato
     
     # initialisation du buffer
-    oBuffer = bufferHistory( pair, sizeImage=7272900 )
+    oBuffer = bufferHistory( pair, sizeImage=7272900, startTime=startTime )
     
     # pour la minutes en cours
     oMinute = []
     
+    # buffer d'enregistrements mongo
+    oMongoBuffer = []
+    iMongoBufferSize = 100
+    
+    # index pour l'affichage de la progression
+    iIndexShowProgress = 0
+    
+    # preparation de la collection
+    sColMM = gl.config[ "mongo" ][ "cols" ][ "mm_pair" ].replace( "{pair}", pair.lower() )
+    oColMM = bdd.getBdd()[ sColMM ]
+    
     # pour toutes les tranches
     iIndexMinutes = -1
     for oRange in oBuffer:
+        iIndexShowProgress += 1
+        if iIndexShowProgress % 100 == 0:
+            print( "MM : " + str( datetime.datetime.strptime( str( datetime.datetime.fromtimestamp( int( oRange[ 0 ][ 'time' ] ) ) ), '%Y-%m-%d %H:%M:%S' ) ) )
+            iIndexShowProgress = 0
         
         # pour la premiere minute
         if iIndexMinutes == -1: 
-            date_time = datetime.datetime.fromtimestamp( oRange[ 0 ][ 'time' ] )
-            ts = pd.Timestamp( date_time )
-            iIndexMinutes = int( ts.round('1min').timestamp() ) - ( 2 * 3600 )
+            #date_time = datetime.datetime.fromtimestamp( oRange[ 0 ][ 'time' ] )
+            #ts = pd.Timestamp( date_time )
+            #iIndexMinutes = int( ts.round('1min').timestamp() ) - ( 2 * 3600 )
+            iIndexMinutes = converter.time2minutes( oRange[ 0 ][ 'time' ] )
         
         # recupere les donnees
         iIndexLine = -1
@@ -82,6 +99,7 @@ def createMM(pair):
         
         # pour tous les prix et les quantites similaires
         oPrices = oQuantities = []
+        iOpen = iClose = iVolume = iLow = iHigh = 0
         
         # pour tous les elements de la plage
         for oLine in oMinute:
@@ -91,6 +109,12 @@ def createMM(pair):
             
             # le montant
             oItem[ "price" ] += float( oLine[ "val" ] )
+            
+            # min et max
+            if iLow == 0 or float( oLine[ "val" ] ) < iLow:
+                iLow = float( oLine[ "val" ] )
+            if iHigh == 0 or float( oLine[ "val" ] ) > iHigh:
+                iHigh = float( oLine[ "val" ] )
             
             # le volume prix et quantite
             oItem[ "vp" ] += float( oLine[ "val" ] ) * float( oLine[ "qte" ] )
@@ -141,22 +165,32 @@ def createMM(pair):
 
         # compilation des resultats
         oItem[ "price" ] = oItem[ "price" ] / oItem[ "count" ]
+        iOpen = oMinute[ 0 ][ "val" ]
+        iClose = oMinute[ -1 ][ "val" ]
+        iVolume = oItem[ "volume" ]
         #oItem[ "time" ] = iIndexMinutes
         
         # enregistrement de la minute
-        sColMM = gl.config[ "mongo" ][ "cols" ][ "mm_pair" ].replace( "{pair}", pair.lower() )
-        oColHistory = bdd.getBdd()[ sColMM ]
-        oColHistory.insert_one( { "time": iIndexMinutes, "1m": oItem, "5m": None, "15m": None, "30m": None, "1h": None, "2h": None, "4h": None, "8h": None, "12h": None, "1j": None, "2j": None, "5j": None, "15j": None, "1M": None } )
+        #oColHistory.insert_one( { "time": iIndexMinutes, "open": iOpen, "close": iClose, "volume": iVolume, "low": iLow, "high": iHigh,
+        #    "1m": oItem, "5m": None, "15m": None, "30m": None, "1h": None, "2h": None, "4h": None, "8h": None, "12h": None,
+        #    "1j": None, "2j": None, "5j": None, "15j": None, "1M": None } )
+        
+        oMongoBuffer.append( { "time": iIndexMinutes, "open": iOpen, "close": iClose, "volume": iVolume, "low": iLow, "high": iHigh,
+            "1m": oItem, "5m": None, "15m": None, "30m": None, "1h": None, "2h": None, "4h": None, "8h": None, "12h": None,
+            "1j": None, "2j": None, "5j": None, "15j": None, "1M": None } )
+        if len( oMongoBuffer ) >= iMongoBufferSize:
+            oColMM.insert_many( oMongoBuffer, ordered=True )
+            oMongoBuffer = []
         
         # increment de la minute
         iIndexMinutes += 60
         oMinute = []
-        
-        
-    #1538147830.9176438
-    #1513393355.5
+        iOpen = iClose = iVolume = iLow = iHigh = 0
     
-    pass
+    # si il reste des enregistrements
+    if len( oMongoBuffer ) >= iMongoBufferSize:
+        oColMM.insert_many( oMongoBuffer, ordered=True )
+
     # kisstomato-methode-createMM-stop-user-code-kisstomato
 
 """

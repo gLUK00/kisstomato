@@ -2,7 +2,7 @@
 import gl, pymongo, datetime
 import pandas as pd
 from pymongo import MongoClient
-from modules import bdd
+from modules import bdd, converter
 # kisstomato-class-import-stop-user-code-kisstomato
 
 """
@@ -14,7 +14,7 @@ class bufferHistory:
     # kisstomato-class-properties-start-user-code-kisstomato
     # kisstomato-class-properties-stop-user-code-kisstomato
 
-    def __init__(self, pair, sizeBuffer=None, sizeImage=None):
+    def __init__(self, pair, sizeBuffer=None, sizeImage=None, startTime=None):
         # kisstomato-class-init-start-user-code-kisstomato
         self.pair = pair
         self.sizeBuffer = 12000000 # nombre de secondes du buffer
@@ -23,20 +23,34 @@ class bufferHistory:
         self.sizeImage = 9849620 # pour 114j 4:20
         if sizeImage != None:
             self.sizeImage = sizeImage
+        self.startTime = 0
+        if startTime != None:
+            self.startTime = startTime
 
         sColHistory = gl.config[ "mongo" ][ "cols" ][ "history_pair" ].replace( "{pair}", pair )
 
         self.colHistory = bdd.getBdd()[ sColHistory ]
 
         # recherche de l'index
-        oFirst = self.colHistory.find_one( { "time": { "$gte": 0 } }, sort=[("time", pymongo.ASCENDING)] )
+        oFirst = self.colHistory.find_one( { "time": { "$gte": self.startTime } }, sort=[("time", pymongo.ASCENDING)] )
         #self.indexTime = int( oFirst[ 'time' ] )
 
         # positionnement a la minute
-        date = pd.to_datetime( datetime.datetime.strptime( str( datetime.datetime.fromtimestamp( int( oFirst[ 'time' ] ) ) ), '%Y-%m-%d %H:%M:%S' ) )
-        self.indexTime = int( date.round('T').timestamp() ) + 60
+        self.indexTime = converter.time2minutes( int( oFirst[ 'time' ] ) )
+        #date = pd.to_datetime( datetime.datetime.strptime( str( datetime.datetime.fromtimestamp( int( oFirst[ 'time' ] ) ) ), '%Y-%m-%d %H:%M:%S' ) )
+        #self.indexTime = int( date.round('T').timestamp() ) + 60
 
         """print( 'tttttttttttttttt' )
+        
+        1616386560
+        
+        
+        1616382907.4678254
+        GMT: Monday 22 March 2021 03:15:07.467
+Your time zone: lundi 22 mars 2021 04:15:07.467 GMT+01:00
+
+GMT: Monday 22 March 2021 04:16:00
+Your time zone: lundi 22 mars 2021 05:16:00 GMT+01:00
 
         print( datetime.datetime.strptime( str( datetime.datetime.fromtimestamp( int( oFirst[ 'time' ] ) ) ), '%Y-%m-%d %H:%M:%S' ) )
 
@@ -103,8 +117,8 @@ class bufferHistory:
 
         #exit()
 
-        print( 'AA ' + str( iIndexStart ) )
-        print( 'BB ' + str( iIndexStop ) )
+        #print( 'AA ' + str( iIndexStart ) )
+        #print( 'BB ' + str( iIndexStop ) )
 
 
 

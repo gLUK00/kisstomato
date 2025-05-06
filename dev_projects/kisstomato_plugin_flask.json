@@ -146,6 +146,29 @@
                                                     },
                                                     "color": "#ec74ba",
                                                     "icon": "fa-solid fa-star-of-life"
+                                                },
+                                                {
+                                                    "id": "6346e218-45d8-4a0b-9543-d8418fe1c5f4",
+                                                    "text": "startTime",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Temps de r\u00e9f\u00e9rence du d\u00e9but"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": false
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "number"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
                                                 }
                                             ],
                                             "state": {
@@ -368,107 +391,6 @@
                 ]
             },
             "children": [
-                {
-                    "id": "d205fb33-cd15-457a-984a-87cdf0fb51c5",
-                    "text": "configuration",
-                    "li_attr": {
-                        "type": "module",
-                        "items": [
-                            {
-                                "id": "desc",
-                                "value": "gestion de la configuration"
-                            }
-                        ]
-                    },
-                    "color": "#b8d567",
-                    "icon": "fa-solid fa-box",
-                    "children": [
-                        {
-                            "id": "e9a98c04-c931-42f7-8ebb-6b4cd52e931b",
-                            "text": "Fonctions",
-                            "li_attr": {
-                                "type": "fonctions",
-                                "readonly": true
-                            },
-                            "color": "#d57277",
-                            "icon": "fa-brands fa-stack-overflow",
-                            "children": [
-                                {
-                                    "id": "0167840d-c428-43ed-b788-37b8c7b4050f",
-                                    "text": "load",
-                                    "li_attr": {
-                                        "type": "fonction",
-                                        "items": [
-                                            {
-                                                "id": "desc",
-                                                "value": "chargement de la configuration"
-                                            },
-                                            {
-                                                "id": "exception",
-                                                "value": true
-                                            },
-                                            {
-                                                "id": "return",
-                                                "value": "none"
-                                            }
-                                        ]
-                                    },
-                                    "color": "#f9a658",
-                                    "icon": "fa-brands fa-accusoft",
-                                    "children": [
-                                        {
-                                            "id": "8945d5ff-1d03-47b6-b2b0-1c51372b2950",
-                                            "text": "Arguments",
-                                            "li_attr": {
-                                                "type": "arguments",
-                                                "readonly": true
-                                            },
-                                            "color": "#50edb8",
-                                            "icon": "fa-solid fa-th-large",
-                                            "children": [
-                                                {
-                                                    "id": "6a04e218-6ec4-4e05-b4bd-3f49e2a23cad",
-                                                    "text": "conf",
-                                                    "li_attr": {
-                                                        "type": "argument",
-                                                        "items": [
-                                                            {
-                                                                "id": "desc",
-                                                                "value": "nom du fichier de configuration"
-                                                            },
-                                                            {
-                                                                "id": "require",
-                                                                "value": false
-                                                            },
-                                                            {
-                                                                "id": "type",
-                                                                "value": "string"
-                                                            }
-                                                        ]
-                                                    },
-                                                    "color": "#ec74ba",
-                                                    "icon": "fa-solid fa-star-of-life"
-                                                }
-                                            ],
-                                            "state": {
-                                                "opened": true
-                                            }
-                                        }
-                                    ],
-                                    "state": {
-                                        "opened": true
-                                    }
-                                }
-                            ],
-                            "state": {
-                                "opened": true
-                            }
-                        }
-                    ],
-                    "state": {
-                        "opened": false
-                    }
-                },
                 {
                     "id": "5e9747e8-f09d-46a9-8100-d591eafde9dd",
                     "text": "bdd",
@@ -1192,6 +1114,196 @@
                     }
                 },
                 {
+                    "id": "d205fb33-cd15-457a-984a-87cdf0fb51c5",
+                    "text": "configuration",
+                    "li_attr": {
+                        "type": "module",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "gestion de la configuration"
+                            }
+                        ]
+                    },
+                    "color": "#b8d567",
+                    "icon": "fa-solid fa-box",
+                    "children": [
+                        {
+                            "id": "e9a98c04-c931-42f7-8ebb-6b4cd52e931b",
+                            "text": "Fonctions",
+                            "li_attr": {
+                                "type": "fonctions",
+                                "readonly": true
+                            },
+                            "color": "#d57277",
+                            "icon": "fa-brands fa-stack-overflow",
+                            "children": [
+                                {
+                                    "id": "0167840d-c428-43ed-b788-37b8c7b4050f",
+                                    "text": "load",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "chargement de la configuration"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": true
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "none"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "8945d5ff-1d03-47b6-b2b0-1c51372b2950",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "children": [
+                                                {
+                                                    "id": "6a04e218-6ec4-4e05-b4bd-3f49e2a23cad",
+                                                    "text": "conf",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "nom du fichier de configuration"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": false
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                }
+                                            ],
+                                            "state": {
+                                                "opened": true
+                                            }
+                                        }
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
+                                }
+                            ],
+                            "state": {
+                                "opened": true
+                            }
+                        }
+                    ],
+                    "state": {
+                        "opened": false
+                    }
+                },
+                {
+                    "id": "0fc472ef-27df-46b2-b0b7-a696d22235f8",
+                    "text": "converter",
+                    "li_attr": {
+                        "type": "module",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "Module d'aide \u00e0 la conversion"
+                            }
+                        ]
+                    },
+                    "color": "#b8d567",
+                    "icon": "fa-solid fa-box",
+                    "children": [
+                        {
+                            "id": "e907bd41-e4a6-4376-a029-694380c4e838",
+                            "text": "Fonctions",
+                            "li_attr": {
+                                "type": "fonctions",
+                                "readonly": true
+                            },
+                            "color": "#d57277",
+                            "icon": "fa-brands fa-stack-overflow",
+                            "children": [
+                                {
+                                    "id": "28e51708-f8d0-41f8-b8c5-3c38583ec16d",
+                                    "text": "time2minutes",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Conversion d'un timestamp en timestamp arrondi \u00e0 la minute"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "number"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "1172135e-e66d-4641-a7e6-f739f47bb6a1",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "children": [
+                                                {
+                                                    "id": "6f577842-31ee-4e13-a9de-c5cdd561de52",
+                                                    "text": "time",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Timestamp d'entr\u00e9e"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "number"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
                     "id": "cead3ade-0ace-4f28-a211-f18caed32e5c",
                     "text": "services",
                     "li_attr": {
@@ -1476,10 +1588,36 @@
                                                     },
                                                     "color": "#ec74ba",
                                                     "icon": "fa-solid fa-star-of-life"
+                                                },
+                                                {
+                                                    "id": "6a3a5942-5e07-4a91-b2b3-748d07e254b6",
+                                                    "text": "startTime",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Temps de r\u00e9f\u00e9rence du d\u00e9but"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": false
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "number"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
                                                 }
                                             ]
                                         }
-                                    ]
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
                                 },
                                 {
                                     "id": "a5edcb90-f587-4ba6-806d-f8295e098949",

@@ -2,12 +2,12 @@
 import argparse
 
 # kisstomato-script-import-start-user-code-kisstomato
-import sys, os
+import sys, os, pymongo
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 import gl
-from modules import configuration, bdd, services, datasets
+from modules import configuration, bdd, services, datasets, converter
 # kisstomato-script-import-stop-user-code-kisstomato
 
 """
@@ -106,13 +106,37 @@ if bdd.collectionExist( sColMM ) and input( 'Calcul des moyennes mobiles (o/N) ?
 
 # calcul des moyennes mobiles
 if bCreateCol:
+    
+    # determine si le calcul doit etre poursuivi
+    bDropMM = True
+    iIndexTimeStart = 0
+    sColMM = gl.config[ "mongo" ][ "cols" ][ "mm_pair" ].replace( "{pair}", sInPair.lower() )
+    if bdd.collectionExist( sColMM ):
+        
+        # recupere la derniere minute traitee
+        oColMM = bdd.getBdd()[ sColMM ]
+        oLastMM = oColMM.find_one(sort=[("time", pymongo.DESCENDING)])
+        if oLastMM != None:
+            iLastTimeMM = int( oLastMM[ 'time' ] )
+            bDropMM = False
+            
+            # recupere la derniere minute de l'historique
+            oColHistory = bdd.getBdd()[ gl.config[ "mongo" ][ "cols" ][ "history_pair" ].replace( "{pair}", sInPair.lower() ) ]
+            oLastHistory = oColHistory.find_one( sort=[("time", pymongo.DESCENDING)] )
+            iLastTimeHistory = int( oLastHistory[ 'time' ] )
+            
+            # compare les minutes
+            if converter.time2minutes( iLastTimeMM ) < converter.time2minutes( iLastTimeHistory ):
+                iIndexTimeStart = iLastTimeMM + 60
 
     # creation de la collection
-    bdd.dropCollection( sColMM, createIndex='time' )
+    if bDropMM:
+        bdd.dropCollection( sColMM, createIndex='time' )
 
     # creation des moyennes mobiles
-    datasets.createMM( sInPair.lower() )
+    datasets.createMM( sInPair.lower(), startTime=iIndexTimeStart )
     print( "Moyennes mobiles créées" )
+
 
 exit()
 # kisstomato-script-section-create-mm-stop-user-code-kisstomato
