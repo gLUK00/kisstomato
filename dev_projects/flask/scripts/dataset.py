@@ -135,6 +135,10 @@ if bCreateCol:
 
     # creation des moyennes mobiles
     datasets.createMM( sInPair.lower(), startTime=iIndexTimeStart )
+    
+    # compilation des moyennes mobiles
+    datasets.buildMM( sInPair.lower() )
+    
     print( "Moyennes mobiles créées" )
 
 

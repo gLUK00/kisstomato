@@ -1,5 +1,5 @@
 # kisstomato-module-import-start-user-code-kisstomato
-import gl, json
+import gl, json, pymongo
 from pymongo import MongoClient
 # kisstomato-module-import-stop-user-code-kisstomato
 
@@ -89,6 +89,25 @@ def importHistory(collection, pair, listFiles):
             oBdd[ collection ].insert_one( { 'time': oLine[ 2 ], 'qte': oLine[ 1 ], 'val': oLine[ 0 ], 'action': oLine[ 3 ], 'type': oLine[ 4 ] } )
     
     # kisstomato-methode-importHistory-stop-user-code-kisstomato
+
+"""
+Récupère une plage d'historique
+"""
+# Arguments :
+# - collection : string : (obligatoire) Collection cible
+# - timeMin : number : (obligatoire) Temps minimum
+# - timeMax : number : (obligatoire) Temps maximum
+def getHistoryRange(collection, timeMin, timeMax):
+    oResult = None
+
+    # kisstomato-methode-getHistoryRange-start-user-code-kisstomato
+    
+    oBdd = getBdd()
+    oResult = list( oBdd[ collection ].colHistory.find( { "time": {"$gte": timeMin, "$lt": timeMax } } ).sort( "time", pymongo.ASCENDING ) )
+    
+    # kisstomato-methode-getHistoryRange-stop-user-code-kisstomato
+
+    return oResult
 
 # kisstomato-module-end-start-user-code-kisstomato
 # kisstomato-module-end-stop-user-code-kisstomato

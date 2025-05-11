@@ -1,8 +1,8 @@
 # kisstomato-module-import-start-user-code-kisstomato
-import gl, json, pymongo, datetime, pandas as pd
+import gl, json, pymongo, datetime, pandas as pd, threading, time
 from pymongo import MongoClient
 from modules import bdd, converter
-from classes import bufferHistory
+from classes import bufferHistory, threadMM, buildMM
 # kisstomato-module-import-stop-user-code-kisstomato
 
 """
@@ -26,7 +26,7 @@ def init(pair):
     # kisstomato-methode-init-stop-user-code-kisstomato
 
 """
-Création des moyennes mobiles
+Création des moyennes mobiles sur 1 minute
 """
 # Arguments :
 # - pair : string : (obligatoire) Paire associée à l'historique des transactions
@@ -34,164 +34,171 @@ Création des moyennes mobiles
 def createMM(pair, startTime=None):
     # kisstomato-methode-createMM-start-user-code-kisstomato
     
-    # initialisation du buffer
-    oBuffer = bufferHistory( pair, sizeImage=7272900, startTime=startTime )
+    oColHistory = bdd.getBdd()[ gl.config[ "mongo" ][ "cols" ][ "history_pair" ].replace( "{pair}", pair ) ]
+    oColMM = bdd.getBdd()[ gl.config[ "mongo" ][ "cols" ][ "mm_pair" ].replace( "{pair}", pair ) ]
     
-    # pour la minutes en cours
-    oMinute = []
-    
-    # buffer d'enregistrements mongo
-    oMongoBuffer = []
-    iMongoBufferSize = 100
-    
-    # index pour l'affichage de la progression
-    iIndexShowProgress = 0
-    
-    # preparation de la collection
-    sColMM = gl.config[ "mongo" ][ "cols" ][ "mm_pair" ].replace( "{pair}", pair.lower() )
-    oColMM = bdd.getBdd()[ sColMM ]
-    
-    # pour toutes les tranches
-    iIndexMinutes = -1
-    for oRange in oBuffer:
-        iIndexShowProgress += 1
-        if iIndexShowProgress % 100 == 0:
-            print( "MM : " + str( datetime.datetime.strptime( str( datetime.datetime.fromtimestamp( int( oRange[ 0 ][ 'time' ] ) ) ), '%Y-%m-%d %H:%M:%S' ) ) )
-            iIndexShowProgress = 0
-        
-        # pour la premiere minute
-        if iIndexMinutes == -1: 
-            #date_time = datetime.datetime.fromtimestamp( oRange[ 0 ][ 'time' ] )
-            #ts = pd.Timestamp( date_time )
-            #iIndexMinutes = int( ts.round('1min').timestamp() ) - ( 2 * 3600 )
-            iIndexMinutes = converter.time2minutes( oRange[ 0 ][ 'time' ] )
-        
-        # recupere les donnees
-        iIndexLine = -1
-        for oLine in oRange:
-            iIndexLine += 1
-            if oLine[ 'time' ] >= iIndexMinutes and oLine[ 'time' ] < iIndexMinutes + 60:
-                oMinute.append( oLine )
-            else:
-                break
-        
-        # troncature du range
-        oRange = oRange[ iIndexLine : ]
-        
-        # compilation de la minute
-        oItem = { "volume": 0,
-            "price": 0,
-            "vp": 0,
-            "progress_up":0,
-            "progress_down": 0,
-            "nbr_buy_limit": 0,
-            "nbr_buy_market": 0,
-            "nbr_sell_limit": 0,
-            "nbr_sell_market": 0,
-            "nbr_price_similar": 0,
-            "nbr_volume_similar": 0,
-            "nbr_buy_round_price": 0,
-            "nbr_sell_round_price": 0,
-            "nbr_buy_round_qte": 0,
-            "nbr_sell_round_qte": 0,
-            "count": len( oMinute ),
-            "time": iIndexMinutes }
-        
-        # pour tous les prix et les quantites similaires
-        oPrices = oQuantities = []
-        iOpen = iClose = iVolume = iLow = iHigh = 0
-        
-        # pour tous les elements de la plage
-        for oLine in oMinute:
-            
-            # le volume total
-            oItem[ "volume" ] += float( oLine[ "qte" ] )
-            
-            # le montant
-            oItem[ "price" ] += float( oLine[ "val" ] )
-            
-            # min et max
-            if iLow == 0 or float( oLine[ "val" ] ) < iLow:
-                iLow = float( oLine[ "val" ] )
-            if iHigh == 0 or float( oLine[ "val" ] ) > iHigh:
-                iHigh = float( oLine[ "val" ] )
-            
-            # le volume prix et quantite
-            oItem[ "vp" ] += float( oLine[ "val" ] ) * float( oLine[ "qte" ] )
-            
-            # pour les actions
-            if oLine[ "action" ] == 'b':
-                if oLine[ "type" ] == 'l':
-                    oItem[ "nbr_buy_limit" ] += 1
-                else:
-                    oItem[ "nbr_buy_market" ] += 1
-            else:
-                if oLine[ "type" ] == 'l':
-                    oItem[ "nbr_sell_limit" ] += 1
-                else:
-                    oItem[ "nbr_sell_market" ] += 1
-            
-            # pour les tarifs similaires
-            if oItem[ "price" ] not in oPrices:
-                oPrices.append( oLine[ "val" ] )
-            else:
-                oItem[ "nbr_price_similar" ] += 1
-            
-            # pour les quantites similaires
-            if oLine[ "qte" ] not in oQuantities:
-                oQuantities.append( oLine[ "qte" ] )
-            else:
-                oItem[ "nbr_volume_similar" ] += 1
-            
-            # pour les prix ronds
-            if float( oLine[ "val" ] ) == round( float( oLine[ "val" ] ) ):
-                if oLine[ "action" ] == 'b':
-                    oItem[ "nbr_buy_round_price" ] += 1
-                else:
-                    oItem[ "nbr_sell_round_price" ] += 1
-                    
-            # pour les quantites rondes
-            if float( oLine[ "qte" ] ) == round( float( oLine[ "qte" ] ) ):
-                if oLine[ "action" ] == 'b':
-                    oItem[ "nbr_buy_round_qte" ] += 1
-                else:
-                    oItem[ "nbr_sell_round_qte" ] += 1
+    if startTime is None:
+        startTime = converter.time2minutes( oColHistory.find_one( sort=[("time", pymongo.ASCENDING)] )[ 'time' ] )
+    else:
+        startTime = converter.time2minutes( startTime )
 
-        # si la minute est vide
-        if oItem[ "count" ] == 0:
-            iIndexMinutes += 60
-            oMinute = []
-            continue
-
-        # compilation des resultats
-        oItem[ "price" ] = oItem[ "price" ] / oItem[ "count" ]
-        iOpen = oMinute[ 0 ][ "val" ]
-        iClose = oMinute[ -1 ][ "val" ]
-        iVolume = oItem[ "volume" ]
-        #oItem[ "time" ] = iIndexMinutes
-        
-        # enregistrement de la minute
-        #oColHistory.insert_one( { "time": iIndexMinutes, "open": iOpen, "close": iClose, "volume": iVolume, "low": iLow, "high": iHigh,
-        #    "1m": oItem, "5m": None, "15m": None, "30m": None, "1h": None, "2h": None, "4h": None, "8h": None, "12h": None,
-        #    "1j": None, "2j": None, "5j": None, "15j": None, "1M": None } )
-        
-        oMongoBuffer.append( { "time": iIndexMinutes, "open": iOpen, "close": iClose, "volume": iVolume, "low": iLow, "high": iHigh,
-            "1m": oItem, "5m": None, "15m": None, "30m": None, "1h": None, "2h": None, "4h": None, "8h": None, "12h": None,
-            "1j": None, "2j": None, "5j": None, "15j": None, "1M": None } )
-        if len( oMongoBuffer ) >= iMongoBufferSize:
-            oColMM.insert_many( oMongoBuffer, ordered=True )
-            oMongoBuffer = []
-        
-        # increment de la minute
-        iIndexMinutes += 60
-        oMinute = []
-        iOpen = iClose = iVolume = iLow = iHigh = 0
+    # recherche des dernieres minutes
+    oColHistory = bdd.getBdd()[ gl.config[ "mongo" ][ "cols" ][ "history_pair" ].replace( "{pair}", pair ) ]
+    iLastMinuteHistory = converter.time2minutes( oColHistory.find_one( sort=[("time", pymongo.DESCENDING)] )[ 'time' ] )
+    """oColHistory = bdd.getBdd()[ gl.config[ "mongo" ][ "cols" ][ "history_pair" ].replace( "{pair}", pair ) ]
+    oColMM = bdd.getBdd()[ gl.config[ "mongo" ][ "cols" ][ "mm_pair" ].replace( "{pair}", pair ) ]
+    iLastMinuteHistory = converter.time2minutes( oColHistory.find_one( sort=[("time", pymongo.DESCENDING)] )[ 'time' ] )
+    iLastMinuteMM = converter.time2minutes( oColMM.find_one( sort=[("time", pymongo.DESCENDING)] )[ 'time' ] )
+    """
     
-    # si il reste des enregistrements
-    if len( oMongoBuffer ) >= iMongoBufferSize:
-        oColMM.insert_many( oMongoBuffer, ordered=True )
+    # detemine la plage temporelle de chaque thread
+    iStepTime = 18000 # 18000s = 5 hours
+
+    # initialisation de la liste des threads
+    oThreads = []
+    for i in range( gl.config[ 'nbr_threads_max' ] ):
+        
+        # recupere la plage d'historique
+        iTimeRef = startTime + ( i * iStepTime )
+        oHisto = list( oColHistory.find( { "time": {"$gte": iTimeRef, "$lt": ( iTimeRef + iStepTime ) } } ).sort( "time", pymongo.ASCENDING ) )
+        oThread = threadMM( indexTime=iTimeRef, history=oHisto )
+        oThreads.append( oThread )
+        oThread.start()
+
+    # progression temporelle
+    iIndexTimeRef = startTime
+    iTimeLastIndex = startTime + ( gl.config[ 'nbr_threads_max' ] * iStepTime )
+    while True:
+        
+        # determine si plus de donnees
+        bLastData = False
+        
+        # pour tous les threads termines
+        for oThread in oThreads:
+            if oThread.disponible and oThread.indexTime == iIndexTimeRef:
+                
+                print( "MM : " + str( datetime.datetime.strptime( str( datetime.datetime.fromtimestamp( int( oThread.indexTime ) ) ), '%Y-%m-%d %H:%M:%S' ) ) )
+                
+                # recupere les donnees
+                if len( oThread.results ) > 0:
+                    oColMM.insert_many( oThread.results, ordered=True )
+
+                # remplacement du thread
+                oHisto = list( oColHistory.find( { "time": {"$gte": iTimeLastIndex, "$lt": ( iTimeLastIndex + iStepTime ) } } ).sort( "time", pymongo.ASCENDING ) )
+                if len( oHisto ) == 0 and ( iTimeLastIndex + iStepTime ) > iLastMinuteHistory:
+                    bLastData = True
+                    break
+                oThreads.remove(oThread)
+                oThread = threadMM( indexTime=iTimeLastIndex, history=oHisto )
+                oThreads.append(oThread)
+                oThread.start()
+                
+                # determine le prochain index
+                iTimeLastIndex += iStepTime
+                iIndexTimeRef += iStepTime
+
+        # determine si il n'y a plus de donnees d'historique
+        if bLastData:
+            break
+        
+        # pause de 5 secondes
+        time.sleep( 0.1 )
 
     # kisstomato-methode-createMM-stop-user-code-kisstomato
+
+"""
+Calcul le reste des moyennes mobiles
+"""
+# Argument :
+# - pair : string : (obligatoire) Paire associée à l'historique des minutes
+def buildMM(pair):
+    # kisstomato-methode-buildMM-start-user-code-kisstomato
+    
+    # detemine la plage temporelle de chaque thread
+    iStepTime = 18000 # 18000s = 5 hours
+    
+    # recupere le premier enregistrement
+    oColMM = bdd.getBdd()[ gl.config[ "mongo" ][ "cols" ][ "mm_pair" ].replace( "{pair}", pair ) ]
+    iFirstMinuteMM = converter.time2minutes( oColMM.find_one( sort=[("time", pymongo.ASCENDING)] )[ 'time' ] )
+    
+    # pour toutes les moyennes mobiles
+    oMMs = {  "5m": 300, "15m": 900, "30m": 1800, "1h": 3600, "2h": 7200, "4h": 14400, "8h": 28800, "12h": 43200,
+        "1j": 86400, "2j": 172800, "5j": 432000, "15j": 1296000, "1M": 2592000 }
+    for sField, iSeconds in oMMs.items():
+        
+        print( "Compilation MM : " + sField )
+
+        # determine si il y a deja eu des calculs
+        iStartTime = 0
+        #iIndexTime = converter.time2minutes( iFirstMinuteMM + iSeconds )
+        oElement = oColMM.find_one( { sField: None }, sort=[("time", pymongo.ASCENDING)] )
+        #oElement = oColMM.find_one( { sField: None, "time": iIndexTime }, sort=[("time", pymongo.ASCENDING)] )
+        if oElement is not None:
+            iStartTime = converter.time2minutes( oElement[ "time" ] )
+        else:
+            print( 'Compilation MM ; déjà effectuée : ' + sField )
+            continue
+        iStopTime = iStartTime + iSeconds + iStepTime
+        
+        # initialisation de la liste des threads
+        oThreads = []
+        for i in range( gl.config[ 'nbr_threads_max' ] ):
+        
+            # recupere la plage des MM
+            oMM = list( oColMM.find( { "time": {"$gte": iStartTime, "$lt": iStopTime } } ).sort( "time", pymongo.ASCENDING ) )
+            oThread = buildMM( indexTime=iStartTime + ( i * iStepTime ), sizeRange=iSeconds, minutes=oMM )
+            oThreads.append( oThread )
+            oThread.start()
+        
+        # progression temporelle
+        iIndexTimeRef = iStartTime
+        iTimeLastIndex = iStartTime + ( gl.config[ 'nbr_threads_max' ] * ( iSeconds + iStepTime ) )
+        while True:
+            
+            # determine si plus de donnees
+            bLastData = False
+            
+            # pour tous les threads termines
+            for oThread in oThreads:
+                if oThread.disponible and oThread.indexTime == iIndexTimeRef:
+                    
+                    print( "MM : " + str( datetime.datetime.strptime( str( datetime.datetime.fromtimestamp( int( oThread.indexTime ) ) ), '%Y-%m-%d %H:%M:%S' ) ) )
+                    
+                    # recupere les donnees
+                    if len( oThread.results ) > 0:
+                        #oColMM.insert_many( oThread.results, ordered=True )
+                        print( 'mise a jour' )
+
+                    # remplacement du thread
+                    oHisto = list( oColMM.find( { "time": {"$gte": iTimeLastIndex, "$lt": ( iTimeLastIndex + iSeconds + iStepTime ) } } ).sort( "time", pymongo.ASCENDING ) )
+                    if len( oHisto ) == 0:
+                        bLastData = True
+                        break
+                    oThreads.remove(oThread)
+                    oThread = buildMM( indexTime=iTimeLastIndex, history=oHisto )
+                    oThreads.append(oThread)
+                    oThread.start()
+                    
+                    # determine le prochain index
+                    iTimeLastIndex += iSeconds + iStepTime
+                    iIndexTimeRef += iSeconds + iStepTime
+
+            # determine si il n'y a plus de donnees d'historique
+            if bLastData:
+                break
+            
+            # pause de 5 secondes
+            time.sleep( 0.1 )
+
+        # oHisto = list( oColHistory.find( { "time": {"$gt": iTimeLastIndex, "$lt": ( iTimeLastIndex + iStepTime ) } } ).sort( "time", pymongo.ASCENDING ) )
+        
+        print( oElement )
+    
+    # troncature du debut de la collection
+    #oColMM.delete_many( { "time": { "$lt": iFirstMinuteMM } } )
+    
+    
+    # kisstomato-methode-buildMM-stop-user-code-kisstomato
 
 """
 Création d'un dataset à partir de l'historique des transactions

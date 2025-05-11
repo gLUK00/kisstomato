@@ -10,6 +10,9 @@ Buffer d'historique d'une paire
 """
 
 class bufferHistory:
+    """
+    Buffer d'historique d'une paire
+    """
 
     # kisstomato-class-properties-start-user-code-kisstomato
     # kisstomato-class-properties-stop-user-code-kisstomato
@@ -76,7 +79,6 @@ Your time zone: lundi 22 mars 2021 05:16:00 GMT+01:00
         # kisstomato-class-methode-__iter__-start-user-code-kisstomato
         oResult = self
         # kisstomato-class-methode-__iter__-stop-user-code-kisstomato
-
         return oResult
     """
     Retourne la plage suivante
@@ -133,5 +135,4 @@ Your time zone: lundi 22 mars 2021 05:16:00 GMT+01:00
             self.buffer = self.buffer[ iIndexStart : ]
         
         # kisstomato-class-methode-__next__-stop-user-code-kisstomato
-
         return oResult

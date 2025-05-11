@@ -2,6 +2,8 @@
 # kisstomato-init-a-stop-user-code-kisstomato
 
 from .bufferHistory import *
+from .threadMM import *
+from .buildMM import *
 
 # kisstomato-init-b-start-user-code-kisstomato
 # kisstomato-init-b-stop-user-code-kisstomato

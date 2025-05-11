@@ -501,6 +501,37 @@
                                     },
                                     "color": "#ff1414",
                                     "icon": "fa-brands fa-node-js"
+                                },
+                                {
+                                    "id": "d876d573-3caa-4d98-acb2-b2aca40fc69f",
+                                    "text": "heritage",
+                                    "li_attr": {
+                                        "type": "item",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "H\u00e9ritage de classe"
+                                            },
+                                            {
+                                                "id": "type",
+                                                "value": "string"
+                                            },
+                                            {
+                                                "id": "type_object",
+                                                "value": "undefined"
+                                            },
+                                            {
+                                                "id": "type_list",
+                                                "value": []
+                                            },
+                                            {
+                                                "id": "on_display",
+                                                "value": ""
+                                            }
+                                        ]
+                                    },
+                                    "color": "#ff1414",
+                                    "icon": "fa-brands fa-node-js"
                                 }
                             ],
                             "state": {
@@ -539,7 +570,7 @@
                         }
                     ],
                     "state": {
-                        "opened": false
+                        "opened": true
                     }
                 },
                 {
@@ -621,7 +652,7 @@
                         }
                     ],
                     "state": {
-                        "opened": true
+                        "opened": false
                     }
                 },
                 {
@@ -1580,7 +1611,7 @@
                         }
                     ],
                     "state": {
-                        "opened": true
+                        "opened": false
                     }
                 },
                 {
@@ -2052,7 +2083,7 @@
                         }
                     ],
                     "state": {
-                        "opened": true
+                        "opened": false
                     }
                 },
                 {
@@ -2612,7 +2643,7 @@
                 }
             ],
             "state": {
-                "opened": false
+                "opened": true
             }
         },
         {
@@ -2918,7 +2949,10 @@
                                     "color": "#5c9226",
                                     "icon": "fa-brands fa-centercode"
                                 }
-                            ]
+                            ],
+                            "state": {
+                                "opened": true
+                            }
                         },
                         {
                             "id": "accbdefc-e74f-4e7e-abfe-c89d25a6e927",
@@ -2998,7 +3032,10 @@
                                             "color": "#4f9a04",
                                             "icon": "fa-solid fa-braille"
                                         }
-                                    ]
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
                                 },
                                 {
                                     "id": "7751a01b-2a50-4eb1-865a-e5bce6a9b4f7",
@@ -3063,6 +3100,44 @@
                                     "children": [
                                         {
                                             "id": "4b4733f4-b4e1-407c-a4ec-24ca342f168f",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#4f9a04",
+                                            "icon": "fa-solid fa-braille"
+                                        }
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
+                                },
+                                {
+                                    "id": "d34be3b8-4d70-4301-a569-f96110e4727e",
+                                    "text": "getHeritage",
+                                    "li_attr": {
+                                        "type": "methode",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Retourne le nom de la classe h\u00e9rit\u00e9e"
+                                            },
+                                            {
+                                                "id": "return-val",
+                                                "value": true
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            }
+                                        ]
+                                    },
+                                    "color": "#ca9f53",
+                                    "icon": "fa-regular fa-list-alt",
+                                    "children": [
+                                        {
+                                            "id": "94c7335a-cfd2-44f0-bdf4-2da22257278d",
                                             "text": "Arguments",
                                             "li_attr": {
                                                 "type": "arguments",
@@ -3215,7 +3290,7 @@
                                         }
                                     ],
                                     "state": {
-                                        "opened": true
+                                        "opened": false
                                     }
                                 },
                                 {

@@ -24,9 +24,23 @@ def {{ oF.name }}({% for oArg in oF.args %}{{ oArg[ 'name' ] }}{% if not oArg[ '
     oResult = None
 
 &&      endif
+&&      if oF[ 'exception' ]
+    try:
+&&      endif
 
-    # kisstomato-methode-{{ oF.name }}-start-user-code-kisstomato
-    # kisstomato-methode-{{ oF.name }}-stop-user-code-kisstomato
+{% if oF[ 'exception' ] %}    {% endif %}    # kisstomato-methode-{{ oF.name }}-start-user-code-kisstomato
+{% if oF[ 'exception' ] %}    {% endif %}    pass
+{% if oF[ 'exception' ] %}    {% endif %}    # kisstomato-methode-{{ oF.name }}-stop-user-code-kisstomato
+
+&&      if oF[ 'exception' ]
+    except Exception as e:
+        # kisstomato-methode-exception-{{ oF.name }}-start-user-code-kisstomato
+        print( e )
+        # kisstomato-methode-exception-{{ oF.name }}-stop-user-code-kisstomato
+            
+    # kisstomato-methode-finally-{{ oF.name }}-start-user-code-kisstomato
+    # kisstomato-methode-finally-{{ oF.name }}-stop-user-code-kisstomato 
+&&      endif
 
 &&      if oF[ 'return' ] and oF[ 'return' ] != 'none'
     return oResult

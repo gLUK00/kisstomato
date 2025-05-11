@@ -2,6 +2,7 @@
     "port": 8080,
     "host": "0.0.0.0",
     "debug": true,
+    "nbr_threads_max": 10,
     "mongo": {
         "user": "root",
         "pass": "mypass",

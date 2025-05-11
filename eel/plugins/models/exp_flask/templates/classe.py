@@ -5,7 +5,10 @@
 {{ o.getDesc() }}
 """
 
-class {{ o.getName() }}:
+class {{ o.getName() }}{% if o.getHeritage() != '' %}({{ o.getHeritage() }}){% endif %}:
+    """
+    {{ o.getDesc() }}
+    """
 
     # kisstomato-class-properties-start-user-code-kisstomato
     # kisstomato-class-properties-stop-user-code-kisstomato
@@ -30,10 +33,22 @@ class {{ o.getName() }}:
         oResult = None
 
 &&      endif
+&&      if oF[ 'exception' ]
+        try:
+&&      endif
 
-        # kisstomato-class-methode-{{ oF.name }}-start-user-code-kisstomato
-        pass
-        # kisstomato-class-methode-{{ oF.name }}-stop-user-code-kisstomato
+{% if oF[ 'exception' ] %}    {% endif %}        # kisstomato-class-methode-{{ oF.name }}-start-user-code-kisstomato
+{% if oF[ 'exception' ] %}    {% endif %}        pass
+{% if oF[ 'exception' ] %}    {% endif %}        # kisstomato-class-methode-{{ oF.name }}-stop-user-code-kisstomato
+&&      if oF[ 'exception' ]
+        except Exception as e:
+            # kisstomato-class-exception-{{ oF.name }}-start-user-code-kisstomato
+            print( e )
+            # kisstomato-class-exception-{{ oF.name }}-stop-user-code-kisstomato
+            
+        # kisstomato-class-finally-{{ oF.name }}-start-user-code-kisstomato
+        # kisstomato-class-finally-{{ oF.name }}-stop-user-code-kisstomato 
+&&      endif
 
 &&      if oF[ 'return' ] and oF[ 'return' ] != 'none'
         return oResult

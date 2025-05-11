@@ -22,7 +22,7 @@ def time2minutes(time):
     #date_time = datetime.datetime.fromtimestamp( time )
     #ts = pd.Timestamp( date_time )
     #oResult = int( ts.round('1min').timestamp() ) - ( 2 * 3600 )
-    oResult = (time // 60) * 60
+    oResult = int( (time // 60) * 60 )
             
     # kisstomato-methode-time2minutes-stop-user-code-kisstomato
 

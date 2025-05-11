@@ -39,7 +39,7 @@ class classe(nodeElement):
                 # recupere les arguments
                 for oArg in generator.getNodesByTypes( oFonction, 'fonction/arguments/argument' ):
                     oArgItems = self._getItems( oArg )
-                    oFon[ 'args' ].append( { "name": oArg[ "text" ], "desc": oArgItems[ "desc" ][ 'value' ], "require": oArgItems[ "require" ][ 'value' ] == True, 'type': oArgItems[ "type" ][ 'value' ] } )
+                    oFon[ 'args' ].append( { "name": oArg[ "text" ], "desc": oArgItems[ "desc" ][ 'value' ], "require": oArgItems[ "require" ][ 'value' ] == True, 'type': oArgItems[ "type" ][ 'value' ], "exception": oItems[ "exception" ][ 'value' ] == True } )
                 
                 # ajoute la fonction
                 self.methodes.append( oFon )
@@ -82,6 +82,16 @@ class classe(nodeElement):
         # kisstomato-methode-getMethodes-start-user-code-kisstomato
         oResult = self.methodes
         # kisstomato-methode-getMethodes-stop-user-code-kisstomato
+
+        return oResult
+
+    # Retourne le nom de la classe héritée
+    def getHeritage(self):
+        oResult = None
+
+        # kisstomato-methode-getHeritage-start-user-code-kisstomato
+        oResult = self.items[ 'heritage' ][ 'value' ]
+        # kisstomato-methode-getHeritage-stop-user-code-kisstomato
 
         return oResult
 

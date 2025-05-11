@@ -4,7 +4,8 @@
 		{
 			"id": "classe", "text": "classe", "icon": "fa-solid fa-archive", "color": "#2e9e59", "children-type": [], "move-on-parent": true
 			,"items":[
-				{ "id": "desc", "text": "Description de la classe", "type": "text" }
+				{ "id": "desc", "text": "Description de la classe", "type": "text" },
+				{ "id": "heritage", "text": "Héritage de classe", "type": "string" }
 			]
 			,"on-create": {
 				"add": [

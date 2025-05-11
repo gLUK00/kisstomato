@@ -29,6 +29,10 @@
                             {
                                 "id": "desc",
                                 "value": "Buffer d'historique d'une paire"
+                            },
+                            {
+                                "id": "heritage",
+                                "value": ""
                             }
                         ]
                     },
@@ -177,7 +181,7 @@
                                         }
                                     ],
                                     "state": {
-                                        "opened": true
+                                        "opened": false
                                     }
                                 },
                                 {
@@ -243,6 +247,361 @@
                                     "children": [
                                         {
                                             "id": "e9f01ee6-69c7-48d8-a414-e2896b36b555",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large"
+                                        }
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
+                                }
+                            ],
+                            "state": {
+                                "opened": true
+                            }
+                        }
+                    ],
+                    "state": {
+                        "opened": false
+                    }
+                },
+                {
+                    "id": "2d8cc72b-5beb-4393-a082-31aba238a28f",
+                    "text": "threadMM",
+                    "li_attr": {
+                        "type": "classe",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "Classe de calcul des moyennes mobiles"
+                            },
+                            {
+                                "id": "heritage",
+                                "value": "threading.Thread"
+                            }
+                        ]
+                    },
+                    "color": "#2e9e59",
+                    "icon": "fa-solid fa-archive",
+                    "children": [
+                        {
+                            "id": "05d9444d-e492-404f-a3da-e7ddf178cdfc",
+                            "text": "methodes",
+                            "li_attr": {
+                                "type": "classe-methodes",
+                                "readonly": true
+                            },
+                            "color": "#2e829e",
+                            "icon": "fa-solid fa-allergies",
+                            "children": [
+                                {
+                                    "id": "295716f9-5350-47a0-a2b6-f5e6396944c8",
+                                    "text": "__init__",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "M\u00e9thode d\u2019initialisation"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "none"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "985f1583-d8f7-480d-b385-418756357d47",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "children": [
+                                                {
+                                                    "id": "1414ab8c-01b2-4966-942a-f4d0453ab89f",
+                                                    "text": "indexTime",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Temps de r\u00e9f\u00e9rence du thread"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "number"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                },
+                                                {
+                                                    "id": "fcc9327c-b55b-4a40-b519-d26123dec212",
+                                                    "text": "history",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Historique des transactions"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "array"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                }
+                                            ],
+                                            "state": {
+                                                "opened": true
+                                            }
+                                        }
+                                    ],
+                                    "state": {
+                                        "opened": false
+                                    }
+                                },
+                                {
+                                    "id": "5edd796f-1405-420e-9c16-0130e7da6d2c",
+                                    "text": "start",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Calcul des moyennes mobiles"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": true
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "none"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "8a3bbf46-4a54-44df-bfaa-0e959378e605",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large"
+                                        }
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
+                                }
+                            ],
+                            "state": {
+                                "opened": false
+                            }
+                        }
+                    ],
+                    "state": {
+                        "opened": false
+                    }
+                },
+                {
+                    "id": "9db73f4a-af6a-4693-bd8b-0ff50dc3b80a",
+                    "text": "buildMM",
+                    "li_attr": {
+                        "type": "classe",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "Classe de compilation des moyennes mobiles"
+                            },
+                            {
+                                "id": "heritage",
+                                "value": "threading.Thread"
+                            }
+                        ]
+                    },
+                    "color": "#2e9e59",
+                    "icon": "fa-solid fa-archive",
+                    "children": [
+                        {
+                            "id": "bb10c8e5-ee36-4211-a5f9-f71e10069e76",
+                            "text": "methodes",
+                            "li_attr": {
+                                "type": "classe-methodes",
+                                "readonly": true
+                            },
+                            "color": "#2e829e",
+                            "icon": "fa-solid fa-allergies",
+                            "children": [
+                                {
+                                    "id": "e7e9559d-2d7e-41e2-afdb-8221d2dc95c4",
+                                    "text": "__init__",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "M\u00e9thode d\u2019initialisation"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "none"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "998300a3-f283-4ec4-a009-915bc845651a",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "children": [
+                                                {
+                                                    "id": "20ed4f86-ca46-4655-bfc8-168e0770ca6f",
+                                                    "text": "indexTime",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Temps de r\u00e9f\u00e9rence du thread"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "number"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                },
+                                                {
+                                                    "id": "2afd8965-2d85-4a6d-b37e-f445345f68f8",
+                                                    "text": "sizeRange",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Nombre de seconde du range"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "number"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                },
+                                                {
+                                                    "id": "4c0b8420-897f-4c24-95a9-08e6596a5afe",
+                                                    "text": "minutes",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Liste des minutes de la plage temporelle"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "array"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                }
+                                            ],
+                                            "state": {
+                                                "opened": true
+                                            }
+                                        }
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
+                                },
+                                {
+                                    "id": "5685d9c2-f72b-49a0-b10f-f4c504cc3d04",
+                                    "text": "start",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "compilation des moyennes mobiles"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": true
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "none"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "837bf750-7625-40b5-b173-2b427a9bf81f",
                                             "text": "Arguments",
                                             "li_attr": {
                                                 "type": "arguments",
@@ -514,7 +873,7 @@
                                         }
                                     ],
                                     "state": {
-                                        "opened": true
+                                        "opened": false
                                     }
                                 },
                                 {
@@ -603,7 +962,7 @@
                                         }
                                     ],
                                     "state": {
-                                        "opened": true
+                                        "opened": false
                                     }
                                 },
                                 {
@@ -702,6 +1061,118 @@
                                                             {
                                                                 "id": "type",
                                                                 "value": "string"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                }
+                                            ],
+                                            "state": {
+                                                "opened": true
+                                            }
+                                        }
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
+                                },
+                                {
+                                    "id": "e6cfb0dd-9d26-4b7f-946c-88254d9e1827",
+                                    "text": "getHistoryRange",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "R\u00e9cup\u00e8re une plage d'historique"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "array"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "7aa7af19-cb95-4cdb-9cf8-41d3efcf2fa0",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "children": [
+                                                {
+                                                    "id": "b3b45427-3adb-4ae6-b41b-7dae327f762b",
+                                                    "text": "collection",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Collection cible"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                },
+                                                {
+                                                    "id": "8de4658e-f033-46f5-add6-bd850bd53776",
+                                                    "text": "timeMin",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Temps minimum"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "number"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                },
+                                                {
+                                                    "id": "6a474d03-33c5-485e-880b-fdd1d1be06de",
+                                                    "text": "timeMax",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Temps maximum"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "number"
                                                             }
                                                         ]
                                                     },
@@ -1297,11 +1768,20 @@
                                                 }
                                             ]
                                         }
-                                    ]
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
                                 }
-                            ]
+                            ],
+                            "state": {
+                                "opened": true
+                            }
                         }
-                    ]
+                    ],
+                    "state": {
+                        "opened": true
+                    }
                 },
                 {
                     "id": "cead3ade-0ace-4f28-a211-f18caed32e5c",
@@ -1439,7 +1919,7 @@
                         }
                     ],
                     "state": {
-                        "opened": true
+                        "opened": false
                     }
                 },
                 {
@@ -1530,7 +2010,7 @@
                                         }
                                     ],
                                     "state": {
-                                        "opened": true
+                                        "opened": false
                                     }
                                 },
                                 {
@@ -1541,7 +2021,7 @@
                                         "items": [
                                             {
                                                 "id": "desc",
-                                                "value": "Cr\u00e9ation des moyennes mobiles"
+                                                "value": "Cr\u00e9ation des moyennes mobiles sur 1 minute"
                                             },
                                             {
                                                 "id": "exception",
@@ -1612,7 +2092,76 @@
                                                     "color": "#ec74ba",
                                                     "icon": "fa-solid fa-star-of-life"
                                                 }
-                                            ]
+                                            ],
+                                            "state": {
+                                                "opened": true
+                                            }
+                                        }
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
+                                },
+                                {
+                                    "id": "9c2e7422-49f6-48d1-b713-7a38b2c6f32f",
+                                    "text": "buildMM",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Calcul le reste des moyennes mobiles"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "none"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "44ee2c8f-5962-455b-9bc6-7b86df98c8f6",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "children": [
+                                                {
+                                                    "id": "5feb5eea-7a26-4cc8-a2f2-eb8de3ff9de4",
+                                                    "text": "pair",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Paire associ\u00e9e \u00e0 l'historique des minutes"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                }
+                                            ],
+                                            "state": {
+                                                "opened": true
+                                            }
                                         }
                                     ],
                                     "state": {
@@ -1682,7 +2231,7 @@
                                         }
                                     ],
                                     "state": {
-                                        "opened": true
+                                        "opened": false
                                     }
                                 },
                                 {
@@ -1745,7 +2294,7 @@
                                         }
                                     ],
                                     "state": {
-                                        "opened": true
+                                        "opened": false
                                     }
                                 },
                                 {
@@ -1857,7 +2406,7 @@
                                         }
                                     ],
                                     "state": {
-                                        "opened": true
+                                        "opened": false
                                     }
                                 },
                                 {
@@ -1920,7 +2469,7 @@
                                         }
                                     ],
                                     "state": {
-                                        "opened": true
+                                        "opened": false
                                     }
                                 }
                             ],
