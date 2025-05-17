@@ -67,8 +67,7 @@ class threadMM(threading.Thread):
                     "nbr_sell_round_price": 0,
                     "nbr_buy_round_qte": 0,
                     "nbr_sell_round_qte": 0,
-                    "count": len( oMinute ),
-                    "time": iIndexMinutes }
+                    "count": len( oMinute ) }
                 
                 # pour tous les prix et les quantites similaires
                 oPrices = oQuantities = []

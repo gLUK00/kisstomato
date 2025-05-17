@@ -128,6 +128,8 @@ if bCreateCol:
             # compare les minutes
             if converter.time2minutes( iLastTimeMM ) < converter.time2minutes( iLastTimeHistory ):
                 iIndexTimeStart = iLastTimeMM + 60
+            else:
+                iIndexTimeStart = iLastTimeHistory
 
     # creation de la collection
     if bDropMM:

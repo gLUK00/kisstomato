@@ -2,7 +2,7 @@
 import gl, json, pymongo, datetime, pandas as pd, threading, time
 from pymongo import MongoClient
 from modules import bdd, converter
-from classes import bufferHistory, threadMM, buildMM
+from classes import bufferHistory, threadMM, buildMM as classBuildMM
 # kisstomato-module-import-stop-user-code-kisstomato
 
 """
@@ -146,7 +146,7 @@ def buildMM(pair):
         
             # recupere la plage des MM
             oMM = list( oColMM.find( { "time": {"$gte": iStartTime, "$lt": iStopTime } } ).sort( "time", pymongo.ASCENDING ) )
-            oThread = buildMM( indexTime=iStartTime + ( i * iStepTime ), sizeRange=iSeconds, minutes=oMM )
+            oThread = classBuildMM( indexTime=iStartTime + ( i * iStepTime ), sizeRange=iSeconds, minutes=oMM )
             oThreads.append( oThread )
             oThread.start()
         
@@ -170,14 +170,18 @@ def buildMM(pair):
                         print( 'mise a jour' )
 
                     # remplacement du thread
-                    oHisto = list( oColMM.find( { "time": {"$gte": iTimeLastIndex, "$lt": ( iTimeLastIndex + iSeconds + iStepTime ) } } ).sort( "time", pymongo.ASCENDING ) )
-                    if len( oHisto ) == 0:
+                    oMMs = list( oColMM.find( { "time": {"$gte": iTimeLastIndex, "$lt": ( iTimeLastIndex + iSeconds + iStepTime ) } } ).sort( "time", pymongo.ASCENDING ) )
+                    if len( oMMs ) == 0:
                         bLastData = True
                         break
                     oThreads.remove(oThread)
-                    oThread = buildMM( indexTime=iTimeLastIndex, history=oHisto )
+                    oThread = classBuildMM( indexTime=iTimeLastIndex, sizeRange=iSeconds, minutes=oMMs)
                     oThreads.append(oThread)
                     oThread.start()
+                    
+                    # enregistrement des resultats
+                    for oUpdate in oThread.results:
+                        print( oColMM.update_one( { "_id": oUpdate[ "id" ] }, { "$set": { sField: oUpdate[ 'data' ] } } ) )
                     
                     # determine le prochain index
                     iTimeLastIndex += iSeconds + iStepTime
