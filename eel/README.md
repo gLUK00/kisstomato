@@ -43,4 +43,11 @@ Vous lanceriez Kisstomato Studio pour :
 2.  Travailler sur la structure et les définitions du projet via l'interface graphique.
 3.  Utiliser les fonctionnalités de génération de code pour produire des artefacts de projet, en fonction des plugins configurés pour ce projet.
 
+## Documentation sur les plugins
+
+Vous trouverez ci-dessous la documentation relative au développement et à l'extension de Kisstomato Studio :
+
+*   [Documentation des Plugins de Type "Fields"](./docs/plugin_field.md)
+*   [Documentation des Plugins de Type "Models"](./docs/plugin_model.md)
+
 Kisstomato Studio vise à simplifier les tâches répétitives et à structurer le développement au sein de l'écosystème Kisstomato.
