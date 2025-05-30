@@ -1,6 +1,6 @@
 # kisstomato-class-import-start-user-code-kisstomato
 import threading, os ,sys
-from modules import converter
+from modules import converter, debug
 # kisstomato-class-import-stop-user-code-kisstomato
 
 """
@@ -38,14 +38,30 @@ class buildMM(threading.Thread):
 
             # determine la position de fin de la premier tranche
             iPosStart = iPosStop = iIndexLine = 0
-            for oLine in self.minutes:
-                if oLine[ 'time' ] >= ( self.minutes[ 0 ][ 'time'] + self.sizeRange ):
+            for iIndexLine in range( len( self.minutes ) ):
+            #for oLine in self.minutes:
+
+                if self.minutes[ iIndexLine ][ 'time' ] >= ( self.minutes[ 0 ][ 'time' ] + self.sizeRange ):
+                #if oLine[ 'time' ] >= ( self.minutes[ 0 ][ 'time'] + self.sizeRange ):
+                    iPosStop = iIndexLine
                     break
-                iPosStop += 1
+                #iPosStop += 1
             
             # pour toutes les plages
-            while iPosStop < len( self.minutes ):
+            while True:
+                # Vérifier que nous avons assez de données pour la plage
+                if iPosStop >= len(self.minutes):
+                    break
+
+                # Vérifier la continuité des données
+                current_time = self.minutes[iPosStart]['time']
+                next_time = self.minutes[iPosStop]['time']
+                expected_time = current_time + self.sizeRange
                 
+                if next_time != expected_time:
+                    print(f"Attention : trou détecté entre {debug.printShowTime(current_time)} et {debug.printShowTime(next_time)}")
+                    print(f"Temps attendu : {debug.printShowTime(expected_time)}")
+                    
                 # compilation de la plage
                 oItem = { "volume": 0,
                     "price": 0,
@@ -82,16 +98,29 @@ class buildMM(threading.Thread):
                     oItem[ 'nbr_buy_round_qte' ] += self.minutes[ iIndexLine ][ '1m' ][ 'nbr_buy_round_qte' ]
                     oItem[ 'nbr_sell_round_qte' ] += self.minutes[ iIndexLine ][ '1m' ][ 'nbr_sell_round_qte' ]
                     oItem[ 'count' ] += self.minutes[ iIndexLine ][ '1m' ][ 'count' ]
+                
                 if oItem[ 'count' ] > 0:
                     oItem[ 'price' ] /= oItem[ 'count' ]
                 
                 # enregistrement de la plage
                 self.results.append( { "id": str( self.minutes[ iPosStop ][ '_id' ] ), "data": oItem } )
+                print(f"Traitement plage : {debug.printShowTime(self.minutes[iPosStop]['time'])}")
                 
                 # calcul des nouvelles positions de debut et de fin
+                #iPosStart = iPosStop
                 iPosStop += 1
-                if  iPosStop >= len( self.minutes ):
+                
+                # Vérifier que nous avons encore assez de données
+                if iPosStop >= len(self.minutes):
                     break
+                
+                # Vérifier que la prochaine plage aura assez de données
+                next_time = self.minutes[iPosStop]['time']
+                if next_time - self.minutes[iPosStart]['time'] < self.sizeRange:
+                    print(f"Attention : pas assez de données pour la prochaine plage")
+                    #break #print( "Sortie sur : " + str( self.minutes[ iPosStop - 1 ][ 'time' ] ) + ' : ' + debug.printShowTime( self.minutes[ iPosStop - 1 ][ 'time' ] ) )
+                    #print( "dernier ID : " + str( self.minutes[ iPosStop - 1 ][ '_id' ] ) )
+                
                 #print( str(  self.minutes[ iPosStop ][ 'time' ] - self.minutes[ iPosStart ][ 'time' ] ) + ' <= ' + str( self.sizeRange ) )
                 while ( self.minutes[ iPosStop ][ 'time' ] - self.minutes[ iPosStart ][ 'time' ] ) > self.sizeRange:
                     """print( "sizeRange : " + str( self.sizeRange ) )

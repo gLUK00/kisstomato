@@ -1,7 +1,8 @@
 # kisstomato-module-import-start-user-code-kisstomato
 import gl, json, pymongo, datetime, pandas as pd, threading, time
 from pymongo import MongoClient
-from modules import bdd, converter
+from bson import ObjectId
+from modules import bdd, converter, debug
 from classes import bufferHistory, threadMM, buildMM as classBuildMM
 # kisstomato-module-import-stop-user-code-kisstomato
 
@@ -37,7 +38,7 @@ def createMM(pair, startTime=None):
     oColHistory = bdd.getBdd()[ gl.config[ "mongo" ][ "cols" ][ "history_pair" ].replace( "{pair}", pair ) ]
     oColMM = bdd.getBdd()[ gl.config[ "mongo" ][ "cols" ][ "mm_pair" ].replace( "{pair}", pair ) ]
     
-    if startTime is None:
+    if startTime is None or startTime == 0:
         startTime = converter.time2minutes( oColHistory.find_one( sort=[("time", pymongo.ASCENDING)] )[ 'time' ] )
     else:
         startTime = converter.time2minutes( startTime )
@@ -77,7 +78,7 @@ def createMM(pair, startTime=None):
         for oThread in oThreads:
             if oThread.disponible and oThread.indexTime == iIndexTimeRef:
                 
-                print( "MM : " + str( datetime.datetime.strptime( str( datetime.datetime.fromtimestamp( int( oThread.indexTime ) ) ), '%Y-%m-%d %H:%M:%S' ) ) )
+                print( "MM : " + debug.printShowTime( oThread.indexTime) )
                 
                 # recupere les donnees
                 if len( oThread.results ) > 0:
@@ -130,14 +131,28 @@ def buildMM(pair):
 
         # determine si il y a deja eu des calculs
         iStartTime = 0
-        #iIndexTime = converter.time2minutes( iFirstMinuteMM + iSeconds )
-        oElement = oColMM.find_one( { sField: None }, sort=[("time", pymongo.ASCENDING)] )
-        #oElement = oColMM.find_one( { sField: None, "time": iIndexTime }, sort=[("time", pymongo.ASCENDING)] )
+        oElement = oColMM.find_one( { sField: None, "time": { "$gte": iFirstMinuteMM + iSeconds } }, sort=[("time", pymongo.ASCENDING)] )
+
+
+        print( str( oElement ) )
+        print( debug.printShowTime( oElement[ 'time' ] ) )
+
+
+        # determine si il y a des calculs
         if oElement is not None:
             iStartTime = converter.time2minutes( oElement[ "time" ] )
+
+            # si ce n'est pas la position de debut
+            #if iStartTime > iFirstMinuteMM:
+            #    iStartTime -= iSeconds
         else:
             print( 'Compilation MM ; déjà effectuée : ' + sField )
             continue
+        
+        # si c'est la premier minute
+        if iStartTime == iFirstMinuteMM:
+            iStartTime += iSeconds
+
         iStopTime = iStartTime + iSeconds + iStepTime
         
         # initialisation de la liste des threads
@@ -145,50 +160,81 @@ def buildMM(pair):
         for i in range( gl.config[ 'nbr_threads_max' ] ):
         
             # recupere la plage des MM
-            oMM = list( oColMM.find( { "time": {"$gte": iStartTime, "$lt": iStopTime } } ).sort( "time", pymongo.ASCENDING ) )
-            oThread = classBuildMM( indexTime=iStartTime + ( i * iStepTime ), sizeRange=iSeconds, minutes=oMM )
+            oMM = list( oColMM.find( { "time": {"$gte": iStartTime - iSeconds, "$lt": iStopTime } } ).sort( "time", pymongo.ASCENDING ) )
+            #oMM = list( oColMM.find( { "time": {"$gte": iStartTime, "$lt": iStopTime } } ).sort( "time", pymongo.ASCENDING ) )
+            oThread = classBuildMM( indexTime=iStartTime, sizeRange=iSeconds, minutes=oMM )
             oThreads.append( oThread )
             oThread.start()
+
+            # determine si il y a d'autres enregistrements
+            oElement = oColMM.find_one( { sField: None, "time": { "$gte": iStopTime } }, sort=[("time", pymongo.ASCENDING)] )
+            if oElement is None:
+                break
+            
+            iStartTime = converter.time2minutes( oElement[ "time" ] )
+            iStopTime = iStartTime + iSeconds + iStepTime
+            
         
         # progression temporelle
-        iIndexTimeRef = iStartTime
-        iTimeLastIndex = iStartTime + ( gl.config[ 'nbr_threads_max' ] * ( iSeconds + iStepTime ) )
+        iTimeLastIndex = iStartTime
+        #iTimeLastIndex = iStartTime + ( gl.config[ 'nbr_threads_max' ] * ( iSeconds + iStepTime ) )
+        iCmpShow = 0
         while True:
             
             # determine si plus de donnees
-            bLastData = False
+            #bLastData = False
             
             # pour tous les threads termines
             for oThread in oThreads:
-                if oThread.disponible and oThread.indexTime == iIndexTimeRef:
+                if oThread.disponible:
                     
-                    print( "MM : " + str( datetime.datetime.strptime( str( datetime.datetime.fromtimestamp( int( oThread.indexTime ) ) ), '%Y-%m-%d %H:%M:%S' ) ) )
-                    
-                    # recupere les donnees
-                    if len( oThread.results ) > 0:
-                        #oColMM.insert_many( oThread.results, ordered=True )
-                        print( 'mise a jour' )
+                    if iCmpShow % 100 == 0:
+                        print( "MM : " + sField + ' : ' +str( datetime.datetime.strptime( str( datetime.datetime.fromtimestamp( int( oThread.indexTime ) ) ), '%Y-%m-%d %H:%M:%S' ) ) )
+                        iCmpShow = 0
+                    iCmpShow += 1
 
-                    # remplacement du thread
-                    oMMs = list( oColMM.find( { "time": {"$gte": iTimeLastIndex, "$lt": ( iTimeLastIndex + iSeconds + iStepTime ) } } ).sort( "time", pymongo.ASCENDING ) )
-                    if len( oMMs ) == 0:
-                        bLastData = True
-                        break
-                    oThreads.remove(oThread)
-                    oThread = classBuildMM( indexTime=iTimeLastIndex, sizeRange=iSeconds, minutes=oMMs)
-                    oThreads.append(oThread)
-                    oThread.start()
-                    
                     # enregistrement des resultats
                     for oUpdate in oThread.results:
-                        print( oColMM.update_one( { "_id": oUpdate[ "id" ] }, { "$set": { sField: oUpdate[ 'data' ] } } ) )
+                        doc_id = ObjectId(oUpdate["id"])
+                        oColMM.update_one(
+                            {"_id": doc_id},
+                            {"$set": {sField: oUpdate['data']}},
+                            upsert=False  # Ne crée pas de nouveau document si non trouvé
+                        )
+                        #if not result.modified_count:
+                        #    print(f"Aucun document mis à jour pour l'ID {doc_id}")
                     
-                    # determine le prochain index
-                    iTimeLastIndex += iSeconds + iStepTime
-                    iIndexTimeRef += iSeconds + iStepTime
+                    # determine si il y a d'autres enregistrements
+                    oElement = oColMM.find_one( { sField: None, "time": { "$gte": iStopTime } }, sort=[("time", pymongo.ASCENDING)] )
+                    if oElement is None:
+                        #bLastData = True
+                        oThreads.remove(oThread)
+                        continue
+                        #break
+                    
+                    iStartTime = converter.time2minutes( oElement[ "time" ] )
+                    iStopTime = iStartTime + iSeconds + iStepTime
+
+                    # recupere la plage des MM
+                    oMM = list( oColMM.find( { "time": {"$gte": iStartTime - iSeconds, "$lt": iStopTime } } ).sort( "time", pymongo.ASCENDING ) )
+
+                    # si pas assez de données
+                    iDiffTime = oMM[ -1 ][ 'time' ] - oMM[ 0 ][ 'time' ]
+                    while iDiffTime < ( iSeconds + iStepTime ):
+                        
+                        iStartTime -= 60
+                        oMM = list( oColMM.find( { "time": {"$gte": iStartTime - iSeconds, "$lt": iStopTime } } ).sort( "time", pymongo.ASCENDING ) )
+                        iDiffTime = oMM[ -1 ][ 'time' ] - oMM[ 0 ][ 'time' ]
+                    
+                    # remplacement du thread
+                    oThreads.remove(oThread)
+                    oThread = classBuildMM( indexTime=iStartTime, sizeRange=iSeconds, minutes=oMM )
+                    oThreads.append(oThread)
+                    oThread.start()
 
             # determine si il n'y a plus de donnees d'historique
-            if bLastData:
+            if len(oThreads) == 0:
+            #if bLastData:
                 break
             
             # pause de 5 secondes
