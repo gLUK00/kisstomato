@@ -140,12 +140,31 @@ if bCreateCol:
     
     # compilation des moyennes mobiles
     datasets.buildMM( sInPair.lower() )
-    
     print( "Moyennes mobiles créées" )
 
-
-exit()
 # kisstomato-script-section-create-mm-stop-user-code-kisstomato
+
+"""
+Représente la carte du ciel
+"""
+print( "\n>> REPRÉSENTE LA CARTE DU CIEL\n" )
+# kisstomato-script-section-create-skymap-start-user-code-kisstomato
+
+if input( 'Calcul de la carte du ciel (o/N) ? ' ).lower() in [ '', 'o' ]:
+
+    """oColMM = bdd.getBdd()[ sColMM ]
+    oColMM.update_many(
+        { "skymap": { "$exists": True } },
+        { "$unset": { "skymap": "" } }
+    )
+    """
+
+    datasets.createSkymap( sInPair.lower() )
+    print( "Carte du ciel créée" )
+
+
+
+# kisstomato-script-section-create-skymap-stop-user-code-kisstomato
 
 """
 Construction des images d'entrées

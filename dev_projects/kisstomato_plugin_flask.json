@@ -622,6 +622,330 @@
                         }
                     ],
                     "state": {
+                        "opened": false
+                    }
+                },
+                {
+                    "id": "a7805306-e50d-43f9-95e9-ac367f71cebe",
+                    "text": "imageHelper",
+                    "li_attr": {
+                        "type": "classe",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "Classe outil d'aide \u00e0 la cr\u00e9ation d'image"
+                            },
+                            {
+                                "id": "heritage",
+                                "value": ""
+                            }
+                        ]
+                    },
+                    "color": "#2e9e59",
+                    "icon": "fa-solid fa-archive",
+                    "children": [
+                        {
+                            "id": "f7ff1c59-a425-4123-a101-b8a73319f76c",
+                            "text": "methodes",
+                            "li_attr": {
+                                "type": "classe-methodes",
+                                "readonly": true
+                            },
+                            "color": "#2e829e",
+                            "icon": "fa-solid fa-allergies",
+                            "children": [
+                                {
+                                    "id": "d85e03ab-168f-4d87-8d9f-ecf3da87de2b",
+                                    "text": "get",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "M\u00e9thode singleton"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "static",
+                                                "value": true
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "object"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "e72a5543-df22-40f8-a814-d60e2082fe2f",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large"
+                                        }
+                                    ],
+                                    "state": {
+                                        "opened": false
+                                    }
+                                },
+                                {
+                                    "id": "4e6f30b8-cafc-42e5-9071-69441d136bef",
+                                    "text": "skymap2time",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Retourne un vecteur de carte du ciel \u00e0 partir d'un timestamp"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "array"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "87634dd0-c734-4eab-b0d4-ed9b5f413a26",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "children": [
+                                                {
+                                                    "id": "ef878a86-70cd-4a22-93eb-610bc1164c37",
+                                                    "text": "iTime",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Timestamp de r\u00e9f\u00e9rence"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "number"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
+                                },
+                                {
+                                    "id": "6c9cb841-6e57-4aa4-bf4a-e73ffbe4c45d",
+                                    "text": "normalize",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Normalise une valeur sur un place de 0 \u00e0 1"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "static",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "number"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "5d411f03-0bc1-44d5-9ab8-85ab478fd035",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "children": [
+                                                {
+                                                    "id": "dcc4cddd-2e9a-4b46-9144-c715fd5e6cea",
+                                                    "text": "iVal",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Valeur d'entr\u00e9e"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "number"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                },
+                                                {
+                                                    "id": "51462200-6552-4ec5-9ef3-43ef0bbc5ce7",
+                                                    "text": "iMin",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Valeur minimum"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "number"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                },
+                                                {
+                                                    "id": "55ca6533-2f47-4f2c-b00a-7ee6e6df6e2a",
+                                                    "text": "iMax",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Valeur maximum"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "number"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                }
+                                            ],
+                                            "state": {
+                                                "opened": false
+                                            }
+                                        }
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
+                                },
+                                {
+                                    "id": "f41bcfd4-c821-47c0-a314-4587208b9d42",
+                                    "text": "date2str",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Retourne une date \u00e0 partir d'un timestamp"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "static",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "number"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "08173a71-4d37-46b6-a7ca-5d66c3881f38",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "children": [
+                                                {
+                                                    "id": "7920d3ed-516b-4d03-a0c3-ae0bbfa16454",
+                                                    "text": "iTime",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Timestamp de r\u00e9f\u00e9rence"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "number"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "state": {
+                                "opened": true
+                            }
+                        }
+                    ],
+                    "state": {
                         "opened": true
                     }
                 }
@@ -2014,6 +2338,72 @@
                                     }
                                 },
                                 {
+                                    "id": "a5edcb90-f587-4ba6-806d-f8295e098949",
+                                    "text": "create",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Cr\u00e9ation d'un dataset \u00e0 partir de l'historique des transactions"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "none"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "bbafd99e-735c-47f4-a72a-0bcb0a645784",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "children": [
+                                                {
+                                                    "id": "e61be26a-7d6e-4599-b2d3-e4159adf9289",
+                                                    "text": "pair",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Paire associ\u00e9e \u00e0 l'historique des transactions"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                }
+                                            ],
+                                            "state": {
+                                                "opened": true
+                                            }
+                                        }
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
+                                },
+                                {
                                     "id": "10aba8af-ef5f-4791-ab4b-6cc9b20ee40a",
                                     "text": "createMM",
                                     "li_attr": {
@@ -2099,7 +2489,7 @@
                                         }
                                     ],
                                     "state": {
-                                        "opened": true
+                                        "opened": false
                                     }
                                 },
                                 {
@@ -2165,18 +2555,18 @@
                                         }
                                     ],
                                     "state": {
-                                        "opened": true
+                                        "opened": false
                                     }
                                 },
                                 {
-                                    "id": "a5edcb90-f587-4ba6-806d-f8295e098949",
-                                    "text": "create",
+                                    "id": "f291fe0c-5e79-49e5-b61b-9086160ea6ef",
+                                    "text": "createSkymap",
                                     "li_attr": {
                                         "type": "fonction",
                                         "items": [
                                             {
                                                 "id": "desc",
-                                                "value": "Cr\u00e9ation d'un dataset \u00e0 partir de l'historique des transactions"
+                                                "value": "G\u00e9n\u00e9ration de la carte du ciel pour une paire"
                                             },
                                             {
                                                 "id": "exception",
@@ -2192,7 +2582,7 @@
                                     "icon": "fa-brands fa-accusoft",
                                     "children": [
                                         {
-                                            "id": "bbafd99e-735c-47f4-a72a-0bcb0a645784",
+                                            "id": "4271910c-85d6-4cc0-b20b-bddefd0ae090",
                                             "text": "Arguments",
                                             "li_attr": {
                                                 "type": "arguments",
@@ -2202,14 +2592,14 @@
                                             "icon": "fa-solid fa-th-large",
                                             "children": [
                                                 {
-                                                    "id": "e61be26a-7d6e-4599-b2d3-e4159adf9289",
+                                                    "id": "cd44f2d6-dc59-4030-b924-267b0e43cb21",
                                                     "text": "pair",
                                                     "li_attr": {
                                                         "type": "argument",
                                                         "items": [
                                                             {
                                                                 "id": "desc",
-                                                                "value": "Paire associ\u00e9e \u00e0 l'historique des transactions"
+                                                                "value": "Paire associ\u00e9e \u00e0 l'historique des minutes"
                                                             },
                                                             {
                                                                 "id": "require",
@@ -2224,14 +2614,11 @@
                                                     "color": "#ec74ba",
                                                     "icon": "fa-solid fa-star-of-life"
                                                 }
-                                            ],
-                                            "state": {
-                                                "opened": true
-                                            }
+                                            ]
                                         }
                                     ],
                                     "state": {
-                                        "opened": false
+                                        "opened": true
                                     }
                                 },
                                 {
@@ -2294,182 +2681,7 @@
                                         }
                                     ],
                                     "state": {
-                                        "opened": false
-                                    }
-                                },
-                                {
-                                    "id": "df69b09f-57b6-4e8b-a357-b6e341342a54",
-                                    "text": "normalize",
-                                    "li_attr": {
-                                        "type": "fonction",
-                                        "items": [
-                                            {
-                                                "id": "desc",
-                                                "value": "Normalise une valeur sur un place de 0 \u00e0 1"
-                                            },
-                                            {
-                                                "id": "exception",
-                                                "value": false
-                                            },
-                                            {
-                                                "id": "return",
-                                                "value": "number"
-                                            }
-                                        ]
-                                    },
-                                    "color": "#f9a658",
-                                    "icon": "fa-brands fa-accusoft",
-                                    "children": [
-                                        {
-                                            "id": "e35299fb-85bb-4101-9577-d79e57454ae5",
-                                            "text": "Arguments",
-                                            "li_attr": {
-                                                "type": "arguments",
-                                                "readonly": true
-                                            },
-                                            "color": "#50edb8",
-                                            "icon": "fa-solid fa-th-large",
-                                            "children": [
-                                                {
-                                                    "id": "84185a88-8697-46f5-b7de-391c5c54f3fa",
-                                                    "text": "iVal",
-                                                    "li_attr": {
-                                                        "type": "argument",
-                                                        "items": [
-                                                            {
-                                                                "id": "desc",
-                                                                "value": "Valeur d'entr\u00e9e"
-                                                            },
-                                                            {
-                                                                "id": "require",
-                                                                "value": true
-                                                            },
-                                                            {
-                                                                "id": "type",
-                                                                "value": "number"
-                                                            }
-                                                        ]
-                                                    },
-                                                    "color": "#ec74ba",
-                                                    "icon": "fa-solid fa-star-of-life"
-                                                },
-                                                {
-                                                    "id": "11cb4d25-1649-4c61-b49a-347363e097e7",
-                                                    "text": "iMin",
-                                                    "li_attr": {
-                                                        "type": "argument",
-                                                        "items": [
-                                                            {
-                                                                "id": "desc",
-                                                                "value": "Valeur minimum"
-                                                            },
-                                                            {
-                                                                "id": "require",
-                                                                "value": true
-                                                            },
-                                                            {
-                                                                "id": "type",
-                                                                "value": "number"
-                                                            }
-                                                        ]
-                                                    },
-                                                    "color": "#ec74ba",
-                                                    "icon": "fa-solid fa-star-of-life"
-                                                },
-                                                {
-                                                    "id": "24e03e3a-abc3-43c6-a053-167ce9ba54c3",
-                                                    "text": "iMax",
-                                                    "li_attr": {
-                                                        "type": "argument",
-                                                        "items": [
-                                                            {
-                                                                "id": "desc",
-                                                                "value": "Valeur maximum"
-                                                            },
-                                                            {
-                                                                "id": "require",
-                                                                "value": true
-                                                            },
-                                                            {
-                                                                "id": "type",
-                                                                "value": "number"
-                                                            }
-                                                        ]
-                                                    },
-                                                    "color": "#ec74ba",
-                                                    "icon": "fa-solid fa-star-of-life"
-                                                }
-                                            ],
-                                            "state": {
-                                                "opened": true
-                                            }
-                                        }
-                                    ],
-                                    "state": {
-                                        "opened": false
-                                    }
-                                },
-                                {
-                                    "id": "dba83367-da74-446d-a59b-fb197b5c09b5",
-                                    "text": "skymap2time",
-                                    "li_attr": {
-                                        "type": "fonction",
-                                        "items": [
-                                            {
-                                                "id": "desc",
-                                                "value": "Retourne un vecteur de carte du ciel \u00e0 partir d'un timestamp"
-                                            },
-                                            {
-                                                "id": "exception",
-                                                "value": false
-                                            },
-                                            {
-                                                "id": "return",
-                                                "value": "array"
-                                            }
-                                        ]
-                                    },
-                                    "color": "#f9a658",
-                                    "icon": "fa-brands fa-accusoft",
-                                    "children": [
-                                        {
-                                            "id": "9ae96da1-db7a-4bb5-80ed-2c4bf1adb4e5",
-                                            "text": "Arguments",
-                                            "li_attr": {
-                                                "type": "arguments",
-                                                "readonly": true
-                                            },
-                                            "color": "#50edb8",
-                                            "icon": "fa-solid fa-th-large",
-                                            "children": [
-                                                {
-                                                    "id": "94cf7bf3-8aac-45da-8dab-de42cdb55304",
-                                                    "text": "iTime",
-                                                    "li_attr": {
-                                                        "type": "argument",
-                                                        "items": [
-                                                            {
-                                                                "id": "desc",
-                                                                "value": "Timestamp de r\u00e9f\u00e9rence"
-                                                            },
-                                                            {
-                                                                "id": "require",
-                                                                "value": true
-                                                            },
-                                                            {
-                                                                "id": "type",
-                                                                "value": "number"
-                                                            }
-                                                        ]
-                                                    },
-                                                    "color": "#ec74ba",
-                                                    "icon": "fa-solid fa-star-of-life"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "state": {
-                                        "opened": false
+                                        "opened": true
                                     }
                                 }
                             ],
@@ -2934,6 +3146,21 @@
                                             {
                                                 "id": "desc",
                                                 "value": "Cr\u00e9ation des moyennes mobiles"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#177ede",
+                                    "icon": "fa-solid fa-border-style"
+                                },
+                                {
+                                    "id": "b1b08f1a-f396-4266-918e-73501e34a141",
+                                    "text": "create-skymap",
+                                    "li_attr": {
+                                        "type": "section",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Repr\u00e9sente la carte du ciel"
                                             }
                                         ]
                                     },

@@ -3,7 +3,7 @@
     "desc": "Plugin application flask, desc",
     "model": "kisstomato_model",
     "relatif-path": true,
-    "version": 2,
+    "version": 3,
     "data": [
         {
             "id": "roots",
@@ -1910,6 +1910,37 @@
                                     "icon": "fa-brands fa-node-js"
                                 },
                                 {
+                                    "id": "7525324f-5e03-4dd8-ad14-59f46f8ae973",
+                                    "text": "static",
+                                    "li_attr": {
+                                        "type": "item",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "M\u00e9thode static"
+                                            },
+                                            {
+                                                "id": "type",
+                                                "value": "switch"
+                                            },
+                                            {
+                                                "id": "type_object",
+                                                "value": "undefined"
+                                            },
+                                            {
+                                                "id": "type_list",
+                                                "value": []
+                                            },
+                                            {
+                                                "id": "on_display",
+                                                "value": ""
+                                            }
+                                        ]
+                                    },
+                                    "color": "#ff1414",
+                                    "icon": "fa-brands fa-node-js"
+                                },
+                                {
                                     "id": "c824e77c-5caf-464e-95e0-e28310010625",
                                     "text": "return",
                                     "li_attr": {
@@ -1973,7 +2004,10 @@
                                     "color": "#ff1414",
                                     "icon": "fa-brands fa-node-js"
                                 }
-                            ]
+                            ],
+                            "state": {
+                                "opened": true
+                            }
                         },
                         {
                             "id": "c52479ec-747d-413a-83a7-0d6fa4983465",
@@ -2002,7 +2036,10 @@
                                 }
                             ]
                         }
-                    ]
+                    ],
+                    "state": {
+                        "opened": true
+                    }
                 },
                 {
                     "id": "0739e725-98f9-4cd1-a466-ac70785bb6d2",
@@ -2997,7 +3034,10 @@
                                             "color": "#4f9a04",
                                             "icon": "fa-solid fa-braille"
                                         }
-                                    ]
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
                                 },
                                 {
                                     "id": "3847b2c5-2258-4d6f-811f-ab033e060be4",

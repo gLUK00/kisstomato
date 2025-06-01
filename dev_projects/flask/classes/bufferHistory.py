@@ -80,6 +80,7 @@ Your time zone: lundi 22 mars 2021 05:16:00 GMT+01:00
         oResult = self
         # kisstomato-class-methode-__iter__-stop-user-code-kisstomato
         return oResult
+
     """
     Retourne la plage suivante
     """
@@ -114,16 +115,6 @@ Your time zone: lundi 22 mars 2021 05:16:00 GMT+01:00
             iIndexStop += 1
 
 
-        #print( iIndexStart )
-        #print( iIndexStop )
-
-        #exit()
-
-        #print( 'AA ' + str( iIndexStart ) )
-        #print( 'BB ' + str( iIndexStop ) )
-
-
-
         # recupere la plage
         oResult = self.buffer[ iIndexStart : iIndexStop ]
 
@@ -136,3 +127,4 @@ Your time zone: lundi 22 mars 2021 05:16:00 GMT+01:00
         
         # kisstomato-class-methode-__next__-stop-user-code-kisstomato
         return oResult
+

@@ -11,3 +11,9 @@ class nodeElement:
                     oItem[ sI ] = o[ sI ]
                 oItems[ o[ 'id' ] ] = oItem
         return oItems
+    
+    def _getItemsValue(self, oItem, sKey, defaultValue = None):
+        if sKey in oItem:
+            return oItem[ sKey ][ 'value' ]
+        return defaultValue
+        

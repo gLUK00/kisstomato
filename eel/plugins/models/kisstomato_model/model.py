@@ -1,5 +1,5 @@
 # numero de version
-_iCurrentVersion = 2
+_iCurrentVersion = 3
 
 # creation d'un projet
 def getJsonCreateNewProject( data ):
@@ -34,6 +34,8 @@ def openProject( oProject ):
 			for oItem in oNode[ 'li_attr' ][ 'items' ]:
 				if 'id' in oItem and oItem[ 'id' ] == 'icon' and 'value' in oItem and 'style' not in oItem[ 'value' ]:
 					oItem[ 'value' ][ 'style' ] = ''
+				elif 'id' in oItem and oItem[ 'id' ] == 'function' and 'value' in oItem and 'static' not in oItem[ 'value' ]:
+					oItem[ 'value' ][ 'static' ] = False
 
 		# si il y a des enfants
 		if 'children' in oNode and len( oNode[ 'children' ] ) > 0:

@@ -58,9 +58,10 @@ class buildMM(threading.Thread):
                 next_time = self.minutes[iPosStop]['time']
                 expected_time = current_time + self.sizeRange
                 
-                if next_time != expected_time:
+                '''if next_time != expected_time:
                     print(f"Attention : trou détecté entre {debug.printShowTime(current_time)} et {debug.printShowTime(next_time)}")
                     print(f"Temps attendu : {debug.printShowTime(expected_time)}")
+                '''
                     
                 # compilation de la plage
                 oItem = { "volume": 0,
@@ -104,7 +105,7 @@ class buildMM(threading.Thread):
                 
                 # enregistrement de la plage
                 self.results.append( { "id": str( self.minutes[ iPosStop ][ '_id' ] ), "data": oItem } )
-                print(f"Traitement plage : {debug.printShowTime(self.minutes[iPosStop]['time'])}")
+                #print(f"Traitement plage : {debug.printShowTime(self.minutes[iPosStop]['time'])}")
                 
                 # calcul des nouvelles positions de debut et de fin
                 #iPosStart = iPosStop
@@ -116,10 +117,10 @@ class buildMM(threading.Thread):
                 
                 # Vérifier que la prochaine plage aura assez de données
                 next_time = self.minutes[iPosStop]['time']
-                if next_time - self.minutes[iPosStart]['time'] < self.sizeRange:
-                    print(f"Attention : pas assez de données pour la prochaine plage")
-                    #break #print( "Sortie sur : " + str( self.minutes[ iPosStop - 1 ][ 'time' ] ) + ' : ' + debug.printShowTime( self.minutes[ iPosStop - 1 ][ 'time' ] ) )
-                    #print( "dernier ID : " + str( self.minutes[ iPosStop - 1 ][ '_id' ] ) )
+                #if next_time - self.minutes[iPosStart]['time'] < self.sizeRange:
+                #    print(f"Attention : pas assez de données pour la prochaine plage")
+                #    #break #print( "Sortie sur : " + str( self.minutes[ iPosStop - 1 ][ 'time' ] ) + ' : ' + debug.printShowTime( self.minutes[ iPosStop - 1 ][ 'time' ] ) )
+                #    #print( "dernier ID : " + str( self.minutes[ iPosStop - 1 ][ '_id' ] ) )
                 
                 #print( str(  self.minutes[ iPosStop ][ 'time' ] - self.minutes[ iPosStart ][ 'time' ] ) + ' <= ' + str( self.sizeRange ) )
                 while ( self.minutes[ iPosStop ][ 'time' ] - self.minutes[ iPosStart ][ 'time' ] ) > self.sizeRange:

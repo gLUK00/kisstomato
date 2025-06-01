@@ -86,6 +86,7 @@
 			,"items":[
 				{ "id": "desc", "text": "Description", "type": "text" },
 				{ "id": "exception", "text": "Générer d'exception", "type": "switch" },
+				{ "id": "static", "text": "Méthode static", "type": "switch" },
 				{ "id": "return", "text": "Type de retour", "type": "list", "items": [
 					{ "text": "Aucun retour", "value": "none" },
 					{ "text": "Booléen", "value": "boolean" },

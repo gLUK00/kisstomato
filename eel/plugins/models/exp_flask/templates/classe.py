@@ -23,12 +23,15 @@ class {{ o.getName() }}{% if o.getHeritage() != '' %}({{ o.getHeritage() }}){% e
     {{ oF.desc }}
     """
 &&  if oF.args|length > 0
-# Argument{% if oF.args|length > 1 %}s{% endif %} :
+    # Argument{% if oF.args|length > 1 %}s{% endif %} :
 &&      for oArg in oF.args
-# - {{ oArg[ 'name' ] }} : {{ oArg[ 'type' ] }} : {% if oArg[ 'require' ] %}(obligatoire) {% else %}(facultatif) {% endif %}{{ oArg[ 'desc' ] }}
+    # - {{ oArg[ 'name' ] }} : {{ oArg[ 'type' ] }} : {% if oArg[ 'require' ] %}(obligatoire) {% else %}(facultatif) {% endif %}{{ oArg[ 'desc' ] }}
 &&      endfor
 &&  endif
-    def {{ oF.name }}(self{% if oF.args|length > 0 %}{% for oArg in oF.args %}, {{ oArg[ 'name' ] }}{% if not oArg[ 'require' ] %}=None{% endif %}{% endfor %}{% endif %}):
+&&  if oF.static == True
+    @staticmethod
+&&  endif
+    def {{ oF.name }}({% if oF.static != True %}self{% endif %}{% if oF.args|length > 0 %}{% for oArg in oF.args %}, {{ oArg[ 'name' ] }}{% if not oArg[ 'require' ] %}=None{% endif %}{% endfor %}{% endif %}):
 &&      if oF[ 'return' ] and oF[ 'return' ] != 'none'
         oResult = None
 
@@ -52,6 +55,7 @@ class {{ o.getName() }}{% if o.getHeritage() != '' %}({{ o.getHeritage() }}){% e
 
 &&      if oF[ 'return' ] and oF[ 'return' ] != 'none'
         return oResult
+
 &&      endif
 && endfor
         
