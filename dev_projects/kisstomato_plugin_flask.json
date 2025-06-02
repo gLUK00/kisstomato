@@ -752,7 +752,10 @@
                                                     "color": "#ec74ba",
                                                     "icon": "fa-solid fa-star-of-life"
                                                 }
-                                            ]
+                                            ],
+                                            "state": {
+                                                "opened": true
+                                            }
                                         }
                                     ],
                                     "state": {
@@ -914,6 +917,137 @@
                                             "children": [
                                                 {
                                                     "id": "7920d3ed-516b-4d03-a0c3-ae0bbfa16454",
+                                                    "text": "iTime",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Timestamp de r\u00e9f\u00e9rence"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "number"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "state": {
+                                        "opened": true
+                                    }
+                                },
+                                {
+                                    "id": "c74545dc-f681-49f9-8868-fa63f6563d53",
+                                    "text": "date2vec",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Vectorisation de la date, sous la forme : 3 positions,\n- 1 position concernant le mois, 1/12,\n- 1 position concernant le jour de la semaine, 1/7,\n- 1 position concernant l\u2019heure, 1/24,"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "static",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "array"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "e05e2d3f-908a-43d3-8cc9-0b27a9387844",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "children": [
+                                                {
+                                                    "id": "74e3740e-fe41-4732-8942-0a84882c5e81",
+                                                    "text": "iTime",
+                                                    "li_attr": {
+                                                        "type": "argument",
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Timestamp de r\u00e9f\u00e9rence"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "number"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "5a8f38dc-7ff2-4217-8011-7afebb16713b",
+                                    "text": "halvingPosition",
+                                    "li_attr": {
+                                        "type": "fonction",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Distance entre les halvings : 1 position,\navec les dates suivantes :\n- 28/11/2012 : 1354057200\n- 09/07/2016 : 1468015200\n- 11/05/2020 : 1589148000\n- 19/04/2024 : 1713477600\n- 01/04/2028 : 1838095200\n- 01/04/2032 : 1964344800"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "static",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "number"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "children": [
+                                        {
+                                            "id": "d1e75235-b479-4de6-aa42-a1cce6ce18ed",
+                                            "text": "Arguments",
+                                            "li_attr": {
+                                                "type": "arguments",
+                                                "readonly": true
+                                            },
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "children": [
+                                                {
+                                                    "id": "464df347-9e9f-47d1-9cbe-21d5c8346d1d",
                                                     "text": "iTime",
                                                     "li_attr": {
                                                         "type": "argument",
@@ -3181,6 +3315,21 @@
                                     },
                                     "color": "#177ede",
                                     "icon": "fa-solid fa-border-style"
+                                },
+                                {
+                                    "id": "c18585ba-275d-419c-8cf9-b98b00ebaf50",
+                                    "text": "create-date",
+                                    "li_attr": {
+                                        "type": "section",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Traitements relatif aux dates (vectorisation des jours, position du halving)"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#177ede",
+                                    "icon": "fa-solid fa-border-style"
                                 }
                             ],
                             "state": {
@@ -3191,6 +3340,57 @@
                     "state": {
                         "opened": true
                     }
+                },
+                {
+                    "id": "972646f9-9b72-46ac-9dcb-c7653567b841",
+                    "text": "bdd",
+                    "li_attr": {
+                        "type": "script",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "Traitements relatifs \u00e0 la base de donn\u00e9es"
+                            },
+                            {
+                                "id": "print_desc",
+                                "value": true
+                            }
+                        ]
+                    },
+                    "color": "#c972d5",
+                    "icon": "fa-solid fa-scroll",
+                    "children": [
+                        {
+                            "id": "d01d571c-816d-48fb-9599-7dc927c4a9c4",
+                            "text": "Arguments",
+                            "li_attr": {
+                                "type": "arguments",
+                                "readonly": true
+                            },
+                            "color": "#50edb8",
+                            "icon": "fa-solid fa-th-large"
+                        },
+                        {
+                            "id": "2ba6b129-67fc-4bf2-b385-20779144887d",
+                            "text": "Fonctions",
+                            "li_attr": {
+                                "type": "fonctions",
+                                "readonly": true
+                            },
+                            "color": "#d57277",
+                            "icon": "fa-brands fa-stack-overflow"
+                        },
+                        {
+                            "id": "26cb564a-a6db-4c8b-aa41-86177b874556",
+                            "text": "Liste des sections",
+                            "li_attr": {
+                                "type": "sections",
+                                "readonly": true
+                            },
+                            "color": "#3382cc",
+                            "icon": "fa-solid fa-border-all"
+                        }
+                    ]
                 }
             ],
             "state": {

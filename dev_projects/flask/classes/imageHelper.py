@@ -96,3 +96,52 @@ class imageHelper:
         # kisstomato-class-methode-date2str-stop-user-code-kisstomato
         return oResult
 
+    """
+    Vectorisation de la date, sous la forme : 3 positions,
+- 1 position concernant le mois, 1/12,
+- 1 position concernant le jour de la semaine, 1/7,
+- 1 position concernant l’heure, 1/24,
+    """
+    # Argument :
+    # - iTime : number : (obligatoire) Timestamp de référence
+    def date2vec(self, iTime):
+        oResult = None
+
+        # kisstomato-class-methode-date2vec-start-user-code-kisstomato
+        # Convertir le timestamp en datetime
+        dt = datetime.datetime.fromtimestamp(iTime)
+        
+        # Extraire le mois (1-12) et normaliser sur 0-1
+        month = (dt.month - 1) / 11  # 0-11 -> 0-1
+        
+        # Extraire le jour de la semaine (0-6) et normaliser sur 0-1
+        weekday = dt.weekday() / 6  # 0-6 -> 0-1
+        
+        # Extraire l'heure (0-23) et normaliser sur 0-1
+        hour = dt.hour / 23  # 0-23 -> 0-1
+        
+        # Concaténer les résultats
+        oResult = [month, weekday, hour]
+        # kisstomato-class-methode-date2vec-stop-user-code-kisstomato
+        return oResult
+
+    """
+    Distance entre les halvings : 1 position,
+avec les dates suivantes :
+- 28/11/2012 : 1354057200
+- 09/07/2016 : 1468015200
+- 11/05/2020 : 1589148000
+- 19/04/2024 : 1713477600
+- 01/04/2028 : 1838095200
+- 01/04/2032 : 1964344800
+    """
+    # Argument :
+    # - iTime : number : (obligatoire) Timestamp de référence
+    def halvingPosition(self, iTime):
+        oResult = None
+
+        # kisstomato-class-methode-halvingPosition-start-user-code-kisstomato
+        pass
+        # kisstomato-class-methode-halvingPosition-stop-user-code-kisstomato
+        return oResult
+

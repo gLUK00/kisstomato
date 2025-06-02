@@ -327,24 +327,25 @@ def createSkymap(pair):
     
     # recupere le premier enregistrement
     oColMM = bdd.getBdd()[ gl.config[ "mongo" ][ "cols" ][ "mm_pair" ].replace( "{pair}", pair ) ]
-    oElement = oColMM.find_one( { "skymap": None } )
+    oElements = list( oColMM.find( { "skymap": None } ).limit( 100 ) )
 
     oImageHelper = imageHelper.get()
 
     # pour toutes les minutes
     iCmpShow = 0
-    while oElement is not None:
+    while oElements is not None and len(oElements) > 0:
 
-        if iCmpShow % 100 == 0:
-            print( "Skymap : " + oImageHelper.date2str( oElement[ 'time' ] ) )
+        if iCmpShow % 10 == 0:
+            print( "Skymap : " + oImageHelper.date2str( oElements[ 0 ][ 'time' ] ) )
             iCmpShow = 0
         iCmpShow += 1
         
         # calcul de la carte du ciel
-        oColMM.update_one( { "_id": oElement[ "_id" ] }, { "$set": { "skymap": oImageHelper.skymap2time( oElement[ 'time' ] ) } } )
+        for oElement in oElements:
+            oColMM.update_one( { "_id": oElement[ "_id" ] }, { "$set": { "skymap": oImageHelper.skymap2time( oElement[ 'time' ] ) } } )
 
         # recherche d'un enregistrement
-        oElement = oColMM.find_one( { "skymap": None } )
+        oElements = list( oColMM.find( { "skymap": None } ).limit( 100 ) )
 
     # kisstomato-methode-createSkymap-stop-user-code-kisstomato
 

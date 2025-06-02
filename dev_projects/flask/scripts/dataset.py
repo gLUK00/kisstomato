@@ -178,5 +178,12 @@ if input( 'Construction des images d\'enttrées (O/n) ? ' ).lower() in [ '', 'o'
 
 # kisstomato-script-section-create-image-stop-user-code-kisstomato
 
+"""
+Traitements relatif aux dates (vectorisation des jours, position du halving)
+"""
+print( "\n>> TRAITEMENTS RELATIF AUX DATES (VECTORISATION DES JOURS, POSITION DU HALVING)\n" )
+# kisstomato-script-section-create-date-start-user-code-kisstomato
+# kisstomato-script-section-create-date-stop-user-code-kisstomato
+
 # kisstomato-script-end-start-user-code-kisstomato
 # kisstomato-script-end-stop-user-code-kisstomato
