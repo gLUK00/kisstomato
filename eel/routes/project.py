@@ -1,18 +1,25 @@
-import eel, base64, json, os, glob
+import base64, json, os, glob
+from flask import Blueprint, jsonify, request
+
+# importation du CORE
+# from core import config, model, plugin # Already imported below, ensure no duplication if core also changes
+
+project_bp = Blueprint('project_routes', __name__, url_prefix='/api/project')
 
 # importation du CORE
 from core import config, model, plugin
 
 # creation du fichier d'un projet
-@eel.expose
-def get_create_file_project( data ):
+@project_bp.route('/create_file', methods=['POST'])
+def flask_get_create_file_project():
+    data = request.json
     try:
 
         # recuperation du json du modele selectionne
         data = plugin.exeMethodModel( data[ 'model' ], 'model', 'getJsonCreateNewProject', data )
 
     except Exception as e:
-        return str( e )
+        return jsonify({'status': 'error', 'message': str(e)}), 500
 
     # si il n'y a pas de donnees
     if "data" not in data:
@@ -32,22 +39,25 @@ def get_create_file_project( data ):
     oFile.close()
 
     # referencement du projet
-    config.addProject( filename, relatif_path = ( data[ 'relatif-path' ] != None and data[ 'relatif-path' ] ) )
+    config.addProject( filename, relatif_path = ( data.get('relatif-path') != None and data.get('relatif-path') ) )
 
-    return True
+    return jsonify({'status': 'success', 'filename': filename})
 
 # ajout du fichier d'un projet
-@eel.expose
-def set_file_project( filename, relatif_path ):
+@project_bp.route('/set_file', methods=['POST'])
+def flask_set_file_project():
+    req_data = request.json
+    filename = req_data.get('filename')
+    relatif_path = req_data.get('relatif_path')
 
     # referencement du projet
     config.addProject( filename, relatif_path )
 
-    return True
+    return jsonify({'status': 'success'})
 
 # recupere tous les projets
-@eel.expose
-def get_all_projects():
+@project_bp.route('/get_all', methods=['GET'])
+def flask_get_all_projects():
     oProjects = []
 
     for pathProject in config.configuration[ 'projects' ]:
@@ -60,11 +70,14 @@ def get_all_projects():
         except Exception as e:
             oProjects.append( { 'file': pathProject, 'error':str( e ) } )
 
-    return oProjects
+    return jsonify(oProjects)
 
 # supprime un projet
-@eel.expose
-def del_project( filename, deletefile ):
+@project_bp.route('/delete', methods=['POST'])
+def flask_del_project():
+    req_data = request.json
+    filename = req_data.get('filename')
+    deletefile = req_data.get('deletefile')
 
     oProjects = []
     for pathProject in config.configuration[ 'projects' ]:
@@ -78,11 +91,13 @@ def del_project( filename, deletefile ):
     config.configuration[ 'projects' ] = oProjects
     config.saveConf()
 
-    return True
+    return jsonify({'status': 'success'})
 
 # ouverture d'un projet
-@eel.expose
-def open_project( filename ):
+@project_bp.route('/open', methods=['POST'])
+def flask_open_project():
+    req_data = request.json
+    filename = req_data.get('filename')
 
     # ouverture du projet
     oProject = {}
@@ -125,11 +140,15 @@ def open_project( filename ):
         for sSubJsFile in glob.glob( os.sep.join( sJsFile.split( os.sep )[ :-1 ] ) + os.sep + 'js' + os.sep + '*.js' ):
             oJs.append( { 'type': 'field', 'file': os.sep.join( sSubJsFile.split( os.sep )[ -3: ] ) } )
 
-    return { 'file': filename, 'info': oProject, 'model': oModel, 'data': oData, 'properties': oProperties, 'js': oJs }
+    return jsonify({ 'file': filename, 'info': oProject, 'model': oModel, 'data': oData, 'properties': oProperties, 'js': oJs })
 
 # mise a jour des donnees d'un projet
-@eel.expose
-def update_project( filename, properties, data ):
+@project_bp.route('/update', methods=['POST'])
+def flask_update_project():
+    req_data = request.json
+    filename = req_data.get('filename')
+    properties = req_data.get('properties')
+    data = req_data.get('data') # This is 'data' from the request, not the oProject['data']
 
     oProject = {}
     with open( filename, 'r', encoding="utf-8" ) as j:
@@ -147,4 +166,11 @@ def update_project( filename, properties, data ):
     oFile.write( json.dumps( oProject, default=config.dumperJson, indent=4 ) )
     oFile.close()
 
-    return open_project( filename )
+    # Instead of calling the old open_project, we might need to call the new flask_open_project
+    # or simply return the updated project data directly. For now, let's assume the client
+    # might re-fetch if needed, or we return the same structure as open_project.
+    # For simplicity, let's just return a success message, the client can re-fetch project details.
+    # Alternatively, replicate the data fetching part of flask_open_project here if needed.
+    # For now, returning a simple success. The frontend will need to adjust.
+    # If a full project reload is needed, the frontend should call /api/project/open again.
+    return jsonify({'status': 'success', 'message': 'Project updated. Call /api/project/open to get updated details if needed.', 'filename': filename})

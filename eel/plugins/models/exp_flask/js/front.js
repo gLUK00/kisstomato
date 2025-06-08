@@ -74,11 +74,39 @@ $( document ).on( "click", "#gen-code", function() {
 		}
 
 		oData[ 'file' ] = getUrlParameter( 'project' );
-		eel.plugin_exec_method_model( oInfoProject[ 'model' ], 'generation', 'generateFlaskCode', oData )( function( result ){
-
-			// affichage du rapport de generation, asynchrone
-			modalShowMessage( result.replaceAll( '\n', '<br/>' ) );
-		} );
+		fetch('/api/plugin/exec_method_model', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				model: oInfoProject['model'],
+				module: 'generation',
+				method: 'generateFlaskCode',
+				data: oData
+			})
+		})
+		.then(response => {
+			if (!response.ok) {
+				return response.json().then(err => { 
+					throw new Error(err.message || `HTTP error ${response.status}`); 
+				});
+			}
+			return response.json();
+		})
+		.then(data => {
+			console.log('Réponse du plugin:', JSON.stringify(data, null, 2));
+			// Le backend retourne { "status": "success", "result": sResult } ou une erreur
+			if (data.status === 'success' && data.result !== undefined) {
+				modalShowMessage(data.result.toString().replaceAll('\n', '<br/>'));
+			} else if (data.message) {
+				modalShowMessage('Erreur du plugin: ' + data.message.toString().replaceAll('\n', '<br/>'), 'error');
+			} else {
+				modalShowMessage('Réponse inattendue du serveur après l\'exécution du plugin.', 'error');
+			}
+		})
+		.catch(error => {
+			console.error('Error calling /api/plugin/exec_method_model:', error);
+			modalShowMessage('Erreur lors de l_appel au plugin: ' + error.message, 'error');
+		});
 
 		return true;
 	}, 'Annuler', undefined, [

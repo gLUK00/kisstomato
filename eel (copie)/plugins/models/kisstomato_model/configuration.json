@@ -1,0 +1,208 @@
+{
+	"title": "Plugin KissTomato Model",
+	"elements": [
+
+		{ "id": "root", "text": "Racine", "icon": "fa-brands fa-html5", "color": "#e099e5", "children-type": [], "move-on-parent": true,
+			"items":[
+				{ "id": "id", "text": "Identifiant", "type": "string" },
+				{ "id": "icon", "text": "Icone", "type": "icon" },
+				{ "id": "test_field", "text": "QR cOde", "type": "qrcode" }
+			],
+			"on-create": {
+				"add": [
+					{ "id": "link_childs", "text": "Enfants", "readonly": true }
+				]
+			}
+		},
+		{ "id": "link_childs", "text": "Enfants", "icon": "fa-solid fa-layer-group", "color": "#f0a728", "children-type": [ "link_child" ] },
+		{ "id": "link_child", "text": "Enfant", "icon": "fa-brands fa-alipay", "color": "#7ff77d", "children-type": [], "move-on-parent": true,
+			"items":[
+				{ "id": "ref_element", "text": "Elément", "type": "object", "filter-type": "element" }
+			]
+		},
+
+		{ "id": "element", "text": "Elément", "icon": "fa-regular fa-list-alt", "color": "#ca9f53", "children-type": [], "move-on-parent": true,
+			"items":[
+				{ "id": "desc", "text": "Description", "type": "text" },
+				{ "id": "icon", "text": "Icone", "type": "icon" },
+				{ "id": "move-on-parent", "text": "Move on parent", "type": "switch" }
+			],
+			"on-create": {
+				"add": [
+					{ "id": "element_childrens_type", "text": "Children type", "readonly": true },
+					{ "id": "items", "text": "Items", "readonly": true },
+					{ "id": "on_create_add", "text": "Add on-create", "readonly": true }
+				]
+			}
+		},
+		{ "id": "on_create_add", "text": "Add on-create", "icon": "fa-solid fa-layer-group", "color": "#f0a728", "children-type": [ "element_on_create_add" ] },
+		{ "id": "element_on_create_add", "text": "Elément", "icon": "fa-brands fa-alipay", "color": "#7ff77d", "children-type": [], "move-on-parent": true,
+			"items":[
+				{ "id": "ref_element", "text": "Elément", "type": "object", "filter-type": "element" }
+			]
+		},
+		{ "id": "element_childrens_type", "text": "Enfants", "icon": "fa-solid fa-layer-group", "color": "#f0a728", "children-type": [ "element_children_type" ] },
+		{ "id": "element_children_type", "text": "Enfant", "icon": "fa-brands fa-alipay", "color": "#7ff77d", "children-type": [], "move-on-parent": true,
+			"items":[
+				{ "id": "ref_element", "text": "Elément", "type": "object", "filter-type": "element" }
+			]
+		},
+		{ "id": "items", "text": "Items", "icon": "fa-solid fa-layer-group", "color": "#f0a728", "children-type": [ "item" ] },
+		{ "id": "item", "text": "Item", "icon": "fa-brands fa-node-js", "color": "#ff1414", "children-type": [], "move-on-parent": true,
+			"items":[
+				{ "id": "desc", "text": "Description", "type": "string" },
+				{ "id": "type", "text": "Type", "type": "list", "items": [
+					{ "text": "String", "value": "string" },
+					{ "text": "Text", "value": "text" },
+					{ "text": "Object", "value": "object" },
+					{ "text": "List", "value": "list" },
+					{ "text": "List clés / valeurs", "value": "list-key-val" },
+					{ "text": "Checkbox", "value": "checkbox" },
+					{ "text": "Radio", "value": "radio" },
+					{ "text": "Color", "value": "color" },
+					{ "text": "Icone", "value": "icone" },
+					{ "text": "Switch", "value": "switch" },
+					{ "text": "Range", "value": "range" }
+				] },
+				{ "id": "type_object", "text": "Link Object", "type": "object", "on-display": "formShowItemTypeObject", "filter-type": "element" },
+				{ "id": "type_list", "text": "Clés / valeurs", "type": "list-key-val" },
+				{ "id": "on_display", "text": "On display", "type": "string" }
+			]
+		},
+
+		{ "id": "module", "text": "Module", "icon": "fa-brands fa-airbnb", "color": "#d38c3c", "children-type": [], "move-on-parent": true,
+			"items":[
+				{ "id": "desc", "text": "Description", "type": "text" }
+			],
+			"on-create": {
+				"add": [
+					{ "id": "fonctions", "text": "Fonctions", "readonly": true }
+				]
+			}
+		},
+
+		{ "id": "classe", "text": "Classe", "icon": "fa-brands fa-airbnb", "color": "#d38c3c", "children-type": [], "move-on-parent": true,
+			"items":[
+				{ "id": "desc", "text": "Description", "type": "text" }
+			],
+			"on-create": {
+				"add": [
+					{ "id": "constructor_args", "text": "Constructeur", "readonly": true },
+					{ "id": "methodes", "text": "Méthodes", "readonly": true }
+				]
+			}
+		},
+		{ "id": "constructor_args", "text": "Constructeur", "icon": "fa-solid fa-layer-group", "color": "#f0a728", "children-type": [ "argument" ] },
+		{ "id": "methodes", "text": "Méthodes", "icon": "fa-solid fa-layer-group", "color": "#f0a728", "children-type": [ "methode" ] },
+		{ "id": "methode", "text": "Méthode", "icon": "fa-regular fa-list-alt", "color": "#ca9f53", "children-type": [], "move-on-parent": true,
+			"items":[
+				{ "id": "desc", "text": "Description", "type": "text" },
+				{ "id": "return-val", "text": "Retourne une valeur", "type": "switch", "value": false },
+				{ "id": "exception", "text": "Peut générer un exception", "type": "switch", "value": false }
+			],
+			"on-create": {
+				"add": [
+					{ "id": "arguments", "text": "Arguments", "readonly": true }
+				]
+			}
+		},
+		
+		{ "id": "on_reate_adds", "text": "On Create Add", "icon": "fa-solid fa-layer-group", "color": "#f0a728", "children-type": [ "on_reate_add" ] },
+		
+		{ "id": "template", "text": "Template", "icon": "fa-brands fa-alipay", "color": "#7ff77d", "children-type": [], "move-on-parent": true,
+			"items":[
+				{ "id": "desc", "text": "Description", "type": "text" }
+			]
+		},
+		{ "id": "directory_tmpl", "text": "Répertoire", "icon": "fa-solid fa-folder", "color": "#ccb833", "children-type": [ "directory_tmpl", "template" ], "move-on-parent": true },
+		{ "id": "javascript", "text": "Javascript", "icon": "fa-brands fa-node-js", "color": "#ff1414", "children-type": [], "move-on-parent": true,
+			"items":[
+				{ "id": "desc", "text": "Description", "type": "text" }
+			],
+			"on-create": {
+				"add": [
+					{ "id": "js_sections", "text": "Sections", "readonly": true },
+					{ "id": "fonctions", "text": "Fonctions", "readonly": true },
+					{ "id": "jquerys", "text": "JQuerys", "readonly": true }
+				]
+			}
+		},
+		{ "id": "js_sections", "text": "Sections", "icon": "fa-brands fa-buffer", "color": "#9418e7", "children-type": [ "section" ] },
+		{ "id": "section", "text": "Section", "icon": "fa-regular fa-bookmark", "color": "#9151b3", "children-type": [], "move-on-parent": true,
+			"items":[
+				{ "id": "desc", "text": "Description", "type": "text" }
+			]
+		},
+		{ "id": "fonctions", "text": "Fonctions", "icon": "fa-solid fa-layer-group", "color": "#f0a728", "children-type": [ "fonction" ] },
+		{ "id": "fonction", "text": "Fonction", "icon": "fa-regular fa-list-alt", "color": "#ca9f53", "children-type": [], "move-on-parent": true,
+			"items":[
+				{ "id": "desc", "text": "Description", "type": "text" },
+				{ "id": "return-val", "text": "Retourne une valeur", "type": "switch", "value": false },
+				{ "id": "exception", "text": "Peut générer un exception", "type": "switch", "value": false }
+			],
+			"on-create": {
+				"add": [
+					{ "id": "arguments", "text": "Arguments", "readonly": true }
+				]
+			}
+		},
+		{ "id": "jquerys", "text": "JQuerys", "icon": "fa-solid fa-layer-group", "color": "#f0a728", "children-type": [ "jquery_ready", "jquery_on" ] },
+		{ "id": "jquery_ready", "text": "Ready", "icon": "fa-regular fa-list-alt", "color": "#ca9f53", "children-type": [], "move-on-parent": true,
+			"items":[
+				{ "id": "desc", "text": "Description", "type": "text" }
+			]
+		},
+		{ "id": "jquery_on", "text": "On", "icon": "fa-regular fa-list-alt", "color": "#ca9f53", "children-type": [], "move-on-parent": true,
+			"items":[
+				{ "id": "desc", "text": "Description", "type": "text" },
+				{ "id": "event", "text": "Evenement", "type": "string" },
+				{ "id": "selector", "text": "Selecteur", "type": "string" }
+			]
+		},
+
+		{ "id": "arguments", "text": "Arguments", "icon": "fa-solid fa-braille", "color": "#4f9a04", "children-type": [ "argument" ] },
+		{ "id": "argument", "text": "Argument", "icon": "fa-brands fa-centercode", "color": "#5c9226", "children-type": [], "move-on-parent": true,
+			"items":[
+				{ "id": "desc", "text": "Description", "type": "text" },
+				{ "id": "require", "text": "Obligatoire", "type": "switch", "value": true },
+				{ "id": "type", "text": "Type", "type": "list", "items": [
+					{ "text": "Non spécifié / inconnu", "value": "none" },
+					{ "text": "Booléen", "value": "boolean" },
+					{ "text": "Numérique", "value": "number" },
+					{ "text": "Chaîne de caractères", "value": "string" },
+					{ "text": "Tableau", "value": "array" },
+					{ "text": "Objet", "value": "object" },
+					{ "text": "Fonction", "value": "function" }
+				] }
+			]
+		},
+
+		{ "id": "property", "text": "Propriété", "icon": "fa-solid fa-scroll", "children-type": [], "move-on-parent": true,
+			"items":[
+				{ "id": "desc", "text": "Description", "type": "string" },
+				{ "id": "type", "text": "Type", "type": "list", "items": [
+					{ "text": "String", "value": "string" },
+					{ "text": "Text", "value": "text" },
+					{ "text": "Object", "value": "object" },
+					{ "text": "List", "value": "list" },
+					{ "text": "List clés / valeurs", "value": "list-key-val" },
+					{ "text": "Checkbox", "value": "checkbox" },
+					{ "text": "Radio", "value": "radio" },
+					{ "text": "Color", "value": "color" },
+					{ "text": "Icone", "value": "icone" },
+					{ "text": "Switch", "value": "switch" },
+					{ "text": "Range", "value": "range" }
+				] },
+				{ "id": "type_object", "text": "Link Object", "type": "object", "on-display": "formShowItemTypeObject", "filter-type": "element" },
+				{ "id": "type_list", "text": "Clés / valeurs", "type": "list-key-val" },
+				{ "id": "on_display", "text": "On display", "type": "string" }
+			]
+		}
+		
+	],
+	"properties": [
+		{ "id": "impl-getJsonCreateNewProject", "text": "Implémentation de la méthode getJsonCreateNewProject", "type": "switch" },
+		{ "id": "impl-openProject", "text": "Implémentation de la méthode openProject", "type": "switch" },
+		{ "id": "model-title", "text": "Titre du modèle", "type": "string" }
+	]
+}

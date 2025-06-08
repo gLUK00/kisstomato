@@ -6,12 +6,12 @@
     "configurations": [
 
         {
-            "name": "Débogueur Python : Fichier actuel avec arguments",
+            "name": "Débogueur Python : Fichier actuel avec arguments",
             "type": "debugpy",
             "request": "launch",
             "program": "scripts/dataset.py",
             "console": "integratedTerminal",
-            "args": "--pair adaxbt"
+            "args": "--pair adaxbt --goto create-image"
         }
     ]
 }

@@ -34,7 +34,18 @@ $( document ).on( "click", "#gen-code", function() {
 		}
 
 		oData[ 'file' ] = getUrlParameter( 'project' );
-		eel.plugin_exec_method_model( oInfoProject[ 'model' ], 'generation', 'generateFlaskCode', oData )( function( result ){
+		fetch('/api/plugin/exec_method_model', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				model: oInfoProject['model'],
+				module: 'generation',
+				method: 'generateFlaskCode',
+				data: oData
+			})
+		})
+		.then(response => response.json())
+		.then(function(result) {
 
 			// affichage du rapport de generation, asynchrone
 			modalShowMessage( result );

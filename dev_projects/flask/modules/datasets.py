@@ -1,8 +1,8 @@
 # kisstomato-module-import-start-user-code-kisstomato
-import gl, json, pymongo, datetime, pandas as pd, threading, time
+import gl, json, pymongo, datetime, pandas as pd, threading, time, sys, os
 from pymongo import MongoClient
 from bson import ObjectId
-from modules import bdd, converter, debug
+from modules import bdd, converter, debug, cache
 from classes import bufferHistory, threadMM, buildMM as classBuildMM, imageHelper
 # kisstomato-module-import-stop-user-code-kisstomato
 
@@ -34,78 +34,99 @@ Création d'un dataset à partir de l'historique des transactions
 def create(pair):
     # kisstomato-methode-create-start-user-code-kisstomato
 
-    # initialisation du buffer
-    oBuffer = bufferHistory( pair )
+    # recupere les collections
+    oColMM = bdd.getBdd()[ gl.config[ "mongo" ][ "cols" ][ "mm_pair" ].replace( "{pair}", pair ) ]
+    oColImages = bdd.getBdd()[ gl.config[ "mongo" ][ "cols" ][ "images_pair" ].replace( "{pair}", pair ) ]
+    oImageHelper = imageHelper.get()
 
-    iDebug = 0
+    # recupere le cache des normales
+    oNormalisation = cache.getDataCache( 'normalisation/' + pair + '.json' )
 
-    # pour toutes les tranches
-    for oRange in oBuffer:
+    # ajustement de la normalisation
+    for sField in oNormalisation:
+        for sKey in oNormalisation[ sField ]:
+
+            # ajout de 10% de marge
+            oNormalisation[ sField ][ sKey ] *= 1.1
+
+
+    # calcule du decalage
+    #iDecalage = ( 5 * 60 * 3 ) + ( 15 * 60 * 2 ) + ( 30 * 60 ) + 3600 + ( 3600 * 2 ) + ( 3600 * 4 ) + ( 3600 * 8 ) + ( 3600 * 12 ) + 86400 + ( 86400 * 2 ) + ( 86400 * 5 ) + ( 86400 * 15 )
+    iDecalage = ( 60 * 5 ) + ( 5 * 60 * 3 ) + ( 15 * 60 * 2 ) + ( 30 * 60 ) + 3600 + ( 3600 * 2 ) + ( 3600 * 4 ) + ( 3600 * 8 ) + ( 3600 * 12 ) + 86400 + ( 86400 * 2 ) + ( 86400 * 5 ) + ( 86400 * 15 )
+
+    # recherche du premier enregistrement où la colonne 15j n'est pas vide
+    # (champ existe, différent de None et de la chaîne vide)
+    oFirstWith15j = oColMM.find_one({ "15j": { "$exists": True, "$ne": None, "$ne": "" } }, sort=[("time", pymongo.ASCENDING)])
+    iFirstTimeMM = int( oFirstWith15j[ 'time' ] ) + iDecalage + ( 86400 * 15 )
+
+    # recherche la position de fin
+    oLastMM = oColMM.find_one(sort=[("time", pymongo.DESCENDING)])
+    iLastTimeMM = int( oLastMM[ 'time' ] ) - 3600
+
+    # calcul de 1%
+    iMax = iLastTimeMM - iFirstTimeMM
+    iOnePercent = float( iMax ) / 100
+
+    # pour toutes les tranches temporelles, sans la premiere
+    oSteps = [
+        { "time": 0, "field": "1m" }, # 1m
+        { "time": 60, "field": "1m" }, # 1m
+        { "time": 60, "field": "1m" }, # 1m
+        { "time": 60, "field": "1m" }, # 1m
+        { "time": 60, "field": "1m" }, # 1m
+        { "time": 300, "field": "5m" }, # 5m
+        { "time": 300, "field": "5m" }, # 5m
+        { "time": 300, "field": "5m" }, # 5m
+        { "time": 900, "field": "15m" }, # 15m
+        { "time": 900, "field": "15m" }, # 15m
+        { "time": 1800, "field": "30m" }, # 30m
+        { "time": 3600, "field": "1h" }, # 1h
+        { "time": 7200, "field": "2h" }, # 2h
+        { "time": 14400, "field": "4h" }, # 4h
+        { "time": 28800, "field": "8h" }, # 8h
+        { "time": 43200, "field": "12h" }, #12h
+        { "time": 86400, "field": "1j" }, # 1j
+        { "time": 172800, "field": "2j" }, # 2j
+        { "time": 432000, "field": "5j" }, # 5j
+        { "time": 1296000, "field": "15j" } # 15j
+    ]
+
+    # pour tous les enregistrements
+    iCmpShow = 0
+    for oMM in oColMM.find({ "time": { "$gte": iFirstTimeMM, "$lte": iLastTimeMM } }, sort=[("time", pymongo.ASCENDING)]):
         
-        
-
-        print( '-----------------------' )
-        print( len( oRange ) )
-
-        print( oRange[ 0 ] )
-        print( oRange[ -1 ] )
-
-
-
-        print( datetime.datetime.strptime( str( datetime.datetime.fromtimestamp( int( oRange[ 0 ][ 'time' ] ) ) ), '%Y-%m-%d %H:%M:%S' ) )
-        print( datetime.datetime.strptime( str( datetime.datetime.fromtimestamp( int( oRange[ -1 ][ 'time' ] ) ) ), '%Y-%m-%d %H:%M:%S' ) )
-        
-        """iDiffTime = int( oRange[ -1 ][ 'time' ] ) - int( oRange[ 0 ][ 'time' ] )
-        print( iDiffTime )
-
-        print( '-------------------------- simu' )
-        iDiffTime = 9849620 - int( oRange[ 0 ][ 'time' ] )
-        
-        print( datetime.datetime.strptime( str( datetime.datetime.fromtimestamp( int( oRange[ 0 ][ 'time' ] ) ) ), '%Y-%m-%d %H:%M:%S' ) )
-        print( datetime.datetime.strptime( str( datetime.datetime.fromtimestamp( int( oRange[ 0][ 'time' ] ) + 9849620 ) ), '%Y-%m-%d %H:%M:%S' ) )
-        
-        iDiffTime = int( oRange[ -1 ][ 'time' ] ) - 9849620
-        print( iDiffTime )
-        """
-        iDebug += 1
-
-        if iDebug == 10:
-            exit()
+        # progression
+        if iCmpShow % 100 == 0:
+            iProgress = ( oMM[ 'time' ] - iFirstTimeMM ) / iOnePercent
+            sys.stdout.write('\r[{0:100s}] {1:.1f}%'.format('#' * int(iProgress), iProgress))
+            sys.stdout.flush()
+            iCmpShow = 0
+        iCmpShow += 1
         
         # generation de l'image
-        oImage = genImage( oRange )
-        print( oImage )
-    exit()
-    
+        oImage = []
+        iDecalage = 0
+        for oStep in oSteps:
 
-    sColHistory = gl.config[ "mongo" ][ "cols" ][ "history_pair" ].replace( "{pair}", pair )
-    sColImages = gl.config[ "mongo" ][ "cols" ][ "images_pair" ].replace( "{pair}", pair )
-    oColHistory = bdd.getBdd()[ sColHistory ]
+            iDecalage -= oStep[ 'time' ]
+            oItem = oColMM.find_one({ "time": { "$lt": oMM[ 'time' ] + iDecalage } }, sort=[("time", pymongo.DESCENDING)])            
 
-    # pour toutes les plages de donnees
-    iIndexTime = 0
-    while True:
-        bExist = True
-        oLines = oColHistory.find( { "time": { "$gte": iIndexTime } } ).sort( "time", pymongo.ASCENDING ).limit( 100 )
-        for oLine in oLines:
-            bExist = False
-            iIndexTime = oLine[ "time" ]
+            # recupere la partie de l'image
+            for sField in oNormalisation:
+                for sKey in oNormalisation[ sField ]:
+                    oImage.append( oImageHelper.normalize( oItem[ sField ][ sKey ], 0, oNormalisation[ sField ][ sKey ] ) )
+        
+        # ajout de la carte du ciel
+        oImage += oMM[ 'skymap' ]
+        
+        # ajout de la date
+        oImage += oMM[ 'date' ]
 
+        # ajout du halving
+        oImage.append( oMM[ 'halving' ] )
 
-
-            print( oLine )
-
-            #exit()
-
-
-        if bExist:
-            break
-
-
-
-        exit()
-
-
+        # enregistrement de l'image
+        oColImages.insert_one( { "time": oMM[ 'time' ], "image": oImage } )
 
     # kisstomato-methode-create-stop-user-code-kisstomato
 
@@ -350,6 +371,92 @@ def createSkymap(pair):
     # kisstomato-methode-createSkymap-stop-user-code-kisstomato
 
 """
+Permet la vectorisation de la date et de la position du prochain Halving
+"""
+# Argument :
+# - pair : string : (obligatoire) Paire associée à l'historique des transactions
+def createDates(pair):
+    # kisstomato-methode-createDates-start-user-code-kisstomato
+    
+    # recupere le premier enregistrement
+    oColMM = bdd.getBdd()[ gl.config[ "mongo" ][ "cols" ][ "mm_pair" ].replace( "{pair}", pair ) ]
+    oElements = list( oColMM.find( { "date": None } ).limit( 100 ) )
+
+    oImageHelper = imageHelper.get()
+
+    # pour toutes les minutes
+    iCmpShow = 0
+    while oElements is not None and len(oElements) > 0:
+
+        if iCmpShow % 10 == 0:
+            print( "Dates : " + oImageHelper.date2str( oElements[ 0 ][ 'time' ] ) )
+            iCmpShow = 0
+        iCmpShow += 1
+        
+        # calcul de la carte du ciel
+        for oElement in oElements:
+            oColMM.update_one( { "_id": oElement[ "_id" ] }, { "$set": { "date": oImageHelper.date2vec( oElement[ 'time' ] ), "halving": oImageHelper.halvingPosition( oElement[ 'time' ] ) } } )
+
+        # recherche d'un enregistrement
+        oElements = list( oColMM.find( { "date": None } ).limit( 100 ) )
+
+    # kisstomato-methode-createDates-stop-user-code-kisstomato
+
+"""
+Création du fichier de normalisation des données d'une paire
+"""
+# Argument :
+# - pair : string : (obligatoire) Paire associée à l'historique des transactions
+def normalisation(pair):
+    # kisstomato-methode-normalisation-start-user-code-kisstomato
+    
+    # calcul des plages de normalisation
+    oFields = [ "1m", "5m", "15m", "1h", "2h", "4h", "8h", "12h", "1j", "2j", "5j", "15j" ]
+    oNormalisation = {}
+    for sField in oFields:
+        oNormalisation[ sField ] = {
+            "volume": -1,
+            "price": -1,
+            "vp": -1,
+            "nbr_buy_limit": -1,
+            "nbr_buy_market": -1,
+            "nbr_sell_limit": -1,
+            "nbr_sell_market": -1,
+            "nbr_volume_similar": -1,
+            "nbr_buy_round_qte": -1,
+            "nbr_sell_round_qte": -1,
+            "count": -1
+        }
+
+    sColMM = gl.config[ "mongo" ][ "cols" ][ "mm_pair" ].replace( "{pair}", pair.lower() )
+    oColMM = bdd.getBdd()[ sColMM ]
+
+    # calcule du decalage
+    iDecalage = ( 60 * 5 ) + ( 5 * 60 * 3 ) + ( 15 * 60 * 2 ) + ( 30 * 60 ) + 3600 + ( 3600 * 2 ) + ( 3600 * 4 ) + ( 3600 * 8 ) + ( 3600 * 12 ) + 86400 + ( 86400 * 2 ) + ( 86400 * 5 ) + ( 86400 * 15 )
+
+    # recherche du premier enregistrement où la colonne 15j n'est pas vide
+    # (champ existe, différent de None et de la chaîne vide)
+    oFirstWith15j = oColMM.find_one({ "15j": { "$exists": True, "$ne": None, "$ne": "" } }, sort=[("time", pymongo.ASCENDING)])
+    iFirstTimeMM = int( oFirstWith15j[ 'time' ] ) + iDecalage + 3600
+
+    # pour tous les enregistrements
+    for oMM in oColMM.find({ "time": { "$gte": iFirstTimeMM } }):
+
+        # pour tous les champs
+        for sField in oFields:
+            
+            # pour tous les indicateurs
+            for sKey in oNormalisation[ sField ].keys():
+                
+                if float( oMM[ sField ][ sKey ] ) > oNormalisation[ sField ][ sKey ]:
+                    oNormalisation[ sField ][ sKey ] = float( oMM[ sField ][ sKey ] )
+
+    # enregistrement du cache
+    cache.setDataCache( 'normalisation/' + pair + '.json', json.dumps( oNormalisation ) )
+
+    # kisstomato-methode-normalisation-stop-user-code-kisstomato
+
+"""
 Création d'un image à partir d'un échantillon de données
 """
 # Argument :
@@ -406,23 +513,18 @@ def genImage(buffer):
         oItem = { "volume": 0,
             "price": 0,
             "vp": 0,
-            "progress_up":0,
-            "progress_down": 0,
             "nbr_buy_limit": 0,
             "nbr_buy_market": 0,
             "nbr_sell_limit": 0,
             "nbr_sell_market": 0,
-            "nbr_price_similar": 0,
             "nbr_volume_similar": 0,
-            "nbr_buy_round_price": 0,
-            "nbr_sell_round_price": 0,
             "nbr_buy_round_qte": 0,
             "nbr_sell_round_qte": 0,
             "count": len( oSource),
             "time": oSource[ 0 ][ "time" ] }
         
         # pour tous les prix et les quantites similaires
-        oPrices = oQuantities = []
+        oQuantities = []
         
         # pour tous les elements de la plage
         for oLine in oSource:
@@ -448,25 +550,12 @@ def genImage(buffer):
                 else:
                     oItem[ "nbr_sell_market" ] += 1
             
-            # pour les tarifs similaires
-            if oItem[ "price" ] not in oPrices:
-                oPrices.append( oLine[ "val" ] )
-            else:
-                oItem[ "nbr_price_similar" ] += 1
-            
             # pour les quantites similaires
             if oLine[ "qte" ] not in oQuantities:
                 oQuantities.append( oLine[ "qte" ] )
             else:
                 oItem[ "nbr_volume_similar" ] += 1
             
-            # pour les prix ronds
-            if float( oLine[ "val" ] ) == round( float( oLine[ "val" ] ) ):
-                if oLine[ "action" ] == 'b':
-                    oItem[ "nbr_buy_round_price" ] += 1
-                else:
-                    oItem[ "nbr_sell_round_price" ] += 1
-                    
             # pour les quantites rondes
             if float( oLine[ "qte" ] ) == round( float( oLine[ "qte" ] ) ):
                 if oLine[ "action" ] == 'b':
@@ -489,15 +578,6 @@ def genImage(buffer):
         iIndexPrec = i + 1
         while oResult[ iIndexPrec ][ "count" ] == 0:
             iIndexPrec += 1
-        
-        # calcul de la progression
-        iDiff = oResult[ i ][ "price" ] - oResult[ iIndexPrec ][ "price" ]
-        if iDiff > 0:
-            oResult[ i ][ "progress_up" ] = abs( iDiff / ( oResult[ iIndexPrec ][ "price" ] / 100 ) )
-            oResult[ i ][ "progress_down" ] = 0
-        elif iDiff < 0:
-            oResult[ i ][ "progress_up" ] = 0
-            oResult[ i ][ "progress_down" ] = abs( iDiff / ( oResult[ iIndexPrec ][ "price" ] / 100 ) )
     
     # suppression de la derniere plage
     oResult = oResult[ : -1 ]

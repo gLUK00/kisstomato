@@ -67,16 +67,11 @@ class buildMM(threading.Thread):
                 oItem = { "volume": 0,
                     "price": 0,
                     "vp": 0,
-                    "progress_up":0,
-                    "progress_down": 0,
                     "nbr_buy_limit": 0,
                     "nbr_buy_market": 0,
                     "nbr_sell_limit": 0,
                     "nbr_sell_market": 0,
-                    "nbr_price_similar": 0,
                     "nbr_volume_similar": 0,
-                    "nbr_buy_round_price": 0,
-                    "nbr_sell_round_price": 0,
                     "nbr_buy_round_qte": 0,
                     "nbr_sell_round_qte": 0,
                     "count": 0 }
@@ -86,16 +81,11 @@ class buildMM(threading.Thread):
                     oItem[ 'volume' ] += self.minutes[ iIndexLine ][ '1m' ][ 'volume' ]
                     oItem[ 'price' ] += self.minutes[ iIndexLine ][ '1m' ][ 'price' ]
                     oItem[ 'vp' ] += self.minutes[ iIndexLine ][ '1m' ][ 'vp' ]
-                    oItem[ 'progress_up' ] += self.minutes[ iIndexLine ][ '1m' ][ 'progress_up' ]
-                    oItem[ 'progress_down' ] += self.minutes[ iIndexLine ][ '1m' ][ 'progress_down' ]
                     oItem[ 'nbr_buy_limit' ] += self.minutes[ iIndexLine ][ '1m' ][ 'nbr_buy_limit' ]
                     oItem[ 'nbr_buy_market' ] += self.minutes[ iIndexLine ][ '1m' ][ 'nbr_buy_market' ]
                     oItem[ 'nbr_sell_limit' ] += self.minutes[ iIndexLine ][ '1m' ][ 'nbr_sell_limit' ]
                     oItem[ 'nbr_sell_market' ] += self.minutes[ iIndexLine ][ '1m' ][ 'nbr_sell_market' ]
-                    oItem[ 'nbr_price_similar' ] += self.minutes[ iIndexLine ][ '1m' ][ 'nbr_price_similar' ]
                     oItem[ 'nbr_volume_similar' ] += self.minutes[ iIndexLine ][ '1m' ][ 'nbr_volume_similar' ]
-                    oItem[ 'nbr_buy_round_price' ] += self.minutes[ iIndexLine ][ '1m' ][ 'nbr_buy_round_price' ]
-                    oItem[ 'nbr_sell_round_price' ] += self.minutes[ iIndexLine ][ '1m' ][ 'nbr_sell_round_price' ]
                     oItem[ 'nbr_buy_round_qte' ] += self.minutes[ iIndexLine ][ '1m' ][ 'nbr_buy_round_qte' ]
                     oItem[ 'nbr_sell_round_qte' ] += self.minutes[ iIndexLine ][ '1m' ][ 'nbr_sell_round_qte' ]
                     oItem[ 'count' ] += self.minutes[ iIndexLine ][ '1m' ][ 'count' ]

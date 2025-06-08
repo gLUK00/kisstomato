@@ -46,7 +46,6 @@ if input( 'Initialisation de la BDD (O/n) ? ' ).lower() in [ '', 'o' ]:
     print( 'rrrrrrrrrrrrr' )
 
 # kisstomato-script-section-initBdd-stop-user-code-kisstomato
-
 """
 Initialisation du cache
 """
@@ -57,7 +56,6 @@ if input( 'Initialisation du cache (O/n) ? ' ).lower() in [ '', 'o' ]:
     cache.initCache( gl.config[ "paths" ][ "cache" ] )
 
 # kisstomato-script-section-cache-stop-user-code-kisstomato
-
 """
 recuperation des paires
 """
@@ -68,6 +66,5 @@ if input( 'Récupèration des paires (O/n) ? ' ).lower() in [ '', 'o' ]:
     services.getPairs()
 
 # kisstomato-script-section-recuperation-paires-stop-user-code-kisstomato
-
 # kisstomato-script-end-start-user-code-kisstomato
 # kisstomato-script-end-stop-user-code-kisstomato

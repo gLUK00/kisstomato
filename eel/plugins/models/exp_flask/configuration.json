@@ -126,7 +126,8 @@
 			"id": "script", "text": "script", "icon": "fa-solid fa-scroll", "color": "#c972d5", "children-type": [], "move-on-parent": true
 			,"items":[
 				{ "id": "desc", "text": "Description", "type": "text" },
-				{ "id": "print_desc", "text": "Afficher description", "type": "switch" }
+				{ "id": "print_desc", "text": "Afficher description", "type": "switch" },
+				{ "id": "jump_section", "text": "Implement jump section", "type": "switch" }
 			]
 			,"on-create": {
 				"add": [

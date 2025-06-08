@@ -1,5 +1,5 @@
 # kisstomato-class-import-start-user-code-kisstomato
-import ephem, datetime
+import ephem, datetime, calendar
 # kisstomato-class-import-stop-user-code-kisstomato
 
 """
@@ -75,10 +75,11 @@ class imageHelper:
         oResult = None
 
         # kisstomato-class-methode-normalize-start-user-code-kisstomato
-        iRange = iMax - iMin
-        iDiffMin = abs( iVal - iMin )
-        iStep = iRange / 100
-        oResult = ( iDiffMin / iStep ) * 0.01
+        # Normalize value linearly between min and max to range [0,1]
+        if iMax == iMin:  # Prevent division by zero
+            oResult = 0
+        else:
+            oResult = max(0, min(1, (iVal - iMin) / (iMax - iMin)))
         # kisstomato-class-methode-normalize-stop-user-code-kisstomato
         return oResult
 
@@ -98,9 +99,9 @@ class imageHelper:
 
     """
     Vectorisation de la date, sous la forme : 3 positions,
-- 1 position concernant le mois, 1/12,
-- 1 position concernant le jour de la semaine, 1/7,
-- 1 position concernant l’heure, 1/24,
+	- 1 position concernant le mois, 1/12,
+	- 1 position concernant le jour de la semaine, 1/7,
+	- 1 position concernant l’heure, 1/24,
     """
     # Argument :
     # - iTime : number : (obligatoire) Timestamp de référence
@@ -111,29 +112,35 @@ class imageHelper:
         # Convertir le timestamp en datetime
         dt = datetime.datetime.fromtimestamp(iTime)
         
-        # Extraire le mois (1-12) et normaliser sur 0-1
-        month = (dt.month - 1) / 11  # 0-11 -> 0-1
+        # Extraire le mois (1-12) avec sous-graduation journalière et normaliser sur ~0-1
+        num_days_in_month = calendar.monthrange(dt.year, dt.month)[1]
+        day_factor = (dt.day - 1.0) / (num_days_in_month - 1.0) if num_days_in_month > 1 else 0.0
+        month = ((dt.month - 1.0) + day_factor) / 12.0
         
         # Extraire le jour de la semaine (0-6) et normaliser sur 0-1
-        weekday = dt.weekday() / 6  # 0-6 -> 0-1
+        weekday = dt.weekday() / 6.0  # dt.weekday() est 0 pour Lundi, 6 pour Dimanche
         
-        # Extraire l'heure (0-23) et normaliser sur 0-1
-        hour = dt.hour / 23  # 0-23 -> 0-1
+        # Extraire l'heure (0-23) avec sous-graduation par minute et normaliser sur ~0-1
+        minute_factor_for_hour = dt.minute / 60.0 # Progression dans l'heure (0.0 à ~0.983)
+        hour = (dt.hour + minute_factor_for_hour) / 24.0 # Normalise sur ~0 (début 00:00) à ~1 (fin 23:59)
         
         # Concaténer les résultats
         oResult = [month, weekday, hour]
+
+        #print( oResult )
+
         # kisstomato-class-methode-date2vec-stop-user-code-kisstomato
         return oResult
 
     """
     Distance entre les halvings : 1 position,
-avec les dates suivantes :
-- 28/11/2012 : 1354057200
-- 09/07/2016 : 1468015200
-- 11/05/2020 : 1589148000
-- 19/04/2024 : 1713477600
-- 01/04/2028 : 1838095200
-- 01/04/2032 : 1964344800
+	avec les dates suivantes :
+	- 28/11/2012 : 1354057200
+	- 09/07/2016 : 1468015200
+	- 11/05/2020 : 1589148000
+	- 19/04/2024 : 1713477600
+	- 01/04/2028 : 1838095200
+	- 01/04/2032 : 1964344800
     """
     # Argument :
     # - iTime : number : (obligatoire) Timestamp de référence
@@ -141,7 +148,32 @@ avec les dates suivantes :
         oResult = None
 
         # kisstomato-class-methode-halvingPosition-start-user-code-kisstomato
-        pass
+        halving_timestamps = [
+            1354057200,  # 28/11/2012
+            1468015200,  # 09/07/2016
+            1589148000,  # 11/05/2020
+            1713477600,  # 19/04/2024
+            1838095200,  # 01/04/2028
+            1964344800   # 01/04/2032
+        ]
+
+        # recherche de la position min et max
+        min_ts = float(halving_timestamps[0])
+        max_ts = float(halving_timestamps[-1])
+        for iPos in range( len( halving_timestamps ) ):
+            if halving_timestamps[ iPos ] < iTime:
+                min_ts = float(halving_timestamps[ iPos ])
+            if halving_timestamps[ iPos ] > iTime:
+                max_ts = float(halving_timestamps[ iPos ])
+                break
+        
+        # determine le % de progression
+        iDiffTime = max_ts - min_ts
+        iOnePercent = iDiffTime / 100
+        oResult =  ( ( iTime - min_ts ) / iOnePercent ) * 0.01
+
+        #print( oResult )
+
         # kisstomato-class-methode-halvingPosition-stop-user-code-kisstomato
         return oResult
 

@@ -46,62 +46,102 @@ var oSelectNode = null;
 var oInfoProject = {};
 var oModel = {};
 var oPropertiesProject = {};
-eel.open_project( getUrlParameter( 'project' ) )( function( data ){
+fetch('/api/project/open', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ filename: getUrlParameter('project') })
+})
+.then(response => {
+    if (!response.ok) { return response.json().then(err => { throw new Error(err.message || `HTTP error ${response.status}`); }); }
+    return response.json();
+})
+.then(data => {
+    // alimente le type
+    oInfoProject = data.info;
+    $('title').html(data.model.title + ' : ' + oInfoProject.name);
+    $('#project_title').html('<span class="badge text-bg-info">' + data.model.title + '</span> ' + oInfoProject.name);
 
-	// alimente le type
-	oInfoProject = data[ 'info' ];
-	$( 'title' ).html( data[ 'model' ][ 'title' ] + ' : ' + oInfoProject[ 'name' ] );
-	$( '#project_title' ).html( '<span class="badge text-bg-info">' + data[ 'model' ][ 'title' ] + '</span> ' + oInfoProject[ 'name' ] );
+    // si le projet a des proprietes
+    if (data.properties !== undefined) {
+        oPropertiesProject = data.properties;
+    }
 
-	// si le projet a des proprietes
-	if( data[ 'properties' ] !== undefined ){
-		oPropertiesProject = data[ 'properties' ];
-	}
+    // recupere le modele
+    oModel = data.model;
 
-	// recupere le modele
-	oModel = data[ 'model' ];
+    // importation des fichiers javascript du model
+    let jsLoadChain = Promise.resolve();
+    if (data.js && Array.isArray(data.js)) {
+        data.js.forEach(jsFile => {
+            jsLoadChain = jsLoadChain.then(() => {
+                let fetchPromise;
+                let scriptUrl;
+                if (jsFile.type === 'model') {
+                    scriptUrl = `/api/model/js/${data.info.model}/${jsFile.file}`;
+                    fetchPromise = fetch(scriptUrl).then(res => {
+                        if (!res.ok) { throw new Error(`Failed to load model script ${jsFile.file}: ${res.statusText}`); }
+                        return res.text();
+                    });
+                } else if (jsFile.type === 'field') {
+                    scriptUrl = `/api/plugin/js/field/${jsFile.file}`;
+                    fetchPromise = fetch(scriptUrl).then(res => {
+                        if (!res.ok) { throw new Error(`Failed to load field script ${jsFile.file}: ${res.statusText}`); }
+                        return res.text();
+                    });
+                } else {
+                    console.warn('Unknown JS type:', jsFile.type);
+                    return Promise.resolve(); // Skip unknown types
+                }
 
-	// importation des fichiers javascript du model
-	for( var i=0; i<data[ 'js' ].length; i++ ){
-		if( data[ 'js' ][ i ][ 'type' ] == 'model' ){
-			eel.get_javascript( data[ 'info' ][ 'model' ], data[ 'js' ][ i ][ 'file' ] )( function( sJsCode ){
-				const el = document.createElement("script");
-				el.src = URL.createObjectURL(new Blob([sJsCode], { type: 'text/javascript' }));
-				document.head.appendChild(el);
-			} );
-		}else if( data[ 'js' ][ i ][ 'type' ] == 'field' ){
-			eel.plugin_get_javascript_field( data[ 'js' ][ i ][ 'file' ] )( function( sJsCode ){
-				const el = document.createElement("script");
-				el.src = URL.createObjectURL(new Blob([sJsCode], { type: 'text/javascript' }));
-				document.head.appendChild(el);
-			} );
-		}
-	}
+                return fetchPromise.then(sJsCode => {
+                    const el = document.createElement("script");
+                    el.src = URL.createObjectURL(new Blob([sJsCode], { type: 'text/javascript' }));
+                    document.head.appendChild(el);
+                }).catch(error => {
+                    console.error(`Error fetching or loading script ${scriptUrl}:`, error);
+                    // Optionally, re-throw or handle to stop further processing if a script is critical
+                });
+            });
+        });
+    }
 
-	// creation des noeuds
-	//oNodes = [];
-	for( var i=0; i<data[ 'data' ].length; i++ ){
-		var oItem = data[ 'data' ][ i ];
+    jsLoadChain.then(() => {
+        // All scripts fetched and appended (hopefully executed)
+        
+        // creation des noeuds
+        oNodes = []; // Initialize/clear global or module-level oNodes
+        if (data.data && Array.isArray(data.data)) {
+            for (var i = 0; i < data.data.length; i++) {
+                var oItem = data.data[i];
+                oNodes.push(oItem);
+            }
+        }
 
+        // application des etats d'ouvertures et fermetures de noeuds
+        setStateOpenClode(oNodes); // Ensure this function handles an empty oNodes if data.data is missing/empty
 
-		oNodes.push( oItem );
-	}
+        $('#tree').jstree({
+            "core": {
+                'data': oNodes
+            }
+        });
 
-	// application des etats d'ouvertures et fermetures de noeuds
-	setStateOpenClode( oNodes );
+        // coloration des noeuds
+        $('#tree').on('open_node.jstree loaded.jstree ready.jstree refresh.jstree changed.jstree', async function () { nodeRefreshColor(oNodes); });
 
-	$('#tree').jstree({
-		"core" : {
-			'data' : oNodes
-		}
-	});
+        // memorisation des ouvertures et fermetures des noeuds
+        $('#tree').on('after_close.jstree after_open.jstree', async function (e, node) { nodeOpenClose(e, node); });
 
-	// coloration des noeuds
-	$('#tree').on('open_node.jstree loaded.jstree ready.jstree refresh.jstree changed.jstree', async function () { nodeRefreshColor( oNodes ); });
-
-	// memorisation des ouvertures et fermetures des noeuds
-	$('#tree').on('after_close.jstree after_open.jstree', async function ( e, node ) { nodeOpenClose( e, node ); });
-} );
+    }).catch(error => {
+        console.error('Error processing project data after loading dynamic JS:', error);
+        alert('Error initializing project view: ' + error.message);
+    });
+})
+.catch(error => {
+    console.error('Error opening project:', error);
+    alert('Failed to open project: ' + error.message);
+    // Potentially redirect or show a more permanent error message on the page
+});
 
 
 
@@ -207,23 +247,52 @@ $( document ).on( "click", "#properties_project", function( e ) {
 
 	modalShowForm( 'Propriétés du projet', 'Valider les modifications', function( oResults ){
 
-		// recuperation de proprietes
-		oInfoProject[ 'name' ] = oResults[ 'name' ];
-		oInfoProject[ 'desc' ] = oResults[ 'desc' ];
-		for( var i=0; i<oModel[ "properties" ].length; i++ ){
-			let oProperty = oModel[ "properties" ][ i ];
-			oPropertiesProject[ oProperty[ 'id' ] ] = oResults[ 'prop-' + oProperty[ 'id' ] ];
-		}
+        // recuperation de proprietes
+        oInfoProject[ 'name' ] = oResults[ 'name' ];
+        oInfoProject[ 'desc' ] = oResults[ 'desc' ];
+        for( var i=0; i<oModel[ "properties" ].length; i++ ){
+            let oProperty = oModel[ "properties" ][ i ];
+            oPropertiesProject[ oProperty[ 'id' ] ] = oResults[ 'prop-' + oProperty[ 'id' ] ];
+        }
 
-		modelSaveProjectModel( getUrlParameter( 'project' ), { 'name': oInfoProject[ 'name' ], 'desc': oInfoProject[ 'desc' ], 'properties': oPropertiesProject }, oNodes, function(){
-			$( '#project_title' ).html( '<span class="badge text-bg-info">' + oModel[ 'title' ] + '</span> ' + oInfoProject[ 'name' ] );
-		} );
-		return true;
+        // enregistrement des modifications
+        fetch('/api/project/update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ filename: oInfoProject['file'], properties: oPropertiesProject, data: oNodes })
+        })
+        .then(response => {
+            if (!response.ok) { 
+                return response.json().then(err => { 
+                    throw new Error(err.message || `HTTP error ${response.status}`); 
+                }); 
+            }
+            return response.json();
+        })
+        .then(result => {
+            if (result.status === 'success') {
+                // rechargement des infos du projet
+                oInfoProject.name = oResults.name; // oResults is {name, desc} from form
+                oInfoProject.desc = oResults.desc;
+                oPropertiesProject = oPropertiesProject; // oPropertiesProject is model-specific properties from form
+
+                $('title').html(oModel.title + ' : ' + oInfoProject.name);
+                $('#project_title').html('<span class="badge text-bg-info">' + oModel.title + '</span> ' + oInfoProject.name);
+            } else {
+                alert(result.message || 'Failed to update project.');
+            }
+        })
+        .catch(error => {
+            console.error('Error updating project properties:', error);
+            alert('Error: ' + error.message);
+        });
+        return true; // Modal closes, fetch handles outcome
 
 
-	}, 'Annuler', null, oData );
+    }, 'Annuler', null, oData );
 } );
 
+// ... rest of the code remains the same ...
 
 
 // mise a jour d'un onglet

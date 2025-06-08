@@ -73,6 +73,16 @@ class nodeScript(nodeElement):
 
         return oResult
 
+    # Détermine si le mécanisme de déplacement vers la section demandé et activé
+    def implementSwitchSection(self):
+        oResult = None
+
+        # kisstomato-methode-implementSwitchSection-start-user-code-kisstomato
+        oResult = self._getItemsValue( self.items, 'jump_section', False )
+        # kisstomato-methode-implementSwitchSection-stop-user-code-kisstomato
+
+        return oResult
+
     # recupere l'ensemble des arguments
     def getArgs(self):
         oResult = None

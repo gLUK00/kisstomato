@@ -55,22 +55,17 @@ class threadMM(threading.Thread):
                 oItem = { "volume": 0,
                     "price": 0,
                     "vp": 0,
-                    "progress_up":0,
-                    "progress_down": 0,
                     "nbr_buy_limit": 0,
                     "nbr_buy_market": 0,
                     "nbr_sell_limit": 0,
                     "nbr_sell_market": 0,
-                    "nbr_price_similar": 0,
                     "nbr_volume_similar": 0,
-                    "nbr_buy_round_price": 0,
-                    "nbr_sell_round_price": 0,
                     "nbr_buy_round_qte": 0,
                     "nbr_sell_round_qte": 0,
                     "count": len( oMinute ) }
                 
                 # pour tous les prix et les quantites similaires
-                oPrices = oQuantities = []
+                oQuantities = []
                 iOpen = iClose = iVolume = iLow = iHigh = 0
                 
                 # pour tous les elements de la plage
@@ -103,25 +98,12 @@ class threadMM(threading.Thread):
                         else:
                             oItem[ "nbr_sell_market" ] += 1
                     
-                    # pour les tarifs similaires
-                    if oItem[ "price" ] not in oPrices:
-                        oPrices.append( oLine[ "val" ] )
-                    else:
-                        oItem[ "nbr_price_similar" ] += 1
-                    
                     # pour les quantites similaires
                     if oLine[ "qte" ] not in oQuantities:
                         oQuantities.append( oLine[ "qte" ] )
                     else:
                         oItem[ "nbr_volume_similar" ] += 1
                     
-                    # pour les prix ronds
-                    if float( oLine[ "val" ] ) == round( float( oLine[ "val" ] ) ):
-                        if oLine[ "action" ] == 'b':
-                            oItem[ "nbr_buy_round_price" ] += 1
-                        else:
-                            oItem[ "nbr_sell_round_price" ] += 1
-                            
                     # pour les quantites rondes
                     if float( oLine[ "qte" ] ) == round( float( oLine[ "qte" ] ) ):
                         if oLine[ "action" ] == 'b':

@@ -78,7 +78,6 @@ if not bExist:
         exit()
 
 # kisstomato-script-section-controle-stop-user-code-kisstomato
-
 """
 Procédure d'importation
 """
@@ -91,7 +90,6 @@ if input( 'Confirmez vous l\'importation de ' + sInPair.upper() + ' (O/n) ? ' ).
     services.getTradesFiles( sInPair )
 
 # kisstomato-script-section-importation-stop-user-code-kisstomato
-
 """
 Enregistrement en BDD
 """
@@ -105,6 +103,5 @@ if input( 'Confirmez vous la création de la collection ' + cColName + ' (O/n) ?
     bdd.importHistory( cColName, sInPair, cache.getAllFiles( 'trades_' + sInPair  ) )
 
 # kisstomato-script-section-enregistrement-stop-user-code-kisstomato
-
 # kisstomato-script-end-start-user-code-kisstomato
 # kisstomato-script-end-stop-user-code-kisstomato
