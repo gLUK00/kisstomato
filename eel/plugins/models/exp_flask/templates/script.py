@@ -44,7 +44,7 @@ oArgs = oParser.parse_args()
 # Gestion de l'argument facultatif --goto
 oSection = []
 &&     for oSection in o.getSections()
-oSection.append( "section_{{ oSection[ 'name' ] }}" )
+oSection.append( "{{ oSection[ 'name' ] }}" )
 &&     endfor
 
 if hasattr(oArgs, "goto") and oArgs.goto:
@@ -91,7 +91,7 @@ def {{ oF.name }}({% for oArg in oF.args %}{{ oArg[ 'name' ] }}{% if not oArg[ '
 &&    for oSection in o.getSections()
 
 &&        if o.implementSwitchSection()
-if sSwitchSection is None or sSwitchSection == "section_{{ oSection[ 'name' ] }}":
+if sSwitchSection is None or sSwitchSection == "{{ oSection[ 'name' ] }}":
     
 &&        endif
 {% if o.implementSwitchSection() %}    {% endif %}"""

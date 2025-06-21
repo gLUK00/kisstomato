@@ -50,13 +50,13 @@ if hasattr(oArgs, "goto") and oArgs.goto:
         print(f"Erreur: le label '{oArgs.goto}' n'existe pas. Labels valides : {oSection}")
         exit(1)
     else:
-        sSwitchSection = 'section_' + oArgs.goto
+        sSwitchSection = oArgs.goto
 
 # kisstomato-script-arg-end-start-user-code-kisstomato
 sInPair = oArgs.pair.lower()
 # kisstomato-script-arg-end-stop-user-code-kisstomato
 
-if sSwitchSection is None or sSwitchSection == "section_controle":
+if sSwitchSection is None or sSwitchSection == "controle":
     
     """
     Contrôle de la paire
@@ -99,7 +99,7 @@ if sSwitchSection is None or sSwitchSection == "section_controle":
     # kisstomato-script-section-controle-stop-user-code-kisstomato
     sSwitchSection = None
 
-if sSwitchSection is None or sSwitchSection == "section_collection-exist":
+if sSwitchSection is None or sSwitchSection == "collection-exist":
     
     """
     Contrôle la présence des données d'historiques
@@ -116,7 +116,7 @@ if sSwitchSection is None or sSwitchSection == "section_collection-exist":
     # kisstomato-script-section-collection-exist-stop-user-code-kisstomato
     sSwitchSection = None
 
-if sSwitchSection is None or sSwitchSection == "section_create-mm":
+if sSwitchSection is None or sSwitchSection == "create-mm":
     
     """
     Création des moyennes mobiles
@@ -170,7 +170,7 @@ if sSwitchSection is None or sSwitchSection == "section_create-mm":
     # kisstomato-script-section-create-mm-stop-user-code-kisstomato
     sSwitchSection = None
 
-if sSwitchSection is None or sSwitchSection == "section_create-skymap":
+if sSwitchSection is None or sSwitchSection == "create-skymap":
     
     """
     Représente la carte du ciel
@@ -193,7 +193,7 @@ if sSwitchSection is None or sSwitchSection == "section_create-skymap":
     # kisstomato-script-section-create-skymap-stop-user-code-kisstomato
     sSwitchSection = None
 
-if sSwitchSection is None or sSwitchSection == "section_create-date":
+if sSwitchSection is None or sSwitchSection == "create-date":
     
     """
     Traitements relatif aux dates (vectorisation des jours, position du halving)
@@ -208,7 +208,7 @@ if sSwitchSection is None or sSwitchSection == "section_create-date":
     # kisstomato-script-section-create-date-stop-user-code-kisstomato
     sSwitchSection = None
 
-if sSwitchSection is None or sSwitchSection == "section_normalisation":
+if sSwitchSection is None or sSwitchSection == "normalisation":
     
     """
     Etablissement des critères de normalisations de données
@@ -219,7 +219,7 @@ if sSwitchSection is None or sSwitchSection == "section_normalisation":
     # kisstomato-script-section-normalisation-stop-user-code-kisstomato
     sSwitchSection = None
 
-if sSwitchSection is None or sSwitchSection == "section_create-image":
+if sSwitchSection is None or sSwitchSection == "create-image":
     
     """
     Construction des images d'entrées

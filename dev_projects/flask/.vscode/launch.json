@@ -4,14 +4,23 @@
     // Pour plus d'informations, visitez : https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
         {
-            "name": "Débogueur Python : Fichier actuel avec arguments",
+            "name": "IA",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "scripts/ia.py",
+            "console": "integratedTerminal",
+            "args": "--pair adaxbt --goto pratice",
+            "preLaunchTask": "install-dependencies"
+        },
+        {
+            "name": "Dataset",
             "type": "debugpy",
             "request": "launch",
             "program": "scripts/dataset.py",
             "console": "integratedTerminal",
-            "args": "--pair adaxbt --goto create-image"
+            "args": "--pair adaxbt --goto create-image",
+            "preLaunchTask": "install-dependencies"
         }
     ]
 }

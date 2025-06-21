@@ -177,3 +177,39 @@ class imageHelper:
         # kisstomato-class-methode-halvingPosition-stop-user-code-kisstomato
         return oResult
 
+    """
+    Converti le vecteur de l'orderbook en structure
+    """
+    # Argument :
+    # - vec : array : (obligatoire) Vecteur de l'orderbook
+    def vec2Orderbook(self, vec):
+        oResult = None
+
+        # kisstomato-class-methode-vec2Orderbook-start-user-code-kisstomato
+        
+        oValVentes = vec[ : 19 ]
+        oValAchats = vec[ 19 : ]
+        oResult = {
+            "ventes": [],
+            "achats": []
+        }
+
+        # Parcours des ventes avec un pas de 2
+        for i in range(0, len(oValVentes), 2):
+            if i+1 < len(oValVentes):
+                oResult["ventes"].append({
+                    "price": oValVentes[i],
+                    "volume": oValVentes[i+1]
+                })
+
+        # Parcours des achats avec un pas de 2
+        for i in range(0, len(oValAchats), 2):
+            if i+1 < len(oValAchats):
+                oResult["achats"].append({
+                    "price": oValAchats[i],
+                    "volume": oValAchats[i+1]
+                })
+
+        # kisstomato-class-methode-vec2Orderbook-stop-user-code-kisstomato
+        return oResult
+

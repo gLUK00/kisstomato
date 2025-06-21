@@ -7,6 +7,16 @@
 	margin-right: 10px;
 }
 
+/* Ajout: scrollbar verticale pour #tree si dépassement */
+#tree {
+    max-height: calc(100vh - 140px); /* Ajustez 140px selon header/nav/marges */
+    overflow-y: auto;
+    overflow-x: auto;
+    /* Optionnel: pour une meilleure apparence */
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+}
+
 #col_left{
 	overflow: auto;
 }

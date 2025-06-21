@@ -20,6 +20,7 @@
         "get-trades": "https://api.kraken.com/0/public/Trades?pair={pair}&since={since}"
     },
     "paths": {
-        "cache": "/media/hidalgo/hidalgo_emmanuel1/trade_ia"
+        "cache": "/media/hidalgo/hidalgo_emmanuel1/trade_ia",
+        "modeles": "/media/hidalgo/hidalgo_emmanuel1/modeles"
     }
 }

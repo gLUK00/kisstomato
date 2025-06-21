@@ -36,6 +36,7 @@ def create(pair):
 
     # recupere les collections
     oColMM = bdd.getBdd()[ gl.config[ "mongo" ][ "cols" ][ "mm_pair" ].replace( "{pair}", pair ) ]
+    oColHistory = bdd.getBdd()[ gl.config[ "mongo" ][ "cols" ][ "history_pair" ].replace( "{pair}", pair ) ]
     oColImages = bdd.getBdd()[ gl.config[ "mongo" ][ "cols" ][ "images_pair" ].replace( "{pair}", pair ) ]
     oImageHelper = imageHelper.get()
 
@@ -94,6 +95,7 @@ def create(pair):
     # pour tous les enregistrements
     iCmpShow = 0
     for oMM in oColMM.find({ "time": { "$gte": iFirstTimeMM, "$lte": iLastTimeMM } }, sort=[("time", pymongo.ASCENDING)]):
+        iLastTimeRef = oMM[ 'time' ]
         
         # progression
         if iCmpShow % 100 == 0:
@@ -125,8 +127,54 @@ def create(pair):
         # ajout du halving
         oImage.append( oMM[ 'halving' ] )
 
+        # simulation des 5 dernieres minutes
+        oLast5MM = []
+        for i in range( 5 ):
+            iLastTimeRef = oMM[ 'time' ] + iDecalage + ( i * 60 )
+            oLMM = oColMM.find_one({ "time": { "$lt": iLastTimeRef } }, sort=[("time", pymongo.DESCENDING)])
+            if oLMM is None:
+                oLast5MM.append([0] * len( oNormalisation[ "1m" ] ))
+            else:
+                iLastTimeRef = oLMM[ 'time' ]
+                oItem = oLMM[ '1m' ]
+                for sKey in oNormalisation[ "1m" ]:
+                    oLast5MM.append( oImageHelper.normalize( oItem[ sKey ], 0, oNormalisation[ "1m" ][ sKey ] ) )
+
+        # simulation de l'orderbook
+        oOrderBook = []
+        oVentes = {}
+        oAchats = {}
+        while len(oVentes) < 10 and len(oAchats) < 10:
+            oOrder = oColHistory.find_one({ "time": { "$gt": iLastTimeRef } }, sort=[("time", pymongo.ASCENDING)])
+            if oOrder is None:
+                break
+            iLastTimeRef = oOrder[ 'time' ]
+            iVal = float(oOrder[ 'val' ])
+            if oOrder[ 'action' ] == 's':
+                if iVal not in oVentes:
+                    oVentes[ iVal ] = float( oOrder[ 'qte' ] )
+                else:
+                    oVentes[ iVal ] += float( oOrder[ 'qte' ] )
+            else:
+                if iVal not in oAchats:
+                    oAchats[ iVal ] = float( oOrder[ 'qte' ] )
+                else:
+                    oAchats[ iVal ] += float( oOrder[ 'qte' ] )
+        
+        # tri des ventes et achats
+        oVentes = sorted(oVentes.items(), key=lambda x: x[1], reverse=True)#decroissant
+        oAchats = sorted(oAchats.items(), key=lambda x: x[1], reverse=False)#croissant
+
+        # alimentation de l'orderbook
+        for oVente in oVentes:
+            oOrderBook.append( oImageHelper.normalize( oVente[0], 0, oNormalisation[ "1m" ][ "price" ] ) )
+            oOrderBook.append( oImageHelper.normalize( oVente[1], 0, oNormalisation[ "1m" ][ "volume" ] ) )
+        for oAchat in oAchats:
+            oOrderBook.append( oImageHelper.normalize( oAchat[0], 0, oNormalisation[ "1m" ][ "price" ] ) )
+            oOrderBook.append( oImageHelper.normalize( oAchat[1], 0, oNormalisation[ "1m" ][ "volume" ] ) )
+
         # enregistrement de l'image
-        oColImages.insert_one( { "time": oMM[ 'time' ], "image": oImage } )
+        oColImages.insert_one( { "time": oMM[ 'time' ], "image": oImage, "last5MM": oLast5MM, "orderbook": oOrderBook } )
 
     # kisstomato-methode-create-stop-user-code-kisstomato
 

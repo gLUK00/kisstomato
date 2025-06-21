@@ -103,21 +103,7 @@ def generateKisstomatoCode( oData ):
         oExcludeFiles = genTmplInDir( generator.getNodeById( 'templates', oProject[ 'data' ] ), sDirTemp + os.sep + 'templates' )
 
 
-        """"
 
-        
-            
-"""
-
-        # pour tous les scripts
-        """oScripts = generator.getNodeById( 'scripts', oProject[ 'data' ] )
-        if oScripts and len( oScripts[ 'children' ] ) > 0:
-
-            # creation des scripts
-            for oScript in oScripts[ 'children' ]:
-
-                generator.genFileFromTmpl( sPathPlugin, oScript, 'script.py', sDirTemp + os.sep + 'scripts' + os.sep + oScript[ 'text' ] + '.py', nodeScript )
-        """
 
         # merge avec le repertoire cible
         sRapport += 'Fusion avec l\'existant :\n' + generator.mergeDirs( sDirTemp, sDirOut,
@@ -131,9 +117,7 @@ def generateKisstomatoCode( oData ):
             oExcludeFiles=oExcludeFiles
         )
 
-        # merge des fichiers particuliers
-        #generator.mergeFiles( sDirTemp + os.sep + 'requirements.txt', sDirOut + os.sep + 'requirements.txt',
-        #    { 'start': '# kisstomato-', 'stop': '-kisstomato' } )
+
 
     except Exception as e:
         exc_type, exc_obj, exc_tb = sys.exc_info()
