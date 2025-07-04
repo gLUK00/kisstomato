@@ -1,4 +1,5 @@
 # kisstomato-module-import-start-user-code-kisstomato
+import json
 import os, gl
 from classes import iaAgentMM, iaEnvironnementMM
 from modules import bdd
@@ -40,6 +41,27 @@ def pratice(pair, modeleFile):
     agent = iaAgentMM(etat_taille=taille_vecteur_entre,actions_taille=3)
     env = iaEnvironnementMM(pair=pair,environnement_taille=taille_vecteur_entre)
 
+    # determine le meilleur reward
+    # Assurer que le nom du modèle se termine par .keras pour une sauvegarde correcte
+    base_modele_name = os.path.splitext(modeleFile)[0]
+    sModeleFile = os.path.join(gl.config["paths"]["modeles"], base_modele_name + ".keras")
+    sMetaFile = os.path.join(gl.config["paths"]["modeles"], base_modele_name + ".meta")
+    iBestReward = -1
+
+    # si le repertoire de sauvegarde n'existe pas
+    if not os.path.exists( gl.config[ "paths" ][ "modeles" ] ):
+        os.makedirs( gl.config[ "paths" ][ "modeles" ] )
+
+    if os.path.exists(sMetaFile):
+        with open(sMetaFile, 'r') as f:
+            meta_data = json.load(f)
+            iBestReward = meta_data.get('iBestReward', -1)
+        print(f"Meilleur reward précédent trouvé : {iBestReward}")
+
+    if os.path.exists(sModeleFile):
+        print(f"Chargement du modèle existant : {sModeleFile}")
+        agent.load(sModeleFile)
+
     # boucle d'apprentissage
     for episode in range(1000):
         if _stopPratice:
@@ -57,14 +79,15 @@ def pratice(pair, modeleFile):
             rewards += reward
         print(f'Épisode: {episode+1}, Récompense totale: {rewards:.2f}, Epsilon: {agent.epsilon:.2f}')
 
-    # si le repertoire de sauvegarde n'existe pas
-    if not os.path.exists( gl.config[ "paths" ][ "modeles" ] ):
-        os.makedirs( gl.config[ "paths" ][ "modeles" ] )
+        # determine le meilleur reward
+        if rewards > iBestReward:
+            iBestReward = rewards
 
-    # enregistrement du modèles
-    sModeleFile = gl.config[ "paths" ][ "modeles" ] + os.sep + modeleFile
-    print( "Enregistrement du modèles : " + sModeleFile )
-    agent.save(sModeleFile)
+            # enregistrement du modèles et des métadonnées
+            print( f"Nouveau meilleur reward : {iBestReward}. Enregistrement du modèle : {sModeleFile}" )
+            agent.save(sModeleFile)
+            with open(sMetaFile, 'w') as f:
+                json.dump({'iBestReward': iBestReward}, f)
     
     # kisstomato-methode-pratice-stop-user-code-kisstomato
 

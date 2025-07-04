@@ -49,20 +49,28 @@ def create(pair):
 
             # ajout de 10% de marge
             oNormalisation[ sField ][ sKey ] *= 1.1
+        
 
 
     # calcule du decalage
     #iDecalage = ( 5 * 60 * 3 ) + ( 15 * 60 * 2 ) + ( 30 * 60 ) + 3600 + ( 3600 * 2 ) + ( 3600 * 4 ) + ( 3600 * 8 ) + ( 3600 * 12 ) + 86400 + ( 86400 * 2 ) + ( 86400 * 5 ) + ( 86400 * 15 )
     iDecalage = ( 60 * 5 ) + ( 5 * 60 * 3 ) + ( 15 * 60 * 2 ) + ( 30 * 60 ) + 3600 + ( 3600 * 2 ) + ( 3600 * 4 ) + ( 3600 * 8 ) + ( 3600 * 12 ) + 86400 + ( 86400 * 2 ) + ( 86400 * 5 ) + ( 86400 * 15 )
 
-    # recherche du premier enregistrement où la colonne 15j n'est pas vide
+    # recherche du premier enregistrement où la colonne 32j n'est pas vide
     # (champ existe, différent de None et de la chaîne vide)
-    oFirstWith15j = oColMM.find_one({ "15j": { "$exists": True, "$ne": None, "$ne": "" } }, sort=[("time", pymongo.ASCENDING)])
-    iFirstTimeMM = int( oFirstWith15j[ 'time' ] ) + iDecalage + ( 86400 * 15 )
+    oFirstMM = oColMM.find_one()
+    oFirstWith32j = oColMM.find_one({ "time": { "$gte": oFirstMM['time'] + ( 86400 * 32 ) } }, sort=[("_id", pymongo.ASCENDING)])
+    iFirstTimeMM = int( oFirstWith32j[ 'time' ] ) + iDecalage 
 
     # recherche la position de fin
     oLastMM = oColMM.find_one(sort=[("time", pymongo.DESCENDING)])
     iLastTimeMM = int( oLastMM[ 'time' ] ) - 3600
+
+    # recupere la derniere image
+    oLastImage = oColImages.find_one(sort=[("time", pymongo.DESCENDING)])
+    if oLastImage is not None:
+        iLastTimeMM = int( oLastImage[ 'time' ] )
+        print( "reprise a partir de : " + oImageHelper.date2str( oLastImage[ 'time' ] ) )
 
     # calcul de 1%
     iMax = iLastTimeMM - iFirstTimeMM
@@ -144,18 +152,18 @@ def create(pair):
         oOrderBook = []
         oVentes = {}
         oAchats = {}
-        while len(oVentes) < 10 and len(oAchats) < 10:
+        while not( len(oVentes) == 10 and len(oAchats) == 10 ):
             oOrder = oColHistory.find_one({ "time": { "$gt": iLastTimeRef } }, sort=[("time", pymongo.ASCENDING)])
             if oOrder is None:
                 break
             iLastTimeRef = oOrder[ 'time' ]
             iVal = float(oOrder[ 'val' ])
-            if oOrder[ 'action' ] == 's':
+            if oOrder[ 'action' ] == 's' and len(oVentes) < 10:
                 if iVal not in oVentes:
                     oVentes[ iVal ] = float( oOrder[ 'qte' ] )
                 else:
                     oVentes[ iVal ] += float( oOrder[ 'qte' ] )
-            else:
+            elif len(oAchats) < 10:
                 if iVal not in oAchats:
                     oAchats[ iVal ] = float( oOrder[ 'qte' ] )
                 else:
@@ -496,6 +504,8 @@ def normalisation(pair):
             # pour tous les indicateurs
             for sKey in oNormalisation[ sField ].keys():
                 
+                if sField not in oMM or oMM[ sField ] is None or sKey not in oMM[ sField ]:
+                    continue
                 if float( oMM[ sField ][ sKey ] ) > oNormalisation[ sField ][ sKey ]:
                     oNormalisation[ sField ][ sKey ] = float( oMM[ sField ][ sKey ] )
 

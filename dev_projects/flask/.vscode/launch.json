@@ -5,7 +5,25 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "IA",
+            "name": "A - Importation",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "scripts/importation.py",
+            "console": "integratedTerminal",
+            "args": "--pair adaxbt",
+            "preLaunchTask": "install-dependencies"
+        },
+        {
+            "name": "B - Dataset",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "scripts/dataset.py",
+            "console": "integratedTerminal",
+            "args": "--pair adaxbt",
+            "preLaunchTask": "install-dependencies"
+        },
+        {
+            "name": "C - IA",
             "type": "debugpy",
             "request": "launch",
             "program": "scripts/ia.py",
@@ -14,12 +32,20 @@
             "preLaunchTask": "install-dependencies"
         },
         {
-            "name": "Dataset",
+            "name": "D - BDD",
             "type": "debugpy",
             "request": "launch",
-            "program": "scripts/dataset.py",
+            "program": "scripts/bdd.py",
             "console": "integratedTerminal",
-            "args": "--pair adaxbt --goto create-image",
+            "preLaunchTask": "install-dependencies"
+        },
+        {
+            "name": "X - Debug",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "scripts/debug.py",
+            "console": "integratedTerminal",
+            "args": "--pair adaxbt --goto trouMM",
             "preLaunchTask": "install-dependencies"
         }
     ]

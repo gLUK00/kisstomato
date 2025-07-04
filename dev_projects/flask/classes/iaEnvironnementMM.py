@@ -20,6 +20,7 @@ class iaEnvironnementMM:
     def __init__(self, pair, environnement_taille):
         # kisstomato-class-init-start-user-code-kisstomato
 
+        self.compteurActions = 0
         self.pair = pair
 
         # indicateurs temporels
@@ -82,6 +83,9 @@ class iaEnvironnementMM:
         oImage = oColImage.find_one()
         self.currentId = oImage['_id']
 
+        # decalage de 1 mois et 1 jour
+        #self.currentId = oColImage.find_one({ "time": { "$gte": oImage['time'] + 31536000 + 86400 } }, sort=[("_id", pymongo.ASCENDING)])
+
         # recupere l'image
         oImage = oColImage.find_one( { "_id": self.currentId } )
         self.rentabilite = 0
@@ -93,6 +97,7 @@ class iaEnvironnementMM:
         self.achatEnCours = False
         self.etat = np.concatenate(([self.gain, self.jaugeTemp], oImage['image'], oImage['orderbook']))
         oResult = self.etat
+        self.compteurActions = 0
 
         # kisstomato-class-methode-reset-stop-user-code-kisstomato
         return oResult
@@ -119,6 +124,7 @@ class iaEnvironnementMM:
         # recupere la prochaine image
         oColImage = bdd.getBdd()[ gl.config[ "mongo" ][ "cols" ][ "images_pair" ].replace( "{pair}", self.pair.lower() ) ]
         oNextImage = oColImage.find_one({ "_id": { "$gt": self.currentId } }, sort=[("_id", 1)])
+        iCurrentTime = int( oNextImage['time'] )
         self.currentId = oNextImage['_id']
 
         # determine si la plage et termine
@@ -132,15 +138,18 @@ class iaEnvironnementMM:
 
         # determine la recompense
         # si: etat=vide et (hold ou vente)
+        # ou si: etat=achete et achete
         reward = 0
-        if not self.achatEnCours and ( action == 0 or action == 2 ):
+        if not self.achatEnCours and ( action == 0 or action == 2 ) or ( self.achatEnCours and action == 1 ):
             
             # determine la distance temporelle entre la derniere action
-            iTimeDiff = int( oNextImage['time'] ) - int( self.timeLast )
+            iTimeDiff = iCurrentTime - self.timeLast
 
             # calcul de la penalite temporelle
             # entre -0.5 et 0
-            reward = ( oImageHelper.normalize( iTimeDiff, 0, self.maxSansAction ) / 2 ) * -1
+            reward = oImageHelper.normalize( iTimeDiff, 0, self.maxSansAction, iMinTarget=-0.5, iMaxTarget=0, bMin2Max=False )
+            #print( 'reward : ' + str(reward))
+            #reward = ( oImageHelper.normalize( iTimeDiff, 0, self.maxSansAction ) / 2 ) * -1
 
             # avance la jauge temporelle
             self.jaugeTemp = oImageHelper.normalize( iTimeDiff, 0, self.maxSansAction )
@@ -149,11 +158,13 @@ class iaEnvironnementMM:
         elif self.achatEnCours and action == 0:
 
             # determine la distance temporelle entre la derniere action
-            iTimeDiff = int( oNextImage['time'] ) - int( self.timeLast )
+            iTimeDiff = iCurrentTime - self.timeLast
 
             # calcul de la penalite temporelle
             # entre -0.5 et 0
-            reward = ( oImageHelper.normalize( iTimeDiff, 0, self.maxAvecAchat ) / 2 ) * -1
+            reward = oImageHelper.normalize( iTimeDiff, 0, self.maxAvecAchat, iMinTarget=-0.5, iMaxTarget=0, bMin2Max=False )
+            #print( 'reward : ' + str(reward))
+            #reward = ( oImageHelper.normalize( iTimeDiff, 0, self.maxAvecAchat ) / 2 ) * -1
 
             # avance la jauge temporelle
             self.jaugeTemp = oImageHelper.normalize( iTimeDiff, 0, self.maxAvecAchat )
@@ -162,20 +173,26 @@ class iaEnvironnementMM:
         elif not self.achatEnCours and action == 1:
 
             self.achatEnCours = True
-            self.timeLast = int( oNextImage['time'] )
+            self.timeLast = iCurrentTime
 
             # la partie de la premiere vente
-            self.prixAchat = oOrderBook[18] + ( oOrderBook[18] * (self.fees / 100) ) # ajoute les frais
-            self.qteAchat = oOrderBook[19] * 0.9 # recupere 90% de la quantite
+            #print( 'prix achat : ' + str(oOrderBook[ 'ventes' ][ -1 ][ 'price' ]))
+            #print( 'frais : ' + str(self.fees))
+            #print( 'prix reel : ' + str(oOrderBook[ 'ventes' ][ -1 ][ 'price' ] + ( oOrderBook[ 'ventes' ][ -1 ][ 'price' ] * (self.fees / 100) )))
+            self.prixAchat = oOrderBook[ 'ventes' ][ -1 ][ 'price' ] + ( oOrderBook[ 'ventes' ][ -1 ][ 'price' ] * (self.fees / 100) ) # ajoute les frais
+            self.qteAchat = oOrderBook[ 'ventes' ][ -1 ][ 'volume' ] * 0.9 # recupere 90% de la quantite
 
             # modifier l'image de l'orderbook
-            oOrderBook[19] = oOrderBook[19] * 0.1
+            oOrderBook[ 'ventes' ][ -1 ][ 'volume' ] = oOrderBook[ 'ventes' ][ -1 ][ 'volume' ] * 0.1
 
             # ajuster le gain/perte global a 0.5, mois les frais pour :
             # - 0 = -50%
             # - 0.5 = 0%
             # - 1 = + 50%
-            self.gain = 0.5 - ( oImageHelper.normalize( ( self.fees / 100 ), 0.5, 1 ) )
+            # TODO : normaliser sur la rentabilite
+            self.gain = oImageHelper.normalize( self.fees / 2, 0, 100, iMinTarget=-0.5, iMaxTarget=0, bMin2Max=False )
+            #print( 'gain : ' + str(self.gain))
+            #self.gain = 0.5 - ( oImageHelper.normalize( self.fees, 0, 100 ) / 2 )
 
             # initialisation de la jauge temporelle
             self.jaugeTemp = 0
@@ -185,29 +202,40 @@ class iaEnvironnementMM:
 
             # mise a jour de l'etat
             self.achatEnCours = False
-            self.timeLast = int( oNextImage['time'] )
+            self.timeLast = iCurrentTime
             self.jaugeTemp = 0
 
             # determine le prix de vente
             iPrixVente = 0
             iQteVente = 0
-            iPosition = 21
-            while iQteVente >= self.qteAchat or iPosition >= 40:
-                iQteVente += oOrderBook[ iPosition ]
-                iPrixVente = oOrderBook[ iPosition - 1 ]
-                iPosition += 2
+            iPosition = 0
+            while iQteVente < self.qteAchat and iPosition < len(oOrderBook[ 'achats' ]):
+                iQteVente += oOrderBook[ 'achats' ][ iPosition ][ 'volume' ]
+                iPrixVente = oOrderBook[ 'achats' ][ iPosition ][ 'price' ]
+                iPosition += 1
 
             # ajout des frais
             iPrixVente += ( iPrixVente * (self.fees / 100) )
 
+            # determine le % de gain/perte
+            #print( 'prix vente : ' + str(iPrixVente))
+            #print( 'prix achat : ' + str(self.prixAchat))
+
             # determine le gain
-            iGain = ( ( iPrixVente - self.prixAchat ) / self.prixAchat )
+            iGain = ( iPrixVente - self.prixAchat ) / self.prixAchat
+            #print( 'gain : ' + str(iGain))
 
             # determine la recompense
-            reward = oImageHelper.normalize( iGain, 0, 1 ) - 0.5
+            if iGain < 0:
+                reward = oImageHelper.normalize( abs( iGain ), 0, 100, iMinTarget=-0.5, iMaxTarget=0, bMin2Max=False )
+                print( 'reward -- : ' + str(reward))
+            else:
+                reward = oImageHelper.normalize( iGain, 0, 100, iMinTarget=0, iMaxTarget=0.5 )
+                print( 'reward ++ : ' + str(reward))
 
             # actualise la rentabilite
             self.rentabilite += iGain/500
+            self.compteurActions += 1
 
         else:
             print( "action non reconnue : " + str(action) )
@@ -220,7 +248,23 @@ class iaEnvironnementMM:
         si il reste 20% du portefeuille initial
         si achat depuis plus de 1h30m
         """
-        done = self.rentabilite < 0.3 or ( self.achatEnCours and ( time.time() - self.timeLast ) > 60*60*1.5 ) or not done
+        #print( self.achatEnCours and ( iCurrentTime - self.timeLast ) > 60*60*1.5 )
+        #print( iCurrentTime - self.timeLast )
+
+        # determine si la rentabilite est trop faible
+        bNotRentabilite = self.rentabilite < -0.3
+        if bNotRentabilite:
+            print( "Rentabilite trop faible : " + str(self.rentabilite) )
+
+        # determine si l'achat est trop ancien
+        bNotTime = self.achatEnCours and ( iCurrentTime - self.timeLast ) > 60*60*1.5
+        if bNotTime:
+            print( "Achat trop ancien : " + str(iCurrentTime - self.timeLast) )
+
+        done = bNotRentabilite or bNotTime or done
+
+        if done:
+            print( "Fin avec " + str(self.compteurActions) + " action, rentabilite : " + str(self.rentabilite) )
 
         # construction du nouvel etat
         self.etat = np.concatenate(([self.gain, self.jaugeTemp], oNextImage['image'], oNextImage['orderbook']))

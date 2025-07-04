@@ -21,6 +21,7 @@
     },
     "paths": {
         "cache": "/media/hidalgo/hidalgo_emmanuel1/trade_ia",
-        "modeles": "/media/hidalgo/hidalgo_emmanuel1/modeles"
+        "modeles": "/media/hidalgo/hidalgo_emmanuel1/modeles",
+        "dump": "/media/hidalgo/hidalgo_emmanuel1/dump"
     }
 }

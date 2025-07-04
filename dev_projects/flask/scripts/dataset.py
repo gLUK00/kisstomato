@@ -228,7 +228,7 @@ if sSwitchSection is None or sSwitchSection == "create-image":
     # kisstomato-script-section-create-image-start-user-code-kisstomato
 
     if input( 'Construction des images d\'enttrées (O/n) ? ' ).lower() in [ '', 'o' ]:
-        datasets.init( sInPair.lower() )
+        #datasets.init( sInPair.lower() )
         datasets.create( sInPair.lower() )
 
     # kisstomato-script-section-create-image-stop-user-code-kisstomato

@@ -65,21 +65,42 @@ class imageHelper:
         return oResult
 
     """
-    Normalise une valeur sur un place de 0 à 1
+    Normalise une valeur d'une échelle source vers une échelle cible.
     """
     # Arguments :
     # - iVal : number : (obligatoire) Valeur d'entrée
     # - iMin : number : (obligatoire) Valeur minimum
     # - iMax : number : (obligatoire) Valeur maximum
-    def normalize(self, iVal, iMin, iMax):
+    # - iMinTarget : number : (facultatif) Valeur cible minimum
+    # - iMaxTarget : number : (facultatif) Valeur cible maximum
+    # - bMin2Max : boolean : (facultatif) Determine l'ordre de progression, par défaut à True du min vers le max.
+    def normalize(self, iVal, iMin, iMax, iMinTarget=None, iMaxTarget=None, bMin2Max=None):
         oResult = None
 
         # kisstomato-class-methode-normalize-start-user-code-kisstomato
-        # Normalize value linearly between min and max to range [0,1]
+
+        if iMinTarget is None:
+            iMinTarget = 0
+        if iMaxTarget is None:
+            iMaxTarget = 1
+        if bMin2Max is None:
+            bMin2Max = True
+
+        # Normalize value from a source range to a target range
         if iMax == iMin:  # Prevent division by zero
-            oResult = 0
+            oResult = iMinTarget
         else:
-            oResult = max(0, min(1, (iVal - iMin) / (iMax - iMin)))
+            if bMin2Max:
+                ratio = (iVal - iMin) / (iMax - iMin)
+            else:
+                # Inverted progress from max to min
+                ratio = (iMax - iVal) / (iMax - iMin)
+
+            # Scale the value to the target range
+            scaled_value = iMinTarget + (iMaxTarget - iMinTarget) * ratio
+            # Clamp the result to the target range, handles normal and inverted ranges.
+            oResult = max(min(iMinTarget, iMaxTarget), min(max(iMinTarget, iMaxTarget), scaled_value))
+
         # kisstomato-class-methode-normalize-stop-user-code-kisstomato
         return oResult
 

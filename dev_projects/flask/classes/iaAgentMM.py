@@ -20,7 +20,7 @@ class iaAgentMM:
     def __init__(self, etat_taille, actions_taille):
         # kisstomato-class-init-start-user-code-kisstomato
         
-        self.etat = 'suivre'# suivre, achete, hold
+        #self.etat = 'suivre'# suivre, achete, hold
         self.etat_taille = etat_taille
         self.actions_taille = actions_taille
         self.modele = self._construire_modele()
@@ -63,7 +63,9 @@ class iaAgentMM:
         
         if np.random.rand() <= self.epsilon:
             return np.random.choice(self.actions_taille)
-        q_valeurs = self.modele.predict(etat)
+        # Assurer que l'état a la forme correcte (1, etat_taille) pour le modèle
+        etat_reshaped = np.expand_dims(etat, axis=0) if len(etat.shape) == 1 else etat
+        q_valeurs = self.modele.predict(etat_reshaped, verbose=0)
         oResult = np.argmax(q_valeurs[0])
 
         # kisstomato-class-methode-choisir_action-stop-user-code-kisstomato
@@ -81,13 +83,17 @@ class iaAgentMM:
     def apprendre(self, etat, action, reward, etat_suivant, done):
         # kisstomato-class-methode-apprendre-start-user-code-kisstomato
         
-        q_valeurs = self.modele.predict(etat)
-        q_valeurs_suivantes = self.modele.predict(etat_suivant)
+        # Assurer que les états ont la forme correcte (1, etat_taille) pour le modèle
+        etat_reshaped = np.expand_dims(etat, axis=0) if len(etat.shape) == 1 else etat
+        etat_suivant_reshaped = np.expand_dims(etat_suivant, axis=0) if len(etat_suivant.shape) == 1 else etat_suivant
+        
+        q_valeurs = self.modele.predict(etat_reshaped, verbose=0)
+        q_valeurs_suivantes = self.modele.predict(etat_suivant_reshaped, verbose=0)
         if done:
             q_valeurs[0][action] = reward
         else:
             q_valeurs[0][action] = reward + self.gamma * np.max(q_valeurs_suivantes[0])
-        self.modele.fit(etat, q_valeurs, verbose=0)
+        self.modele.fit(etat_reshaped, q_valeurs, verbose=0)
         if self.epsilon > self.epsilon_min:
             self.epsilon *= self.epsilon_decrement
 
@@ -101,3 +107,12 @@ class iaAgentMM:
         # kisstomato-class-methode-save-start-user-code-kisstomato
         self.modele.save(file)
         # kisstomato-class-methode-save-stop-user-code-kisstomato
+    """
+    Chargement du modèle
+    """
+    # Argument :
+    # - file : string : (obligatoire) Nom du modèle à charger
+    def load(self, file):
+        # kisstomato-class-methode-load-start-user-code-kisstomato
+        self.modele = tf.keras.models.load_model(file)
+        # kisstomato-class-methode-load-stop-user-code-kisstomato

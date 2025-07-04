@@ -1,6 +1,7 @@
 # kisstomato-module-import-start-user-code-kisstomato
-import gl, json, pymongo
+import gl, json, pymongo, os
 from pymongo import MongoClient
+from bson import BSON, json_util, decode_file_iter
 # kisstomato-module-import-stop-user-code-kisstomato
 
 """
@@ -45,6 +46,57 @@ def collectionExist(collection):
     # kisstomato-methode-collectionExist-stop-user-code-kisstomato
 
     return oResult
+
+"""
+Export une collection
+"""
+# Argument :
+# - collection : string : (obligatoire) Nom de la collection
+def exportCollection(collection):
+    # kisstomato-methode-exportCollection-start-user-code-kisstomato
+
+    # determine l'eixstance du repertoire des dumps
+    if not os.path.exists(gl.config[ 'paths' ][ 'dump' ]):
+        os.makedirs(gl.config[ 'paths' ][ 'dump' ])
+    
+    oBdd = getBdd()
+    print( "Ecriture du fichier " + gl.config[ 'paths' ][ 'dump' ] + "/" + collection + ".bson" )
+    with open(gl.config[ 'paths' ][ 'dump' ] + "/" + collection + ".bson", "wb") as f:
+        for doc in oBdd[ collection ].find({}):
+            f.write(BSON.encode(doc))
+    
+    # kisstomato-methode-exportCollection-stop-user-code-kisstomato
+
+"""
+Import d'une collection
+"""
+# Argument :
+# - collection : string : (obligatoire) Nom de la collection
+def importCollection(collection):
+    # kisstomato-methode-importCollection-start-user-code-kisstomato
+    
+    bdd = getBdd()
+
+    file_path = os.path.join(gl.config['paths']['dump'], f"{collection}.bson")
+    print( "Lecture du fichier " + file_path )
+    
+    documents = []
+    # Le fichier est un flux de documents BSON, pas un JSON.
+    # Nous le lisons en mode binaire et utilisons decode_file_iter.
+    with open(file_path, 'rb') as f:
+        try:
+            documents = list(decode_file_iter(f))
+        except Exception as e:
+            print(f"Erreur lors de la lecture du fichier BSON : {e}")
+            return
+
+    if documents:
+        # Vider la collection avant d'importer les nouvelles données
+        bdd[collection].delete_many({})
+        # Insérer tous les documents décodés
+        bdd[collection].insert_many(documents)
+
+    # kisstomato-methode-importCollection-stop-user-code-kisstomato
 
 """
 Supprime une collection

@@ -8,6 +8,7 @@ from .converter import *
 from .services import *
 from .datasets import *
 from .ia import *
+from .debug import *
 
 # kisstomato-init-b-start-user-code-kisstomato
 # kisstomato-init-b-stop-user-code-kisstomato
