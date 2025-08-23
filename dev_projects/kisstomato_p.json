@@ -3372,10 +3372,22 @@
                                     "text": "printDescOnStart"
                                 },
                                 {
+                                    "children": [
+                                        {
+                                            "color": "#4f9a04",
+                                            "icon": "fa-solid fa-braille",
+                                            "id": "f8bdc311-7e88-47ac-b69f-eff34ccf7535",
+                                            "li_attr": {
+                                                "readonly": true,
+                                                "type": "arguments"
+                                            },
+                                            "text": "Arguments"
+                                        }
+                                    ],
+                                    "color": "#ca9f53",
+                                    "icon": "fa-regular fa-list-alt",
                                     "id": "1c739a60-6edd-4946-8a21-7f18adf8bab0",
-                                    "text": "implementSwitchSection",
                                     "li_attr": {
-                                        "type": "methode",
                                         "items": [
                                             {
                                                 "id": "desc",
@@ -3389,22 +3401,10 @@
                                                 "id": "exception",
                                                 "value": false
                                             }
-                                        ]
+                                        ],
+                                        "type": "methode"
                                     },
-                                    "color": "#ca9f53",
-                                    "icon": "fa-regular fa-list-alt",
-                                    "children": [
-                                        {
-                                            "id": "f8bdc311-7e88-47ac-b69f-eff34ccf7535",
-                                            "text": "Arguments",
-                                            "li_attr": {
-                                                "type": "arguments",
-                                                "readonly": true
-                                            },
-                                            "color": "#4f9a04",
-                                            "icon": "fa-solid fa-braille"
-                                        }
-                                    ]
+                                    "text": "implementSwitchSection"
                                 },
                                 {
                                     "children": [
@@ -3844,7 +3844,7 @@
                 "readonly": true
             },
             "state": {
-                "opened": false
+                "opened": true
             },
             "text": "Classes"
         },
@@ -3938,6 +3938,21 @@
                         "type": "template"
                     },
                     "text": "classe.py"
+                },
+                {
+                    "id": "b4ffc090-a3ac-45da-99dc-6895ece2b7e2",
+                    "text": "route.py",
+                    "li_attr": {
+                        "type": "template",
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "Template des routes"
+                            }
+                        ]
+                    },
+                    "color": "#7ff77d",
+                    "icon": "fa-brands fa-alipay"
                 }
             ],
             "color": "#b9c421",

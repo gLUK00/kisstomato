@@ -905,7 +905,7 @@
                                         "type": "fonction"
                                     },
                                     "state": {
-                                        "opened": true
+                                        "opened": false
                                     },
                                     "text": "normalize"
                                 },
@@ -1182,9 +1182,76 @@
                                         "type": "fonction"
                                     },
                                     "state": {
-                                        "opened": true
+                                        "opened": false
                                     },
                                     "text": "vec2Orderbook"
+                                },
+                                {
+                                    "children": [
+                                        {
+                                            "children": [
+                                                {
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life",
+                                                    "id": "84a477c1-698c-4e9d-9076-f21ade72f63d",
+                                                    "li_attr": {
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Orderbook des achats/ventes"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "array"
+                                                            }
+                                                        ],
+                                                        "type": "argument"
+                                                    },
+                                                    "text": "orderbook"
+                                                }
+                                            ],
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "id": "1dbba800-6a57-40b4-9e88-65861f9cbebc",
+                                            "li_attr": {
+                                                "readonly": true,
+                                                "type": "arguments"
+                                            },
+                                            "text": "Arguments"
+                                        }
+                                    ],
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "id": "030c7135-6b28-4a6a-ac0c-6677013d173b",
+                                    "li_attr": {
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Transforme l'orderbook en repr\u00e9sentation"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "static",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "string"
+                                            }
+                                        ],
+                                        "type": "fonction"
+                                    },
+                                    "state": {
+                                        "opened": false
+                                    },
+                                    "text": "orderbook2str"
                                 }
                             ],
                             "color": "#2e829e",
@@ -1657,10 +1724,47 @@
                                     "text": "save"
                                 },
                                 {
+                                    "children": [
+                                        {
+                                            "children": [
+                                                {
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life",
+                                                    "id": "a3f3a4d0-8f18-4d89-abe6-f9c02eb13c69",
+                                                    "li_attr": {
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Nom du mod\u00e8le \u00e0 charger"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ],
+                                                        "type": "argument"
+                                                    },
+                                                    "text": "file"
+                                                }
+                                            ],
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "id": "b72213d6-8c9a-4c3b-ae85-0496646cfd04",
+                                            "li_attr": {
+                                                "readonly": true,
+                                                "type": "arguments"
+                                            },
+                                            "text": "Arguments"
+                                        }
+                                    ],
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
                                     "id": "a0298105-2fca-429d-bb05-dab324427a2f",
-                                    "text": "load",
                                     "li_attr": {
-                                        "type": "fonction",
                                         "items": [
                                             {
                                                 "id": "desc",
@@ -1678,47 +1782,13 @@
                                                 "id": "return",
                                                 "value": "none"
                                             }
-                                        ]
+                                        ],
+                                        "type": "fonction"
                                     },
-                                    "color": "#f9a658",
-                                    "icon": "fa-brands fa-accusoft",
-                                    "children": [
-                                        {
-                                            "id": "b72213d6-8c9a-4c3b-ae85-0496646cfd04",
-                                            "text": "Arguments",
-                                            "li_attr": {
-                                                "type": "arguments",
-                                                "readonly": true
-                                            },
-                                            "color": "#50edb8",
-                                            "icon": "fa-solid fa-th-large",
-                                            "children": [
-                                                {
-                                                    "id": "a3f3a4d0-8f18-4d89-abe6-f9c02eb13c69",
-                                                    "text": "file",
-                                                    "li_attr": {
-                                                        "type": "argument",
-                                                        "items": [
-                                                            {
-                                                                "id": "desc",
-                                                                "value": "Nom du mod\u00e8le \u00e0 charger"
-                                                            },
-                                                            {
-                                                                "id": "require",
-                                                                "value": true
-                                                            },
-                                                            {
-                                                                "id": "type",
-                                                                "value": "string"
-                                                            }
-                                                        ]
-                                                    },
-                                                    "color": "#ec74ba",
-                                                    "icon": "fa-solid fa-star-of-life"
-                                                }
-                                            ]
-                                        }
-                                    ]
+                                    "state": {
+                                        "opened": true
+                                    },
+                                    "text": "load"
                                 }
                             ],
                             "color": "#2e829e",
@@ -2706,7 +2776,7 @@
                         "type": "module"
                     },
                     "state": {
-                        "opened": true
+                        "opened": false
                     },
                     "text": "bdd"
                 },
@@ -3499,7 +3569,7 @@
                                         "type": "fonction"
                                     },
                                     "state": {
-                                        "opened": true
+                                        "opened": false
                                     },
                                     "text": "init"
                                 },
@@ -3720,7 +3790,7 @@
                                         "type": "fonction"
                                     },
                                     "state": {
-                                        "opened": false
+                                        "opened": true
                                     },
                                     "text": "buildMM"
                                 },
@@ -3956,7 +4026,10 @@
                                                 "readonly": true,
                                                 "type": "arguments"
                                             },
-                                            "text": "Arguments"
+                                            "text": "Arguments",
+                                            "state": {
+                                                "opened": true
+                                            }
                                         }
                                     ],
                                     "color": "#f9a658",
@@ -3987,6 +4060,122 @@
                                         "opened": true
                                     },
                                     "text": "genImage"
+                                },
+                                {
+                                    "children": [
+                                        {
+                                            "children": [
+                                                {
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life",
+                                                    "id": "473937bb-a544-401b-af31-439a01b05b93",
+                                                    "li_attr": {
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Paire associ\u00e9e \u00e0 l'historique des minutes"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ],
+                                                        "type": "argument"
+                                                    },
+                                                    "text": "pair"
+                                                },
+                                                {
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life",
+                                                    "id": "ce886e10-dc25-406d-a638-21ac7734fbf0",
+                                                    "li_attr": {
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Timestamp de r\u00e9f\u00e9rence"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "number"
+                                                            }
+                                                        ],
+                                                        "type": "argument"
+                                                    },
+                                                    "text": "time"
+                                                },
+                                                {
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life",
+                                                    "id": "a3377054-9860-466d-9229-6b3e5f36d006",
+                                                    "li_attr": {
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Normalisation de la moyenne mobile 1 minute"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "object"
+                                                            }
+                                                        ],
+                                                        "type": "argument"
+                                                    },
+                                                    "text": "normal1mm"
+                                                }
+                                            ],
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "id": "398760a3-1654-4435-9c45-b86edc9b91e9",
+                                            "li_attr": {
+                                                "readonly": true,
+                                                "type": "arguments"
+                                            },
+                                            "text": "Arguments",
+                                            "state": {
+                                                "opened": true
+                                            }
+                                        }
+                                    ],
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "id": "01cb2b1b-1ce1-4c38-a144-ed98f0dd7e61",
+                                    "li_attr": {
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "G\u00e9n\u00e9ration d'un Orderbook \u00e0 destination de l'apprentissage"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "static",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "array"
+                                            }
+                                        ],
+                                        "type": "fonction"
+                                    },
+                                    "state": {
+                                        "opened": true
+                                    },
+                                    "text": "genOrderbook"
                                 }
                             ],
                             "color": "#d57277",
@@ -4015,7 +4204,7 @@
                         "type": "module"
                     },
                     "state": {
-                        "opened": false
+                        "opened": true
                     },
                     "text": "datasets"
                 },
@@ -4357,6 +4546,409 @@
                         "opened": false
                     },
                     "text": "debug"
+                },
+                {
+                    "children": [
+                        {
+                            "children": [
+                                {
+                                    "children": [
+                                        {
+                                            "children": [
+                                                {
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life",
+                                                    "id": "8e23062e-ea35-43a8-a405-4e0166aeec63",
+                                                    "li_attr": {
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Objet Sftp/ssh"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "object"
+                                                            }
+                                                        ],
+                                                        "type": "argument"
+                                                    },
+                                                    "text": "sftp"
+                                                },
+                                                {
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life",
+                                                    "id": "c2eaf482-9bf1-4455-a5a2-d76f394625ca",
+                                                    "li_attr": {
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "R\u00e9pertoire local"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ],
+                                                        "type": "argument"
+                                                    },
+                                                    "text": "localPath"
+                                                },
+                                                {
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life",
+                                                    "id": "d7b97701-b461-4263-8cf9-06f198c9b213",
+                                                    "li_attr": {
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "R\u00e9pertoire distant"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ],
+                                                        "type": "argument"
+                                                    },
+                                                    "text": "remotePath"
+                                                }
+                                            ],
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "id": "ba8114db-8e71-444c-af1b-25958aaf3c8f",
+                                            "li_attr": {
+                                                "readonly": true,
+                                                "type": "arguments"
+                                            },
+                                            "state": {
+                                                "opened": true
+                                            },
+                                            "text": "Arguments"
+                                        }
+                                    ],
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "id": "681603d0-7453-40ca-9f22-c639ac52d1ec",
+                                    "li_attr": {
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Upload de r\u00e9pertoire"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "static",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "none"
+                                            }
+                                        ],
+                                        "type": "fonction"
+                                    },
+                                    "state": {
+                                        "opened": false
+                                    },
+                                    "text": "uploadDir"
+                                },
+                                {
+                                    "children": [
+                                        {
+                                            "children": [
+                                                {
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life",
+                                                    "id": "25f6f2b8-64bc-40b8-bb46-3fba2f01ab1f",
+                                                    "li_attr": {
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Objet Sftp/ssh"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "object"
+                                                            }
+                                                        ],
+                                                        "type": "argument"
+                                                    },
+                                                    "text": "sftp"
+                                                },
+                                                {
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life",
+                                                    "id": "1d22c538-d463-4294-9beb-c0fb65dcd9a1",
+                                                    "li_attr": {
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "R\u00e9pertoire distant"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ],
+                                                        "type": "argument"
+                                                    },
+                                                    "text": "remoteDir"
+                                                }
+                                            ],
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "id": "2416e857-12df-4b5f-ba92-2ea4cd4a9214",
+                                            "li_attr": {
+                                                "readonly": true,
+                                                "type": "arguments"
+                                            },
+                                            "state": {
+                                                "opened": true
+                                            },
+                                            "text": "Arguments"
+                                        }
+                                    ],
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "id": "0fc76c28-f505-47af-9c4d-3f2e4f205686",
+                                    "li_attr": {
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Cr\u00e9er un r\u00e9pertoire distant"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "static",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "none"
+                                            }
+                                        ],
+                                        "type": "fonction"
+                                    },
+                                    "state": {
+                                        "opened": false
+                                    },
+                                    "text": "createDir"
+                                },
+                                {
+                                    "children": [
+                                        {
+                                            "children": [
+                                                {
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life",
+                                                    "id": "1ad2761f-882f-4805-9638-65b635ffac29",
+                                                    "li_attr": {
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Utilisateur"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ],
+                                                        "type": "argument"
+                                                    },
+                                                    "text": "user"
+                                                },
+                                                {
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life",
+                                                    "id": "f96d32df-c854-471d-9051-2346520f313d",
+                                                    "li_attr": {
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Mot de passe"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ],
+                                                        "type": "argument"
+                                                    },
+                                                    "text": "password"
+                                                },
+                                                {
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life",
+                                                    "id": "c4ee1137-2bf2-4b8b-a249-96ed3af59118",
+                                                    "li_attr": {
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "Adresse IP"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ],
+                                                        "type": "argument"
+                                                    },
+                                                    "text": "host"
+                                                },
+                                                {
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life",
+                                                    "id": "4774bc49-8ad5-4be8-b511-61bc1177f5f4",
+                                                    "li_attr": {
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "R\u00e9pertoire source"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ],
+                                                        "type": "argument"
+                                                    },
+                                                    "text": "dirSource"
+                                                },
+                                                {
+                                                    "color": "#ec74ba",
+                                                    "icon": "fa-solid fa-star-of-life",
+                                                    "id": "c0afb85f-f321-4786-a713-fed72db8753c",
+                                                    "li_attr": {
+                                                        "items": [
+                                                            {
+                                                                "id": "desc",
+                                                                "value": "R\u00e9pertoire cible"
+                                                            },
+                                                            {
+                                                                "id": "require",
+                                                                "value": true
+                                                            },
+                                                            {
+                                                                "id": "type",
+                                                                "value": "string"
+                                                            }
+                                                        ],
+                                                        "type": "argument"
+                                                    },
+                                                    "text": "dirCible"
+                                                }
+                                            ],
+                                            "color": "#50edb8",
+                                            "icon": "fa-solid fa-th-large",
+                                            "id": "d89ffd8a-2201-4fa7-a21f-b4e2dcac983b",
+                                            "li_attr": {
+                                                "readonly": true,
+                                                "type": "arguments"
+                                            },
+                                            "text": "Arguments"
+                                        }
+                                    ],
+                                    "color": "#f9a658",
+                                    "icon": "fa-brands fa-accusoft",
+                                    "id": "35afce99-1b24-47a0-8cff-3e127e30e302",
+                                    "li_attr": {
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Synchronisation d'un r\u00e9pertoire"
+                                            },
+                                            {
+                                                "id": "exception",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "static",
+                                                "value": false
+                                            },
+                                            {
+                                                "id": "return",
+                                                "value": "none"
+                                            }
+                                        ],
+                                        "type": "fonction"
+                                    },
+                                    "state": {
+                                        "opened": true
+                                    },
+                                    "text": "rsyncDir"
+                                }
+                            ],
+                            "color": "#d57277",
+                            "icon": "fa-brands fa-stack-overflow",
+                            "id": "7494b882-c959-4c40-97b8-040ae2e5af6f",
+                            "li_attr": {
+                                "readonly": true,
+                                "type": "fonctions"
+                            },
+                            "state": {
+                                "opened": true
+                            },
+                            "text": "Fonctions"
+                        }
+                    ],
+                    "color": "#b8d567",
+                    "icon": "fa-solid fa-box",
+                    "id": "b3412f56-f49a-4ef3-bc3e-ef91a3abfb1a",
+                    "li_attr": {
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "Module li\u00e9 aux d\u00e9ploiements"
+                            }
+                        ],
+                        "type": "module"
+                    },
+                    "state": {
+                        "opened": true
+                    },
+                    "text": "deploy"
                 }
             ],
             "color": "#f77373",
@@ -4472,7 +5064,7 @@
                         "type": "script"
                     },
                     "state": {
-                        "opened": true
+                        "opened": false
                     },
                     "text": "bdd"
                 },
@@ -4647,7 +5239,7 @@
                         "type": "script"
                     },
                     "state": {
-                        "opened": false
+                        "opened": true
                     },
                     "text": "initialisation"
                 },
@@ -5165,6 +5757,21 @@
                                     "text": "controle"
                                 },
                                 {
+                                    "id": "06cbfde6-b14c-49b3-b6f5-55d94143b8cc",
+                                    "text": "showGraph",
+                                    "li_attr": {
+                                        "type": "section",
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Visualisation graphique"
+                                            }
+                                        ]
+                                    },
+                                    "color": "#177ede",
+                                    "icon": "fa-solid fa-border-style"
+                                },
+                                {
                                     "color": "#177ede",
                                     "icon": "fa-solid fa-border-style",
                                     "id": "eb8de72b-f21a-4ffd-becc-465e334bac84",
@@ -5214,9 +5821,162 @@
                         "type": "script"
                     },
                     "state": {
-                        "opened": true
+                        "opened": false
                     },
                     "text": "debug"
+                },
+                {
+                    "children": [
+                        {
+                            "color": "#50edb8",
+                            "icon": "fa-solid fa-th-large",
+                            "id": "27d6a7a5-c5c1-4a98-80a7-4566f91d605d",
+                            "li_attr": {
+                                "readonly": true,
+                                "type": "arguments"
+                            },
+                            "text": "Arguments"
+                        },
+                        {
+                            "color": "#d57277",
+                            "icon": "fa-brands fa-stack-overflow",
+                            "id": "5a717b4e-d697-436e-aacd-0e14f6d00ef6",
+                            "li_attr": {
+                                "readonly": true,
+                                "type": "fonctions"
+                            },
+                            "text": "Fonctions"
+                        },
+                        {
+                            "children": [
+                                {
+                                    "color": "#177ede",
+                                    "icon": "fa-solid fa-border-style",
+                                    "id": "24fd8139-bafb-4fc2-9214-42bdb7e3ddae",
+                                    "li_attr": {
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Ouverture de la session SSH"
+                                            }
+                                        ],
+                                        "type": "section"
+                                    },
+                                    "text": "ssh-open"
+                                },
+                                {
+                                    "color": "#177ede",
+                                    "icon": "fa-solid fa-border-style",
+                                    "id": "edac6cab-6cf3-4f0e-bacf-33d543414f09",
+                                    "li_attr": {
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Installation de base de l'environnement"
+                                            }
+                                        ],
+                                        "type": "section"
+                                    },
+                                    "text": "install-env"
+                                },
+                                {
+                                    "color": "#177ede",
+                                    "icon": "fa-solid fa-border-style",
+                                    "id": "f62400e1-b041-4b36-bc20-54415b2ad036",
+                                    "li_attr": {
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Installation de l'application"
+                                            }
+                                        ],
+                                        "type": "section"
+                                    },
+                                    "text": "install-app"
+                                },
+                                {
+                                    "color": "#177ede",
+                                    "icon": "fa-solid fa-border-style",
+                                    "id": "f192f305-3ec7-4cb5-8bc0-e99ceddbda9d",
+                                    "li_attr": {
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Section li\u00e9e \u00e0 la base de donn\u00e9es"
+                                            }
+                                        ],
+                                        "type": "section"
+                                    },
+                                    "text": "create-bdd"
+                                },
+                                {
+                                    "color": "#177ede",
+                                    "icon": "fa-solid fa-border-style",
+                                    "id": "bca9d224-826e-4a89-965c-907c271bf5a5",
+                                    "li_attr": {
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Upload des dumps"
+                                            }
+                                        ],
+                                        "type": "section"
+                                    },
+                                    "text": "send-dump"
+                                },
+                                {
+                                    "color": "#177ede",
+                                    "icon": "fa-solid fa-border-style",
+                                    "id": "1ec6b4b3-9b82-499b-a0b5-0897d0c76e5b",
+                                    "li_attr": {
+                                        "items": [
+                                            {
+                                                "id": "desc",
+                                                "value": "Fermeture de la session SSH"
+                                            }
+                                        ],
+                                        "type": "section"
+                                    },
+                                    "text": "ssh-close"
+                                }
+                            ],
+                            "color": "#3382cc",
+                            "icon": "fa-solid fa-border-all",
+                            "id": "a3f48022-fb8b-4148-89f3-5241de02aefe",
+                            "li_attr": {
+                                "readonly": true,
+                                "type": "sections"
+                            },
+                            "state": {
+                                "opened": true
+                            },
+                            "text": "Liste des sections"
+                        }
+                    ],
+                    "color": "#c972d5",
+                    "icon": "fa-solid fa-scroll",
+                    "id": "ebb8346a-7426-4768-b617-448f060b03d2",
+                    "li_attr": {
+                        "items": [
+                            {
+                                "id": "desc",
+                                "value": "Script de d\u00e9ploiement"
+                            },
+                            {
+                                "id": "print_desc",
+                                "value": true
+                            },
+                            {
+                                "id": "jump_section",
+                                "value": false
+                            }
+                        ],
+                        "type": "script"
+                    },
+                    "state": {
+                        "opened": true
+                    },
+                    "text": "deploy"
                 }
             ],
             "color": "#263ef2",

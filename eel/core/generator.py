@@ -32,7 +32,7 @@ def getNodeById( sId, oNode ):
     return None
 
 # recupere une liste de node en fonction du type
-def getNodesByTypes( oNodes, sTypes ):
+def getNodesByTypes( oNodes, sTypes, subSearch=False, sPath='' ):
     if not type( oNodes ) is list:
         oNodes = [ oNodes ]
 
@@ -43,6 +43,16 @@ def getNodesByTypes( oNodes, sTypes ):
 
     oResults = []
     
+    # si c'est une recherche recursive
+    if subSearch:
+        for oNode in oNodes:
+            if 'li_attr' in oNode and 'type' in oNode[ 'li_attr' ] and oNode[ 'li_attr' ][ 'type' ] == sTypes:
+                oNode[ 'path' ] = sPath
+                oResults += [ oNode ]
+            if 'children' in oNode and len( oNode[ 'children' ] ) > 0:
+                oResults += getNodesByTypes( oNode[ 'children' ], sTypes, subSearch=True, sPath=sPath + '/' + oNode[ 'text' ] )
+        return oResults
+    
 
     #if len( oTypes ) == 1:
     #oNodes = oNode
@@ -52,7 +62,8 @@ def getNodesByTypes( oNodes, sTypes ):
         # si c'est le derniers noeud
         if len( oTypes ) == 1:
             for oNode in oNodes:
-                if oNode[ 'li_attr' ][ 'type' ] == sType:
+                if 'li_attr' in oNode and 'type' in oNode[ 'li_attr' ] and oNode[ 'li_attr' ][ 'type' ] == sType:
+                    oNode[ 'path' ] = sPath
                     oResults += [ oNode ]
             return oResults
         
@@ -63,7 +74,7 @@ def getNodesByTypes( oNodes, sTypes ):
         if len( oResults ) == 0:
             return []
 
-        return getNodesByTypes( oResults, '/'.join( oTypes[ 1 : ] ) )
+        return getNodesByTypes( oResults, '/'.join( oTypes[ 1 : ] ), sPath=sPath )
 
     return oResults
 
@@ -155,7 +166,7 @@ def mergeFiles( sFileSource, sFileTarget, oTags ):
 
 
 # merge de repertoires
-def mergeDirs( sDirSource, sDirTarget, oConfig=None, oExcludeFiles=None ):
+def mergeDirs( sDirSource, sDirTarget, oConfig=None, oExcludeFiles=[] ):
     sRapport = ''
     try:
 
@@ -187,17 +198,17 @@ def mergeDirs( sDirSource, sDirTarget, oConfig=None, oExcludeFiles=None ):
             if iPosPoint != -1:
                 sExt = sElement[ iPosPoint + 1 : ].lower()
             
+            # determine si le fichier doit etre exclus
+            if sElement in oExcludeFiles:
+                sRapport += 'Exclusion du fichier : ' + sPathNameElement + '\n'
+                continue
+            
             # si le fichier n'existe pas en cible ou n'est pas a prendre en compte dans la configuration
             if not sElementTarget in oAllTar or oConfig == None or ( not sExt in oConfig.keys() and not '.' + sPathNameElement in oConfig.keys() ):
 
                 # copie du fichier
                 #sRapport += 'Copie du fichier : ' + sElementTarget + '\n'
                 shutil.copyfile( sElement, sElementTarget )
-                continue
-
-            # determine si le fichier doit etre exclus
-            if oExcludeFiles and sElement in oExcludeFiles:
-                sRapport += 'Exclusion du fichier : ' + sPathNameElement + '\n'
                 continue
 
             sRapport += 'Merge des fichiers : ' + sPathNameElement + ' et ' + sElementTarget + '\n'
