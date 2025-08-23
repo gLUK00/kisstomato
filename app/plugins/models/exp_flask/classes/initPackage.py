@@ -24,7 +24,6 @@ class initPackage(nodeElement):
         oResult = None
 
         # kisstomato-methode-getClasses-start-user-code-kisstomato
-        oResult = self.classes
         # kisstomato-methode-getClasses-stop-user-code-kisstomato
 
         return oResult

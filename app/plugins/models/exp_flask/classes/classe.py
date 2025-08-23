@@ -17,32 +17,6 @@ class classe(nodeElement):
         self.node = node
 
         # kisstomato-init-b-start-user-code-kisstomato
-        self.items = self._getItems( node )
-        self.argsInits = []
-        self.methodes = []
-        for oFonction in generator.getNodesByTypes( self.node, 'classe/classe-methodes/fonction' ):
-            oItems = self._getItems( oFonction )
-            
-            # determine le nom de la fonction            
-            sName = oFonction[ "text" ]
-            if sName == "__init__":
-                
-                # recupere les arguments
-                for oArg in generator.getNodesByTypes( oFonction, 'fonction/arguments/argument' ):
-                    oArgItems = self._getItems( oArg )
-                    self.argsInits.append( { "name": oArg[ "text" ], "desc": oArgItems[ "desc" ][ 'value' ], "require": oArgItems[ "require" ][ 'value' ] == True, 'type': oArgItems[ "type" ][ 'value' ] } )
-            else:
-                
-                # recupere la fonction
-                oFon = { "name": sName, "desc": oItems[ "desc" ][ 'value' ], "exception": self._getItemsValue( oItems, "exception", False ), "return": self._getItemsValue( oItems, "return", None ), "static": self._getItemsValue( oItems, "static", False ), 'args': [] }
-                
-                # recupere les arguments
-                for oArg in generator.getNodesByTypes( oFonction, 'fonction/arguments/argument' ):
-                    oArgItems = self._getItems( oArg )
-                    oFon[ 'args' ].append( { "name": oArg[ "text" ], "desc": oArgItems[ "desc" ][ 'value' ], "require": oArgItems[ "require" ][ 'value' ] == True, 'type': oArgItems[ "type" ][ 'value' ], "exception": self._getItemsValue( oItems, "exception", False ) } )
-                
-                # ajoute la fonction
-                self.methodes.append( oFon )
         # kisstomato-init-b-stop-user-code-kisstomato
 
     # Retourne le nom de la classe
@@ -50,7 +24,6 @@ class classe(nodeElement):
         oResult = None
 
         # kisstomato-methode-getName-start-user-code-kisstomato
-        oResult = self.node[ 'text' ]
         # kisstomato-methode-getName-stop-user-code-kisstomato
 
         return oResult
@@ -60,7 +33,6 @@ class classe(nodeElement):
         oResult = None
 
         # kisstomato-methode-getDesc-start-user-code-kisstomato
-        oResult = self.items[ 'desc' ][ 'value' ]
         # kisstomato-methode-getDesc-stop-user-code-kisstomato
 
         return oResult
@@ -70,7 +42,6 @@ class classe(nodeElement):
         oResult = None
 
         # kisstomato-methode-getArgsInit-start-user-code-kisstomato
-        oResult = self.argsInits
         # kisstomato-methode-getArgsInit-stop-user-code-kisstomato
 
         return oResult
@@ -80,7 +51,6 @@ class classe(nodeElement):
         oResult = None
 
         # kisstomato-methode-getMethodes-start-user-code-kisstomato
-        oResult = self.methodes
         # kisstomato-methode-getMethodes-stop-user-code-kisstomato
 
         return oResult
@@ -90,7 +60,6 @@ class classe(nodeElement):
         oResult = None
 
         # kisstomato-methode-getHeritage-start-user-code-kisstomato
-        oResult = self.items[ 'heritage' ][ 'value' ]
         # kisstomato-methode-getHeritage-stop-user-code-kisstomato
 
         return oResult

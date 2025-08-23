@@ -7,7 +7,6 @@ _iCurrentVersion = 1
 # kisstomato-init-a-start-user-code-kisstomato
 # kisstomato-init-a-stop-user-code-kisstomato
 
-&& if o.asGetJsonCreateNewProject()
 # creation d'un projet
 def getJsonCreateNewProject( data ):
     global _iCurrentVersion
@@ -18,11 +17,12 @@ def getJsonCreateNewProject( data ):
     # kisstomato-getJsonCreateNewProject-a-stop-user-code-kisstomato
     
     oRoots = []
-&&  if o.oRoots|length > 0
-&&      for oRoot in o.oRoots
-    oRoots.append( { "id": "{{ oRoot[ 'id' ] }}", "text": "{{ oRoot[ 'text' ] }}"{% if 'icon' in oRoot %}, "icon": "{{ oRoot[ 'icon' ] }}"{% endif %}{% if 'color' in oRoot %}, "color": "{{ oRoot[ 'color' ] }}"{% endif %}, "li_attr": { "readonly": True, "children-type": [{{ oRoot[ 'children-type' ] }}] } } )
-&&      endfor
-&&  endif
+    oRoots.append( { "id": "classes", "text": "Classes", "icon": "fa-solid fa-boxes", "color": "#37c347", "li_attr": { "readonly": True, "children-type": ["classe"] } } )
+    oRoots.append( { "id": "templates", "text": "Templates", "icon": "fa-solid fa-book", "color": "#56b6c2", "li_attr": { "readonly": True, "children-type": ["template", "directory-template"] } } )
+    oRoots.append( { "id": "routes", "text": "Routes", "icon": "fa-brands fa-hubspot", "color": "#b366ff", "li_attr": { "readonly": True, "children-type": ["directory-route", "file-routes"] } } )
+    oRoots.append( { "id": "modules", "text": "Modules", "icon": "fa-solid fa-cubes", "color": "#f77373", "li_attr": { "readonly": True, "children-type": ["module"] } } )
+    oRoots.append( { "id": "decorators", "text": "Décorateurs", "icon": "fa-solid fa-photo-video", "color": "#ec4b4b", "li_attr": { "readonly": True, "children-type": ["decorator"] } } )
+    oRoots.append( { "id": "scripts", "text": "Scripts", "icon": "fa-solid fa-scroll", "color": "#263ef2", "li_attr": { "readonly": True, "children-type": ["script"] } } )
     data[ 'data' ] = oRoots
 
     # kisstomato-getJsonCreateNewProject-b-start-user-code-kisstomato
@@ -30,9 +30,6 @@ def getJsonCreateNewProject( data ):
 
     return data
 
-&& endif
-
-&& if o.asOpenProject()
 # ouverture d'un projet
 def openProject( oProject ):
     global _iCurrentVersion
@@ -73,4 +70,3 @@ def openProject( oProject ):
     # mise a jour de la version
     oProject[ 'version' ] = _iCurrentVersion
     return oProject, True
-&& endif
