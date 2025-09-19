@@ -6,10 +6,10 @@ from core import generator, nodeElement
 # kisstomato-classe-b-start-user-code-kisstomato
 # kisstomato-classe-b-stop-user-code-kisstomato
 
-# classe de génération des modules
+# Script autonome
 # Argument :
-# - node : object : (obligatoire) noeud du module
-class module(nodeElement):
+# - node : object : (obligatoire) noeud du script
+class nodeScript(nodeElement):
     def __init__(self, node):
         # kisstomato-init-a-start-user-code-kisstomato
         # kisstomato-init-a-stop-user-code-kisstomato
@@ -34,6 +34,42 @@ class module(nodeElement):
 
         # kisstomato-methode-getDesc-start-user-code-kisstomato
         # kisstomato-methode-getDesc-stop-user-code-kisstomato
+
+        return oResult
+
+    # determine si la description doit etre affichee au demarrage
+    def printDescOnStart(self):
+        oResult = None
+
+        # kisstomato-methode-printDescOnStart-start-user-code-kisstomato
+        # kisstomato-methode-printDescOnStart-stop-user-code-kisstomato
+
+        return oResult
+
+    # Détermine si le mécanisme de déplacement vers la section demandé et activé
+    def implementSwitchSection(self):
+        oResult = None
+
+        # kisstomato-methode-implementSwitchSection-start-user-code-kisstomato
+        # kisstomato-methode-implementSwitchSection-stop-user-code-kisstomato
+
+        return oResult
+
+    # recupere l'ensemble des arguments
+    def getArgs(self):
+        oResult = None
+
+        # kisstomato-methode-getArgs-start-user-code-kisstomato
+        # kisstomato-methode-getArgs-stop-user-code-kisstomato
+
+        return oResult
+
+    # Retourne la liste des sections
+    def getSections(self):
+        oResult = None
+
+        # kisstomato-methode-getSections-start-user-code-kisstomato
+        # kisstomato-methode-getSections-stop-user-code-kisstomato
 
         return oResult
 

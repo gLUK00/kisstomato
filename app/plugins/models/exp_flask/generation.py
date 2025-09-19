@@ -35,6 +35,9 @@ def generateFlaskCode(data):
         if "save-params" in data and data[ "save-params" ]:
 
             print( 'enregistrement des parametres' )
+        
+        # liste des fichiers a exclure
+        oExcludeFiles = []
 
         # supprime et creer le repertoire temporaire
         sDirTemp = data[ 'dir-temp' ]
@@ -100,6 +103,72 @@ def generateFlaskCode(data):
             oResult += 'Generation du fichier __init__.py des modules\n'
             generator.genFileFromTmpl( sPathPlugin, oClasses, 'initPackage.py', sDirTemp + os.sep + 'modules' + os.sep + '__init__.py', initPackage )
         
+        # copie des fichiers de base
+        oResult += 'Copie des fichiers de base :\n' + generator.mergeDirs( sPathPlugin + os.sep + 'templates' + os.sep + 'base', sDirTemp )
+        
+        # generation des repertoires des templates
+        oDirTemplates = generator.getNodesByTypes( oProject[ 'data' ], 'directory-template', subSearch=True )
+        if len( oDirTemplates ) > 0:
+            
+            # pour tous les repertoires de templates
+            for oDir in oDirTemplates:
+                sDirTmpl = sDirTemp + os.sep + 'web' + os.sep + 'templates' + os.sep + oDir[ 'path' ][ len( '/Templates/' ) : ] + '/' + oDir[ 'text' ]
+                sDirTmpl = sDirTmpl.replace( '//', os.sep ).replace( '/', os.sep )
+                
+                print( 'creation du repertoire de templates : ' + sDirTmpl )
+                os.makedirs( sDirTmpl, mode = 0o777 )
+
+        # generation des templates
+        oTemplates = generator.getNodesByTypes( oProject[ 'data' ], 'template', subSearch=True )
+        if len( oTemplates ) > 0:
+            
+            # pour tous les templates
+            for oTemplate in oTemplates:
+                
+                # creation d'un fichier de template
+                sHtml = sDirTemp + os.sep + 'web' + os.sep + 'templates' + os.sep + oTemplate[ 'path' ][ len( '/Templates/' ) : ] + '/' + oTemplate[ 'text' ] + '.html'
+                sHtml = sHtml.replace( '//', os.sep ).replace( '/', os.sep )
+
+                print( 'creation du fichier de template : ' + sHtml )
+                open( sHtml, 'a' ).close()
+                oExcludeFiles.append( sHtml )
+        
+        """
+        "directory-route"
+        "route"
+        
+        """
+        
+        # generation des repertoires des routes
+        oDirRoutes = generator.getNodesByTypes( oProject[ 'data' ], 'directory-route', subSearch=True )
+        if len( oDirRoutes ) > 0:
+
+            # pour tous les repertoires de routes
+            for oDir in oDirRoutes:
+                sDirRoute = sDirTemp + os.sep + 'routes' + os.sep + oDir[ 'path' ][ len( '/Routes/' ) : ] + '/' + oDir[ 'text' ]
+                sDirRoute = sDirRoute.replace( '//', os.sep ).replace( '/', os.sep )
+
+                print( 'creation du repertoire de routes : ' + sDirRoute )
+                os.makedirs( sDirRoute, mode = 0o777 )
+        
+        # generation des routes
+        oRoutes = generator.getNodesByTypes( oProject[ 'data' ], 'route', subSearch=True )
+        if len( oRoutes ) > 0:
+            
+            # pour toutes les routes
+            oRouteImports = []
+            for oRoute in oRoutes:
+                
+                # creation d'un fichier de route
+                sRoutePath = oRoute[ 'path' ][ len( '/Routes/' ) : ]
+                sRoute = sDirTemp + os.sep + 'fl_routes' + os.sep + sRoutePath + '/' + oRoute[ 'text' ] + '.py'
+                sRoute = sRoute.replace( '//', os.sep ).replace( '/', os.sep )
+
+                oRouteImports.append( 'from fl_routes.' + sRoutePath.replace( '/', '.' ) + ' import ' + oRoute[ 'text' ] )
+
+                print( 'creation du fichier de route : ' + sRoute )
+                #open( sRoute, 'a' ).close()
+        
         # creation d'un fichier de configuration de base
         oConf = {
             'port': 8080,
@@ -120,19 +189,17 @@ def generateFlaskCode(data):
         # creation du fichier de configuration
         io.createJsonFile( sDirTemp + os.sep + 'configuration.json', oConf )
         
-        # copie des fichiers de base
-        oResult += 'Copie des fichiers de base :\n' + generator.mergeDirs( sPathPlugin + os.sep + 'templates' + os.sep + 'base', sDirTemp )
-        
         # merge avec le repertoire cible
         oResult += 'Fusion avec l\'existant :\n' + generator.mergeDirs( sDirTemp, sDirOut,
             oConfig={
-                'html': { 'start': '<!-- kisstomato-', 'stop': ' -->' },
+                #'html': { 'start': '<!-- kisstomato-', 'stop': ' -->' },
                 'js': { 'start': '// kisstomato-', 'stop': '-kisstomato' },
                 'py': { 'start': '# kisstomato-', 'stop': '-kisstomato' },
                 'sh': { 'start': '# kisstomato-', 'stop': '-kisstomato' },
                 'bat': { 'start': 'rem kisstomato-', 'stop': '-kisstomato' },
                 './requirements.txt': { 'start': '# kisstomato-', 'stop': '-kisstomato' }
-            }
+            },
+            oExcludeFiles=oExcludeFiles
         )
         
         

@@ -24,8 +24,7 @@ from fl_routes import routes
 
 app.register_blueprint(routes)
 
-@app.route('/')
-def home():
-   return render_template('index.html')
+# kisstomato-routes-start-user-code-kisstomato
+# kisstomato-routes-stop-user-code-kisstomato
 
 gl.socketio.run(app, host=gl.config[ 'host' ], port=gl.config[ 'port' ], debug=gl.config[ 'debug' ], allow_unsafe_werkzeug=True)
