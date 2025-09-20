@@ -114,8 +114,8 @@ def generateFlaskCode(data):
             for oDir in oDirTemplates:
                 sDirTmpl = sDirTemp + os.sep + 'web' + os.sep + 'templates' + os.sep + oDir[ 'path' ][ len( '/Templates/' ) : ] + '/' + oDir[ 'text' ]
                 sDirTmpl = sDirTmpl.replace( '//', os.sep ).replace( '/', os.sep )
-                
-                print( 'creation du repertoire de templates : ' + sDirTmpl )
+
+                oResult += 'creation du repertoire de templates : ' + sDirTmpl + '\n'
                 os.makedirs( sDirTmpl, mode = 0o777 )
 
         # generation des templates
@@ -129,7 +129,7 @@ def generateFlaskCode(data):
                 sHtml = sDirTemp + os.sep + 'web' + os.sep + 'templates' + os.sep + oTemplate[ 'path' ][ len( '/Templates/' ) : ] + '/' + oTemplate[ 'text' ] + '.html'
                 sHtml = sHtml.replace( '//', os.sep ).replace( '/', os.sep )
 
-                print( 'creation du fichier de template : ' + sHtml )
+                oResult += 'creation du fichier de template : ' + sHtml + '\n'
                 open( sHtml, 'a' ).close()
                 oExcludeFiles.append( sHtml )
         
@@ -148,7 +148,7 @@ def generateFlaskCode(data):
                 sDirRoute = sDirTemp + os.sep + 'routes' + os.sep + oDir[ 'path' ][ len( '/Routes/' ) : ] + '/' + oDir[ 'text' ]
                 sDirRoute = sDirRoute.replace( '//', os.sep ).replace( '/', os.sep )
 
-                print( 'creation du repertoire de routes : ' + sDirRoute )
+                oResult += 'creation du repertoire de routes : ' + sDirRoute + '\n'
                 os.makedirs( sDirRoute, mode = 0o777 )
         
         # generation des routes
@@ -166,7 +166,7 @@ def generateFlaskCode(data):
 
                 oRouteImports.append( 'from fl_routes.' + sRoutePath.replace( '/', '.' ) + ' import ' + oRoute[ 'text' ] )
 
-                print( 'creation du fichier de route : ' + sRoute )
+                oResult += 'creation du fichier de route : ' + sRoute + '\n'
                 #open( sRoute, 'a' ).close()
         
         # creation d'un fichier de configuration de base

@@ -102,9 +102,6 @@ def generateKisstomatoCode( oData ):
         # liste des fichiers a exclures
         oExcludeFiles = genTmplInDir( generator.getNodeById( 'templates', oProject[ 'data' ] ), sDirTemp + os.sep + 'templates' )
 
-
-
-
         # merge avec le repertoire cible
         sRapport += 'Fusion avec l\'existant :\n' + generator.mergeDirs( sDirTemp, sDirOut,
             oConfig={
@@ -116,8 +113,6 @@ def generateKisstomatoCode( oData ):
             },
             oExcludeFiles=oExcludeFiles
         )
-
-
 
     except Exception as e:
         exc_type, exc_obj, exc_tb = sys.exc_info()

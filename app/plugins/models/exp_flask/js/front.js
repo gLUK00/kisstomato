@@ -45,13 +45,13 @@ $( document ).on( "click", "#gen-code", function() {
 	var oFormItemTemp = { 'name': 'dir-temp', 'type': 'set-dir', 'title': 'Répertoire temporaire' };
 	var oFormItemOut = { 'name': 'dir-out', 'type': 'set-dir', 'title': 'Répertoire de sortie' };
 	var oFormItemCheckbox = { 'name': 'save-params', 'type': 'checkbox', 'title': 'Mémorisation des paramètres de génération' };
-	if( localStorage.getItem( 'plugin-flask-generator-dir-temp' ) !== null ){
-		oFormItemTemp[ 'value' ] = localStorage.getItem( 'plugin-flask-generator-dir-temp' );
+	if( localStorage.getItem( 'plugin-flask-generator-dir-temp-' + getUrlParameter('project') ) !== null ){
+		oFormItemTemp[ 'value' ] = localStorage.getItem( 'plugin-flask-generator-dir-temp-' + getUrlParameter('project') );
 	}
-	if( localStorage.getItem( 'plugin-flask-generator-dir-out' ) !== null ){
-		oFormItemOut[ 'value' ] = localStorage.getItem( 'plugin-flask-generator-dir-out' );
+	if( localStorage.getItem( 'plugin-flask-generator-dir-out-' + getUrlParameter('project') ) !== null ){
+		oFormItemOut[ 'value' ] = localStorage.getItem( 'plugin-flask-generator-dir-out-' + getUrlParameter('project') );
 	}
-	oFormItemCheckbox[ 'value' ] = localStorage.getItem( 'plugin-flask-generator-save-params' ) !== null && localStorage.getItem( 'kisstomato-generator-save-params' );
+	oFormItemCheckbox[ 'value' ] = localStorage.getItem( 'plugin-flask-generator-save-params-' + getUrlParameter('project') ) !== null && localStorage.getItem( 'kisstomato-generator-save-params' );
 
 	modalShowForm( 'Génération du code de l\'application Flask', 'Générer', function( oData ){
 
@@ -64,14 +64,14 @@ $( document ).on( "click", "#gen-code", function() {
 
 		// memorisation des chemins
 		if( oData[ 'save-params' ] ){
-			localStorage.setItem( 'plugin-flask-generator-dir-temp', oData[ 'dir-temp' ].trim() );
-			localStorage.setItem( 'plugin-flask-generator-dir-out', oData[ 'dir-out' ].trim() );
-			localStorage.setItem( 'plugin-flask-generator-save-params', true );
-		}else{
+			localStorage.setItem( 'plugin-flask-generator-dir-temp-' + getUrlParameter('project'), oData[ 'dir-temp' ].trim() );
+			localStorage.setItem( 'plugin-flask-generator-dir-out-' + getUrlParameter('project'), oData[ 'dir-out' ].trim() );
+			localStorage.setItem( 'plugin-flask-generator-save-params-' + getUrlParameter('project'), true );
+		}/*else{
 			localStorage.setItem( 'plugin-flask-generator-dir-temp', '' );
 			localStorage.setItem( 'plugin-flask-generator-dir-out', '' );
 			localStorage.setItem( 'plugin-flask-generator-save-params', false );
-		}
+		}*/
 
 		oData[ 'file' ] = getUrlParameter( 'project' );
 		fetch('/api/plugin/exec_method_model', {
