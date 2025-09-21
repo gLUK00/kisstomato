@@ -1,0 +1,7 @@
+{
+    "name": "Test Project 2", 
+    "description": "Second projet de test pour la configuration",
+    "model": "html_maker",
+    "version": "2.0.0",
+    "author": "Test User"
+}

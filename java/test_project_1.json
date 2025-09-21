@@ -1,0 +1,8 @@
+{
+    "name": "Test Project 1",
+    "description": "Premier projet de test pour la configuration",
+    "model": "python_flask",
+    "version": "1.0.0",
+    "author": "Test User"
+}
+
