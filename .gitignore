@@ -5,3 +5,4 @@ simple_front/node_modules/**
 example/**
 **/venv/**
 dev_projects/temps/**
+java/target/**

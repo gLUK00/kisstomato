@@ -1,0 +1,10 @@
+{
+    "type": "java-jar",
+    "name": "Python Flask Generator",
+    "description": "Générateur de projets Python Flask",
+    "version": "1.0.0",
+    "author": "KissTomato",
+    "cmd-create-new-project": "java -jar {path_plugin}/python-flask-generator-cli.jar --action=create --data={data}",
+    "cmd-open-project": "java -jar {path_plugin}/python-flask-generator-cli.jar --action=open --file={file}",
+    "cmd-command": "java -jar {path_plugin}/python-flask-generator-cli.jar --action=command --data={data}"
+}

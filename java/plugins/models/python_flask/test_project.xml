@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <name>TestFlaskApp</name>
+    <author>Developer Test</author>
+    <path>/home/hidalgo/Documents/projects/kisstomato/java/plugins/models/python_flask/TestFlaskApp</path>
+    <version>1.0.0</version>
+    <description>Projet Flask de test généré par KissTomato</description>
+    <framework>Flask</framework>
+    <language>Python</language>
+</project>

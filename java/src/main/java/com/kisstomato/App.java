@@ -28,6 +28,7 @@ public class App extends Application {
         FXMLLoader loader = new FXMLLoader(App.class.getResource("/main.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root, 800, 600);
+        primaryStage.setMaximized(false);
         primaryStage.setScene(scene);
     }
 
@@ -36,7 +37,10 @@ public class App extends Application {
         Parent root = loader.load();
         ProjectController controller = loader.getController();
         controller.setProject(project);
-        Scene scene = new Scene(root, 800, 600);
+        primaryStage.setTitle("KissTomato - " + project.getNom());
+        // Maximiser la fenêtre et adapter la taille de la fenêtre à la taille maximale de l'écran
+        primaryStage.setMaximized(true);
+        Scene scene = new Scene(root);
         primaryStage.setScene(scene);
     }
 

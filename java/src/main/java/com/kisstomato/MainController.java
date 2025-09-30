@@ -107,6 +107,10 @@ public class MainController implements Initializable {
         );
     }
 
+    /**
+     * Gère les clics sur le tableau des projets
+     * @param event l'événement de clic
+     */
     @FXML
     private void handleTableClick(MouseEvent event) {
         if (event.getClickCount() == 2) { // Double-clic

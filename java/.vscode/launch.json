@@ -41,6 +41,30 @@
                 "--add-opens", "javafx.fxml/javafx.fxml=ALL-UNNAMED"
             ],
             "args": ["--config", "configuration.json"]
+        },
+        {
+            "type": "java",
+            "name": "Debug Python Flask Plugin - Create Project",
+            "request": "launch",
+            "mainClass": "org.kisstomato.plugins.models.python_flask.Main",
+            "projectName": "kisstomato-app",
+            "cwd": "${workspaceFolder}/plugins/models/python_flask",
+            "args": [
+                "--action=create",
+                "--data={\"projectName\":\"TestFlaskApp\", \"author\":\"Developer Test\"}"
+            ]
+        },
+        {
+            "type": "java",
+            "name": "Debug Python Flask Plugin - Open Project",
+            "request": "launch",
+            "mainClass": "org.kisstomato.plugins.models.python_flask.Main",
+            "projectName": "kisstomato-app", 
+            "cwd": "${workspaceFolder}/plugins/models/python_flask",
+            "args": [
+                "--action=open",
+                "--file=${workspaceFolder}/test_projet_reference.json"
+            ]
         }
     ]
 }
